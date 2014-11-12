@@ -102,7 +102,8 @@ gulp.task('webpack', function(callback){
 
 var execWebpack = function(config){
     webpack((config), function(err, stats) {
-         if (err) new gutil.PluginError("execWebpack", err);
+        if (err) new gutil.PluginError("execWebpack", err);
+        gutil.log(stats.toString({colors: true}));
     });
 }
 

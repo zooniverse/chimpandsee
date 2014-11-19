@@ -52,6 +52,10 @@ Annotation = React.createClass
           <img src={cursor.refine('video').value} />
         </div>
       </div>
+      <div className="ui-buttons">
+        <img className="guide" src="./assets/guide.svg" alt="field guide button" />
+        <img className="favorite" src="./assets/favorite.svg" alt="favorite button" />
+      </div>
       <Step step={cursor.refine('currentStep')} currentAnswers={cursor.refine('currentAnswers')} notes={cursor.refine('notes')} subject={cursor.refine('video')} />
       <Notes notes={cursor.refine('notes')} />
     </div>

@@ -8,44 +8,44 @@ stepOne =
   presence:
     question: ''
     options: [
-      {choice: 'I see something'}
-      {choice: 'Nothing here'}
+      'I see something'
+      'Nothing here'
     ]
 
 stepTwo =
   animal:
     question: 'Which animal do you see?'
     options: [
-      {choice: 'chimpanzee'}
-      {choice: 'gorilla'}
-      {choice: 'bird'}
-      {choice: 'rodent'}
-      {choice: 'elephant'}
+      'chimpanzee'
+      'gorilla'
+      'bird'
+      'rodent'
+      'elephant'
     ]
 
 stepThree =
   number:
     question: "How many animals?"
     options: [
-      {choice: '1'}
-      {choice: '2'}
-      {choice: '3'}
-      {choice: '4'}
-      {choice: '5'}
-      {choice: '6+'}
+      '1'
+      '2'
+      '3'
+      '4'
+      '5'
+      '6+'
     ]
   time:
     question: 'What time of day?'
     options: [
-      {choice:'day'}
-      {choice: 'night'}
+      'day'
+      'night'
     ]
   view:
     question: 'Which side of the animal(s) do you see?'
     options: [
-      {choice: 'front'}
-      {choice: 'side'}
-      {choice: 'back'}
+      'front'
+      'side'
+      'back'
     ]
 
 steps = [stepOne, stepTwo, stepThree]
@@ -56,17 +56,25 @@ Step = React.createClass
 
   onButtonClick: (event) ->
     button = event.target
-    switch
-      when button.value is steps[0].presence.options[0].choice then @moveToNextStep()
-      when button.value is steps[0].presence.options[1].choice
-        @props.notes.set []
-        @props.currentAnswers.set {}
-        Subject.next()
-        @props.subject.set Subject.current.location.standard
-      else
-        obj = {}
-        obj[button.name] = button.value
-        @props.currentAnswers.merge obj
+
+    steps[1].animal.options.map (animalOption) =>
+      switch
+        when button.value is steps[0].presence.options[0] then @moveToNextStep()
+        when button.value is steps[0].presence.options[1]
+          @props.notes.set []
+          @props.currentAnswers.set {}
+          Subject.next()
+          @props.subject.set Subject.current.location.standard
+        when button.value is animalOption
+          @storeSelection(button.name, button.value)
+          @moveToNextStep()
+        else
+          @storeSelection(button.name, button.value)
+
+  storeSelection: (name, value) ->
+    obj = {}
+    obj[name] = value
+    @props.currentAnswers.merge obj
 
   moveToNextStep: ->
     @props.step.set Math.min @props.step.value + 1, steps.length
@@ -75,7 +83,6 @@ Step = React.createClass
     @props.step.set @props.step.value - 1
 
   addNote: ->
-    document.getElementsByClassName('finish').disabled = false
     @props.notes.push [@props.currentAnswers.value]
     @props.currentAnswers.set {}
     @props.step.set 1
@@ -91,9 +98,9 @@ Step = React.createClass
     step = for name, step of steps[@props.step.value]
       buttons = step.options.map (option, i) =>
         classes = cx({
-          'btn-active': if option.choice in _.values(@props.currentAnswers.value) then true else false
+          'btn-active': if option in _.values(@props.currentAnswers.value) then true else false
         })
-        <button className={classes} key={i} name={name} value={option.choice} onClick={@onButtonClick}>{option.choice}</button>
+        <button className={classes} key={i} name={name} value={option} onClick={@onButtonClick}>{option}</button>
       <div key={name}>{step.question}<br />{buttons}</div>
 
     nextClasses = cx({
@@ -118,7 +125,6 @@ Step = React.createClass
       when @props.step.value >= 1 and @props.step.value < (steps.length - 1)
         <div>
           <button className="prev" onClick={@moveToPrevStep}>Go Back</button>
-          <button className={nextClasses} onClick={@moveToNextStep} disabled={nextDisabled}>Next</button>
         </div>
       when @props.step.value is (steps.length - 1)
         <div>

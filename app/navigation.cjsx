@@ -1,11 +1,6 @@
-# @cjsx React.DOM
-
 React = require 'react/addons'
-{ImmutableOptimizations} = require('react-cursor')
 
 module?.exports = React.createClass
-  mixins: [ImmutableOptimizations(['cursor'])]
-
   displayName: 'Navigation'
 
   links: [
@@ -14,14 +9,17 @@ module?.exports = React.createClass
     {href: '#/about', text: 'About'}
   ]
 
+  getInitialState: ->
+    activeLink: location.hash
+
   componentDidMount: ->
     window.onhashchange = @onHashChange
 
   onHashChange: ->
-    @props.cursor.set(location.hash)
+    @setState activeLink: location.hash
 
   link: (data, i) ->
-    className = if data.href is @props.cursor.value then 'active' else ''
+    className = if data.href is @state.activeLink then 'active' else ''
     <a key={i} href={data.href} className={className}>{data.text}</a>
 
   render: ->

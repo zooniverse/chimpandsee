@@ -1,4 +1,61 @@
 .classify
-  img
-    display: block
-    
+
+  max-width: 1200px
+  width: 100%
+  margin: 0 auto
+
+  .annotation
+    padding-bottom: 20px
+
+    span
+      margin: 10px 0 0 0
+
+    button
+      margin: 0 5px 10px 0
+
+    .btn-active
+      background-color: green
+
+    .disabled
+      cursor: not-allowed
+
+    .subject
+      text-align: center
+
+      .preview-imgs
+        li
+          display: inline
+
+          &:nth-child(3):after
+            content: "\A"
+            white-space: pre
+
+          img
+            margin: 0 2.5px 0
+
+      .video
+        img // placeholder img
+          width: 100%
+
+      .hide
+        display: none
+
+    .workflowButtons
+      text-align: center
+
+    .step
+      text-align: center
+
+    .notes-container
+      display: table
+      margin: 0 auto
+
+      .note-row
+        display: table-row
+
+        .note
+          display: table-cell
+
+        .delete
+          display: table-cell
+          margin: 10px

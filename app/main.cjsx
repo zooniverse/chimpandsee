@@ -1,5 +1,6 @@
 init = require './init'
 React = require 'react/addons'
+cx = React.addons.classSet
 {Router, Routes, Route, Link} = require 'react-router'
 
 Navigation = require './navigation'
@@ -12,7 +13,11 @@ User = require 'zooniverse/models/user'
 Main = React.createClass
   displayName: 'Main'
 
+  getInitialState: ->
+    pushLeft: false
+
   render: ->
+
     <div>
       <Navigation />
 

@@ -1,2 +1,17 @@
 html, body
   font-family: 'Lato', sans-serif
+  overflow-x: hidden
+  margin: 0
+
+  #wrapper
+    width: 100%
+    height: 100%
+    position: relative
+    -webkit-transform: translateX(0)
+    transform: translateX(0)
+    -webkit-transition: .3s ease all
+    transition: .3s ease all
+
+  .push-left
+    -webkit-transform: translateX(300px) !important
+    transform: translateX(300px) !important

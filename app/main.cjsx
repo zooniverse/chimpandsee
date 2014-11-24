@@ -1,6 +1,7 @@
 init = require './init'
 React = require 'react/addons'
-{Router, Routes, Route, Link} = require 'react-router'
+Router = require 'react-router'
+{Route, RouteHandler, DefaultRoute, Link} = require 'react-router'
 
 Navigation = require './navigation'
 Home = require './home'
@@ -16,12 +17,17 @@ Main = React.createClass
     <div>
       <Navigation />
 
-      <Routes>
-        <Route path="/" name="root" handler={Home} />
-        <Route path="/classify" handler={Classify} />
-        <Route path="/about" handler={About} />
-      </Routes>
+      <RouteHandler />
     </div>
 
-React.render <Main />, document.getElementById("app")
+routes =
+  <Route name="root" path="/" handler={Main}>
+    <Route path="/classify" handler={Classify} />
+    <Route path="/about" handler={About} />
+    <DefaultRoute handler={Home} />
+  </Route>
+
+Router.run routes, (Handler) ->
+  React.render <Handler />, document.getElementById("app")
+
 window.React = React

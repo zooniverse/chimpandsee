@@ -2,6 +2,7 @@ html, body
   font-family: 'Lato', sans-serif
   overflow-x: hidden
   margin: 0
+  background-color: $gray
 
   #wrapper
     width: 100%
@@ -15,3 +16,19 @@ html, body
   .push-right
     -webkit-transform: translateX(300px) !important
     transform: translateX(300px) !important
+
+  button
+    border-radius: 6px
+    background-color: $green
+    color: white
+    border: none
+    margin: 10px
+
+    &.disabled
+      background-color: $dark-green
+      cursor: not-allowed
+
+  .zooniverse-footer
+    background-color: $dark-gray
+    color: white
+    padding: 20px

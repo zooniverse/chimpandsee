@@ -8,12 +8,12 @@ module?.exports = React.createClass
   getInitialState: ->
     subject: "http://placehold.it/300&text=loading"
     preview: [
-      "http://placehold.it/150&text=video-preview"
-      "http://placehold.it/150&text=video-preview"
-      "http://placehold.it/150&text=video-preview"
-      "http://placehold.it/150&text=video-preview"
-      "http://placehold.it/150&text=video-preview"
-      "http://placehold.it/150&text=video-preview"
+      "http://placehold.it/300x150&text=video-preview"
+      "http://placehold.it/300x150&text=video-preview"
+      "http://placehold.it/300x150&text=video-preview"
+      "http://placehold.it/300x150&text=video-preview"
+      "http://placehold.it/300x150&text=video-preview"
+      "http://placehold.it/300x150&text=video-preview"
     ]
     showGuide: false
 

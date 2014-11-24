@@ -15,7 +15,7 @@ Annotation = React.createClass
     notes: []
     currentAnswers: {}
     video: null
-    preview: []
+    preview: ["http://placehold.it/300x150&text=loading"]
 
   componentWillMount: ->
     console.log @props.subject

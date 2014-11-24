@@ -2,6 +2,7 @@
   max-width: 1200px
   width: 100%
   margin: 0 auto
+  color: white
 
   .guide
     top: 0
@@ -9,7 +10,7 @@
     width: 300px
     height: 100%
     position: absolute
-    background-color: limegreen
+    background-color: $green
     padding: 20px
     box-sizing: border-box
 
@@ -24,19 +25,20 @@
     span
       margin: 10px 0 0 0
 
-    button
-      margin: 0 5px 10px 0
-
     .btn-active
-      background-color: green
-
-    .disabled
-      cursor: not-allowed
+      background-color: #0d6795
 
     .subject
       text-align: center
 
       .preview-imgs
+        width: 100%
+        max-width: 980px
+        margin: 0 auto
+        padding: 10px 0
+        background-color: $dark-gray
+        border-radius: 12px
+
         li
           display: inline
 
@@ -48,7 +50,8 @@
             visibility: hidden
 
           img
-            margin: 0 2.5px 2.5px
+            padding: 10px
+            border-radius: 16px
 
       .video
         img // placeholder img
@@ -59,12 +62,12 @@
 
     .workflowButtons
       text-align: center
-      margin: 15px auto
+      margin: 50px auto 15px
 
     .ui-buttons
-      max-width: 450px
+      max-width: 600px
       margin: 0 auto
-      padding-top: 10px
+      padding-top: 50px
 
       .guide-btn, .favorite-btn
         cursor: pointer
@@ -77,9 +80,16 @@
 
     .step
       text-align: center
-      max-width: 350px
-      margin: -15px auto
+      max-width: 500px
+      margin: -50px auto
       padding-top: 10px
+
+      button
+        width: 200px
+        height: 50px
+        font-size: 16px
+        font-weight: 400
+        line-height: 24px
 
     .notes-container
       display: table

@@ -20,7 +20,7 @@ module?.exports = React.createClass
 
   link: (data, i) ->
     className = if data.href is @state.activeLink then 'active' else ''
-    <a key={i} href={data.href} className={className}>{data.text}</a>
+    <li key={i} className={className}><a href={data.href}>{data.text}</a></li>
 
   render: ->
     links = @links.map(@link)

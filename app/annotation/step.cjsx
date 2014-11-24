@@ -8,8 +8,8 @@ stepOne =
   presence:
     question: ''
     options: [
-      'I see something'
       'Nothing here'
+      'I see something!'
     ]
 
 stepTwo =
@@ -24,29 +24,38 @@ stepTwo =
     ]
 
 stepThree =
-  number:
-    question: "How many animals?"
+  age:
+    question: 'Age?'
     options: [
-      '1'
-      '2'
-      '3'
-      '4'
-      '5'
-      '6+'
+      'youth'
+      'adult'
     ]
-  time:
-    question: 'What time of day?'
+  sex:
+    question: 'Sex?'
     options: [
-      'day'
-      'night'
+      'male'
+      'female'
     ]
-  view:
-    question: 'Which side of the animal(s) do you see?'
+  behavior:
+    question: "What is the animal doing?"
     options: [
-      'front'
-      'side'
-      'back'
+      'drinking'
+      'feeding'
+      'traveling'
+      'fleeing'
+      'sleeping'
+      'sex'
+      'nursing'
+      'playing'
+      'social interaction'
+      'agonistic interaction'
+      'hunting'
+      'tool use'
+      'vocalization'
+      'carrying item'
     ]
+
+
 
 steps = [stepOne, stepTwo, stepThree]
 
@@ -59,12 +68,12 @@ Step = React.createClass
 
     steps[1].animal.options.map (animalOption) =>
       switch
-        when button.value is steps[0].presence.options[0] then @moveToNextStep()
-        when button.value is steps[0].presence.options[1]
+        when button.value is steps[0].presence.options[0]
           @props.notes.set []
           @props.currentAnswers.set {}
           Subject.next()
           @props.subject.set Subject.current.location.standard
+        when button.value is steps[0].presence.options[1] then @moveToNextStep()
         when button.value is animalOption
           @storeSelection(button.name, button.value)
           @moveToNextStep()
@@ -82,6 +91,8 @@ Step = React.createClass
   moveToPrevStep: ->
     @props.step.set @props.step.value - 1
 
+  componentDidMount: ->
+    console.log @props
   addNote: ->
     @props.notes.push [@props.currentAnswers.value]
     @props.currentAnswers.set {}
@@ -131,6 +142,9 @@ Step = React.createClass
           <button className="prev" onClick={@moveToPrevStep}>Go Back</button>
           <button className={addClasses} onClick={@addNote} disabled={addDisabled}>Add Note</button>
         </div>
+    finishButton =
+      if @props.notes.value.length
+        <button className={finishClasses} onClick={@finishNote} disabled={finishDisabled}>Finish</button>
 
     <div>
       <div className="step">
@@ -138,7 +152,7 @@ Step = React.createClass
       </div>
       <div className="workflowButtons">
         {workflowButtons}
-        <button className={finishClasses} onClick={@finishNote} disabled={finishDisabled}>Finish</button>
+        {finishButton}
       </div>
     </div>
 

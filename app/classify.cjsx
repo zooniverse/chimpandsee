@@ -46,7 +46,6 @@ module?.exports = React.createClass
 
   render: ->
     <div className="classify">
-      <h1>Classify Page</h1>
       <div className="guide">
         <h2>Field Guide</h2>
         <button className="close-guide-btn" onClick={@onClickClose}>X</button>

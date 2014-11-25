@@ -42,6 +42,7 @@ Annotation = React.createClass
       <li key={i}><img src={preview} /></li>
 
     <div className="annotation">
+      <p>See an animal in the clip? Add an annotation!</p>
       <div className="subject">
         <div className={previewClasses}>
           <div>

@@ -5,7 +5,7 @@ module?.exports = React.createClass
 
   links: [
     {href: '#/', text: 'Home'}
-    {href: '#/classify', text: 'Classify'}
+    {href: '#/classify', text: 'Explore'}
     {href: '#/about', text: 'About'}
   ]
 

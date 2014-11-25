@@ -1,5 +1,5 @@
 html, body
-  font-family: 'Lato', sans-serif
+  font-family: 'Nunito', sans-serif
   overflow-x: hidden
   margin: 0
   background-color: $gray
@@ -17,6 +17,14 @@ html, body
     -webkit-transform: translateX(300px) !important
     transform: translateX(300px) !important
 
+  p
+    font-size: 16px
+    font-weight: 400
+    line-height: 24px
+    color: $copy-gray
+    -webkit-font-smoothing: antialiased
+    -moz-osx-font-smoothing: grayscale
+
   button
     border-radius: 6px
     background-color: $green
@@ -24,9 +32,21 @@ html, body
     border: none
     margin: 10px
 
+    &:focus
+      outline: none
+
     &.disabled
       background-color: $dark-green
       cursor: not-allowed
+
+  .zooniverse-top-bar
+    background: $topbar-green
+    color: $mint
+    left: 0
+    text-align: initial
+
+    .corner
+      display: none
 
   .zooniverse-footer
     background-color: $dark-gray

@@ -1,5 +1,5 @@
 .classify
-  max-width: 1200px
+  max-width: 960px
   width: 100%
   margin: 0 auto
   color: white
@@ -25,6 +25,10 @@
     span
       margin: 10px 0 0 0
 
+    p
+      text-align: left
+      margin: 1em auto
+
     .btn-active
       background-color: #0d6795
 
@@ -32,30 +36,44 @@
       text-align: center
 
       .preview-imgs
-        width: 100%
-        max-width: 980px
         margin: 0 auto
-        padding: 10px 0
         background-color: $dark-gray
         border-radius: 12px
 
         li
           display: inline
 
-          &:nth-child(3):after
-            content: "."
-            display: block
-            height: 0
-            clear: both
-            visibility: hidden
+          @media screen and (min-width: 960px)
+            &:nth-child(3):after
+              content: "."
+              display: block
+              height: 0
+              clear: both
+              visibility: hidden
 
           img
             padding: 10px
             border-radius: 16px
+            width: 100%
+            max-width: 300px
+
+            @media screen and (max-width: 768px)
+              max-width: 250px
+
+            @media screen and (max-width: 400px)
+              max-width: 175px
 
       .video
+        background-color: $dark-gray
+        border-radius: 12px
+        max-height: 547px
+
         img // placeholder img
           width: 100%
+          max-width: 940px
+          padding: 10px
+          border-radius: 16px
+
 
       .hide
         display: none

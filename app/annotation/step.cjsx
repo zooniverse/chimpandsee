@@ -55,8 +55,6 @@ stepThree =
       'carrying item'
     ]
 
-
-
 steps = [stepOne, stepTwo, stepThree]
 
 Step = React.createClass
@@ -73,6 +71,7 @@ Step = React.createClass
           @props.currentAnswers.set {}
           Subject.next()
           @props.subject.set Subject.current.location.standard
+          @props.animateImages()
         when button.value is steps[0].presence.options[1] then @moveToNextStep()
         when button.value is animalOption
           @storeSelection(button.name, button.value)
@@ -91,8 +90,6 @@ Step = React.createClass
   moveToPrevStep: ->
     @props.step.set @props.step.value - 1
 
-  componentDidMount: ->
-    console.log @props
   addNote: ->
     @props.notes.push [@props.currentAnswers.value]
     @props.currentAnswers.set {}

@@ -4,9 +4,10 @@ module?.exports = React.createClass
   displayName: 'Navigation'
 
   links: [
-    {href: '#/', text: 'Home'}
     {href: '#/classify', text: 'Explore'}
     {href: '#/about', text: 'About'}
+    {href: '#', text: 'Talk'}
+    {href: '#', text: 'Blog' }
   ]
 
   getInitialState: ->
@@ -25,5 +26,6 @@ module?.exports = React.createClass
   render: ->
     links = @links.map(@link)
     <nav className="site-navigation">
+      <a href="#/"><img className="logo" src="http://placehold.it/160x45&text=site-logo" alt="logo" /></a>
       {links}
     </nav>

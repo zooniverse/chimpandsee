@@ -1,0 +1,65 @@
+.annotation
+  padding: 20px 0
+  margin: 0 auto
+
+  span
+    margin: 10px 0 0 0
+
+  p
+    text-align: left
+    margin: 1em auto
+    max-width: 920px
+
+  .subject
+    display: flex
+    align-items: center
+
+    .guide-btn, .favorite-btn
+      cursor: pointer
+      display: table
+      background-color: $near-black
+      padding: 12.5px 13.5px
+      border-radius: 50%
+      text-align: center
+
+      img
+        display: table-cell
+        vertical-align: middle
+
+    .preview-imgs
+      margin: 0 auto
+
+      li
+        display: inline
+
+        @media screen and (min-width: 1040px)
+          &:nth-child(3):after
+            content: "."
+            display: block
+            height: 0
+            clear: both
+            visibility: hidden
+
+        img
+          padding: 5px
+          border-radius: 16px
+          width: 100%
+          max-width: 300px
+
+          @media screen and (max-width: 768px)
+            max-width: 250px
+
+          @media screen and (max-width: 400px)
+            max-width: 175px
+
+    .video
+      margin: 0 auto
+
+      img // placeholder img
+        width: 100%
+        max-width: 920px
+        padding: 10px
+        border-radius: 16px
+
+
+

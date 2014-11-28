@@ -19,7 +19,6 @@ Annotation = React.createClass
     currentAnswers: {}
     video: null
     preview: ["http://placehold.it/300x150&text=loading"]
-    animate: false
 
   componentWillMount: ->
     setTimeout ( =>
@@ -47,18 +46,15 @@ Annotation = React.createClass
       <li key={i}><img style={@getAnimatedStyle("image-flip")} src={preview} /></li>
 
     <div className="annotation">
-      <p>See an animal in the clip? Add an annotation!</p>
       <div className="subject">
+        <div className="guide-btn" onClick={@props.onClickGuide}><img src="./assets/guide-icon.svg" alt="field guide button" /></div>
         <div className={previewClasses}>
           {previews}
         </div>
         <div className={videoClasses}>
           <img src={cursor.refine('video').value} />
         </div>
-      </div>
-      <div className="ui-buttons">
-        <img className="guide-btn" src="./assets/guide.svg" alt="field guide button" onClick={@props.onClickGuide}/>
-        <img className="favorite-btn" src="./assets/favorite.svg" alt="favorite button" />
+        <div className="favorite-btn"><img src="./assets/fav-icon.svg" alt="favorite button" /></div>
       </div>
       <Step step={cursor.refine('currentStep')} currentAnswers={cursor.refine('currentAnswers')} notes={cursor.refine('notes')} subject={cursor.refine('video')} preview={cursor.refine('preview')} animateImages={@animateImages} />
       <Notes notes={cursor.refine('notes')} />

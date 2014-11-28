@@ -3,6 +3,7 @@ html, body
   overflow-x: hidden
   margin: 0
   background-color: $gray
+  background-image: url('./assets/bg-fill.png')
 
   #wrapper
     width: 100%
@@ -16,6 +17,9 @@ html, body
   .push-right
     -webkit-transform: translateX(300px) !important
     transform: translateX(300px) !important
+
+  .hide
+    display: none
 
   p
     font-size: 16px
@@ -31,6 +35,8 @@ html, body
     color: white
     border: none
     margin: 10px
+    -webkit-font-smoothing: antialiased
+    -moz-osx-font-smoothing: grayscale
 
     &:focus
       outline: none
@@ -49,6 +55,6 @@ html, body
       display: none
 
   .zooniverse-footer
-    background-color: $dark-gray
+    background-color: #1f1f1f
     color: white
     padding: 20px

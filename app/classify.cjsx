@@ -47,8 +47,16 @@ module?.exports = React.createClass
   render: ->
     <div className="classify">
       <div className="guide">
-        <h2>Field Guide</h2>
-        <button className="close-guide-btn" onClick={@onClickClose}>X</button>
+        <header>
+          <h2>FIELD GUIDE</h2>
+        </header>
+        <section>
+          <button className="close-guide-btn" onClick={@onClickClose}><img className="back-icon" src="./assets/back-icon.svg" alt="back icon" /> Back</button>
+          <h2>CHIMPANZEE</h2>
+          <h3>Pan Troglodytes</h3>
+          <img src="http://placehold.it/360x230" />
+          <p>The common chimpanzee (Pan troglodytes), also known as the robust chimpanzee, is a species of great ape. Colloquially, the common chimpanzee is often called the chimpanzee (or "chimp"), though this term can be used to refer to both species in the genus Pan: the common chimpanzee and the closely related bonobo, formerly called the pygmy chimpanzee. Evidence from fossils and DNA sequencing show both species of chimpanzees are the sister group to the modern human lineage.</p>
+        </section>
       </div>
       <Annotation subject={@state.subject} preview={@state.preview} onClickGuide={@onClickGuide} />
     </div>

@@ -1,12 +1,21 @@
 stepOne =
   presence:
-    question: ''
+    question: null
     options: [
       'Nothing here'
-      'Add Annotation'
+      'I see something'
     ]
 
 stepTwo =
+  annotation:
+    question: null
+    options: [
+      'Nothing here'
+      '+'
+      'Next subject'
+    ]
+
+stepThree =
   animal:
     question: 'Which species do you want to annotate?'
     options: [
@@ -22,21 +31,21 @@ stepTwo =
       'tiger'
     ]
 
-stepThree =
+stepChimp =
   age:
-    question: 'Age?'
+    question: "What is this chimpanzee doing?"
     options: [
       'youth'
       'adult'
     ]
   sex:
-    question: 'Sex?'
+    question: null
     options: [
       'male'
       'female'
     ]
   behavior:
-    question: "What is the animal doing?"
+    question: null
     options: [
       'drinking'
       'feeding'
@@ -54,4 +63,12 @@ stepThree =
       'carrying item'
     ]
 
-module.exports = [stepOne, stepTwo, stepThree]
+stepOther =
+  question: "What is this animal doing?"
+  options: [
+    'this'
+    'that'
+  ]
+
+
+module.exports = [stepOne, stepTwo, stepThree, stepChimp, stepOther]

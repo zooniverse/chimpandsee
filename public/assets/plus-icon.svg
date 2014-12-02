@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<svg xmlns="http://www.w3.org/2000/svg"
+	xmlns:xlink="http://www.w3.org/1999/xlink"
+	width="30px" height="30px">
+<filter id="filter0" x="-3.57%" y="-3.57%" width="107.14%" height="110.71%" filterUnits="objectBoundingBox">
+<feGaussianBlur in="SourceAlpha" result="dsBlurOut" stdDeviation="0.50"/>
+<feFlood result="dsFloodOut" flood-color="rgb(0,0,0)"/>
+<feComposite in="dsFloodOut" in2="dsBlurOut" result="dsShadow" operator="atop"/>
+<feComponentTransfer in="dsShadow" result="dsShadowOpacity">
+<feFuncA type="linear" slope="0.25"/>
+</feComponentTransfer>
+<feOffset in="dsShadowOpacity" dx="0.50" dy="0.87" result="dsOffset"/>
+<feComposite in="dsOffset" in2="SourceAlpha" result="dropShadow" operator="out"/>
+</filter>
+<defs>
+<path id="symbol0" fill-rule="evenodd" d="M27.00 16.00 C27.00 16.00 17.00 16.00 17.00 16.00 C17.00 16.00 17.00 26.00 17.00 26.00 C17.00 27.10 16.10 28.00 15.00 28.00 C13.90 28.00 13.00 27.10 13.00 26.00 C13.00 26.00 13.00 16.00 13.00 16.00 C13.00 16.00 3.00 16.00 3.00 16.00 C1.90 16.00 1.00 15.10 1.00 14.00 C1.00 12.90 1.90 12.00 3.00 12.00 C3.00 12.00 13.00 12.00 13.00 12.00 C13.00 12.00 13.00 2.00 13.00 2.00 C13.00 0.90 13.90 0.00 15.00 0.00 C16.10 0.00 17.00 0.90 17.00 2.00 C17.00 2.00 17.00 12.00 17.00 12.00 C17.00 12.00 27.00 12.00 27.00 12.00 C28.10 12.00 29.00 12.90 29.00 14.00 C29.00 15.10 28.10 16.00 27.00 16.00 Z"/>
+</defs>
+<g>
+<use xlink:href="#symbol0" filter="url(#filter0)"/>
+<use xlink:href="#symbol0" fill="rgb(241,241,241)"/>
+</g>
+</svg>

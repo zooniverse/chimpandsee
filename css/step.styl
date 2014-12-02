@@ -2,7 +2,7 @@
   text-align: center
   margin: 0 auto
   width: 100%
-  max-width: 920px
+  max-width: 930px
 
   .step-top
     width: 100%
@@ -11,12 +11,40 @@
     font-size: 16px
     line-height: 24px
     padding: 28px 0
+    -webkit-font-smoothing: antialiased
+    position: relative
+    z-index: 1
+
+    .step-buttons
+      position: absolute
+      top: 20px
+      right: 10px
+
+      .step-button
+        background-color: $blackish
+        width: 34px
+        height: 34px
+        border-radius: 100%
+        color: #7d7d7d
+        font-size: 16px
+        font-weight: 400
+        line-height: 24px
+        margin: 0 10px
+
+      .step-active
+        background-color: #555656
+        color: white
+
+      span:last-child
+        img
+          display: none
 
   .step-bottom
     width: 100%
     background-color: $blackish
     padding 20px 0
     border-radius: 8px
+    margin-top: -10px
 
     button
       min-width: 90px
@@ -29,64 +57,133 @@
       font-weight: 400
       line-height: 24px
 
-      &[name="presence"]
+      // 'Nothing here', 'I see something', and 'Next Subject' buttons
+      &#presence-0, &#presence-1, &#annotation-0, &#annotation-2
         width: 220px
-        height: 50px
-        color: white
-        background-color: $green
+        height: 70px
+        color: #555656
         border: none
-        border-radius: 6px
+        display: inline-block
+        margin: 0 10px
+        line-height: 65px
+
+        &.nothing-disabled
+          font-size: 0
+          vertical-align: middle
+          cursor: not-allowed
+
+          &:after
+            opacity: 0.3
+
+      // finish button
+      &#annotation-2
+        color: white
+
+        &.finish-disabled
+          color: #555656
+          cursor: not-allowed
+
+      &#presence-0:after, &#annotation-0:after
+        content: ''
+        display: block
+        background: url(./assets/cancel-icon.svg) no-repeat center center
+        width: 60px
+        height: 60px
+        border: solid 2px #c72c2c
+        border-radius: 50%
+        margin: 0
+        float: right
+
+      &#presence-1:before, &#annotation-2:before
+        content: ''
+        display: block
+        background: url(./assets/check-icon.svg) no-repeat center center
+        width: 60px
+        height: 60px
+        border: solid 2px $green
+        border-radius: 50%
+        margin: 0
+        float: left
+
+      // Add annotation button
+      &#annotation-1
+        color: white
+        background: $green url(./assets/plus-icon.svg) no-repeat center center
+        min-width: initial
+        width: 60px
+        height: 60px
+        border: solid 2px $green
+        border-radius: 50%
+        margin: 0 10px 5px
+        padding: 0
+        vertical-align: middle
+        font-size: 0
 
     .btn-active
       background-color: $green
       color: white
 
   .cancel
-    font-size: 20px
-    font-weight: bold
-    color: white
-    min-width: initial
+    font-size: 16px
+    color: #555656
+    background-color: transparent
+    float: left
+
+    &:before
+      content: ''
+      background: $blackish url(./assets/cancel-icon.svg) no-repeat center center
+      width: 54px
+      height: 48px
+      border: solid 2px $green
+      border-radius: 50%
+      position: relative
+      display: block
+      margin: 0 0 10px 0
+
+  .next
+    font-size: 16px
+    color: #555656
+    background-color: transparent
+    float: right
+
+    &:before
+      content: ''
+      background: $green url(./assets/arrow-icon.svg) no-repeat center center
+      width: 54px
+      height: 48px
+      border: solid 2px $green
+      border-radius: 50%
+      position: relative
+      display: block
+      margin: 0 0 10px 0
+
+  .add
+    color: #555656
+    float: right
+    font-size: 16px
+    padding: 10px 0 0 0
+    background-color: transparent
+
+    &.disabled:before
+      background-color: transparent
+
+  .add:before
+    content: ''
+    display: block
+    background: url(./assets/check-icon.svg) no-repeat center center
+    background-color: $green
+    margin: 0 0 5px 0
     width: 54px
-    background-color: $blackish
     height: 48px
     border: solid 2px $green
     border-radius: 50%
-    float: left
-    margin: 64px 0 0 20px
-    padding: 10px 0 0 0
-
-    &:after
-      content: 'Cancel'
-      color: #555656
-      font-size: 16px
-      position: relative
-      display: block
-      margin-top: 16px
-
-  .next
-    float: right
-    margin: 64px 20px 0
-    width: 54px
-    height: 48px
-    font-size: 26px
-    font-weight: bold
-    border-radius: 50%
-    padding: 10px 0 0 0
-
-    &:after
-      content: 'Next'
-      color: #555656
-      font-size: 16px
-      position: relative
-      display: block
-      margin-top: 16px
 
   .presence
     background-color: $dark-gray
     border-radius: 8px
 
-    button[data-reactid=".0.1.1.1.0.$presence.1.1:$0"]
-      background-color: $button-green
+    .step-bottom
+      padding: 5px 0
 
 .workflowButtons
   text-align: center

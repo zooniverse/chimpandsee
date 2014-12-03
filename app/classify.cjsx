@@ -37,6 +37,8 @@ module?.exports = React.createClass
     if @state.showGuide is false
       @setState showGuide: true
       wrapper.classList.add 'push-right'
+
+      window.scrollTo window.innerHeight, -300
     else
       @setState showGuide: false
       wrapper.classList.remove 'push-right'

@@ -71,5 +71,4 @@ stepOther =
       'that'
     ]
 
-
-module.exports = [stepOne, stepTwo, stepThree, stepChimp, stepOther]
+module.exports = [[stepOne], [stepTwo], [stepThree], [stepChimp, stepOther]]

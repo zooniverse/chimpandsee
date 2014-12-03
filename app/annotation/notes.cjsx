@@ -18,7 +18,7 @@ Notes = React.createClass
 
     notes = @props.notes.value.map (note, i) =>
       <p key={i} className="note">
-        A(n) {note.age} {note.sex} {note.animal} is doing this behavior: {note.behavior}.
+        {note.animal}: {note.age}, {note.sex}, {note.behavior}.
         <button className="delete" onClick={@deleteNote.bind(null, i)}><img src="./assets/close-icon.svg" alt="X" /></button>
       </p>
 

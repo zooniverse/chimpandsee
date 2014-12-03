@@ -15,6 +15,7 @@ Annotation = React.createClass
 
   getInitialState: ->
     currentStep: 0
+    subStep: 0
     notes: []
     currentAnswers: {}
     video: null
@@ -56,7 +57,7 @@ Annotation = React.createClass
         </div>
         <div className="favorite-btn"><img src="./assets/fav-icon.svg" alt="favorite button" /></div>
       </div>
-      <Step step={cursor.refine('currentStep')} currentAnswers={cursor.refine('currentAnswers')} notes={cursor.refine('notes')} subject={cursor.refine('video')} preview={cursor.refine('preview')} animateImages={@animateImages} />
+      <Step step={cursor.refine('currentStep')} subStep={cursor.refine('subStep')} currentAnswers={cursor.refine('currentAnswers')} notes={cursor.refine('notes')} subject={cursor.refine('video')} preview={cursor.refine('preview')} animateImages={@animateImages} />
       <Notes notes={cursor.refine('notes')} />
     </div>
 

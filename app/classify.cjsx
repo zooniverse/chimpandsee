@@ -59,6 +59,10 @@ module?.exports = React.createClass
           <h3>Pan Troglodytes</h3>
           <img src="http://placehold.it/360x230" />
           <p>The common chimpanzee (Pan troglodytes), also known as the robust chimpanzee, is a species of great ape. Colloquially, the common chimpanzee is often called the chimpanzee (or "chimp"), though this term can be used to refer to both species in the genus Pan: the common chimpanzee and the closely related bonobo, formerly called the pygmy chimpanzee. Evidence from fossils and DNA sequencing show both species of chimpanzees are the sister group to the modern human lineage.</p>
+          <figcaption>Example Images</figcaption>
+          <figure><img src="./assets/example-1.jpg" alt="Example of a chimp" /></figure>
+          <figure><img src="./assets/example-2.jpg" alt="Example of a chimp" /></figure>
+          <figure><img src="./assets/example-3.jpg" alt="Example of a chimp" /></figure>
         </section>
       </div>
       <Annotation subject={@state.subject} preview={@state.preview} onClickGuide={@onClickGuide} />

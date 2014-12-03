@@ -30,7 +30,6 @@ Step = React.createClass
           @moveToNextStep()
         when button.value is animalOption
           @storeSelection(button.name, button.value)
-          console.log steps[3]
           @props.step.set 4
         else
           @storeSelection(button.name, button.value)
@@ -71,7 +70,7 @@ Step = React.createClass
   render: ->
     cancelClasses = cx({
       'cancel': true
-      'hide': if @props.step.value <= 1 then true else false
+      'hidden': if @props.step.value <= 1 then true else false
     })
 
     nextClasses = cx({
@@ -84,16 +83,16 @@ Step = React.createClass
     addClasses = cx({
       'disabled': if Object.keys(@props.currentAnswers.value).length < 4 then true else false
       'add': true
-      'hide': unless @props.step.value is steps.length - 2 then true else false
+      'hidden': unless @props.step.value is steps.length - 2 then true else false
     })
 
     stepButtons = steps.map (step, i) =>
       stepBtnClasses = cx({
         'step-button': true
         'step-active': if @props.step.value is i+2 then true else false
-        'step-complete': if Object.keys(@props.currentAnswers.value).length > 0 and i is @props.step.value then true else false
+        'step-complete': if Object.keys(@props.currentAnswers.value).length > 0 and @props.step.value is i+1 then true else false
       })
-      console.log @props.step.value, i
+      console.log step
 
       if i < steps.length - 2
         <span key={i}>
@@ -121,20 +120,24 @@ Step = React.createClass
       })
       <div key={name} className={name}>
         <div className={stepTopClasses}>
-          {step.question}
+          <div className="step-question">
+            {step.question}
+          </div>
           <div className="step-buttons">
             {stepButtons}
           </div>
         </div>
-        <button className={cancelClasses} onClick={@cancelNote}>Cancel</button>
-        <button className={nextClasses} onClick={@moveToNextStep} disabled={nextDisabled}>Next</button>
-        <button className={addClasses} onClick={@addNote}>Done</button>
         <div className="step-bottom">
-          {buttons}
+          <div className="buttons-container">
+            {buttons}
+          </div>
         </div>
       </div>
 
     <div className="step">
+      <button className={cancelClasses} onClick={@cancelNote}>Cancel</button>
+      <button className={nextClasses} onClick={@moveToNextStep} disabled={nextDisabled}>Next</button>
+      <button className={addClasses} onClick={@addNote}>Done</button>
       {step}
     </div>
 

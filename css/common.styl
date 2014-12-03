@@ -18,8 +18,19 @@ html, body
     -webkit-transform: translateX(400px) !important
     transform: translateX(400px) !important
 
+  #app
+    min-height: 100%
+    margin-bottom: -274px
+
+    &:after
+      content: ""
+      display: block
+
   .hide
     display: none
+
+  .hidden
+    visibility: hidden
 
   p
     font-size: 16px
@@ -41,10 +52,6 @@ html, body
     &:focus
       outline: none
 
-    // &.disabled
-    //   background-color: $dark-green
-    //   cursor: not-allowed
-
   .zooniverse-top-bar
     background: $topbar-green
     color: $mint
@@ -55,7 +62,10 @@ html, body
     .corner
       display: none
 
-  .zooniverse-footer
-    background-color: #1f1f1f
-    color: white
-    padding: 20px
+  #footer, #app:after
+    height: 274px
+
+    .zooniverse-footer
+      background-color: #1f1f1f
+      color: white
+      padding: 20px

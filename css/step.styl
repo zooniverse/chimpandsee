@@ -15,6 +15,9 @@
     position: relative
     z-index: 1
 
+    .step-question
+      display: inline-block
+
     .step-buttons
       position: absolute
       top: 20px
@@ -45,6 +48,10 @@
     padding 20px 0
     border-radius: 8px
     margin-top: -10px
+
+    .buttons-container
+      max-width: 680px
+      margin: 0 auto
 
     button
       min-width: 90px
@@ -123,6 +130,10 @@
       background-color: $green
       color: white
 
+  .cancel, .next, .add
+    position: relative
+    top: 100px
+
   .cancel
     font-size: 16px
     color: #555656
@@ -161,7 +172,6 @@
     color: #555656
     float: right
     font-size: 16px
-    padding: 10px 0 0 0
     background-color: transparent
 
     &.disabled:before

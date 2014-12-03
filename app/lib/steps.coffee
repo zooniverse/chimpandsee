@@ -64,11 +64,12 @@ stepChimp =
     ]
 
 stepOther =
-  question: "What is this animal doing?"
-  options: [
-    'this'
-    'that'
-  ]
+  otherAnimal:
+    question: "What is this animal doing?"
+    options: [
+      'this'
+      'that'
+    ]
 
 
 module.exports = [stepOne, stepTwo, stepThree, stepChimp, stepOther]

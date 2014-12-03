@@ -14,16 +14,13 @@ Notes = React.createClass
     hintClasses = cx({
       'note-hint': true
       'hide': if @props.notes.value.length > 0 then true else false
-
     })
 
     notes = @props.notes.value.map (note, i) =>
-      <div key={i} className="note-row">
-        <p className="note">
-          A(n) {note.age} {note.sex} {note.animal} is doing this behavior: {note.behavior}.
-          <button className="delete" onClick={@deleteNote.bind(null, i)}>X</button>
-        </p>
-      </div>
+      <p key={i} className="note">
+        A(n) {note.age} {note.sex} {note.animal} is doing this behavior: {note.behavior}.
+        <button className="delete" onClick={@deleteNote.bind(null, i)}><img src="./assets/close-icon.svg" alt="X" /></button>
+      </p>
 
     <div className="notes-container">
       <p className={hintClasses}>See something? Add an annotation and it will appear here!</p>

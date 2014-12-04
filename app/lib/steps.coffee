@@ -64,11 +64,16 @@ stepChimp =
     ]
 
 stepOther =
-  otherAnimal:
+  behavior:
     question: "What is this animal doing?"
     options: [
       'this'
       'that'
+      'the other thing'
+      'drinking'
+      'feeding'
+      'social interaction'
+      'something else'
     ]
 
 module.exports = [[stepOne], [stepTwo], [stepThree], [stepChimp, stepOther]]

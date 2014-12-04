@@ -1,0 +1,68 @@
+.slide-tutorial
+  display: none
+  width: 100%
+  background: rgba(120, 120, 120, 0.7)
+  position: fixed
+  box-sizing: border-box
+  top: 0
+  bottom: 0
+  left: 0
+  right: 0
+  &.active
+    display: block
+
+  .slide-tutorial-slide
+    display: none
+    &.active
+      display: block
+
+  .slide-tutorial-container
+    width: 40%
+    position: relative
+    background: #fff
+    margin: 50px auto
+    overflow: auto
+    z-index: 1
+
+    @media screen and (max-width: 820px)
+      width: 60%
+
+    @media screen and (max-width: 520px)
+      width: 90%
+
+    .slide-tutorial-slide
+      .slide-tutorial-slide-top img
+        width: 100%
+      .slide-tutorial-slide-bottom
+        p, h1
+          color: $green
+          margin: 10px
+
+    .slide-tutorial-close-button
+      position: absolute
+      top: 0
+      right: 0
+
+    .slide-tutorial-dots
+      text-align: center
+      width: 100%
+      overflow: auto
+      margin: 10px 0
+
+      .slide-tutorial-dot
+        width: 10px
+        border-radius: 50%
+        height: 10px
+        display: inline-block
+        float: none
+        background: grey
+        margin: 1px
+        &.active
+          background: green
+
+    .slide-tutorial-button-container
+      width: 100%
+      text-align: center
+
+      .slide-tutorial-next-button
+        margin: 10px

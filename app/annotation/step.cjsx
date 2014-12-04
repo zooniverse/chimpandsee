@@ -13,7 +13,7 @@ Step = React.createClass
   onButtonClick: (event) ->
     button = event.target
     notAChimp = _.without steps[2][0].animal.options, steps[2][0].animal.options[0] #chimp
-    console.log steps[1][0].annotation.options[0], button.value
+
     notAChimp.map (animalOption) =>
       switch
         when button.value is steps[0][0].presence.options[0] and @props.step.value is 0
@@ -77,32 +77,40 @@ Step = React.createClass
   render: ->
     cancelClasses = cx({
       'cancel': true
-      'hidden': if @props.step.value <= 1 then true else false
+      'hidden': @props.step.value <= 1
     })
 
+    nextDisabled = _.values(@props.currentAnswers.value).length is 0
     nextClasses = cx({
-      'disabled': if Object.keys(@props.currentAnswers.value).length is 0 then true else false
+      'disabled': nextDisabled
       'next': true
-      'hide': if @props.step.value <= 2 or @props.step.value is steps.length - 1 then true else false
+      'hide': @props.step.value <= 2 or @props.step.value is steps.length - 1
     })
-    nextDisabled = if Object.keys(@props.currentAnswers.value).length is 0 then true else false
+
+    addDisabled = switch
+      when _.values(@props.currentAnswers.value).length < 4 and _.values(@props.currentAnswers.value)[0] is steps[2][0].animal.options[0]
+        true
+      when _.values(@props.currentAnswers.value).length < 2 then true
 
     addClasses = cx({
-      'disabled': if Object.keys(@props.currentAnswers.value).length < 4 then true else false
+      'disabled': addDisabled
       'add': true
-      'hidden': unless @props.step.value is steps.length - 1 then true else false
+      'hidden': unless @props.step.value is steps.length - 1 then true
     })
 
     stepButtons = steps.map (step, i) =>
+      stepBtnDisabled = _.values(@props.currentAnswers.value).length is 0
+
       stepBtnClasses = cx({
         'step-button': true
-        'step-active': if @props.step.value is i+2 then true else false
-        'step-complete': if @props.step.value is i+3 then true else false
+        'step-active': @props.step.value is i+2
+        'step-complete': @props.step.value is i+3
+        'disabled': stepBtnDisabled
       })
 
       if i < steps.length - 2
         <span key={i}>
-          <button className={stepBtnClasses} value={i+2} onClick={@goToStep.bind(null, i)}>{i+1}</button>
+          <button className={stepBtnClasses} value={i+2} onClick={@goToStep.bind(null, i)} disabled={stepBtnDisabled}>{i+1}</button>
           <img src="./assets/small-dot.svg" alt="" />
         </span>
 
@@ -113,16 +121,16 @@ Step = React.createClass
           when @props.notes.value.length > 0 and option is steps[1][0].annotation.options[0] then true
 
         classes = cx({
-          'btn-active': if option in _.values(@props.currentAnswers.value) then true else false
-          'finish-disabled': if @props.notes.value.length is 0 and option is steps[1][0].annotation.options[2] then true else false
-          'nothing-disabled': if @props.notes.value.length > 0 and option is steps[1][0].annotation.options[0] then true else false
+          'btn-active': option in _.values(@props.currentAnswers.value)
+          'finish-disabled': @props.notes.value.length is 0 and option is steps[1][0].annotation.options[2]
+          'nothing-disabled': @props.notes.value.length > 0 and option is steps[1][0].annotation.options[0]
         })
         <button className={classes} key={i} id="#{name}-#{i}" name={name} value={option} onClick={@onButtonClick} disabled={disabled}>
           {option}
         </button>
       stepTopClasses = cx({
         'step-top': true
-        'hide': if step.question is null then true else false
+        'hide': step.question is null
       })
       <div key={name} className={name}>
         <div className={stepTopClasses}>
@@ -143,7 +151,7 @@ Step = React.createClass
     <div className="step">
       <button className={cancelClasses} onClick={@cancelNote}>Cancel</button>
       <button className={nextClasses} onClick={@moveToNextStep} disabled={nextDisabled}>Next</button>
-      <button className={addClasses} onClick={@addNote}>Done</button>
+      <button className={addClasses} onClick={@addNote} disabled={addDisabled}>Done</button>
       {step}
     </div>
 

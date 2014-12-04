@@ -26,6 +26,7 @@
     "webpack": "^1.4.12"
   },
   "dependencies": {
+    "animated-scrollto": "^1.1.0",
     "react": "^0.12.0",
     "react-animate": "^0.1.5",
     "react-cursor": "^0.9.1",

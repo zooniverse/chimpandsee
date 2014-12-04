@@ -1,6 +1,9 @@
 React = require 'react/addons'
 Subject = require 'zooniverse/models/subject'
 Annotation = require './annotation/annotation'
+SlideTutorial = require './slideTutorial'
+
+animatedScrollTo = require 'animated-scrollto'
 
 module?.exports = React.createClass
   displayName: 'Classify'
@@ -19,6 +22,7 @@ module?.exports = React.createClass
       "http://placehold.it/300x150&text=video-preview"
     ]
     showGuide: false
+    modalIsOpen: false
 
   componentWillMount: ->
     Subject.on 'select', @onSubjectSelect
@@ -38,7 +42,7 @@ module?.exports = React.createClass
       @setState showGuide: true
       wrapper.classList.add 'push-right'
 
-      window.scrollTo window.innerHeight, -300
+      animatedScrollTo document.body, 0, 1000
     else
       @setState showGuide: false
       wrapper.classList.remove 'push-right'
@@ -49,8 +53,15 @@ module?.exports = React.createClass
     @setState showGuide: false
     wrapper.classList.remove 'push-right'
 
+  openModal: ->
+    @setState modalIsOpen: true
+
+  closeModal: ->
+    @setState modalIsOpen: false
+
   render: ->
     <div className="classify">
+      <button onClick={@openModal}>Tutorial</button>
       <div className="guide">
         <header>
           <h2>Field Guide</h2>
@@ -68,5 +79,6 @@ module?.exports = React.createClass
         </section>
       </div>
       <Annotation subject={@state.subject} preview={@state.preview} onClickGuide={@onClickGuide} />
+      <SlideTutorial modalIsOpen={@state.modalIsOpen} onClickCloseSlide={@closeModal} />
       <img className="hidden-chimp" src="./assets/hidden-chimp.png" alt="" />
     </div>

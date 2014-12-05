@@ -13,7 +13,7 @@ SlideTutorial = React.createClass
     activeSlide: 0
 
   componentWillReceiveProps: ->
-    if @state.activeSlide is 2
+    if @state.activeSlide is @state.slides.length - 1
       @setState activeSlide: 0
 
   onClickButton: ->

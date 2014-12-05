@@ -9,7 +9,7 @@ var notify = require("gulp-notify");
 var nib = require('nib');
 var express = require('express');
 var imagemin = require('gulp-imagemin');
-var uglify = require('gulp-uglify');
+var rev = require('gulp-rev');
 
 var webpack = require('webpack');
 var webpackConfig = require('./webpack.config.js')

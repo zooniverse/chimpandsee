@@ -13,27 +13,29 @@ Step = React.createClass
   onButtonClick: (event) ->
     button = event.target
     notAChimp = _.without steps[2][0].animal.options, steps[2][0].animal.options[0] #chimp
+    otherAnimal = notAChimp.map (animal) ->
+      animal if animal is button.value
+    otherAnimal = _.compact(otherAnimal)
 
-    notAChimp.map (animalOption) =>
-      switch
-        when button.value is steps[0][0].presence.options[0] and @props.step.value is 0
-          @newSubject()
-          @props.animateImages()
-        when button.value is steps[0][0].presence.options[1] then @moveToNextStep()
-        when button.value is steps[1][0].annotation.options[0]
-          @props.step.set 0
-          @newSubject()
-        when button.value is steps[1][0].annotation.options[1] then @moveToNextStep()
-        when button.value is steps[1][0].annotation.options[2] then @finishNote()
-        when button.value is steps[2][0].animal.options[0] #chimp
-          @storeSelection(button.name, button.value)
-          @moveToNextStep()
-        when button.value is animalOption
-          @storeSelection(button.name, button.value)
-          @props.step.set 3
-          @props.subStep.set 1
-        else
-          @storeSelection(button.name, button.value)
+    switch
+      when button.value is steps[0][0].presence.options[0] and @props.step.value is 0
+        @newSubject()
+        @props.animateImages()
+      when button.value is steps[0][0].presence.options[1] then @moveToNextStep()
+      when button.value is steps[1][0].annotation.options[0]
+        @props.step.set 0
+        @newSubject()
+      when button.value is steps[1][0].annotation.options[1] then @moveToNextStep()
+      when button.value is steps[1][0].annotation.options[2] then @finishNote()
+      when button.value is steps[2][0].animal.options[0] #chimp
+        @storeSelection(button.name, button.value)
+        @moveToNextStep()
+      when button.value is otherAnimal[0]
+        @storeSelection(button.name, button.value)
+        @props.step.set 3
+        @props.subStep.set 1
+      else
+        @storeSelection(button.name, button.value)
 
   newSubject: ->
     @props.notes.set []
@@ -53,7 +55,11 @@ Step = React.createClass
     @props.step.set @props.step.value - 1
 
   goToStep: (i) ->
-    @props.step.set i+2
+    if i is 1 and @props.currentAnswers.value.animal isnt steps[2][0].animal.options[0]
+      @props.subStep.set 1
+    else
+      @props.subStep.set 0
+      @props.step.set i+2
 
   addNote: ->
     @props.notes.push [@props.currentAnswers.value]
@@ -67,7 +73,7 @@ Step = React.createClass
     @props.currentAnswers.set {}
 
   finishNote: ->
-    console.log 'send to classification'
+    console.log 'send to classification', @props.notes.value
     @props.step.set 0
     @props.subStep.set 0
     @props.notes.set []

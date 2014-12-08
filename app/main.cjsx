@@ -10,6 +10,9 @@ About = require './about'
 
 User = require 'zooniverse/models/user'
 
+require '../css/main.styl'
+
+
 Main = React.createClass
   displayName: 'Main'
 

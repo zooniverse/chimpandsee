@@ -5,7 +5,6 @@
     <title>Chimps</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width">
-    <link rel="stylesheet" href="./main.css">
   </head>
   <body>
     <div id="wrapper">
@@ -15,5 +14,17 @@
     </div>
   </body>
   <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+  <script type="text/javascript">
+    $.getJSON('./stats.json').done(function (stats) {
+      var s = document.getElementsByTagName('script')[2];
+
+      var jsPath = './' + stats.hash + '/' + stats.assets[0].name;
+
+      var el = document.createElement('script');
+      el.async = true;
+      el.src = jsPath;
+      s.parentNode.insertBefore(el, s);
+    });
+  </script>
   <script src="./main.js"></script>
 </html>

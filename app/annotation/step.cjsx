@@ -57,6 +57,10 @@ Step = React.createClass
   goToStep: (i) ->
     if i is 1 and @props.currentAnswers.value.animal isnt steps[2][0].animal.options[0]
       @props.subStep.set 1
+      @props.step.set i+2
+    else if i is 0 and @props.currentAnswers.value.animal isnt steps[2][0].animal.options[0]
+      @props.subStep.set 0
+      @props.step.set i+2
     else
       @props.subStep.set 0
       @props.step.set i+2

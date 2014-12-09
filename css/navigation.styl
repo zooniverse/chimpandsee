@@ -8,27 +8,24 @@
     vertical-align: middle
     margin-left: 20px
 
-  li
+  a:not(:first-of-type)
     display: inline-block
     width: 90px
-    height: 35px
+    color: $light-gray
+    font-size: 16px
+    font-weight: 400
+    line-height: 35px
+    text-decoration: none
     text-align: center
     margin: 17px 0
 
-    &:first-of-type
+    &:nth-child(2)
       margin-left: 35px
 
-    a
-      color: $light-gray
-      font-size: 16px
-      font-weight: 400
-      line-height: 35px
-      text-decoration: none
-      &:visited
-        color: inherit
+    &:visited
+      color: inherit
 
     &.active
       color: white
       border: solid 2px $topbar-green
       border-radius: 6px
-

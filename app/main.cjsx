@@ -10,8 +10,8 @@ About = require './about'
 
 User = require 'zooniverse/models/user'
 
+# Require main.styl for webpack
 require '../css/main.styl'
-
 
 Main = React.createClass
   displayName: 'Main'
@@ -25,8 +25,12 @@ Main = React.createClass
 
 routes =
   <Route name="root" path="/" handler={Main}>
-    <Route path="/classify" handler={Classify} />
-    <Route path="/about" handler={About} />
+    <Route name="classify" path="classify" handler={Classify} />
+    <Route name="about" path="about" handler={About}>
+      <Route name="team" path="team" handler={About} />
+      <Route name="organizations" path="organizations" handler={About} />
+    </Route>
+
     <DefaultRoute handler={Home} />
   </Route>
 

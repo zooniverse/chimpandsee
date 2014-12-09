@@ -123,6 +123,6 @@ var createServer = function(port) {
     })
 }
 
-gulp.task('build', ['serve', 'html', 'images', 'webpack:build']);
+gulp.task('build', ['html', 'images', 'webpack:build']);
 
 gulp.task('default', ['serve', 'watch']);

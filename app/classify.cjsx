@@ -61,7 +61,7 @@ module?.exports = React.createClass
 
   render: ->
     <div className="classify">
-      <button onClick={@openModal}>Tutorial</button>
+      <button className="tutorial-btn" onClick={@openModal}>Tutorial</button>
       <div className="guide">
         <header>
           <h2>Field Guide</h2>

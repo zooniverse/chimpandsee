@@ -1,31 +1,22 @@
 React = require 'react/addons'
+{Link} = require 'react-router'
 
 module?.exports = React.createClass
   displayName: 'Navigation'
 
   links: [
-    {href: '#/classify', text: 'Explore'}
-    {href: '#/about', text: 'About'}
-    {href: '#', text: 'Talk'}
-    {href: '#', text: 'Blog' }
+    {href: 'classify', text: 'Explore'}
+    {href: 'about', text: 'About'}
   ]
 
-  getInitialState: ->
-    activeLink: location.hash
-
-  componentDidMount: ->
-    window.onhashchange = @onHashChange
-
-  onHashChange: ->
-    @setState activeLink: location.hash
-
   link: (data, i) ->
-    className = if data.href is @state.activeLink then 'active' else ''
-    <li key={i} className={className}><a href={data.href}>{data.text}</a></li>
+    <Link key={i} to={data.href}>{data.text}</Link>
 
   render: ->
     links = @links.map(@link)
     <nav className="site-navigation">
       <a href="#/"><img className="logo" src="http://placehold.it/160x45&text=site-logo" alt="logo" /></a>
       {links}
+      <a href="#">Talk</a>
+      <a href="#">Blog</a>
     </nav>

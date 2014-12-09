@@ -20,6 +20,8 @@ Annotation = React.createClass
     currentAnswers: {}
     video: null
     preview: ["http://placehold.it/300x150&text=loading"]
+    zoomImage: false
+    zoomImageIndex: null
 
   componentWillMount: ->
     setTimeout ( =>
@@ -30,21 +32,36 @@ Annotation = React.createClass
   animateImages: ->
     @animate "image-flip", {transform: 'rotateY(180deg)'}, {transform: 'rotateY(0deg)'}, 'in-out', 1000
 
+  zoomImage: (i) ->
+    if @state.zoomImage is false
+      @animate "zoom-image", {transition: 'all .2s ease-in-out'}, {transform: 'scale3d(3,3,2)', marginTop: '95px'}, 'in-out', 1000
+      @setState zoomImage: true
+      @setState zoomImageIndex: i
+    else
+      @animate "zoom-image", {transition: 'all .2s ease-in-out'}, {transform: 'scale3d(1,1,1)', marginTop: '0'}, 'in-out', 1000
+      @setState zoomImage: false
+      @setState zoomImageIndex: null
+
   render: ->
     cursor = Cursor.build(@)
 
     previewClasses = cx({
-      'hide': if cursor.refine('currentStep').value > 0 then true else false
+      'hide': cursor.refine('currentStep').value > 0
       'preview-imgs': true
     })
 
     videoClasses = cx({
-      'hide': if cursor.refine('currentStep').value is 0 then true else false
+      'hide': cursor.refine('currentStep').value is 0
       'video': true
     })
 
     previews = cursor.refine('preview').value.map (preview, i) =>
-      <li key={i}><img style={@getAnimatedStyle("image-flip")} src={preview} /></li>
+      liClasses = cx({
+        'hide': @state.zoomImage is true and i isnt @state.zoomImageIndex
+      })
+      <li key={i} className={liClasses}>
+        <img style={@getAnimatedStyle("image-flip")} style={@getAnimatedStyle('zoom-image') if i is @state.zoomImageIndex} src={preview} onClick={@zoomImage.bind(null, i)} />
+      </li>
 
     <div className="annotation">
       <div className="subject">

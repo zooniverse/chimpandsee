@@ -57,7 +57,6 @@ gulp.task('images', function() {
   return gulp.src(config.images.src)
     .pipe(changed(config.images.dest))
     .pipe(imagemin())
-    // .pipe(rev())
     .pipe(gulp.dest(config.images.dest));
 });
 
@@ -65,7 +64,6 @@ gulp.task('images', function() {
 gulp.task('html', function() {
   return gulp.src(config.html.src)
     .on('error', handleErrors)
-    // .pipe(rev())
     .pipe(gulp.dest(config.html.dest));
 });
 
@@ -104,7 +102,8 @@ gulp.task("webpack:build", function(callback) {
         if(err) throw new gutil.PluginError("webpack:build", err);
         gutil.log("[webpack:build]", stats.toString({
             colors: true
-        }));
+          })
+        );
         callback();
     });
 });

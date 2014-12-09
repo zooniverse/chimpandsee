@@ -20,10 +20,10 @@ module.exports = {
     loaders: [
       { test: /\.cjsx$/, loaders: ['coffee-loader', 'cjsx-loader'] },
       { test: /\.coffee$/, loader: 'coffee-loader' },
-      { test: /\.styl$/, loader: 'style-loader!css-loader!stylus-loader' },
-      { test: /\.png$/, loader: "url-loader?mimetype=image/png" },
-      { test: /\.jpg$/, loader: "file-loader" },
-      { test: /\.svg$/, loader: "file-loader" }
+      { test: /\.styl$/, loader: 'style-loader!css-loader!stylus-loader!' },
+      { test: /\.png$/, loader: 'file-loader' },
+      { test: /\.jpg$/, loader: 'file-loader' },
+      { test: /\.svg$/, loader: 'file-loader' }
     ],
     noParse: [
       /^react$/

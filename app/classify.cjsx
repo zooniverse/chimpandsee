@@ -1,9 +1,14 @@
 React = require 'react/addons'
+cx = React.addons.classSet
+
 Subject = require 'zooniverse/models/subject'
 Annotation = require './annotation/annotation'
 SlideTutorial = require './slideTutorial'
+Guide = require './guide'
 
 animatedScrollTo = require 'animated-scrollto'
+
+steps = require './lib/steps'
 
 module?.exports = React.createClass
   displayName: 'Classify'
@@ -62,22 +67,8 @@ module?.exports = React.createClass
   render: ->
     <div className="classify">
       <button className="tutorial-btn" onClick={@openModal}>Tutorial</button>
-      <div className="guide">
-        <header>
-          <h2>Field Guide</h2>
-        </header>
-        <section>
-          <button className="close-guide-btn" onClick={@onClickClose}><img className="back-icon" src="./assets/back-icon.svg" alt="back icon" /> Back</button>
-          <h2>Chimpanzee</h2>
-          <h3>Pan Troglodytes</h3>
-          <img src="http://placehold.it/360x230" />
-          <p>The common chimpanzee (Pan troglodytes), also known as the robust chimpanzee, is a species of great ape. Colloquially, the common chimpanzee is often called the chimpanzee (or "chimp"), though this term can be used to refer to both species in the genus Pan: the common chimpanzee and the closely related bonobo, formerly called the pygmy chimpanzee. Evidence from fossils and DNA sequencing show both species of chimpanzees are the sister group to the modern human lineage.</p>
-          <figcaption>Example Images</figcaption>
-          <figure><img src="./assets/example-1.jpg" alt="Example of a chimp" /></figure>
-          <figure><img src="./assets/example-2.jpg" alt="Example of a chimp" /></figure>
-          <figure><img src="./assets/example-3.jpg" alt="Example of a chimp" /></figure>
-        </section>
-      </div>
+
+      <Guide onClickClose={@onClickClose} />
       <Annotation subject={@state.subject} preview={@state.preview} onClickGuide={@onClickGuide} />
       <SlideTutorial modalIsOpen={@state.modalIsOpen} onClickCloseSlide={@closeModal} />
       <img className="hidden-chimp" src="./assets/hidden-chimp.png" alt="" />

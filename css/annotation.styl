@@ -9,6 +9,10 @@
     display: flex
     align-items: center
 
+    @media screen and (max-width: 400px)
+      flex-wrap: wrap
+      justify-content: space-around
+
     .guide-btn, .favorite-btn
       cursor: pointer
       display: table
@@ -23,8 +27,16 @@
     .guide-btn
       margin-left: 10px
 
+      @media screen and (max-width: 400px)
+        order: 2
+        margin: 0
+
     .favorite-btn
       margin-right: 10px
+
+      @media screen and (max-width: 400px)
+        order: 3
+        margin: 0
 
     .preview-imgs
       margin: 0 auto 10px
@@ -56,6 +68,10 @@
 
     .video
       margin: 10px auto
+
+      @media screen and (max-width: 400px)
+        order: 1
+        align-self: center
 
       img // placeholder img
         width: 100%

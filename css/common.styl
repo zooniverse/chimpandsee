@@ -15,7 +15,6 @@ html, body
     transition: .3s ease all
 
   .push-right
-    -webkit-transform: translateX(400px) !important
     transform: translateX(400px) !important
 
   #app
@@ -25,6 +24,18 @@ html, body
     &:after
       content: ""
       display: block
+
+    .content
+      width: 100%
+      max-width: 1070px
+      margin: 95px auto
+      box-sizing: border-box
+
+      @media screen and (max-width: 768px)
+        max-width: 768px
+
+      @media screen and (max-width: 400px)
+        max-width: 400px
 
   .show
     display: block

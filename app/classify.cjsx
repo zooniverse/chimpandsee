@@ -47,9 +47,7 @@ module?.exports = React.createClass
       @setState guideIsOpen: true
       wrapper.classList.add 'push-right'
     else
-      console.log @refs
-      @setState guideIsOpen: false
-      wrapper.classList.remove 'push-right'
+      @onClickClose()
 
   onClickClose: ->
     wrapper = document.getElementById('wrapper')
@@ -64,10 +62,10 @@ module?.exports = React.createClass
     @setState modalIsOpen: false
 
   render: ->
-    <div className="classify">
+    <div className="classify content">
       <button className="tutorial-btn" onClick={@openModal}>Tutorial</button>
 
-      <Guide onClickClose={@onClickClose} />
+      <Guide onClickClose={@onClickClose} guideIsOpen={@state.guideIsOpen} />
       <Annotation subject={@state.subject} preview={@state.preview} toggleGuide={@toggleGuide} guideIsOpen={@state.guideIsOpen} />
       <SlideTutorial modalIsOpen={@state.modalIsOpen} onClickCloseSlide={@closeModal} />
       <img className="hidden-chimp" src="./assets/hidden-chimp.png" alt="" />

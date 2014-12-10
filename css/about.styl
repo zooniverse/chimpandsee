@@ -1,0 +1,26 @@
+.about
+  padding: 20px
+  background: white
+  border-radius: 8px
+
+  .about-nav
+    a
+      text-decoration: none
+      margin: 10px
+      color: black
+
+      &:first-of-type
+        margin-left: 0
+
+      &.active
+        color: $green
+
+      &.about-link
+        color: inherit !important
+
+      &:visited(:not(.active))
+        color: inherit
+
+  section
+    width: 100%
+

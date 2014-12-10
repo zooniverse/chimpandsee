@@ -23,13 +23,28 @@ Guide = React.createClass
   getInitialState: ->
     guideDetailsIndex: null
 
+  componentWillReceiveProps: ->
+    if @props.guideIsOpen is false
+      @setState guideDetailsIndex: null
+
+  openAnimation: ->
+    @animate "show-details", {transitionProperty: 'opacity, left', transitionDuration: '.15s, 0s', transitionDelay: '0s, 0s', opacity: '1', left: '0'}, {opacity: '0', left: '-400px'}, 'in-out', 500
+
+  closeAnimation: ->
+    @animate "close-details", {transitionProperty: 'opacity, left', transitionDuration: '.15s, 0s', transitionDelay: '0s, 0s', opacity: '0', left: '-400px'}, {opacity: '1', left: '0'}, 'in-out', 500
+
   onSelectGuideAnimal: (i) ->
-    @animate "show-details", {transitionProperty: 'opacity, left', transitionDuration: '.25s, 0s', transitionDelay: '0s, 0s', opacity: '1', left: '0'}, {opacity: '0', left: '-400px'}, 'in-out', 500
+    @openAnimation()
     @setState guideDetailsIndex: i
 
   onClickBack: ->
-    @animate "show-details", {transitionProperty: 'opacity, left', transitionDuration: '.5s, 0s', transitionDelay: '0s, 0s', opacity: '0', left: '-400px'}, {opacity: '1', left: '0'}, 'in-out', 500
+    @closeAnimation()
     @setState guideDetailsIndex: null
+
+  onClickClose: ->
+    @closeAnimation()
+    @setState guideDetailsIndex: null
+    @props.onClickClose()
 
   render: ->
     animals = steps[2][0].animal.options.map (animal, i) =>
@@ -61,10 +76,10 @@ Guide = React.createClass
 
     <div className="guide">
       <header className={headerClasses}>
-        <button className="close-guide-btn" onClick={@props.onClickClose}>X</button>
+        <button className="close-guide-btn" onClick={@onClickClose}>X</button>
         <h2>Field Guide</h2>
       </header>
-      <nav style={@getAnimatedStyle("show-details")} className="animal-list">
+      <nav style={if @state.guideDetailsIndex isnt null then @getAnimatedStyle("show-details") else @getAnimatedStyle("close-details")} className="animal-list">
         <header className="nav-header">What animal do you want to know about?</header>
         {animals}
       </nav>

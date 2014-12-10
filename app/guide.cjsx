@@ -24,8 +24,12 @@ Guide = React.createClass
     guideDetailsIndex: null
 
   onSelectGuideAnimal: (i) ->
-    @animate "show-details", {opacity: '1'}, {opacity: '0'}, 'in-out', 500
+    @animate "show-details", {transitionProperty: 'opacity, left', transitionDuration: '.25s, 0s', transitionDelay: '0s, 0s', opacity: '1', left: '0'}, {opacity: '0', left: '-400px'}, 'in-out', 500
     @setState guideDetailsIndex: i
+
+  onClickBack: ->
+    @animate "show-details", {transitionProperty: 'opacity, left', transitionDuration: '.5s, 0s', transitionDelay: '0s, 0s', opacity: '0', left: '-400px'}, {opacity: '1', left: '0'}, 'in-out', 500
+    @setState guideDetailsIndex: null
 
   render: ->
     animals = steps[2][0].animal.options.map (animal, i) =>
@@ -36,26 +40,32 @@ Guide = React.createClass
       'hide': @state.guideDetailsIndex is null
     })
 
+    headerClasses = cx({
+      'guide-header': true
+      'open-guide': @state.guideDetailsIndex isnt null
+    })
+
     details = if @state.guideDetailsIndex?
       exampleImages = guideDetails[@state.guideDetailsIndex].exampleImages.map (image, i) =>
         <figure key={i}><img src={image} alt="Example image of an animal" /></figure>
 
       <section className={detailsClasses}>
-        <button className="close-guide-btn" onClick={@props.onClickClose}><img className="back-icon" src="./assets/back-icon.svg" alt="back icon" /> Back</button>
+        <button className="back-guide-btn" onClick={@onClickBack}><img className="back-icon" src="./assets/back-icon.svg" alt="back icon" /> Back</button>
         <h2>{guideDetails[@state.guideDetailsIndex].header}</h2>
         <h3>{guideDetails[@state.guideDetailsIndex].subHeader}</h3>
-        <img src={guideDetails[@state.guideDetailsIndex].featured} />
+        <img src={guideDetails[@state.guideDetailsIndex].featureImage} />
         <p>{guideDetails[@state.guideDetailsIndex].description}</p>
         <figcaption>Example Images</figcaption>
         {exampleImages}
       </section>
 
     <div className="guide">
-      <header>
+      <header className={headerClasses}>
+        <button className="close-guide-btn" onClick={@props.onClickClose}>X</button>
         <h2>Field Guide</h2>
       </header>
       <nav style={@getAnimatedStyle("show-details")} className="animal-list">
-        <header>What animal do you want to know about?</header>
+        <header className="nav-header">What animal do you want to know about?</header>
         {animals}
       </nav>
       {details}

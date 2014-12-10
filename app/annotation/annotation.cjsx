@@ -5,6 +5,7 @@ Subject = require 'zooniverse/models/subject'
 Cursor = require('react-cursor').Cursor
 
 AnimateMixin = require "react-animate"
+animatedScrollTo = require 'animated-scrollto'
 
 Step = require './step'
 Notes = require './notes'
@@ -42,6 +43,19 @@ Annotation = React.createClass
       @setState zoomImage: false
       @setState zoomImageIndex: null
 
+  componentWillReceiveProps: ->
+    if @props.guideIsOpen is true
+      @refs.guideIcon.getDOMNode().src = "./assets/guide-icon.svg"
+
+  onClickGuide: ->
+    if @props.guideIsOpen is false
+      @refs.guideIcon.getDOMNode().src = "./assets/cancel-icon.svg"
+      animatedScrollTo document.body, 0, 1000
+    else
+      @refs.guideIcon.getDOMNode().src = "./assets/guide-icon.svg"
+
+    @props.toggleGuide()
+
   render: ->
     cursor = Cursor.build(@)
 
@@ -65,7 +79,7 @@ Annotation = React.createClass
 
     <div className="annotation">
       <div className="subject">
-        <div className="guide-btn" onClick={@props.onClickGuide}><img src="./assets/guide-icon.svg" alt="field guide button" /></div>
+        <div className="guide-btn" onClick={@onClickGuide}><img ref="guideIcon" src="./assets/guide-icon.svg" alt="field guide button" /></div>
         <div className={previewClasses}>
           {previews}
         </div>

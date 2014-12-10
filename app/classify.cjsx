@@ -26,7 +26,7 @@ module?.exports = React.createClass
       "http://placehold.it/300x150&text=video-preview"
       "http://placehold.it/300x150&text=video-preview"
     ]
-    showGuide: false
+    guideIsOpen: false
     modalIsOpen: false
 
   componentWillMount: ->
@@ -39,23 +39,22 @@ module?.exports = React.createClass
   onSubjectSelect: (e, subject) ->
     @setState subject: subject.location.standard
 
-  onClickGuide: (e) ->
+  toggleGuide: (e) ->
     # Grabbing DOM element outside of React components to be able to move everything to the right including top bar and footer
     wrapper = document.getElementById('wrapper')
 
-    if @state.showGuide is false
-      @setState showGuide: true
+    if @state.guideIsOpen is false
+      @setState guideIsOpen: true
       wrapper.classList.add 'push-right'
-
-      animatedScrollTo document.body, 0, 1000
     else
-      @setState showGuide: false
+      console.log @refs
+      @setState guideIsOpen: false
       wrapper.classList.remove 'push-right'
 
   onClickClose: ->
     wrapper = document.getElementById('wrapper')
 
-    @setState showGuide: false
+    @setState guideIsOpen: false
     wrapper.classList.remove 'push-right'
 
   openModal: ->
@@ -69,7 +68,7 @@ module?.exports = React.createClass
       <button className="tutorial-btn" onClick={@openModal}>Tutorial</button>
 
       <Guide onClickClose={@onClickClose} />
-      <Annotation subject={@state.subject} preview={@state.preview} onClickGuide={@onClickGuide} />
+      <Annotation subject={@state.subject} preview={@state.preview} toggleGuide={@toggleGuide} guideIsOpen={@state.guideIsOpen} />
       <SlideTutorial modalIsOpen={@state.modalIsOpen} onClickCloseSlide={@closeModal} />
       <img className="hidden-chimp" src="./assets/hidden-chimp.png" alt="" />
     </div>

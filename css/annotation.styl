@@ -46,6 +46,7 @@
       li
         display: inline
 
+
         @media screen and (min-width: 1040px)
           &:nth-child(3):after
             content: "."
@@ -59,12 +60,21 @@
           border-radius: 16px
           width: 100%
           max-width: 300px
+          transform: scale3d(1,1,1)
+          transition-duration: 500ms
+          transition-timing-function: ease-in-out
 
           @media screen and (max-width: 768px)
             max-width: 250px
 
           @media screen and (max-width: 400px)
             max-width: 175px
+
+        img.zoom-image
+          transform: scale3d(3,3,2) !important
+          transition-duration: 500ms
+          transition-timing-function: ease-in-out
+          margin-top: 95px
 
     .video
       margin: 10px auto

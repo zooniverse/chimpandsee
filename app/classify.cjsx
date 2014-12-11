@@ -16,15 +16,15 @@ module?.exports = React.createClass
   getInitialState: ->
     subject: "http://placehold.it/300&text=loading"
     preview: [
-      "http://placehold.it/300x150&text=video-preview"
-      "http://placehold.it/300x150&text=video-preview"
-      "http://placehold.it/300x150&text=video-preview"
-      "http://placehold.it/300x150&text=video-preview"
-      "http://placehold.it/300x150&text=video-preview"
-      "http://placehold.it/300x150&text=video-preview"
-      "http://placehold.it/300x150&text=video-preview"
-      "http://placehold.it/300x150&text=video-preview"
-      "http://placehold.it/300x150&text=video-preview"
+      "http://placehold.it/300x150&text=video-preview-1"
+      "http://placehold.it/300x150&text=video-preview-2"
+      "http://placehold.it/300x150&text=video-preview-3"
+      "http://placehold.it/300x150&text=video-preview-4"
+      "http://placehold.it/300x150&text=video-preview-5"
+      "http://placehold.it/300x150&text=video-preview-6"
+      "http://placehold.it/300x150&text=video-preview-7"
+      "http://placehold.it/300x150&text=video-preview-8"
+      "http://placehold.it/300x150&text=video-preview-9"
     ]
     guideIsOpen: false
     modalIsOpen: false

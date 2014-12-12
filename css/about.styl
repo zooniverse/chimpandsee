@@ -1,26 +1,119 @@
 .about
-  padding: 20px
-  background: white
-  border-radius: 8px
+  .about-hero
+    background: url(/assets/about-hero.jpg) no-repeat center center
+    background-size: cover
+    width: 100%
+    height: 414px
+
+    h2
+      margin: 0
+      font-size: 60px
+      font-weight: 700
+      line-height 60px
+      text-align: left
+      color: white
+      padding: 143px 249px
+
+      .amp
+        font-size: 120px
+        transform: rotate(-23deg)
+        display: inline-block
+        vertical-align: middle
 
   .about-nav
+    background-color: $near-black
+    height: 59px
+
     a
       text-decoration: none
-      margin: 10px
-      color: black
+      line-height: 59px
+      padding: 19px
+      color: white
 
       &:first-of-type
         margin-left: 0
 
       &.active
-        color: $green
+        background-color: $green
 
       &.about-link
-        color: inherit !important
+        background-color: $near-black
 
       &:visited(:not(.active))
         color: inherit
 
-  section
+  .about-section
     width: 100%
+    background-color: $dark-gray
+    height: 500px
+
+    .content
+      display: flex
+      height: 500px
+      align-items: center
+
+      div
+        order: 1
+        padding: 0 110px 0 0
+
+        h2
+          color: $green
+
+        p
+          color: #eae9e9
+          margin: 0
+        a
+          display: none
+
+      img
+        width: 100%
+        max-width: 222px
+        border-radius: 50%
+        order: 2
+        border: solid 15px $green
+        box-sizing: border-box
+
+    &:nth-child(odd)
+      background-color: $blackish
+
+      .content
+        div
+          order: 2
+          padding: 0 110px
+        img
+          order: 1
+
+    &:first-of-type
+      .content img
+        border: none
+
+    &:last-of-type
+      background-color: $green
+      height: 333px
+
+      .content
+        height: 333px
+        text-align: center
+        flex-direction: column
+        justify-content: center
+
+        div
+          h2
+            margin: 0 0 75px
+            color: #eae9e9
+
+          img
+            display: none
+
+          p
+            display: none
+
+          a
+            display: initial
+            padding: 22px 74px
+            text-decoration: none
+            color: #eae9e9
+            background-color: #1b865c
+            border-radius: 8px
+
 

@@ -6,10 +6,6 @@ Annotation = require './annotation/annotation'
 SlideTutorial = require './slideTutorial'
 Guide = require './guide'
 
-animatedScrollTo = require 'animated-scrollto'
-
-steps = require './lib/steps'
-
 module?.exports = React.createClass
   displayName: 'Classify'
 

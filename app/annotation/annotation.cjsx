@@ -31,10 +31,11 @@ Annotation = React.createClass
     ), 2000
 
   animateImages: ->
-    @animate "image-flip", {transform: 'rotateY(180deg)'}, {transform: 'rotateY(0deg)'}, 'in-out', 1000
+    @animate "image-flip", {transform: 'rotateY(180deg)'}, {transform: 'rotateY(0deg)'}, 'ease-in-out', 500
 
   zoomImage: (i) ->
     if @state.zoomImage is false
+      @animate "image-zoom", {transform: 'scale3d(1,1,1)', transitionDuration: '500ms'}, {transform: 'scale3d(3,3,2)'}, 'ease-in-out', 500
       @setState zoomImage: true
       @setState zoomImageIndex: i
     else
@@ -71,12 +72,9 @@ Annotation = React.createClass
       liClasses = cx({
         'hide': @state.zoomImage is true and i isnt @state.zoomImageIndex
       })
-      imgClasses = cx({
-        'zoom-image': i is @state.zoomImageIndex
-      })
 
       <li key={i} className={liClasses}>
-        <img className={imgClasses} style={@getAnimatedStyle('image-flip')} src={preview} onClick={@zoomImage.bind(null, i)} />
+        <img style={if @state.zoomImage is true then @getAnimatedStyle("image-zoom") else @getAnimatedStyle('image-flip')} src={preview} onClick={@zoomImage.bind(null, i)} />
       </li>
 
     <div className="annotation">

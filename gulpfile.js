@@ -1,6 +1,8 @@
 var gulp = require('gulp');
-var path = require('path')
+var path = require('path');
+var util = require('util');
 var del = require('del');
+var through2 = require('through2');
 var watch = require('gulp-watch');
 var gutil = require('gulp-util');
 var changed = require('gulp-changed');
@@ -104,6 +106,19 @@ gulp.task("webpack:build", function(callback) {
             colors: true
           })
         );
+
+        // write the hashed main.js to /public/build/index.html
+        var jsFilename = stats.toJson().assetsByChunkName['main'];
+
+        gulp.src('./public/build/index.html')
+            .on('error', handleErrors)
+            .pipe(through2.obj(function (chunk, enc, tCb) {
+                chunk.contents = new Buffer(String(chunk.contents)
+                    .replace('main.js', jsFilename));
+                this.push(chunk);
+                tCb();
+            }))
+            .pipe(gulp.dest(dest));
         callback();
     });
 });

@@ -1,5 +1,4 @@
 var path = require("path");
-var replace = require("replace");
 var webpack = require("webpack");
 
 module.exports = {

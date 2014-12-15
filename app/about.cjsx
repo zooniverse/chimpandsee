@@ -18,7 +18,7 @@ module?.exports = React.createClass
         {header: "Many theories tie human evolution to meat-eating and tool use.", content: "It is thought that a major leap in the mental, physical, and cultural development of Homo sapiens was associated with increases in hunting, meat-eating, and the use of tools. We sometimes see similar human-like behaviors appear among diverse populations of today’s wild chimpanzees. If we study when, where, and how such behavior is more prominent, we can get a better idea of the evolutionary scenarios that led to the rise of our species.", image: "./assets/chimp-tools.gif"},
         {header: "You can watch videos to help us learn about chimps and humans.", content: "For this project, we have collected nearly 7,000 hours of footage, reflecting various chimpanzee habitats, from camera traps in 15 countries across Africa. (We are also collecting a wide variety of organic samples from these sites, such as feces, hair, and plant matter, and information on the ecology and environment of each habitat.) By scanning the videos from these traps and identifying the types of species and activity that you see, you’ll help us to understand the lives of these apes—their behaviors, relationships, and environments—and to extrapolate new ideas about human origins.", image: "./assets/chimp-video.gif"},
         {header: "We have two goals: to learn and to preserve.", content: "In addition to helping us better understand cultural evolution, this project will also document wildlife populations and biodiversity in these areas. Already we have both documented new chimpanzee behaviors and made some startling finds of animals in locations where they were no longer thought to live! We hope that drawing attention to a great many of these sites will incite conservation organizations to take an interest in these areas and move to protect them.", image: "./assets/chimp-people.gif"}
-        {header: "Ready to join us? Get started watching chimps!", content: "Start Watching", image: ""}
+        {header: "Ready to join us? Get started watching chimps!", content: "Start Watching", image: "./assets/hidden-chimp.png"}
       ]
       [
         {header: "Christophe Boesch", content: "is Professor and Director of the Department of Primatology of the Max Planck Institute for Evolutionary Anthropology in Germany. He has been studying apes for over 40 years across Africa, having established both the Tai Chimpanzee Project in Cote d’Ivoire and the Loango Ape Project in Gabon during this time. His research takes a holistic approach to studying chimpanzees and uses this to improve our understanding of the evolution of humans and their cognitive and cultural abilities. He is the author of several popular books and as the founding president of the Wild Chimpanzee Foundation he fights for a better future for the remaining wild ape populations at a grassroots level.", image: ""}
@@ -31,6 +31,12 @@ module?.exports = React.createClass
       ]
     ]
     activeContent: 0
+
+  componentWillMount: ->
+    if window.location.hash is '#/about/team'
+      @setState activeContent: 1
+    else if window.location.hash is '#/about/organizations'
+      @setState activeContent: 2
 
   onLinkClick: (i) ->
     @setState activeContent: i

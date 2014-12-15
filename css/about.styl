@@ -89,7 +89,8 @@
           border: none
 
       &:last-of-type
-        background-color: $green
+        background: $green url(/assets/about-background.jpg) no-repeat center center
+        background-size: cover 
         height: 333px
 
         .content
@@ -105,9 +106,6 @@
               margin: 0 0 75px
               color: #eae9e9
 
-            img
-              display: none
-
             p
               display: none
 
@@ -118,7 +116,19 @@
               color: #eae9e9
               background-color: #1b865c
               border-radius: 8px
-  
+              
+          img
+            order: 3
+            width: 66px
+            border: none
+            position: absolute
+            right: 30%
+            bottom: 190px
+            transition: all 0.5s ease
+
+            &:hover
+              bottom: 210px
+              
   .page-two, .page-three
     background: #eae9e9
     padding: 20px

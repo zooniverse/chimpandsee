@@ -41,79 +41,91 @@
 
       &:visited(:not(.active))
         color: inherit
-
-  .about-section
-    width: 100%
-    background-color: $dark-gray
-    height: 500px
-
-    .content
-      display: flex
+        
+  .page-one
+    .about-section
+      width: 100%
+      background-color: $dark-gray
       height: 500px
-      align-items: center
-
-      div
-        order: 1
-        padding: 0 110px 0 0
-
-        h2
-          color: $green
-
-        p
-          color: #eae9e9
-          margin: 0
-        a
-          display: none
-
-      img
-        width: 100%
-        max-width: 222px
-        border-radius: 50%
-        order: 2
-        border: solid 15px $green
-        box-sizing: border-box
-
-    &:nth-child(odd)
-      background-color: $blackish
 
       .content
+        display: flex
+        height: 500px
+        align-items: center
+
         div
-          order: 2
-          padding: 0 110px
-        img
           order: 1
+          padding: 0 110px 0 0
 
-    &:first-of-type
-      .content img
-        border: none
-
-    &:last-of-type
-      background-color: $green
-      height: 333px
-
-      .content
-        height: 333px
-        text-align: center
-        flex-direction: column
-        justify-content: center
-
-        div
           h2
-            margin: 0 0 75px
-            color: #eae9e9
-
-          img
-            display: none
+            color: $green
 
           p
+            color: #eae9e9
+            margin: 0
+          a
             display: none
 
-          a
-            display: initial
-            padding: 22px 74px
-            text-decoration: none
-            color: #eae9e9
-            background-color: #1b865c
-            border-radius: 8px
+        img
+          width: 100%
+          max-width: 222px
+          border-radius: 50%
+          order: 2
+          border: solid 15px $green
+          box-sizing: border-box
 
+      &:nth-child(odd)
+        background-color: $blackish
+
+        .content
+          div
+            order: 2
+            padding: 0 0 0 110px
+          img
+            order: 1
+
+      &:first-of-type
+        .content img
+          border: none
+
+      &:last-of-type
+        background-color: $green
+        height: 333px
+
+        .content
+          height: 333px
+          text-align: center
+          flex-direction: column
+          justify-content: center
+
+          div
+            padding: 0
+            
+            h2
+              margin: 0 0 75px
+              color: #eae9e9
+
+            img
+              display: none
+
+            p
+              display: none
+
+            a
+              display: initial
+              padding: 22px 74px
+              text-decoration: none
+              color: #eae9e9
+              background-color: #1b865c
+              border-radius: 8px
+  
+  .page-two, .page-three
+    background: #eae9e9
+    padding: 20px
+    margin: 95px auto !important
+    border-radius: 8px
+    
+    .name
+      margin-right: 5px
+      font-weight: 700
 

@@ -2,7 +2,7 @@ require 'json'
 require 'aws-sdk'
 require 'mime/types'
 
-if ARGV[0].nil? && ARGV[1].nil?
+if ARGV[0].nil? || ARGV[1].nil?
   puts "Provide both an input path and output S3 key path."
   puts "ex: uploader.rb ./outputs subjects"
   exit
@@ -37,8 +37,8 @@ end
 
 # Probably gets only files?
 files = Dir["#{File.expand_path(ARGV[0])}/**/*.*"]
-
 total = files.length
+
 uploader = Uploader.new(ARGV[0], ARGV[1])
 
 files.each_slice(25).with_index do |list, i|

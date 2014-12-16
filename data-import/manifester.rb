@@ -26,15 +26,15 @@ files.each.with_index do |file, index|
   seconds_between = duration / previews_per
   (0..previews_per).each do |preview|
     screenshot_time = preview * seconds_between
-    preview_path = "#{subject_path}/previews/#{id}-#{screenshot_time}.jpg"
-    `ffmpeg -ss #{screenshot_time} -i "#{file}" -r 1 -t 1 #{preview_path}`
-    previews << preview_path
+
+    `ffmpeg -ss #{screenshot_time} -i "#{file}" -r 1 -t 1 #{subject_path}/previews/#{id}-#{screenshot_time}.jpg`
+    previews << "http://demo.zooniverse.org/chimps/subjects/#{id}/previews/#{id}-#{screenshot_time}.jpg"
   end
 
   subject = {
     id: id,
     location: {
-      standard: "#{subject_path}/#{id}.mp4",
+      standard: "http://demo.zooniverse.org/chimps/subjects/#{id}/#{id}.mp4",
       previews: previews
     },
     metadata: {
@@ -44,4 +44,4 @@ files.each.with_index do |file, index|
   subjects << subject
 end
 
-File.open("#{outputs_path}/manifest.json", "w"){|f| f.puts(JSON.dump(subjects))}
+File.open("./manifest.json", "w"){|f| f.puts(JSON.dump(subjects))}

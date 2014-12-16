@@ -3,5 +3,7 @@ npm-debug.log
 /public/build
 /public/build/**/*
 .DS_Store
+
+/data-import/manifest.json
 /data-import/inputs/**/*
 /data-import/outputs/**/*

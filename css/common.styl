@@ -76,9 +76,25 @@ html, body
     left: 0
     text-align: initial
     height: 30px
+    position: relative
+    z-index: 1
 
     .corner
       display: none
+
+    .no-user
+      .sign-in
+        position: absolute
+        top: 50px
+        right: 10px
+
+    .current-user
+      position: absolute
+      top: 50px
+      right: 10px
+
+      img
+        border-radius: 50%
 
   #footer, #app:after
     height: 274px

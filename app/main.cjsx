@@ -9,6 +9,7 @@ Classify = require './classify'
 About = require './about'
 
 User = require 'zooniverse/models/user'
+Profile = require './profile'
 
 # Require main.styl for webpack
 require '../css/main.styl'
@@ -16,11 +17,21 @@ require '../css/main.styl'
 Main = React.createClass
   displayName: 'Main'
 
+  getInitialState: ->
+    user: null
+
+  componentWillMount: ->
+    User.on 'change', @onUserChange
+    User.fetch()
+
+  onUserChange: (e, user) ->
+    @setState user: user
+
   render: ->
     <div>
-      <Navigation />
+      <Navigation user={@state.user} />
 
-      <RouteHandler />
+      <RouteHandler user={@state.user} />
     </div>
 
 routes =
@@ -30,6 +41,7 @@ routes =
       <Route name="team" path="team" handler={About} />
       <Route name="organizations" path="organizations" handler={About} />
     </Route>
+    <Route name="profile" path="profile" handler={Profile} />
 
     <DefaultRoute handler={Home} />
   </Route>

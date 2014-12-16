@@ -19,7 +19,7 @@ html, body
 
   #app
     min-height: 100%
-    margin-bottom: -274px
+    margin-bottom: -395px
 
     &:after
       content: ""
@@ -74,7 +74,7 @@ html, body
     background: $topbar-green
     color: $mint
     left: 0
-    text-align: initial
+    text-align: left
     height: 30px
     position: relative
     z-index: 1
@@ -85,7 +85,7 @@ html, body
     .no-user
       .sign-in
         position: absolute
-        top: 50px
+        top: 55px
         right: 10px
 
     .current-user
@@ -97,10 +97,33 @@ html, body
         border-radius: 50%
 
   #footer, #app:after
-    height: 274px
+    height: 395px
 
+  #footer
     .zooniverse-footer
       background-color: #1f1f1f
-      color: white
+      color: #eae9e9
       padding: 20px
       position: relative
+
+      .zooniverse-logo-container
+        display: block
+        width: 100%
+        text-align: center
+
+        .zooniverse-logo
+          width: 90px
+          margin-bottom: 30px
+
+      .zooniverse-footer-content
+        float: none
+        width: 100%
+        max-width: 920px
+        margin: 0 auto
+
+        .zooniverse-footer-heading
+          max-width: 720px
+          margin: 0 auto 20px
+          text-align: center
+          font-size: 16px
+

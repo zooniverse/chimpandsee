@@ -31,6 +31,8 @@ module?.exports = React.createClass
 
   componentWillUnmount: ->
     Subject.off 'select', @onSubjectSelect
+    wrapper = document.getElementById('wrapper')
+    wrapper.classList.remove 'push-right'
 
   onSubjectSelect: (e, subject) ->
     @setState subject: subject.location.standard

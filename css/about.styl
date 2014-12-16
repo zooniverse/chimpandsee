@@ -46,17 +46,24 @@
     .about-section
       width: 100%
       background-color: $dark-gray
-      height: 500px
+      min-height: 500px
 
       .content
         display: flex
-        height: 500px
+        min-height: 500px
         align-items: center
+
+        @media screen and (max-width: 768px)
+          flex-direction: column
 
         div
           order: 1
-          padding: 0 110px 0 0
+          padding: 0 110px 0 20px
           max-width: 738px
+
+          @media screen and (max-width: 768px)
+            order: 2
+            padding: 20px
 
           h2
             color: $green
@@ -70,10 +77,16 @@
         img
           width: 100%
           max-width: 222px
+          height: 100%
+          max-height: 222px
           border-radius: 50%
           order: 2
           border: solid 15px $green
           box-sizing: border-box
+          margin: 20px
+
+          @media screen and (max-width: 768px)
+            order: 1
 
       &:nth-child(odd)
         background-color: $blackish
@@ -81,7 +94,11 @@
         .content
           div
             order: 2
-            padding: 0 0 0 110px
+            padding: 0 20px 0 110px
+
+            @media screen and (max-width: 768px)
+              padding: 20px
+
           img
             order: 1
 
@@ -92,20 +109,23 @@
       &:last-of-type
         background: $green url(/assets/about-background.jpg) no-repeat center center
         background-size: cover
-        height: 333px
+        min-height: 333px
 
         .content
-          height: 333px
+          min-height: 333px
           text-align: center
           flex-direction: column
           justify-content: center
 
           div
-            padding: 0
+            padding: 0 20px
 
             h2
-              margin: 0 0 75px
+              margin: 75px 0
               color: #eae9e9
+
+              @media screen and (max-width: 768px)
+                margin: 0 0 20px
 
             p
               display: none
@@ -121,14 +141,34 @@
           img
             order: 3
             width: 66px
+            height: 112px
             border: none
-            position: absolute
-            right: 30%
-            bottom: 312px
+            position: relative
+            bottom: -83px
+            margin: 0
+            padding: 0
             transition: all 0.5s ease
 
+            @media screen and (min-width: 769px)
+              align-self: flex-end
+              right: 15%
+
+            @media screen and (max-width: 768px)
+              bottom: -136px
+              align-self: center
+
+            @media screen and (max-width: 598px)
+              bottom: -119px
+
             &:hover
-              bottom: 335px
+              bottom: -60px
+
+              @media screen and (max-width: 768px)
+                bottom: -110px
+
+              @media screen and (max-width: 598px)
+                bottom: -95px
+
 
   .page-two, .page-three
     background: #eae9e9

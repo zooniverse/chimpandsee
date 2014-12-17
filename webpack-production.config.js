@@ -8,8 +8,8 @@ module.exports = {
     main: './main.cjsx'
   },
   output: {
-    path: path.join(__dirname, '/public/build', '[hash]'),
-    publicPath: '/public/build/[hash]/',
+    path: path.join(__dirname, '/public/build'),
+    publicPath: '/public/build/',
     filename: '[name].[hash].js',
     chunkFilename: '[id].[hash].bundle.js'
   },

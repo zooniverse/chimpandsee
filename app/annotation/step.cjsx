@@ -1,8 +1,10 @@
 React = require 'react/addons'
 cx = React.addons.classSet
 _ = require 'underscore'
-Subject = require 'zooniverse/models/subject'
 ImmutableOptimizations = require('react-cursor').ImmutableOptimizations
+
+Subject = require 'zooniverse/models/subject'
+Classification = require 'zooniverse/models/classification'
 
 steps = require '../lib/steps'
 
@@ -42,6 +44,7 @@ Step = React.createClass
     @props.currentAnswers.set {}
     Subject.next()
     @props.subject.set Subject.current.location.standard
+    @props.previews.set Subject.current.location.previews
 
   storeSelection: (name, value) ->
     obj = {}
@@ -77,12 +80,12 @@ Step = React.createClass
     @props.currentAnswers.set {}
 
   finishNote: ->
-    console.log 'send to classification', @props.notes.value
+    console?.log 'send to classification', @props.notes.value
+    @props.classification.annotate @props.notes.value
+    @props.classification.send()
     @props.step.set 0
     @props.subStep.set 0
-    @props.notes.set []
-    Subject.next()
-    @props.subject.set Subject.current.location.standard
+    @newSubject()
 
   render: ->
     cancelClasses = cx({

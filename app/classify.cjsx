@@ -1,27 +1,21 @@
 React = require 'react/addons'
 cx = React.addons.classSet
 
-Subject = require 'zooniverse/models/subject'
 Annotation = require './annotation/annotation'
 SlideTutorial = require './slideTutorial'
 Guide = require './guide'
+
+Subject = require 'zooniverse/models/subject'
+Favorite = require 'zooniverse/models/favorite'
+Classification = require 'zooniverse/models/classification'
 
 module?.exports = React.createClass
   displayName: 'Classify'
 
   getInitialState: ->
     subject: "http://placehold.it/300&text=loading"
-    preview: [
-      "http://placehold.it/300x150&text=video-preview-1"
-      "http://placehold.it/300x150&text=video-preview-2"
-      "http://placehold.it/300x150&text=video-preview-3"
-      "http://placehold.it/300x150&text=video-preview-4"
-      "http://placehold.it/300x150&text=video-preview-5"
-      "http://placehold.it/300x150&text=video-preview-6"
-      "http://placehold.it/300x150&text=video-preview-7"
-      "http://placehold.it/300x150&text=video-preview-8"
-      "http://placehold.it/300x150&text=video-preview-9"
-    ]
+    previews: []
+    classification: null
     guideIsOpen: false
     modalIsOpen: false
 
@@ -36,6 +30,8 @@ module?.exports = React.createClass
 
   onSubjectSelect: (e, subject) ->
     @setState subject: subject.location.standard
+    @setState previews: subject.location.previews
+    @setState classification: new Classification {subject}
 
   toggleGuide: (e) ->
     # Grabbing DOM element outside of React components to be able to move everything to the right including top bar and footer
@@ -64,7 +60,7 @@ module?.exports = React.createClass
       <button className="tutorial-btn" onClick={@openModal}>Tutorial</button>
 
       <Guide onClickClose={@onClickClose} guideIsOpen={@state.guideIsOpen} />
-      <Annotation subject={@state.subject} preview={@state.preview} toggleGuide={@toggleGuide} guideIsOpen={@state.guideIsOpen} />
+      <Annotation subject={@state.subject} previews={@state.previews} classification={@state.classification} toggleGuide={@toggleGuide} guideIsOpen={@state.guideIsOpen} />
       <SlideTutorial modalIsOpen={@state.modalIsOpen} onClickCloseSlide={@closeModal} />
       <img className="hidden-chimp" src="./assets/hidden-chimp.png" alt="" />
     </div>

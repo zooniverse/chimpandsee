@@ -4,7 +4,7 @@ Footer = require 'zooniverse/controllers/footer'
 
 # Api
 Api = require 'zooniverse/lib/api'
-api = new Api project: 'penguin'
+api = new Api project: 'chimp'
 
 # Top Bar
 topBar = new TopBar

@@ -11,7 +11,11 @@ Profile = React.createClass
 
   render: ->
     userDetails = if @props.user?
-      <h1>Hello, {@props.user.name}</h1>
+      <div>
+        <h1>Hello, {@props.user.name}</h1>
+        <p>Favorite: {@props.user.project.favorite_count or 0}</p>
+        <p>Classification Count: {@props.user.project.classification_count or 0}</p>
+      </div>
     else
       <p>Please <a href="#/profile" onClick={@onClickSignIn}>sign in</a>.</p>
 

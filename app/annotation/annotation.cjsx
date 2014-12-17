@@ -1,11 +1,12 @@
 React = require 'react/addons'
 cx = React.addons.classSet
 _ = require 'underscore'
-Subject = require 'zooniverse/models/subject'
 Cursor = require('react-cursor').Cursor
 
 AnimateMixin = require "react-animate"
 animatedScrollTo = require 'animated-scrollto'
+
+Subject = require 'zooniverse/models/subject'
 
 Step = require './step'
 Notes = require './notes'
@@ -20,14 +21,15 @@ Annotation = React.createClass
     notes: []
     currentAnswers: {}
     video: null
-    preview: ["http://placehold.it/300x150&text=loading"]
+    previews: ["http://placehold.it/300x150&text=loading"]
     zoomImage: false
     zoomImageIndex: null
+    favorited: false
 
   componentWillMount: ->
     setTimeout ( =>
       @setState video: @props.subject
-      @setState preview: @props.preview
+      @setState previews: @props.previews
     ), 2000
 
   animateImages: ->
@@ -55,6 +57,16 @@ Annotation = React.createClass
 
     @props.toggleGuide()
 
+  onClickFavorite: ->
+    if @state.favorited is false
+      @setState favorited: true
+      @props.classification.favorite is true
+      @refs.favoriteIcon.getDOMNode().src = "./assets/fav-icon-filled.svg"
+    else
+      @setState favorited: false
+      @props.classification.favorite is false
+      @refs.favoriteIcon.getDOMNode().src = "./assets/fav-icon.svg"
+
   render: ->
     cursor = Cursor.build(@)
 
@@ -68,7 +80,7 @@ Annotation = React.createClass
       'video': true
     })
 
-    previews = cursor.refine('preview').value.map (preview, i) =>
+    previews = cursor.refine('previews').value.map (preview, i) =>
       liClasses = cx({
         'hide': @state.zoomImage is true and i isnt @state.zoomImageIndex
       })
@@ -84,11 +96,13 @@ Annotation = React.createClass
           {previews}
         </div>
         <div className={videoClasses}>
-          <img src={cursor.refine('video').value} />
+          <video poster={cursor.refine('previews').value[0]} src={cursor.refine('video').value} width="100%" type="video/mp4" controls>
+            Your browser does not support the video format. Please upgrade your browser.
+          </video>
         </div>
-        <div className="favorite-btn"><img src="./assets/fav-icon.svg" alt="favorite button" /></div>
+        <div className="favorite-btn" onClick={@onClickFavorite}><img ref="favoriteIcon" src="./assets/fav-icon.svg" alt="favorite button" /></div>
       </div>
-      <Step step={cursor.refine('currentStep')} subStep={cursor.refine('subStep')} currentAnswers={cursor.refine('currentAnswers')} notes={cursor.refine('notes')} subject={cursor.refine('video')} preview={cursor.refine('preview')} animateImages={@animateImages} />
+      <Step step={cursor.refine('currentStep')} subStep={cursor.refine('subStep')} currentAnswers={cursor.refine('currentAnswers')} notes={cursor.refine('notes')} subject={cursor.refine('video')} previews={cursor.refine('previews')} animateImages={@animateImages} classification={@props.classification} />
       <Notes notes={cursor.refine('notes')} />
     </div>
 

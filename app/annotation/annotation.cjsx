@@ -32,6 +32,14 @@ Annotation = React.createClass
       @setState previews: @props.previews
     ), 2000
 
+  componentWillReceiveProps: ->
+    if @props.guideIsOpen is true
+      @refs.guideIcon.getDOMNode().src = "./assets/guide-icon.svg"
+
+    if @state.favorited is true
+      @setState favorited: false
+      @refs.favoriteIcon.getDOMNode().src = "./assets/fav-icon.svg"
+
   animateImages: ->
     @animate "image-flip", {transform: 'rotateY(180deg)'}, {transform: 'rotateY(0deg)'}, 'ease-in-out', 500
 
@@ -43,10 +51,6 @@ Annotation = React.createClass
     else
       @setState zoomImage: false
       @setState zoomImageIndex: null
-
-  componentWillReceiveProps: ->
-    if @props.guideIsOpen is true
-      @refs.guideIcon.getDOMNode().src = "./assets/guide-icon.svg"
 
   onClickGuide: ->
     if @props.guideIsOpen is false
@@ -60,11 +64,11 @@ Annotation = React.createClass
   onClickFavorite: ->
     if @state.favorited is false
       @setState favorited: true
-      @props.classification.favorite is true
+      @props.classification.favorite = true
       @refs.favoriteIcon.getDOMNode().src = "./assets/fav-icon-filled.svg"
     else
       @setState favorited: false
-      @props.classification.favorite is false
+      @props.classification.favorite = false
       @refs.favoriteIcon.getDOMNode().src = "./assets/fav-icon.svg"
 
   render: ->

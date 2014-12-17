@@ -2,7 +2,7 @@ var path = require("path");
 var webpack = require("webpack");
 
 module.exports = {
-  watch: true,
+  watch: false,
   context: __dirname + '/app',
   entry: {
     main: './main.cjsx'

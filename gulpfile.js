@@ -110,7 +110,7 @@ gulp.task("webpack:build", function(callback) {
         // write the hashed main.js to /public/build/index.html
         var jsFilename = stats.toJson().assetsByChunkName['main'];
 
-        gulp.src('./public/build/index.html')
+        return gulp.src(config.html.src)
             .on('error', handleErrors)
             .pipe(through2.obj(function (chunk, enc, tCb) {
                 chunk.contents = new Buffer(String(chunk.contents)
@@ -118,7 +118,7 @@ gulp.task("webpack:build", function(callback) {
                 this.push(chunk);
                 tCb();
             }))
-            .pipe(gulp.dest(dest));
+            .pipe(gulp.dest(config.html.dest));
         callback();
     });
 });
@@ -138,6 +138,6 @@ var createServer = function(port) {
     })
 }
 
-gulp.task('build', ['html', 'images', 'webpack:build']);
+gulp.task('build', ['images', 'webpack:build']);
 
 gulp.task('default', ['serve', 'watch']);

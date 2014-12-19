@@ -23,7 +23,7 @@ module?.exports = React.createClass
       'hide': unless @props.user? then true else false
     })
     <nav className="site-navigation">
-      <a href="#/"><img className="logo" src="http://placehold.it/160x45&text=site-logo" alt="logo" /></a>
+      <a href="#/"><img className="logo" src="./assets/chimp-zoo.svg" alt="logo" /></a>
       {links}
       <a href="#">Talk</a>
       <a href="#">Blog</a>

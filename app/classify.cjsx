@@ -29,8 +29,10 @@ module?.exports = React.createClass
     wrapper.classList.remove 'push-right'
 
   onSubjectSelect: (e, subject) ->
+    previews = subject.location.previews
+    previews.pop() #temporary for fitting the current 9 preview image design
     @setState subject: subject.location.standard
-    @setState previews: subject.location.previews
+    @setState previews: previews
     @setState classification: new Classification {subject}
 
   toggleGuide: (e) ->

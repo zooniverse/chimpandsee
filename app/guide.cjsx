@@ -68,7 +68,7 @@ Guide = React.createClass
         <button className="back-guide-btn" onClick={@onClickBack}><img className="back-icon" src="./assets/back-icon.svg" alt="back icon" /> Back</button>
         <h2>{guideDetails[@state.guideDetailsIndex].header}</h2>
         <h3>{guideDetails[@state.guideDetailsIndex].subHeader}</h3>
-        <img src={guideDetails[@state.guideDetailsIndex].featureImage} />
+        <img className="feature-image" src={guideDetails[@state.guideDetailsIndex].featureImage} />
         <p>{guideDetails[@state.guideDetailsIndex].description}</p>
         <figcaption>Example Images</figcaption>
         {exampleImages}

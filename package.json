@@ -13,10 +13,8 @@
     "cjsx-loader": "^1.0.0",
     "coffee-loader": "^0.7.2",
     "coffee-script": "^1.8.0",
-    "css-loader": "^0.9.0",
     "del": "^0.1.3",
     "express": "^4.10.1",
-    "file-loader": "^0.8.1",
     "gulp": "^3.8.9",
     "gulp-changed": "^1.0.0",
     "gulp-imagemin": "^1.2.1",
@@ -30,9 +28,7 @@
     "run-sequence": "^1.0.2",
     "style-loader": "^0.8.2",
     "stylus": "^0.49.2",
-    "stylus-loader": "^0.5.0",
     "through2": "^0.6.3",
-    "url-loader": "^0.5.5",
     "webpack": "^1.4.12"
   },
   "dependencies": {

@@ -26,7 +26,6 @@
     "gulp-watch": "^1.1.0",
     "nib": "^1.0.4",
     "run-sequence": "^1.0.2",
-    "style-loader": "^0.8.2",
     "stylus": "^0.49.2",
     "through2": "^0.6.3",
     "webpack": "^1.4.12"

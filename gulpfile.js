@@ -76,12 +76,6 @@ gulp.task('images', function() {
 gulp.task('html', function() {
   return gulp.src(config.html.src)
     .on('error', handleErrors)
-    .pipe(gulp.dest(config.html.dest));
-});
-
-gulp.task('html:build', function() {
-  return gulp.src(config.html.src)
-    .on('error', handleErrors)
     .pipe(inject(gulp.src('./public/build/*.css'), {ignorePath: 'public/build', addPrefix: '.', addRootSlash: false}))
     .pipe(gulp.dest(config.html.dest));
 });
@@ -104,7 +98,12 @@ gulp.task('stylus:build', function() {
 });
 
 // watch for changes during development, build once first
-gulp.task('watch', ['stylus', 'html', 'images', 'webpack'], function() {
+gulp.task('watch', function() {
+    runSequence(
+      'stylus',
+      'html',
+      ['images', 'webpack']
+    );
     gulp.watch(config.stylus.files, ['stylus']);
     gulp.watch(config.html.src, ['html']);
     gulp.watch(config.images.src, ['images']);
@@ -176,7 +175,7 @@ var createServer = function(port) {
 gulp.task('build', function(callback) {
   runSequence(
     'stylus:build',
-    'html:build',
+    'html',
     ['images', 'webpack:build'],
     callback
   );

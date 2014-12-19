@@ -23,8 +23,8 @@ Guide = React.createClass
   getInitialState: ->
     guideDetailsIndex: null
 
-  componentWillReceiveProps: ->
-    if @props.guideIsOpen is false
+  componentWillReceiveProps: (nextProps) ->
+    if nextProps.guideIsOpen is false
       @setState guideDetailsIndex: null
 
   openAnimation: ->

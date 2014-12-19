@@ -28,7 +28,7 @@ Main = React.createClass
     <div>
       <Navigation user={@state.user} />
 
-      <RouteHandler user={@state.user} />
+      <RouteHandler user={@state.user} hash={window.location.hash} />
     </div>
 
 routes =

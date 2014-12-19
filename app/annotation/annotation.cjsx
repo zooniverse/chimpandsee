@@ -32,11 +32,13 @@ Annotation = React.createClass
       @setState previews: @props.previews
     ), 2000
 
-  componentWillReceiveProps: ->
-    if @props.guideIsOpen is true
+  componentWillReceiveProps: (nextProps) ->
+    if nextProps.guideIsOpen is false
       @refs.guideIcon.getDOMNode().src = "./assets/guide-icon.svg"
+    else
+      @refs.guideIcon.getDOMNode().src = "./assets/cancel-icon.svg"
 
-    if @state.favorited is true
+    if nextProps.subject isnt @props.subject
       @setState favorited: false
       @refs.favoriteIcon.getDOMNode().src = "./assets/fav-icon.svg"
 
@@ -53,11 +55,7 @@ Annotation = React.createClass
       @setState zoomImageIndex: null
 
   onClickGuide: ->
-    if @props.guideIsOpen is false
-      @refs.guideIcon.getDOMNode().src = "./assets/cancel-icon.svg"
-      animatedScrollTo document.body, 0, 1000
-    else
-      @refs.guideIcon.getDOMNode().src = "./assets/guide-icon.svg"
+    animatedScrollTo document.body, 0, 1000
 
     @props.toggleGuide()
 

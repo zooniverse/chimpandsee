@@ -12,8 +12,8 @@ SlideTutorial = React.createClass
     ]
     activeSlide: 0
 
-  componentWillReceiveProps: ->
-    if @state.activeSlide is @state.slides.length - 1
+  componentWillReceiveProps: (nextProps) ->
+    if nextProps.modalIsOpen is false
       @setState activeSlide: 0
 
   onClickButton: ->

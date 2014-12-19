@@ -98,11 +98,12 @@ gulp.task('stylus:build', function() {
 });
 
 // watch for changes during development, build once first
-gulp.task('watch', function() {
+gulp.task('watch', function(callback) {
     runSequence(
       'stylus',
       'html',
-      ['images', 'webpack']
+      ['images', 'webpack'],
+      callback
     );
     gulp.watch(config.stylus.files, ['stylus']);
     gulp.watch(config.html.src, ['html']);

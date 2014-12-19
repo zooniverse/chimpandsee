@@ -10,16 +10,12 @@ module.exports = {
     chunkFilename: '[id].bundle.js'
   },
   resolve: {
-    extensions: ['', '.js', '.cjsx', '.coffee', '.styl']
+    extensions: ['', '.js', '.cjsx', '.coffee']
   },
   module: {
     loaders: [
       { test: /\.cjsx$/, loaders: ['coffee-loader', 'cjsx-loader'] },
-      { test: /\.coffee$/, loader: 'coffee-loader' },
-      { test: /\.styl$/, loader: 'style-loader!css-loader!stylus-loader!' },
-      { test: /\.png$/, loader: 'file-loader' },
-      { test: /\.jpg$/, loader: 'file-loader' },
-      { test: /\.svg$/, loader: 'file-loader' }
+      { test: /\.coffee$/, loader: 'coffee-loader' }
     ],
     noParse: [
       /^react$/

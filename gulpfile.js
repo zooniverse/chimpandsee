@@ -5,6 +5,10 @@ var del = require('del');
 var through2 = require('through2');
 var watch = require('gulp-watch');
 var gutil = require('gulp-util');
+var stylus = require('gulp-stylus');
+var rev = require('gulp-rev');
+var inject = require('gulp-inject');
+var runSequence = require('run-sequence');
 var changed = require('gulp-changed');
 var notify = require("gulp-notify");
 var nib = require('nib');
@@ -19,6 +23,12 @@ var webpackProductionConfig = require('./webpack-production.config.js')
 var dest = "./public/build";
 
 var config = {
+    stylus: {
+        files: './css/**/*',
+        src: "./css/main.styl",
+        out: 'main.css',
+        dest: dest
+    },
     html: {
         src: "./public/index.html",
         dest: dest
@@ -69,8 +79,33 @@ gulp.task('html', function() {
     .pipe(gulp.dest(config.html.dest));
 });
 
+gulp.task('html:build', function() {
+  return gulp.src(config.html.src)
+    .on('error', handleErrors)
+    .pipe(inject(gulp.src('./public/build/*.css'), {ignorePath: 'public/build', addPrefix: '.', addRootSlash: false}))
+    .pipe(gulp.dest(config.html.dest));
+});
+
+// compile stylus and move to build dir
+gulp.task('stylus', function() {
+  return gulp.src(config.stylus.src)
+    .pipe(stylus({use: nib(), 'include css': true, errors: true}))
+    .on('error', handleErrors)
+    .pipe(gulp.dest(config.stylus.dest));
+});
+
+// compile stylus and move to build dir
+gulp.task('stylus:build', function() {
+  return gulp.src(config.stylus.src)
+    .pipe(stylus({use: nib(), 'include css': true, errors: true}))
+    .on('error', handleErrors)
+    .pipe(rev())
+    .pipe(gulp.dest(config.stylus.dest));
+});
+
 // watch for changes during development, build once first
-gulp.task('watch', ['html', 'images', 'webpack'], function() {
+gulp.task('watch', ['stylus', 'html', 'images', 'webpack'], function() {
+    gulp.watch(config.stylus.files, ['stylus']);
     gulp.watch(config.html.src, ['html']);
     gulp.watch(config.images.src, ['images']);
 });
@@ -110,12 +145,12 @@ gulp.task("webpack:build", function(callback) {
         // write the hashed main.js to /public/build/index.html
         var jsFilename = stats.toJson().assetsByChunkName['main'];
 
-        return gulp.src(config.html.src)
+        return gulp.src('./public/build/index.html')
             .on('error', handleErrors)
-            .pipe(through2.obj(function (chunk, enc, tCb) {
-                chunk.contents = new Buffer(String(chunk.contents)
+            .pipe(through2.obj(function (file, enc, tCb) {
+                file.contents = new Buffer(String(file.contents)
                     .replace('main.js', jsFilename));
-                this.push(chunk);
+                this.push(file);
                 tCb();
             }))
             .pipe(gulp.dest(config.html.dest));
@@ -138,6 +173,13 @@ var createServer = function(port) {
     })
 }
 
-gulp.task('build', ['images', 'webpack:build']);
+gulp.task('build', function(callback) {
+  runSequence(
+    'stylus:build',
+    'html:build',
+    ['images', 'webpack:build'],
+    callback
+  );
+});
 
 gulp.task('default', ['serve', 'watch']);

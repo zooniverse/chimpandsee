@@ -9,21 +9,17 @@ module.exports = {
   },
   output: {
     path: path.join(__dirname, '/public/build'),
-    publicPath: '/public/build/',
+    publicPath: '',
     filename: '[name].[hash].js',
     chunkFilename: '[id].[hash].bundle.js'
   },
   resolve: {
-    extensions: ['', '.js', '.cjsx', '.coffee', '.styl']
+    extensions: ['', '.js', '.cjsx', '.coffee']
   },
   module: {
     loaders: [
       { test: /\.cjsx$/, loaders: ['coffee-loader', 'cjsx-loader'] },
       { test: /\.coffee$/, loader: 'coffee-loader' },
-      { test: /\.styl$/, loader: 'style-loader!css-loader!stylus-loader!' },
-      { test: /\.png$/, loader: 'file-loader' },
-      { test: /\.jpg$/, loader: 'file-loader' },
-      { test: /\.svg$/, loader: 'file-loader' }
     ],
     noParse: [
       /^react$/

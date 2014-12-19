@@ -11,9 +11,6 @@ About = require './about'
 User = require 'zooniverse/models/user'
 Profile = require './profile'
 
-# Require main.styl for webpack
-require '../css/main.styl'
-
 Main = React.createClass
   displayName: 'Main'
 

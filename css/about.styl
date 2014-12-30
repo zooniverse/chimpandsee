@@ -14,11 +14,27 @@
       color: white
       padding: 143px 249px
 
+      @media screen and (max-width: 1200px)
+        padding: 143px 200px
+
+      @media screen and (max-width: 1000px)
+        padding: 143px 100px
+
+      @media screen and (max-width: 800px)
+        padding: 143px 50px
+
+      @media screen and (max-width: 500px)
+        font-size: 45px
+        line-height: 45px
+
       .amp
         font-size: 120px
         transform: rotate(-23deg)
         display: inline-block
         vertical-align: middle
+
+        @media screen and (max-width: 500px)
+          font-size: 90px
 
   .about-nav
     background-color: $near-black

@@ -83,13 +83,13 @@ Annotation = React.createClass
     })
 
     previews = cursor.refine('previews').value.map (preview, i) =>
-      liClasses = cx({
+      figClasses = cx({
         'hide': @state.zoomImage is true and i isnt @state.zoomImageIndex
       })
 
-      <li key={i} className={liClasses}>
+      <figure key={i} className={figClasses}>
         <img style={if @state.zoomImage is true then @getAnimatedStyle("image-zoom") else @getAnimatedStyle('image-flip')} src={preview} onClick={@zoomImage.bind(null, i)} />
-      </li>
+      </figure>
 
     <div className="annotation">
       <div className="subject">

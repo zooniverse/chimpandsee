@@ -18,15 +18,19 @@
     .step-question
       display: inline-block
 
+      @media screen and (max-width: 450px)
+        font-size: 14px
+
     .step-buttons
       position: absolute
       top: 20px
       right: 10px
 
       @media screen and (max-width: 600px)
+        display: inline-flex
         position: relative
-        top: -95px
-        margin: 0 auto
+        top: 10px
+        justify-content: center
 
       .step-button
         background-color: $blackish
@@ -183,6 +187,7 @@
   .cancel, .next, .done
     position: relative
     top: 100px
+    font-size: 16px
 
     @media screen and (max-width: 680px)
       top: 75px
@@ -191,8 +196,11 @@
       top: 0
       z-index: 10
 
+    @media screen and (max-width: 450px)
+      font-size: 14px
+      margin: 25px 5px 5px
+
   .cancel
-    font-size: 16px
     color: #555656
     background-color: transparent
     float: left
@@ -208,8 +216,11 @@
       display: block
       margin: 0 0 10px 0
 
+      @media screen and (max-width: 450px)
+        width: 44px
+        height: 38px
+
   .next
-    font-size: 16px
     color: #555656
     background-color: transparent
     float: right
@@ -225,17 +236,17 @@
       display: block
       margin: 0 0 10px 0
 
+      @media screen and (max-width: 450px)
+        width: 44px
+        height: 38px
+
   .done
     color: #555656
     float: right
-    font-size: 16px
     background-color: transparent
 
     &.disabled:before
       background-color: transparent
-
-    // @media screen and (max-width: 950px)
-    //   display: none
 
   .done:before
     content: ''
@@ -247,6 +258,10 @@
     height: 48px
     border: solid 2px $green
     border-radius: 50%
+
+    @media screen and (max-width: 450px)
+      width: 44px
+      height: 38px
 
   .presence
     background-color: $dark-gray

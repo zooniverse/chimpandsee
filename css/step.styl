@@ -15,10 +15,14 @@
     position: relative
     z-index: 1
 
-    .step-question
-      display: inline-block
+    @media screen and (max-width: 930px)
+      width: 98%
+      margin: 0 auto
 
-      @media screen and (max-width: 450px)
+    .step-question
+      display: block
+
+      @media screen and (max-width: 480px)
         font-size: 14px
 
     .step-buttons
@@ -64,8 +68,9 @@
     border-radius: 8px
     margin-top: -10px
 
-    // @media screen and (max-width: 600px)
-    //   margin-top: 15px
+    @media screen and (max-width: 930px)
+      width: 98%
+      margin: 0 auto
 
     .buttons-container
       max-width: 680px
@@ -136,7 +141,7 @@
           margin: 0
           float: left
 
-      @media screen and (max-width: 480px)
+      @media screen and (max-width: 479px)
         &#presence-0:after
           display: none
 
@@ -264,9 +269,6 @@
       height: 38px
 
   .presence
-    background-color: $dark-gray
-    border-radius: 8px
-
     .step-bottom
       padding: 5px 0
 

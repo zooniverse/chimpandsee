@@ -20,28 +20,63 @@
       margin: -2px 9px 0 0
       vertical-align: middle
 
-  .logo
+  .mobile-menu
     vertical-align: middle
-    margin-left: 20px
 
-  a:not(:first-of-type)
-    display: inline-block
-    width: 90px
-    color: $light-gray
-    font-size: 16px
-    font-weight: 400
-    line-height: 35px
-    text-decoration: none
-    text-align: center
-    margin: 17px 0
+    .hamburger
+      width: 15px
+      margin-left: 20px
+      display: none
 
-    &:nth-child(2)
-      margin-left: 35px
+      @media screen and (max-width: 660px)
+        display: inline-block
 
-    &:visited
+  .logo-link
+    line-height: 70px
+
+    .logo
+      vertical-align: middle
+      margin: 0 20px
+
+  .menu-list
+    transition: .3s ease all
+    transform: translateY(0)
+    background-color: $green
+    display: inline
+
+    a
+      display: inline-block
+      width: 90px
       color: $light-gray
+      font-size: 16px
+      font-weight: 400
+      line-height: 35px
+      text-decoration: none
+      text-align: center
+      margin: 17px 0
 
-    &.active
-      color: white
-      border: solid 2px $topbar-green
-      border-radius: 6px
+      &:visited
+        color: $light-gray
+
+      &.active
+        color: white
+        border: solid 2px $topbar-green
+        border-radius: 6px
+
+  @media screen and (max-width: 660px)
+    .menu-list
+      position: relative
+      top: -347px
+      padding: 10px 0
+      display: block
+
+      a
+        display: none
+
+      &.show-menu
+        transform: translateY(347px)
+        z-index: 10
+
+        a
+          display: block
+          margin: 17px auto

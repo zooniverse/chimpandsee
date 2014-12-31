@@ -26,7 +26,7 @@ Main = React.createClass
 
   render: ->
     <div>
-      <Navigation user={@state.user} />
+      <Navigation user={@state.user} hash={window.location.hash} />
 
       <RouteHandler user={@state.user} hash={window.location.hash} />
     </div>

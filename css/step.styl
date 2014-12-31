@@ -23,6 +23,11 @@
       top: 20px
       right: 10px
 
+      @media screen and (max-width: 600px)
+        position: relative
+        top: -95px
+        margin: 0 auto
+
       .step-button
         background-color: $blackish
         width: 34px
@@ -55,12 +60,15 @@
     border-radius: 8px
     margin-top: -10px
 
-    @media screen and (max-width: 600px)
-      margin-top: 15px
+    // @media screen and (max-width: 600px)
+    //   margin-top: 15px
 
     .buttons-container
       max-width: 680px
       margin: 0 auto
+
+      @media screen and (max-width: 750px)
+        max-width: 575px
 
     button
       min-width: 90px
@@ -109,6 +117,35 @@
         border-radius: 50%
         margin: 0
         float: right
+      @media screen and (max-width: 560px)
+        &#annotation-0:after
+          display: none
+
+        &#annotation-0:before
+          content: ''
+          display: block
+          background: url(./assets/cancel-icon.svg) no-repeat center center
+          width: 60px
+          height: 60px
+          border: solid 2px #c72c2c
+          border-radius: 50%
+          margin: 0
+          float: left
+
+      @media screen and (max-width: 480px)
+        &#presence-0:after
+          display: none
+
+        &#presence-0:before
+          content: ''
+          display: block
+          background: url(./assets/cancel-icon.svg) no-repeat center center
+          width: 60px
+          height: 60px
+          border: solid 2px #c72c2c
+          border-radius: 50%
+          margin: 0
+          float: left
 
       &#presence-1:before, &#annotation-2:before
         content: ''
@@ -135,13 +172,24 @@
         vertical-align: middle
         font-size: 0
 
+        @media screen and (max-width: 560px)
+          display: block
+          margin: 0 auto
+
     .btn-active
       background-color: $green
       color: white
 
-  .cancel, .next, .add
+  .cancel, .next, .done
     position: relative
     top: 100px
+
+    @media screen and (max-width: 680px)
+      top: 75px
+
+    @media screen and (max-width: 600px)
+      top: 0
+      z-index: 10
 
   .cancel
     font-size: 16px
@@ -177,7 +225,7 @@
       display: block
       margin: 0 0 10px 0
 
-  .add
+  .done
     color: #555656
     float: right
     font-size: 16px
@@ -186,7 +234,10 @@
     &.disabled:before
       background-color: transparent
 
-  .add:before
+    // @media screen and (max-width: 950px)
+    //   display: none
+
+  .done:before
     content: ''
     display: block
     background: url(./assets/check-icon.svg) no-repeat center center

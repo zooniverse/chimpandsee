@@ -90,7 +90,7 @@ Step = React.createClass
   render: ->
     cancelClasses = cx({
       'cancel': true
-      'hidden': @props.step.value <= 1
+      'hide': @props.step.value <= 1
     })
 
     nextDisabled = _.values(@props.currentAnswers.value).length is 0
@@ -107,8 +107,9 @@ Step = React.createClass
 
     addClasses = cx({
       'disabled': addDisabled
-      'add': true
+      'done': true
       'hidden': unless @props.step.value is steps.length - 1 then true
+      'hide': @props.step.value < 2
     })
 
     stepButtons = steps.map (step, i) =>

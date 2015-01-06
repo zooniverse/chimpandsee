@@ -13,4 +13,3 @@ document.getElementById('top-bar').appendChild topBar.el[0]
 # Footer
 footer = new Footer
 document.getElementById('footer').appendChild footer.el[0]
-

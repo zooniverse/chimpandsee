@@ -28,6 +28,7 @@ ProfileItems = React.createClass
       </video>
 
     <div className="item">
+      {<p>Loading...</p> if @state[@props.collection] is null}
       {items}
     </div>
 

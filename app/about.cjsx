@@ -21,13 +21,13 @@ module?.exports = React.createClass
         {header: "Ready to join us? Get started watching chimps!", content: "Start Watching", image: "./assets/hidden-chimp.png"}
       ]
       [
-        {header: "Christophe Boesch", content: "is Professor and Director of the Department of Primatology of the Max Planck Institute for Evolutionary Anthropology in Germany. He has been studying apes for over 40 years across Africa, having established both the Tai Chimpanzee Project in Cote d’Ivoire and the Loango Ape Project in Gabon during this time. His research takes a holistic approach to studying chimpanzees and uses this to improve our understanding of the evolution of humans and their cognitive and cultural abilities. He is the author of several popular books and as the founding president of the Wild Chimpanzee Foundation he fights for a better future for the remaining wild ape populations at a grassroots level.", image: ""}
-        {header: "Hjalmar Kuehl", content: "is a Robert Bosch Junior Professor and research group leader at the German Centre for Integrative Biodiversity Research and the Max Planck Institute for Evolutionary Anthropology. His research has focused on various issues in ape conservation, the development of wildlife survey and monitoring techniques, as well as questions in ape population ecology. More recently he has been focusing on new approaches to reduce the negative effects of natural resource exploitation in great ape habitats and combining evidence-based environmental protection with complexity science.", image: ""}
-        {header: "Mimi Arandjelovic", content: "is a junior scientist and project manager of the Pan African Programme: The Cultured Chimpanzee at the Max Planck Institute for Evolutionary Anthropology. Her research focuses on primate genetics, molecular ecology and conservation biology, and finding efficient means of studying wild animal populations non-invasively. In addition to her current research, she currently manages data collection from over 35 temporary research sites across Africa from all four chimpanzee subspecies.", image: ""}
+        {header: "Christophe Boesch", content: "Christophe is Professor and Director of the Department of Primatology of the Max Planck Institute for Evolutionary Anthropology in Germany. He has been studying apes for over 40 years across Africa, having established both the Tai Chimpanzee Project in Cote d’Ivoire and the Loango Ape Project in Gabon during this time. His research takes a holistic approach to studying chimpanzees and uses this to improve our understanding of the evolution of humans and their cognitive and cultural abilities. He is the author of several popular books and as the founding president of the Wild Chimpanzee Foundation he fights for a better future for the remaining wild ape populations at a grassroots level.", image: "http://placehold.it/250x250"}
+        {header: "Hjalmar Kuehl", content: "Hjalmar is a Robert Bosch Junior Professor and research group leader at the German Centre for Integrative Biodiversity Research and the Max Planck Institute for Evolutionary Anthropology. His research has focused on various issues in ape conservation, the development of wildlife survey and monitoring techniques, as well as questions in ape population ecology. More recently he has been focusing on new approaches to reduce the negative effects of natural resource exploitation in great ape habitats and combining evidence-based environmental protection with complexity science.", image: "http://placehold.it/250x250"}
+        {header: "Mimi Arandjelovic", content: "Mimi is a junior scientist and project manager of the Pan African Programme: The Cultured Chimpanzee at the Max Planck Institute for Evolutionary Anthropology. Her research focuses on primate genetics, molecular ecology and conservation biology, and finding efficient means of studying wild animal populations non-invasively. In addition to her current research, she currently manages data collection from over 35 temporary research sites across Africa from all four chimpanzee subspecies.", image: "http://placehold.it/250x250"}
       ]
       [
-        {header: "Max Planck Institute for Evolutionary Anthropology", content: "The Max Planck Institute for Evolutionary Anthropology unites scientists with various backgrounds (natural sciences and humanities) whose aim is to investigate the history of humankind from an interdisciplinary perspective with the help of comparative analyses of genes, cultures, cognitive abilities, languages and social systems of past and present human populations as well as those of primates closely related to human beings.", image: ""}
-        {header: "Zooniverse", content: "The Zooniverse and the suite of projects it contains is produced, maintained and developed by the Citizen Science Alliance. The member institutions of the CSA work with many academic and other partners around the world to produce projects that use the efforts and ability of volunteers to help scientists and researchers deal with the flood of data that confronts them.", image: ""}
+        {header: "Max Planck Institute for Evolutionary Anthropology", content: "The Max Planck Institute for Evolutionary Anthropology unites scientists with various backgrounds (natural sciences and humanities) whose aim is to investigate the history of humankind from an interdisciplinary perspective with the help of comparative analyses of genes, cultures, cognitive abilities, languages and social systems of past and present human populations as well as those of primates closely related to human beings.", image: "http://placehold.it/250x250"}
+        {header: "Zooniverse", content: "The Zooniverse and the suite of projects it contains is produced, maintained and developed by the Citizen Science Alliance. The member institutions of the CSA work with many academic and other partners around the world to produce projects that use the efforts and ability of volunteers to help scientists and researchers deal with the flood of data that confronts them.", image: "http://placehold.it/250x250"}
       ]
     ]
     activeContent: 0
@@ -68,22 +68,30 @@ module?.exports = React.createClass
       when @state.activeContent is 1
         @state.pageContent[1].map (page, i) =>
           <section key={i} className="about-section">
-            <p>
-              <span className="name">{page.header}</span>
-              {page.content}
-            </p>
+            <div className="content">
+              <img src={page.image} alt={page.header} />
+              <div>
+                <h2 className="name">{page.header}</h2>
+                <p>{page.content}</p>
+              </div>
+            </div>
           </section>
       when @state.activeContent is 2
         @state.pageContent[2].map (page, i) =>
-          <section key={i}>
-            <h2>{page.header}</h2>
-            <p>{page.content}</p>
+          <section key={i} className="about-section">
+            <div className="content">
+              <img src={page.image} alt={page.header} />
+              <div>
+                <h2>{page.header}</h2>
+                <p>{page.content}</p>
+              </div>
+            </div>
           </section>
 
     pageClasses = cx({
       'page-one': @state.activeContent is 0
-      'page-two content': @state.activeContent is 1
-      'page-three content': @state.activeContent is 2
+      'page-two': @state.activeContent is 1
+      'page-three': @state.activeContent is 2
     })
 
     <div className="about">
@@ -95,7 +103,7 @@ module?.exports = React.createClass
           {links}
         </div>
       </nav>
-      <section className={pageClasses}>
+      <div className={pageClasses}>
         {pageContent}
-      </section>
+      </div>
     </div>

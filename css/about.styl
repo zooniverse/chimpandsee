@@ -58,7 +58,8 @@
       &:visited(:not(.active))
         color: inherit
 
-  .page-one
+
+  .page-one, .page-two, .page-three
     .about-section
       width: 100%
       background-color: $dark-gray
@@ -73,12 +74,10 @@
           flex-direction: column
 
         div
-          order: 1
           padding: 0 110px 0 20px
           max-width: 738px
 
           @media screen and (max-width: 768px)
-            order: 2
             padding: 20px
 
           h2
@@ -92,21 +91,32 @@
 
         img
           width: 100%
-          max-width: 222px
+          max-width: 225px
           height: 100%
-          max-height: 222px
+          max-height: 225px
           border-radius: 50%
-          order: 2
-          // border: solid 15px $green
           box-sizing: border-box
           margin: 20px
+
+      &:nth-child(odd)
+        background-color: $blackish
+
+  .page-one
+    .about-section
+      .content
+        div
+          order: 1
+
+          @media screen and (max-width: 768px)
+            order: 2
+
+        img
+          order: 2
 
           @media screen and (max-width: 768px)
             order: 1
 
       &:nth-child(odd)
-        background-color: $blackish
-
         .content
           div
             order: 2
@@ -182,14 +192,10 @@
               @media screen and (max-width: 598px)
                 bottom: -95px
 
-
   .page-two, .page-three
-    background: #eae9e9
-    padding: 20px
-    margin: 95px auto !important
-    border-radius: 8px
+    @media screen and (max-width: 768px)
+      h2
+        text-align: center
 
-    .name
-      margin-right: 5px
-      font-weight: 700
+
 

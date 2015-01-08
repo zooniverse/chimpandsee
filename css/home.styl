@@ -1,5 +1,71 @@
 .home
-  background-color: white
-  padding: 20px
-  margin: 95px auto !important
-  border-radius: 8px
+  // background: url(./assets/home-background.jpg) no-repeat center center
+  min-height: 800px
+
+  .color-overlay
+    background-color: rgba(9, 41, 28, 0.85)
+    background-size: cover
+    position: absolute
+    top: 30px
+    left: 0
+    z-index: 0
+    min-height: 800px
+    width: 100%
+    height: 100%
+
+  .home-content
+    display: flex
+    flex-direction: column
+    justify-content: center
+    align-items: center
+    color: white
+    position: relative
+    z-index: 10
+
+    h1
+      margin: 190px 0 0
+      font-size: 60px
+      display: inline
+
+      .amp
+        font-size: 120px
+        display: inline-block
+        vertical-align: middle
+
+    p
+      max-width: 600px
+      text-align: center
+
+    .get-started-link
+      text-decoration: none
+      color: #eae9e9
+      background-color: #1b865c
+      border-radius: 8px
+      width: 420px
+      line-height: 60px
+      font-size: 16px
+      font-weight: 700
+      text-align: center
+      margin: 60px 0 0
+
+    .learn-more-link
+      text-decoration: underline
+      margin: 50px 0 0
+      font-weight: 400
+      color: #eae9e9
+
+      &:visited
+        color: #eae9e9
+
+  figure
+    margin: 0
+    position: absolute
+    display: inline
+    top: 200px
+    z-index: -1
+
+  .left-chimp
+    left: 0
+
+  .right-chimp
+    right: 0

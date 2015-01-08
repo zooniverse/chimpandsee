@@ -17,6 +17,21 @@ html, body
   .push-right
     transform: translateX(400px) !important
 
+  .home-background //Overriding defaults for home page.
+    background: url(./assets/home-background.jpg) no-repeat top 30px center
+
+    .site-navigation
+      background-color: transparent
+      color: white
+
+      .menu-list
+        background-color: transparent
+        position: relative
+        z-index: 10
+
+        a
+          color: white
+
   #app
     min-height: 100%
     margin-bottom: -395px

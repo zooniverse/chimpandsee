@@ -11,11 +11,14 @@ About = require './about'
 User = require 'zooniverse/models/user'
 Profile = require './profile'
 
+LanguageManager = require 'zooniverse/lib/language-manager'
+
 Main = React.createClass
   displayName: 'Main'
 
   getInitialState: ->
     user: null
+    language: null
 
   componentWillMount: ->
     User.on 'change', @onUserChange

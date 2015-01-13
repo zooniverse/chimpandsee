@@ -1,5 +1,50 @@
 .profile
-  background: #eae9e9
-  padding: 20px
-  margin: 95px auto !important
-  border-radius: 8px
+  margin: 0 auto !important
+  color: #eae9e9
+
+  section
+    background: $dark-gray
+    height: 100%
+    padding: 20px
+
+    &:nth-child(odd)
+      background: $blackish
+
+  .profile-status
+    display: flex
+    align-items: center
+    text-align: center
+    min-height: 200px
+
+    .greeting
+      color: $green
+      font-size: 24px
+      font-weight: 400
+
+    .classification-count, .favorite-count
+      display: inline-block
+      padding: 10px 20px
+
+      p
+        margin: 5px
+        font-size: 24px
+
+  button
+    width: 120px
+    line-height: 25px
+    font-size: 14px
+    font-weight: 700
+
+  .items
+    video
+      padding: 2.5px
+      box-sizing: border-box
+
+  .profile-sign-in
+    display: flex
+    align-items: center
+    min-height: 200px
+
+    a, a:visited
+      color: white
+

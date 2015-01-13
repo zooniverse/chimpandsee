@@ -27,7 +27,7 @@ ProfileItems = React.createClass
         Your browser does not support the video format. Please upgrade your browser.
       </video>
 
-    <div className="item">
+    <div>
       {<p>Loading...</p> if @state[@props.collection] is null}
       {items}
     </div>

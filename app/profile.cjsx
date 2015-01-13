@@ -20,17 +20,33 @@ Profile = React.createClass
   render: ->
     userDetails = if @props.user?
       <div>
-        <h1>Hello, {@props.user.name}</h1>
-        <p>Favorite: {@props.user.project.favorite_count or 0}</p>
-        <p>Classification Count: {@props.user.project.classification_count or 0}</p>
-        <button onClick={@toggleCollection} value="recents">Recents</button>
-        <button onClick={@toggleCollection} value="favorites">Favorites</button>
-        <ProfileItems collection={@state.collection} />
+        <section className="profile-status">
+          <div className="content">
+            <h1 className="greeting">Hello, {@props.user.name}</h1>
+            <div className="classification-count">
+              <p>{@props.user.project.classification_count or 0}</p>
+              <p>Videos Explored</p>
+            </div>
+            <div className="favorite-count">
+              <p>{@props.user.project.favorite_count or 0}</p>
+              <p>Favorite Count</p>
+            </div>
+          </div>
+        </section>
+        <section className="items">
+          <div className="content">
+            <button onClick={@toggleCollection} value="recents">Recents</button>
+            <button onClick={@toggleCollection} value="favorites">Favorites</button>
+            <ProfileItems collection={@state.collection} />
+          </div>
+        </section>
       </div>
     else
-      <p>Please <a href="#/profile" onClick={@onClickSignIn}>sign in</a>.</p>
+      <section className="profile-sign-in">
+        <p className="content">Please <a href="#/profile" onClick={@onClickSignIn}>sign in</a>.</p>
+      </section>
 
-    <div className="profile content">
+    <div className="profile">
       {userDetails}
     </div>
 

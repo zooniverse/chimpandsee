@@ -27,7 +27,7 @@ module?.exports = React.createClass
       ]
       [
         {header: "Max Planck Institute for Evolutionary Anthropology", subHeader: "", content: "The Max Planck Institute for Evolutionary Anthropology unites scientists with various backgrounds (natural sciences and humanities) whose aim is to investigate the history of humankind from an interdisciplinary perspective with the help of comparative analyses of genes, cultures, cognitive abilities, languages and social systems of past and present human populations as well as those of primates closely related to human beings.", image: "http://placehold.it/250x250"}
-        {header: "Zooniverse", subHeader: "", content: "The Zooniverse and the suite of projects it contains is produced, maintained and developed by the Citizen Science Alliance. The member institutions of the CSA work with many academic and other partners around the world to produce projects that use the efforts and ability of volunteers to help scientists and researchers deal with the flood of data that confronts them.", image: "http://placehold.it/250x250"}
+        {header: "Zooniverse", subHeader: "", content: "The Zooniverse and the suite of projects it contains is produced, maintained and developed by the Citizen Science Alliance. The member institutions of the CSA work with many academic and other partners around the world to produce projects that use the efforts and ability of volunteers to help scientists and researchers deal with the flood of data that confronts them.", image: "./assets/zooniverse-icon-web-white.png"}
       ]
     ]
     activeContent: 0

@@ -1,5 +1,4 @@
 React = require 'react/addons'
-cx = React.addons.classSet
 ImmutableOptimizations = require('react-cursor').ImmutableOptimizations
 
 Notes = React.createClass
@@ -11,11 +10,6 @@ Notes = React.createClass
     @props.notes.splice [[i, 1]]
 
   render: ->
-    hintClasses = cx({
-      'note-hint': true
-      'hide': if @props.notes.value.length > 0 then true else false
-    })
-
     notes = @props.notes.value.map (note, i) =>
       age = "#{note.age}," if note.age?
       sex = "#{note.sex}," if note.sex?
@@ -26,7 +20,7 @@ Notes = React.createClass
       </p>
 
     <div className="notes-container">
-      <p className={hintClasses}>See something? Add an annotation and it will appear here!</p>
+      {<p className="note-hint">See something? Add an annotation and it will appear here!</p> unless @props.notes.value.length > 0}
       {notes}
     </div>
 

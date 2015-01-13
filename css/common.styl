@@ -20,14 +20,24 @@ html, body
   .home-background //Overriding defaults for home page.
     background: url(./assets/home-background.jpg) no-repeat top 30px center
 
+    @media screen and (max-width: 710px)
+      .color-background
+        background-color: rgba(9, 41, 28, 0.85) !important
+
     .site-navigation
       background-color: transparent
       color: white
 
+      .mobile-menu .bars
+        fill: white
+
       .menu-list
         background-color: transparent
         position: relative
-        z-index: 10
+        z-index: 20
+
+        @media screen and (max-width: 710px)
+          background-color: rgba(9, 41, 28, 0.85)
 
         a
           color: white

@@ -24,20 +24,25 @@
       vertical-align: middle
 
   .mobile-menu
+    width: 15px
+    display: none
     vertical-align: middle
+    z-index: 10
 
-    .hamburger
-      width: 15px
-      display: none
+    @media screen and (max-width: 710px)
+      display: inline-block
+      position: absolute
+      top: 34.5px
+      right: 4.5px
+      padding: 20px
 
-      @media screen and (max-width: 710px)
-        display: inline-block
-        position: absolute
-        top: 54.5px
-        right: 24.5px
+      .bars
+        fill: #424242
 
   .logo-link
     line-height: 70px
+    position: relative
+    z-index: 10
 
     .logo
       vertical-align: middle
@@ -49,7 +54,7 @@
   .menu-list
     transition: .3s ease all
     transform: translateY(0)
-    background-color: $green
+    background-color: transparent
     display: inline
 
     a
@@ -83,8 +88,10 @@
 
       &.show-menu
         transform: translateY(347px)
-        z-index: 10
+        z-index: 20
 
         a
           display: block
           margin: 17px auto
+          position: relative
+          z-index: 20

@@ -20,14 +20,13 @@ Summary = React.createClass
         <section>
           <p>You saw a chimp!</p>
           <button>Identify a chimp</button>
-          <button>How to identify a chimp</button>
+          <button>Current chimps at this site</button>
+          <button onClick={@props.openModal.bind(null, "chimps")}>How to identify a chimp</button>
         </section>
       }
       <button value="Discuss">Discuss</button>
       <button>Share</button>
-      <p>A map</p>
-      <figure className="map"><img src="http://placehold.it/400x250" /></figure>
+      <figure className="map"><img src="http://placehold.it/400x250text=a_map" /></figure>
     </div>
-
 
 module.exports = Summary

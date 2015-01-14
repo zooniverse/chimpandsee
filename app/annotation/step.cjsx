@@ -161,7 +161,8 @@ Step = React.createClass
             </div>
           </div>}
         <div className="step-bottom">
-          {if @props.step.value is steps.length - 1 then <Summary notes={@props.notes.value} />}
+          {if @props.step.value is steps.length - 1
+            <Summary notes={@props.notes.value} tutorialType={@props.tutorialType} openModal={@props.openModal} />}
           <div className="buttons-container">
             {buttons}
           </div>

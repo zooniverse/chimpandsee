@@ -22,19 +22,9 @@ Annotation = React.createClass
     subStep: 0
     notes: []
     currentAnswers: {}
-    video: null
-    previews: ["http://placehold.it/300x150&text=loading"]
     zoomImage: false
     zoomImageIndex: null
     favorited: false
-
-  componentWillMount: ->
-    setTimeout ( =>
-      @setState({
-        video: @props.subject
-        previews: @props.previews
-      })
-    ), 2000
 
   componentWillReceiveProps: (nextProps) ->
     if nextProps.guideIsOpen is false
@@ -52,11 +42,15 @@ Annotation = React.createClass
   zoomImage: (i) ->
     if @state.zoomImage is false
       @animate "image-zoom", {transform: 'scale3d(1,1,1)', transitionDuration: '500ms', marginTop: '0'}, {transform: 'scale3d(2,2,2)', marginTop: '95px'}, 'ease-in-out', 500
-      @setState zoomImage: true
-      @setState zoomImageIndex: i
+      @setState({
+        zoomImage: true
+        zoomImageIndex: i
+      })
     else
-      @setState zoomImage: false
-      @setState zoomImageIndex: null
+      @setState({
+        zoomImage: false
+        zoomImageIndex: null
+      })
 
   onClickGuide: ->
     animatedScrollTo document.body, 0, 1000
@@ -86,7 +80,7 @@ Annotation = React.createClass
       'video': true
     })
 
-    previews = cursor.refine('previews').value.map (preview, i) =>
+    previews = @props.previews.map (preview, i) =>
       figClasses = cx({
         'hide': @state.zoomImage is true and i isnt @state.zoomImageIndex
       })
@@ -102,13 +96,24 @@ Annotation = React.createClass
           {previews}
         </div>
         <div className={videoClasses}>
-          <video poster={cursor.refine('previews').value[0]} src={cursor.refine('video').value} width="100%" type="video/mp4" controls>
+          <video poster={@props.previews[0]} src={@props.subject} width="100%" type="video/mp4" controls>
             Your browser does not support the video format. Please upgrade your browser.
           </video>
         </div>
         <div className="favorite-btn" onClick={@onClickFavorite}><img ref="favoriteIcon" src="./assets/fav-icon.svg" alt="favorite button" /></div>
       </div>
-      <Step step={cursor.refine('currentStep')} subStep={cursor.refine('subStep')} currentAnswers={cursor.refine('currentAnswers')} notes={cursor.refine('notes')} subject={cursor.refine('video')} previews={cursor.refine('previews')} animateImages={@animateImages} classification={@props.classification} />
+      <Step
+        step={cursor.refine('currentStep')}
+        subStep={cursor.refine('subStep')}
+        currentAnswers={cursor.refine('currentAnswers')}
+        notes={cursor.refine('notes')}
+        subject={@props.subject}
+        previews={@props.previews}
+        animateImages={@animateImages}
+        classification={@props.classification}
+        tutorialType={@state.tutorialType}
+        openModal={@props.openModal}
+      />
       <Notes notes={cursor.refine('notes')} step={cursor.refine('currentStep')} />
     </div>
 

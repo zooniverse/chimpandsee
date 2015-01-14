@@ -5,10 +5,15 @@ SlideTutorial = React.createClass
   displayName: 'SlideTutorial'
 
   getInitialState: ->
-    slides: [
+    general: [
       {image: 'http://placehold.it/560x280', title: 'Slide 1', content:'Slide 1', button: 'Next'}
       {image: 'http://placehold.it/560x280', title: 'Slide 2', content:'Slide 2', button: 'Next'}
       {image: 'http://placehold.it/560x280', title: 'Slide 3', content:'Slide 3', button: 'Finish'}
+    ]
+    chimps: [
+      {image: 'http://placehold.it/560x280', title: 'Slide 1', content:'Chimp Slide 1', button: 'Next'}
+      {image: 'http://placehold.it/560x280', title: 'Slide 2', content:'Chimp Slide 2', button: 'Next'}
+      {image: 'http://placehold.it/560x280', title: 'Slide 3', content:'Chimp Slide 3', button: 'Finish'}
     ]
     activeSlide: 0
 
@@ -27,7 +32,7 @@ SlideTutorial = React.createClass
     @setState activeSlide: i
 
   render: ->
-    slideDots = @state.slides.map (slide, i) =>
+    slideDots = @state[@props.tutorialType]?.map (slide, i) =>
       dotClasses = cx({
         'slide-tutorial-dot': true
         'active': i is @state.activeSlide
@@ -35,7 +40,7 @@ SlideTutorial = React.createClass
 
       <div key={i} className={dotClasses} onClick={@onDotClick.bind(null, i)}></div>
 
-    slides = @state.slides.map (slide, i) =>
+    slides = @state[@props.tutorialType]?.map (slide, i) =>
       slideClasses = cx({
         'slide-tutorial-slide': true
         'active': i is @state.activeSlide

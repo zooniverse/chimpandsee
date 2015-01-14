@@ -11,6 +11,8 @@ Subject = require 'zooniverse/models/subject'
 Step = require './step'
 Notes = require './notes'
 
+steps = require '../lib/steps'
+
 Annotation = React.createClass
   displayName: 'Annotation'
   mixins: [AnimateMixin]
@@ -80,7 +82,7 @@ Annotation = React.createClass
     })
 
     videoClasses = cx({
-      'hide': cursor.refine('currentStep').value is 0
+      'hide': cursor.refine('currentStep').value is 0 or cursor.refine('currentStep').value is steps.length - 1
       'video': true
     })
 
@@ -107,7 +109,7 @@ Annotation = React.createClass
         <div className="favorite-btn" onClick={@onClickFavorite}><img ref="favoriteIcon" src="./assets/fav-icon.svg" alt="favorite button" /></div>
       </div>
       <Step step={cursor.refine('currentStep')} subStep={cursor.refine('subStep')} currentAnswers={cursor.refine('currentAnswers')} notes={cursor.refine('notes')} subject={cursor.refine('video')} previews={cursor.refine('previews')} animateImages={@animateImages} classification={@props.classification} />
-      <Notes notes={cursor.refine('notes')} />
+      <Notes notes={cursor.refine('notes')} step={cursor.refine('currentStep')} />
     </div>
 
 module.exports = Annotation

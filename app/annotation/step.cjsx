@@ -5,6 +5,7 @@ ImmutableOptimizations = require('react-cursor').ImmutableOptimizations
 
 Subject = require 'zooniverse/models/subject'
 Classification = require 'zooniverse/models/classification'
+Summary = require './summary'
 
 steps = require '../lib/steps'
 
@@ -36,7 +37,7 @@ Step = React.createClass
         @storeSelection(button.name, button.value)
         @props.step.set 3
         @props.subStep.set 1
-      when button.value is steps[4][0].conclusion.options[0] then @nextSubject()
+      when button.value is steps[4][0].summary.options[0] then @nextSubject()
       else
         @storeSelection(button.name, button.value)
 
@@ -54,9 +55,6 @@ Step = React.createClass
 
   moveToNextStep: ->
     @props.step.set Math.min @props.step.value + 1, steps.length
-
-  moveToPrevStep: ->
-    @props.step.set @props.step.value - 1
 
   goToStep: (i) ->
     if i is 1 and @props.currentAnswers.value.animal isnt steps[2][0].animal.options[0]
@@ -151,20 +149,19 @@ Step = React.createClass
         <button className={classes} key={i} id="#{name}-#{i}" name={name} value={option} onClick={@onButtonClick} disabled={disabled}>
           {option}
         </button>
-      stepTopClasses = cx({
-        'step-top': true
-        'hide': step.question is null
-      })
+
       <div key={name} className={name}>
-        <div className={stepTopClasses}>
-          <div className="step-question">
-            {step.question}
-          </div>
-          <div className="step-buttons">
-            {stepButtons}
-          </div>
-        </div>
+        {unless step.question is null
+          <div className="step-top">
+            <div className="step-question">
+              {step.question}
+            </div>
+            <div className="step-buttons">
+              {stepButtons}
+            </div>
+          </div>}
         <div className="step-bottom">
+          {if @props.step.value is steps.length - 1 then <Summary notes={@props.notes.value} />}
           <div className="buttons-container">
             {buttons}
           </div>

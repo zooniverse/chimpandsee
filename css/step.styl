@@ -81,16 +81,17 @@
 
     button
       min-width: 90px
-      height: 48px
+      height: 45px
       border: solid 2px $green
       border-radius: 35px
       color: $green
       background-color: $blackish
-      font-size: 16px
+      font-size: 14px
       font-weight: 400
       line-height: 24px
+      margin: 5px
 
-      // 'Nothing here', 'I see something', 'Add', and 'Next Subject' buttons
+      // 'Nothing here', 'I see something', 'Add', and 'Finish' buttons
       &#presence-0, &#presence-1, &#annotation-0, &#annotation-1, &#annotation-2
         max-width: 220px
         height: 70px
@@ -98,7 +99,13 @@
         border: none
         display: inline-block
         margin: 0 10px
+        font-size: 16px
         line-height: 65px
+
+        @media screen and (max-width: 450px)
+          width: 220px
+          text-align: left
+          margin: 5px 10px
 
         &.nothing-disabled
           font-size: 0
@@ -116,7 +123,7 @@
           color: #555656
           cursor: not-allowed
 
-      &#presence-0:before, &#annotation-0:before
+      &#presence-0:before, &#annotation-0:before // 'Nothing here' buttons
         content: ''
         display: block
         background: url(./assets/cancel-icon.svg) no-repeat center center
@@ -156,7 +163,7 @@
           margin: 0 10px 0 0
           float: left
 
-      &#presence-1:before, &#annotation-2:before
+      &#presence-1:before, &#annotation-2:before // 'I see something' and 'Finish'
         content: ''
         display: block
         background: url(./assets/check-icon.svg) no-repeat center center
@@ -178,10 +185,6 @@
         border-radius: 50%
         margin: 0 10px 0 0
         float: left
-
-        @media screen and (max-width: 560px)
-          display: block
-          margin: 0 auto
 
     .btn-active
       background-color: $green
@@ -270,6 +273,5 @@
     .step-bottom
       padding: 5px 0
 
-.workflowButtons
-  text-align: center
-  margin: 50px auto 15px
+  .summary
+    margin-top: -50px

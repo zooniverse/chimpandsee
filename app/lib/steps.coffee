@@ -93,7 +93,7 @@ stepOther =
     ]
 
 stepFinal =
-  conclusion:
+  summary:
     question: "Would you like to explore more?"
     options: [
       'Next Subject'

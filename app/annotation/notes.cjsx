@@ -1,6 +1,8 @@
 React = require 'react/addons'
 ImmutableOptimizations = require('react-cursor').ImmutableOptimizations
 
+steps = require '../lib/steps'
+
 Notes = React.createClass
   displayName: 'Notes'
 
@@ -16,7 +18,8 @@ Notes = React.createClass
 
       <p key={i} className="note #{note.animal}">
         {note.animal}: {age} {sex} {note.behavior}
-        <button className="delete" onClick={@deleteNote.bind(null, i)}><img src="./assets/close-icon.svg" alt="X" /></button>
+        {unless @props.step.value is steps.length - 1
+          <button className="delete" onClick={@deleteNote.bind(null, i)}><img src="./assets/close-icon.svg" alt="X" /></button>}
       </p>
 
     <div className="notes-container">

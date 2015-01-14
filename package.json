@@ -31,16 +31,16 @@
     "webpack": "^1.4.12"
   },
   "dependencies": {
-    "animated-scrollto": "^1.1.0",
-    "counterpart": "^0.16.4",
-    "publisssh": "^0.2.6",
-    "react": "^0.12.0",
-    "react-animate": "^0.1.5",
-    "react-cursor": "^0.9.1",
-    "react-interpolate-component": "^0.6.2",
-    "react-router": "^0.11.1",
-    "react-translate-component": "^0.7.0",
-    "underscore": "^1.7.0",
-    "zooniverse": "^0.7.1"
+    "animated-scrollto": "1.1.0",
+    "counterpart": "0.16.4",
+    "publisssh": "0.2.6",
+    "react": "0.12.1",
+    "react-animate": "0.1.5",
+    "react-cursor": "0.9.1",
+    "react-interpolate-component": "0.6.2",
+    "react-router": "0.11.1",
+    "react-translate-component": "0.7.0",
+    "underscore": "1.7.0",
+    "zooniverse": "0.7.1"
   }
 }

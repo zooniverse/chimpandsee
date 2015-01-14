@@ -11,8 +11,8 @@ stepTwo =
     question: null
     options: [
       'Nothing here'
-      '+'
-      'Next subject'
+      'Add'
+      'Finish'
     ]
 
 stepThree =
@@ -92,4 +92,11 @@ stepOther =
       'something else'
     ]
 
-module.exports = [[stepOne], [stepTwo], [stepThree], [stepChimp, stepOther]]
+stepFinal =
+  conclusion:
+    question: "Would you like to explore more?"
+    options: [
+      'Next Subject'
+    ]
+
+module.exports = [[stepOne], [stepTwo], [stepThree], [stepChimp, stepOther], [stepFinal]]

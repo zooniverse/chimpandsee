@@ -15,6 +15,7 @@ module?.exports = React.createClass
   getInitialState: ->
     subject: "http://placehold.it/300&text=loading"
     previews: []
+    location: "Congo Rainforest"
     classification: null
     guideIsOpen: false
     modalIsOpen: false
@@ -62,6 +63,9 @@ module?.exports = React.createClass
       <button className="tutorial-btn" onClick={@openModal}>Tutorial</button>
 
       <Guide onClickClose={@onClickClose} guideIsOpen={@state.guideIsOpen} />
+      <div className="location-container">
+        <p><span className="bold">Site:</span> {@state.location}</p>
+      </div>
       <Annotation subject={@state.subject} previews={@state.previews} classification={@state.classification} toggleGuide={@toggleGuide} guideIsOpen={@state.guideIsOpen} />
       <SlideTutorial modalIsOpen={@state.modalIsOpen} onClickCloseSlide={@closeModal} />
       <img className="hidden-chimp" src="./assets/hidden-chimp.png" alt="" />

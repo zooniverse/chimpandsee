@@ -28,8 +28,10 @@ Annotation = React.createClass
 
   componentWillMount: ->
     setTimeout ( =>
-      @setState video: @props.subject
-      @setState previews: @props.previews
+      @setState({
+        video: @props.subject
+        previews: @props.previews
+      })
     ), 2000
 
   componentWillReceiveProps: (nextProps) ->

@@ -73,7 +73,7 @@
       margin: 0 auto
 
     .buttons-container
-      max-width: 680px
+      max-width: 720px
       margin: 0 auto
 
       @media screen and (max-width: 750px)
@@ -90,9 +90,9 @@
       font-weight: 400
       line-height: 24px
 
-      // 'Nothing here', 'I see something', and 'Next Subject' buttons
-      &#presence-0, &#presence-1, &#annotation-0, &#annotation-2
-        width: 220px
+      // 'Nothing here', 'I see something', 'Add', and 'Next Subject' buttons
+      &#presence-0, &#presence-1, &#annotation-0, &#annotation-1, &#annotation-2
+        max-width: 220px
         height: 70px
         color: #555656
         border: none
@@ -105,7 +105,7 @@
           vertical-align: middle
           cursor: not-allowed
 
-          &:after
+          &:before
             opacity: 0.3
 
       // finish button
@@ -116,7 +116,7 @@
           color: #555656
           cursor: not-allowed
 
-      &#presence-0:after, &#annotation-0:after
+      &#presence-0:before, &#annotation-0:before
         content: ''
         display: block
         background: url(./assets/cancel-icon.svg) no-repeat center center
@@ -124,10 +124,10 @@
         height: 60px
         border: solid 2px #c72c2c
         border-radius: 50%
-        margin: 0
-        float: right
+        margin: 0 10px 0 0
+        float: left
       @media screen and (max-width: 560px)
-        &#annotation-0:after
+        &#annotation-0:before
           display: none
 
         &#annotation-0:before
@@ -138,11 +138,11 @@
           height: 60px
           border: solid 2px #c72c2c
           border-radius: 50%
-          margin: 0
+          margin: 0 10px 0 0
           float: left
 
       @media screen and (max-width: 479px)
-        &#presence-0:after
+        &#presence-0:before
           display: none
 
         &#presence-0:before
@@ -153,7 +153,7 @@
           height: 60px
           border: solid 2px #c72c2c
           border-radius: 50%
-          margin: 0
+          margin: 0 10px 0 0
           float: left
 
       &#presence-1:before, &#annotation-2:before
@@ -164,22 +164,20 @@
         height: 60px
         border: solid 2px $green
         border-radius: 50%
-        margin: 0
+        margin: 0 10px 0 0
         float: left
 
       // Add annotation button
-      &#annotation-1
-        color: white
+      &#annotation-1:before
+        content: ''
+        display: block
         background: $green url(./assets/plus-icon.svg) no-repeat center center
-        min-width: 60px
         width: 60px
         height: 60px
         border: solid 2px $green
         border-radius: 50%
-        margin: 0 10px 5px
-        padding: 0
-        vertical-align: middle
-        font-size: 0
+        margin: 0 10px 0 0
+        float: left
 
         @media screen and (max-width: 560px)
           display: block

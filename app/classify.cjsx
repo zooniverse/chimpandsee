@@ -13,31 +13,47 @@ module?.exports = React.createClass
   displayName: 'Classify'
 
   getInitialState: ->
-    subject: "http://placehold.it/300&text=loading"
-    previews: ["http://placehold.it/300&text=loading"]
+    subject: null
+    previews: null
     location: "Congo Rainforest"
     classification: null
     guideIsOpen: false
     modalIsOpen: false
     tutorialType: null
 
-  componentWillMount: ->
+  componentDidMount: ->
+    console.log 'classifer mount'
     Subject.on 'select', @onSubjectSelect
+    console.log 'subject listener added'
+    Subject.on 'no-more', @onNoSubjects
     Subject.next()
+    console.log 'subject next called'
 
   componentWillUnmount: ->
+    console.log 'classifer unmount'
     Subject.off 'select', @onSubjectSelect
+    console.log 'subject listener removed'
+    Subject.off 'no-more', @onNoSubjects
     wrapper = document.getElementById('wrapper')
     wrapper.classList.remove 'push-right'
 
   onSubjectSelect: (e, subject) ->
-    previews = subject.location.previews
-    previews.pop() #temporary for fitting the current 9 preview image design
-    @setState({
-      subject: subject.location.standard
-      previews: previews
-      classification: new Classification {subject}
-    })
+    setTimeout ( =>
+      console.log 'state', @state
+      console.log 'getting subject'
+      previews = subject.location.previews
+      previews.pop() #temporary for fitting the current 9 preview image design
+      @setState({
+        subject: subject.location.standard
+        previews: previews
+        classification: new Classification {subject}
+      })
+      console.log 'state set', @state
+    ), 1000
+
+  onNoSubjects: ->
+    console.log 'no more subjects'
+    @refs.statusMessage.getDOMNode().innerHTML = "No more subjects. Please try again."
 
   toggleGuide: (e) ->
     # Grabbing DOM element outside of React components to be able to move everything to the right including top bar and footer
@@ -72,15 +88,17 @@ module?.exports = React.createClass
       <div className="location-container">
         <p><span className="bold">Site:</span> {@state.location}</p>
       </div>
-      <Annotation
-        subject={@state.subject}
-        previews={@state.previews}
-        classification={@state.classification}
-        toggleGuide={@toggleGuide}
-        guideIsOpen={@state.guideIsOpen}
-        tutorialType={@state.tutorialType}
-        openModal={@openModal}
-      />
+      {unless @state.previews is null and @state.subject is null
+        <Annotation
+          subject={@state.subject}
+          previews={@state.previews}
+          classification={@state.classification}
+          toggleGuide={@toggleGuide}
+          guideIsOpen={@state.guideIsOpen}
+          tutorialType={@state.tutorialType}
+          openModal={@openModal} />
+      else
+        <div ref="statusMessage" className="loading-container">Loading...</div>}
       <SlideTutorial modalIsOpen={@state.modalIsOpen} onClickCloseSlide={@closeModal} tutorialType={@state.tutorialType} />
       <img className="hidden-chimp" src="./assets/hidden-chimp.png" alt="" />
     </div>

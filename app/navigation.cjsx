@@ -33,7 +33,7 @@ module?.exports = React.createClass
     })
     menuClasses = cx({
       'menu-list': true
-      'show-menu': @state.showMobileMenu is true
+      'show-menu green-background': @state.showMobileMenu is true
     })
 
     <nav className={navClasses}>

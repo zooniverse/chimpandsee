@@ -45,8 +45,6 @@ Step = React.createClass
     @props.notes.set []
     @props.currentAnswers.set {}
     Subject.next()
-    @props.subject.set Subject.current.location.standard
-    @props.previews.set Subject.current.location.previews
 
   storeSelection: (name, value) ->
     obj = {}

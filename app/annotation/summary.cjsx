@@ -26,7 +26,7 @@ Summary = React.createClass
       }
       <button value="Discuss">Discuss</button>
       <button>Share</button>
-      <figure className="map"><img src="http://placehold.it/400x250text=a_map" /></figure>
+      <figure className="map"><img src="http://placehold.it/400x250&text=a_map" /></figure>
     </div>
 
 module.exports = Summary

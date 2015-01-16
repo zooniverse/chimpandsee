@@ -23,9 +23,9 @@ SlideTutorial = React.createClass
 
   onClickButton: ->
     switch
-      when @state.activeSlide < @state.slides.length - 1
+      when @state.activeSlide < @state[@props.tutorialType]?.length - 1
         @setState activeSlide: @state.activeSlide + 1
-      when @state.activeSlide is @state.slides.length - 1
+      when @state.activeSlide is @state[@props.tutorialType]?.length - 1
         @props.onClickCloseSlide()
 
   onDotClick: (i) ->

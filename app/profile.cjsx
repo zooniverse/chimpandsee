@@ -9,7 +9,7 @@ Profile = React.createClass
   displayName: 'Profile'
 
   getInitialState: ->
-    collection: 'recents'
+    collection: 'Recent'
 
   onClickSignIn: ->
     loginDialog.show()
@@ -35,9 +35,9 @@ Profile = React.createClass
         </section>
         <section className="items">
           <div className="content">
-            <button onClick={@toggleCollection} value="recents">Recents</button>
-            <button onClick={@toggleCollection} value="favorites">Favorites</button>
-            <ProfileItems collection={@state.collection} />
+            <button onClick={@toggleCollection} value="Recent">Recents</button>
+            <button onClick={@toggleCollection} value="Favorite">Favorites</button>
+            <ProfileItems collection={@state.collection} user={@props.user} />
           </div>
         </section>
       </div>

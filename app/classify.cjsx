@@ -9,6 +9,10 @@ Subject = require 'zooniverse/models/subject'
 Favorite = require 'zooniverse/models/favorite'
 Classification = require 'zooniverse/models/classification'
 
+wrapper = document.getElementById('wrapper')
+body = document.getElementsByTagName('body')['0']
+
+
 module?.exports = React.createClass
   displayName: 'Classify'
 
@@ -31,6 +35,7 @@ module?.exports = React.createClass
     Subject.off 'no-more', @onNoSubjects
     wrapper = document.getElementById('wrapper')
     wrapper.classList.remove 'push-right'
+    body.classList.remove 'overflow-hidden'
 
   onSubjectSelect: (e, subject) ->
     setTimeout ( =>
@@ -41,7 +46,6 @@ module?.exports = React.createClass
         previews: previews
         classification: new Classification {subject}
       })
-      console.log 'state set', @state
     ), 1000
 
   onNoSubjects: ->
@@ -49,19 +53,23 @@ module?.exports = React.createClass
 
   toggleGuide: (e) ->
     # Grabbing DOM element outside of React components to be able to move everything to the right including top bar and footer
-    wrapper = document.getElementById('wrapper')
+    # wrapper = document.getElementById('wrapper')
+    # body = document.getElementsByClassName('body')['0']
 
     if @state.guideIsOpen is false
       @setState guideIsOpen: true
       wrapper.classList.add 'push-right'
+      body.classList.add 'overflow-hidden'
     else
       @onClickClose()
 
   onClickClose: ->
-    wrapper = document.getElementById('wrapper')
+    # wrapper = document.getElementById('wrapper')
+    # body = document.getElementsByClassName('body')['0']
 
     @setState guideIsOpen: false
     wrapper.classList.remove 'push-right'
+    body.classList.remove 'overflow-hidden'
 
   openModal: (type) ->
     @setState({

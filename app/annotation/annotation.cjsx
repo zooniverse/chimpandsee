@@ -86,7 +86,7 @@ Annotation = React.createClass
       })
 
       <figure key={i} className={figClasses} style={@getAnimatedStyle('image-flip')}>
-        <img style={if @state.zoomImage is true then @getAnimatedStyle("image-zoom")} src={preview} onClick={@zoomImage.bind(null, i)} />
+        <img style={if @state.zoomImage is true then @getAnimatedStyle("image-zoom")} src={preview} onClick={@zoomImage.bind(null, i) if window.innerWidth > 600} width="auto" />
       </figure>
 
     <div className="annotation">

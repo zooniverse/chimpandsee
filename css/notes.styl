@@ -10,6 +10,9 @@
     width: 98%
     margin: 0 auto
 
+  @media screen and (max-width: 400px)
+    margin: 15px auto
+
   .note-hint
     border: solid 3px $dark-gray
     border-radius: 8px
@@ -35,6 +38,9 @@
     border-radius: 8px
     border-spacing: 5px 5px
 
+    @media screen and (max-width: 400px)
+      font-size: 12px
+
     &:before
       content: ''
       background-color: $dark-gray
@@ -44,6 +50,9 @@
       float: left
       border-bottom-left-radius: 8px
       border-top-left-radius: 8px
+
+      @media screen and (max-width: 400px)
+        width: 40px
 
     &.chimpanzee:before
       background-color: $green

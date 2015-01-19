@@ -8,6 +8,7 @@ Classification = require 'zooniverse/models/classification'
 Summary = require './summary'
 
 steps = require '../lib/steps'
+animatedScrollTo = require 'animated-scrollto'
 
 Step = React.createClass
   displayName: 'Step'
@@ -24,7 +25,8 @@ Step = React.createClass
       when button.value is steps[0][0].presence.options[0] and @props.step.value is 0
         @newSubject()
         @props.animateImages()
-      when button.value is steps[0][0].presence.options[1] then @moveToNextStep()
+      when button.value is steps[0][0].presence.options[1]
+        @moveToNextStep()
       when button.value is steps[1][0].annotation.options[0]
         @props.step.set 0
         @newSubject()
@@ -41,12 +43,14 @@ Step = React.createClass
       else
         @storeSelection(button.name, button.value)
 
+  componentWillReceiveProps: (nextProps) ->
+    console.log nextProps
+    animatedScrollTo document.body, 0, 1000 if window.innerWidth < 601 and nextProps.step.value < 3
+
   newSubject: ->
     @props.notes.set []
     @props.currentAnswers.set {}
     Subject.next()
-    @props.subject.set Subject.current.location.standard
-    @props.previews.set Subject.current.location.previews
 
   storeSelection: (name, value) ->
     obj = {}

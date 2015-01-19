@@ -22,25 +22,18 @@ module?.exports = React.createClass
     tutorialType: null
 
   componentDidMount: ->
-    console.log 'classifer mount'
     Subject.on 'select', @onSubjectSelect
-    console.log 'subject listener added'
     Subject.on 'no-more', @onNoSubjects
     Subject.next()
-    console.log 'subject next called'
 
   componentWillUnmount: ->
-    console.log 'classifer unmount'
     Subject.off 'select', @onSubjectSelect
-    console.log 'subject listener removed'
     Subject.off 'no-more', @onNoSubjects
     wrapper = document.getElementById('wrapper')
     wrapper.classList.remove 'push-right'
 
   onSubjectSelect: (e, subject) ->
     setTimeout ( =>
-      console.log 'state', @state
-      console.log 'getting subject'
       previews = subject.location.previews
       previews.pop() #temporary for fitting the current 9 preview image design
       @setState({
@@ -52,7 +45,6 @@ module?.exports = React.createClass
     ), 1000
 
   onNoSubjects: ->
-    console.log 'no more subjects'
     @refs.statusMessage.getDOMNode().innerHTML = "No more subjects. Please try again."
 
   toggleGuide: (e) ->

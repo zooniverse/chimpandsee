@@ -25,6 +25,11 @@ Annotation = React.createClass
     zoomImage: false
     zoomImageIndex: null
     favorited: false
+    user: false
+
+  componentWillMount: ->
+    if @props.user?
+      @setState user: true
 
   componentWillReceiveProps: (nextProps) ->
     if nextProps.guideIsOpen is false
@@ -35,6 +40,9 @@ Annotation = React.createClass
     if nextProps.subject isnt @props.subject
       @setState favorited: false
       @refs.favoriteIcon.getDOMNode().src = "./assets/fav-icon.svg"
+
+    if nextProps.user? then @setState user: true else @setState user: false
+
 
   animateImages: ->
     @animate "image-flip", {transform: 'rotateY(180deg)'}, {transform: 'rotateY(0deg)'}, 'ease-in-out', 500
@@ -80,6 +88,11 @@ Annotation = React.createClass
       'video': true
     })
 
+    favoriteClasses = cx({
+      'favorite-btn': true
+      'hidden': @state.user is false
+    })
+
     previews = @props.previews.map (preview, i) =>
       figClasses = cx({
         'hide': @state.zoomImage is true and i isnt @state.zoomImageIndex
@@ -100,7 +113,9 @@ Annotation = React.createClass
             Your browser does not support the video format. Please upgrade your browser.
           </video>
         </div>
-        <div className="favorite-btn" onClick={@onClickFavorite}><img ref="favoriteIcon" src="./assets/fav-icon.svg" alt="favorite button" /></div>
+        <div className={favoriteClasses} onClick={@onClickFavorite}>
+          <img ref="favoriteIcon" src="./assets/fav-icon.svg" alt="favorite button" />
+        </div>
       </div>
       <Step
         step={cursor.refine('currentStep')}

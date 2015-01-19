@@ -88,7 +88,8 @@ module?.exports = React.createClass
           toggleGuide={@toggleGuide}
           guideIsOpen={@state.guideIsOpen}
           tutorialType={@state.tutorialType}
-          openModal={@openModal} />
+          openModal={@openModal}
+          user={@props.user} />
       else
         <div ref="statusMessage" className="loading-container">Loading...</div>}
       <SlideTutorial modalIsOpen={@state.modalIsOpen} onClickCloseSlide={@closeModal} tutorialType={@state.tutorialType} />

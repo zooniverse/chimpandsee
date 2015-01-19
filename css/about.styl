@@ -140,10 +140,10 @@
       &:last-of-type
         background: $green url(./assets/about-background.jpg) no-repeat center center
         background-size: cover
-        min-height: 333px
+        height: 333px
 
         .content
-          min-height: 333px
+          height: 333px
           text-align: center
           flex-direction: column
           justify-content: center
@@ -174,8 +174,8 @@
             width: 66px
             height: 112px
             border: none
-            position: relative
-            bottom: -83px
+            position: absolute
+            bottom: 311px
             margin: 0
             padding: 0
             transition: all 0.5s ease
@@ -185,19 +185,20 @@
               right: 15%
 
             @media screen and (max-width: 768px)
+              position: relative
               bottom: -136px
               align-self: center
 
-            @media screen and (max-width: 598px)
+            @media screen and (max-width: 573px)
               bottom: -119px
 
             &:hover
-              bottom: -60px
+              bottom: 330px
 
               @media screen and (max-width: 768px)
                 bottom: -110px
 
-              @media screen and (max-width: 598px)
+              @media screen and (max-width: 573px)
                 bottom: -95px
 
   .page-two, .page-three

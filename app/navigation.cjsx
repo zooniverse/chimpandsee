@@ -37,13 +37,15 @@ module?.exports = React.createClass
     })
 
     <nav className={navClasses}>
-      <svg className="mobile-menu" onClick={@toggleMobileMenu} xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" viewBox="0 0 30 30">
-        <g>
-          <rect className="bars" y="2.5" width="30" height="5"/>
-          <rect className="bars" y="12.5" width="30" height="5"/>
-          <rect className="bars" y="22.5" width="30" height="5"/>
-        </g>
-      </svg>
+      <div className="mobile-menu" onClick={@toggleMobileMenu}>
+        <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" viewBox="0 0 30 30">
+          <g>
+            <rect className="bars" y="2.5" width="30" height="5"/>
+            <rect className="bars" y="12.5" width="30" height="5"/>
+            <rect className="bars" y="22.5" width="30" height="5"/>
+          </g>
+        </svg>
+      </div>
       <a href="#/" className="logo-link"><img className="logo" src={if window.location.hash is '#/' then "./assets/chimp-logo-home.png" else "./assets/chimp-logo.png"} alt="logo" /></a>
       <div className={menuClasses}>
         {links}

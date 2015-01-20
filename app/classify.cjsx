@@ -9,6 +9,7 @@ Subject = require 'zooniverse/models/subject'
 Favorite = require 'zooniverse/models/favorite'
 Classification = require 'zooniverse/models/classification'
 
+# Grabbing DOM element outside of React components to be able to move everything to the right including top bar and footer
 wrapper = document.getElementById('wrapper')
 body = document.getElementsByTagName('body')['0']
 
@@ -33,7 +34,7 @@ module?.exports = React.createClass
   componentWillUnmount: ->
     Subject.off 'select', @onSubjectSelect
     Subject.off 'no-more', @onNoSubjects
-    wrapper = document.getElementById('wrapper')
+
     wrapper.classList.remove 'push-right'
     body.classList.remove 'overflow-hidden'
 
@@ -52,10 +53,6 @@ module?.exports = React.createClass
     @refs.statusMessage.getDOMNode().innerHTML = "No more subjects. Please try again."
 
   toggleGuide: (e) ->
-    # Grabbing DOM element outside of React components to be able to move everything to the right including top bar and footer
-    # wrapper = document.getElementById('wrapper')
-    # body = document.getElementsByClassName('body')['0']
-
     if @state.guideIsOpen is false
       @setState guideIsOpen: true
       wrapper.classList.add 'push-right'
@@ -64,9 +61,6 @@ module?.exports = React.createClass
       @onClickClose()
 
   onClickClose: ->
-    # wrapper = document.getElementById('wrapper')
-    # body = document.getElementsByClassName('body')['0']
-
     @setState guideIsOpen: false
     wrapper.classList.remove 'push-right'
     body.classList.remove 'overflow-hidden'

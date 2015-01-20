@@ -23,8 +23,8 @@ Step = React.createClass
 
     switch
       when button.value is steps[0][0].presence.options[0] and @props.step.value is 0
-        @newSubject()
         @props.animateImages()
+        @newSubject()
       when button.value is steps[0][0].presence.options[1]
         @moveToNextStep()
       when button.value is steps[1][0].annotation.options[0]
@@ -44,13 +44,14 @@ Step = React.createClass
         @storeSelection(button.name, button.value)
 
   componentWillReceiveProps: (nextProps) ->
-    console.log nextProps
     animatedScrollTo document.body, 0, 1000 if window.innerWidth < 601 and nextProps.step.value < 3
 
   newSubject: ->
     @props.notes.set []
     @props.currentAnswers.set {}
-    Subject.next()
+    setTimeout ( =>
+      Subject.next()
+    ), 100
 
   storeSelection: (name, value) ->
     obj = {}

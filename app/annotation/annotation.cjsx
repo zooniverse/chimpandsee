@@ -40,20 +40,26 @@ Annotation = React.createClass
     if nextProps.subject isnt @props.subject
       @setState favorited: false
       @refs.favoriteIcon.getDOMNode().src = "./assets/fav-icon.svg"
+      @animate "image-slide", {transform: 'translateX(0)', opacity: '0'}, {transform: 'translateX(0)', opacity: '1'}, 'ease-in-out', 500
 
     if nextProps.user? then @setState user: true else @setState user: false
 
-
   animateImages: ->
-    @animate "image-flip", {transform: 'rotateY(180deg)'}, {transform: 'rotateY(0deg)'}, 'ease-in-out', 500
+    @animate "image-slide", {transform: 'translateX(0)', opacity: '1'}, {transform: 'translateX(310px)', opacity: '0'}, 'ease-in-out', 500
 
   zoomImage: (i) ->
     if @state.zoomImage is false
-      @animate "image-zoom", {transform: 'scale3d(1,1,1)', transitionDuration: '500ms', marginTop: '0'}, {transform: 'scale3d(2,2,2)', marginTop: '95px'}, 'ease-in-out', 500
       @setState({
         zoomImage: true
         zoomImageIndex: i
       })
+      @animate "image-zoom", {transform: 'scale3d(1,1,1)'}, {transform: 'scale3d(2,2,2)'}, 'linear', 500
+      setTimeout ( =>
+        previews = document.getElementsByClassName('fade-out')
+
+        for preview in previews
+          preview.classList.add 'hide'
+      ), 500
     else
       @setState({
         zoomImage: false
@@ -95,11 +101,12 @@ Annotation = React.createClass
 
     previews = @props.previews.map (preview, i) =>
       figClasses = cx({
-        'hide': @state.zoomImage is true and i isnt @state.zoomImageIndex
+        'zoom-image': @state.zoomImage is true and i is @state.zoomImageIndex
+        'fade-out': @state.zoomImage is true and i isnt @state.zoomImageIndex
       })
 
-      <figure key={i} className={figClasses} style={@getAnimatedStyle('image-flip')}>
-        <img style={if @state.zoomImage is true then @getAnimatedStyle("image-zoom")} src={preview} onClick={@zoomImage.bind(null, i) if window.innerWidth > 600} width="auto" />
+      <figure key={i} ref="preview" className={figClasses} style={@getAnimatedStyle('image-slide')}>
+        <img style={if @state.zoomImage is true and @state.zoomImageIndex is i then @getAnimatedStyle("image-zoom")} src={preview} onClick={@zoomImage.bind(null, i) if window.innerWidth > 600} width="auto" />
       </figure>
 
     <div className="annotation">

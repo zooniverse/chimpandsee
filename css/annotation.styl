@@ -47,18 +47,15 @@
 
     .preview-imgs
       margin-bottom: 10px
-      width: 100%
       max-width: 930px
       height: 100%
       min-height: 415px
-      display: flex
-      flex-wrap: wrap
+      display: block
 
       figure
-        flex-grow: 1
-        flex-shrink: 1
-        flex-basis: 33%
         margin: 0
+        max-width: 33%
+        float: left
 
         @media screen and (max-width: 600px)
           min-width: 100%
@@ -74,11 +71,15 @@
           @media screen and (max-width: 600px)
             max-width: 100%
 
-        // img.zoom-image
-        //   transform: scale3d(3,3,2) !important
-        //   transition-duration: 500ms
-        //   transition-timing-function: ease-in-out
-        //   margin-top: 95px
+      .zoom-image
+        max-width: inherit
+        margin-top: 95px
+        transition: max-width 0s 0s, margin-top 0s 0s linear
+
+      .fade-out
+        visibility: hidden
+        opacity: 0
+        transition: visibility 0s .25s, opacity .25s linear
 
     .video
       margin: 10px auto

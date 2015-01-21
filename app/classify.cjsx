@@ -13,7 +13,6 @@ Classification = require 'zooniverse/models/classification'
 wrapper = document.getElementById('wrapper')
 body = document.getElementsByTagName('body')['0']
 
-
 module?.exports = React.createClass
   displayName: 'Classify'
 
@@ -36,7 +35,7 @@ module?.exports = React.createClass
     Subject.off 'no-more', @onNoSubjects
 
     wrapper.classList.remove 'push-right'
-    body.classList.remove 'overflow-hidden'
+    body.classList.remove 'no-scroll'
 
   onSubjectSelect: (e, subject) ->
     setTimeout ( =>
@@ -56,14 +55,14 @@ module?.exports = React.createClass
     if @state.guideIsOpen is false
       @setState guideIsOpen: true
       wrapper.classList.add 'push-right'
-      body.classList.add 'overflow-hidden'
+      body.classList.add 'no-scroll'
     else
       @onClickClose()
 
   onClickClose: ->
     @setState guideIsOpen: false
     wrapper.classList.remove 'push-right'
-    body.classList.remove 'overflow-hidden'
+    body.classList.remove 'no-scroll'
 
   openModal: (type) ->
     @setState({
@@ -91,7 +90,8 @@ module?.exports = React.createClass
           guideIsOpen={@state.guideIsOpen}
           tutorialType={@state.tutorialType}
           openModal={@openModal}
-          user={@props.user} />
+          user={@props.user}
+          location={@state.location} />
       else
         <div ref="statusMessage" className="loading-container">Loading...</div>}
       <SlideTutorial modalIsOpen={@state.modalIsOpen} onClickCloseSlide={@closeModal} tutorialType={@state.tutorialType} />

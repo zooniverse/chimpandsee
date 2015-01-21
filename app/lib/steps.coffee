@@ -19,32 +19,32 @@ stepThree =
   animal:
     question: 'Which species do you want to annotate?'
     options: [
-      'chimpanzee'
-      'gorilla'
-      'human'
-      'small bodied monkey'
-      'elephant'
       'bird'
-      'warthog'
-      'pangolin'
-      'lion'
-      'leopard'
-      'small cat'
-      'hyneas'
-      'wild dogs'
-      'hippopotamus'
-      'small blue duiker'
-      'zebra duiker'
-      'Jentik\'s duiker'
-      'medium red duiker'
-      'large duiker'
+      'chimpanzee'
+      'elephant'
       'forest buffalo'
+      'gorilla'
+      'hippopotamus'
+      'human'
+      'hyneas'
+      'Jentik\'s duiker'
+      'large duiker'
       'large ungulate'
-      'small antelope'
+      'leopard'
+      'lion'
       'lizard'
-      'rodent'
-      'porcupine'
+      'medium red duiker'
       'other'
+      'pangolin'
+      'porcupine'
+      'rodent'
+      'small antelope'
+      'small blue duiker'
+      'small bodied monkey'
+      'small cat'
+      'warthog'
+      'wild dogs'
+      'zebra duiker'
     ]
 
 stepChimp =
@@ -63,20 +63,24 @@ stepChimp =
   behavior:
     question: null
     options: [
-      'drinking'
-      'feeding'
-      'traveling'
-      'fleeing'
-      'sleeping'
-      'sex'
+      'aggression'
+      'arboreal'
+      'camera reaction'
+      'carrying'
+      'climing'
+      'cross-species interaction'
+      'drinking/feeding'
+      'drumming'
+      'grooming'
       'nursing'
       'playing'
+      'resting'
+      'sex'
       'social interaction'
-      'agonistic interaction'
-      'hunting'
-      'tool use'
-      'vocalization'
-      'carrying item'
+      'terrestrial'
+      'tool usage'
+      'traveling'
+      'vocalizing'
     ]
 
 stepOther =
@@ -94,7 +98,7 @@ stepOther =
 
 stepFinal =
   summary:
-    question: "Would you like to explore more?"
+    question: null
     options: [
       'Next Subject'
     ]

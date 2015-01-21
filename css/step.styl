@@ -91,8 +91,8 @@
       line-height: 24px
       margin: 5px
 
-      // 'Nothing here', 'I see something', 'Add', and 'Finish' buttons
-      &#presence-0, &#presence-1, &#annotation-0, &#annotation-1, &#annotation-2
+      // 'Nothing here', 'I see something', 'Add', 'Finish', and 'Next Subject' buttons
+      &#presence-0, &#presence-1, &#annotation-0, &#annotation-1, &#annotation-2, &#summary-0
         max-width: 220px
         height: 70px
         color: #555656
@@ -163,7 +163,7 @@
           margin: 0 10px 0 0
           float: left
 
-      &#presence-1:before, &#annotation-2:before // 'I see something' and 'Finish'
+      &#presence-1:before, &#annotation-2:before, &#summary-0:before // 'I see something' and 'Finish'
         content: ''
         display: block
         background: url(./assets/check-icon.svg) no-repeat center center
@@ -274,15 +274,6 @@
       padding: 5px 0
 
   .summary
-    margin-top: -50px
+    .step-bottom
+      margin-top: 10px
 
-    @media screen and (max-width: 600px)
-      margin-top: 0
-
-    .map
-      width: 100%
-      margin: 15px auto
-
-      img
-        width: 98%
-        max-width: 400px

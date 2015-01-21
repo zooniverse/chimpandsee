@@ -9,6 +9,7 @@ animatedScrollTo = require 'animated-scrollto'
 Subject = require 'zooniverse/models/subject'
 
 Step = require './step'
+Summary = require './summary'
 Notes = require './notes'
 
 steps = require '../lib/steps'
@@ -26,40 +27,41 @@ Annotation = React.createClass
     zoomImageIndex: null
     favorited: false
     user: false
+    animating: false
 
   componentWillMount: ->
     if @props.user?
       @setState user: true
 
   componentWillReceiveProps: (nextProps) ->
-    if nextProps.guideIsOpen is false
-      @refs.guideIcon.getDOMNode().src = "./assets/guide-icon.svg"
-    else
-      @refs.guideIcon.getDOMNode().src = "./assets/cancel-icon.svg"
-
     if nextProps.subject isnt @props.subject
       @setState favorited: false
-      @refs.favoriteIcon.getDOMNode().src = "./assets/fav-icon.svg"
-      @animate "image-slide", {transform: 'translateX(0)', opacity: '0'}, {transform: 'translateX(0)', opacity: '1'}, 'ease-in-out', 500
+      # @animate "image-slide", {}, {animation: 'fadeIn 0.5s forwards'}, 'ease-in-out', 500
+      setTimeout (=>
+        @setState animating: false
+      ), 100
 
     if nextProps.user? then @setState user: true else @setState user: false
 
-  animateImages: ->
-    @animate "image-slide", {transform: 'translateX(0)', opacity: '1'}, {transform: 'translateX(310px)', opacity: '0'}, 'ease-in-out', 500
+  # animateImages: ->
+  #   @animate "image-slide", {}, {animation: 'fadeOut 0.5s forwards', animation: 'slideOut 0.5s forwards'}, 'ease-in-out', 500
 
   zoomImage: (i) ->
+    # image = @refs["img-#{i}"].getDOMNode()
+    # console.log image.clientWidth * 1/3
     if @state.zoomImage is false
       @setState({
         zoomImage: true
         zoomImageIndex: i
       })
-      @animate "image-zoom", {transform: 'scale3d(1,1,1)'}, {transform: 'scale3d(2,2,2)'}, 'linear', 500
       setTimeout ( =>
         previews = document.getElementsByClassName('fade-out')
 
         for preview in previews
           preview.classList.add 'hide'
       ), 500
+      @animate "image-zoom", {transform: 'scale3d(1,1,1)'}, {transform: 'scale3d(2,2,3)'}, 'linear', 500
+
     else
       @setState({
         zoomImage: false
@@ -75,11 +77,9 @@ Annotation = React.createClass
     if @state.favorited is false
       @setState favorited: true
       @props.classification.favorite = true
-      @refs.favoriteIcon.getDOMNode().src = "./assets/fav-icon-filled.svg"
     else
       @setState favorited: false
       @props.classification.favorite = false
-      @refs.favoriteIcon.getDOMNode().src = "./assets/fav-icon.svg"
 
   render: ->
     cursor = Cursor.build(@)
@@ -87,6 +87,7 @@ Annotation = React.createClass
     previewClasses = cx({
       'hide': cursor.refine('currentStep').value > 0
       'preview-imgs': true
+      'adjust-width': @state.zoomImage is true
     })
 
     videoClasses = cx({
@@ -97,21 +98,29 @@ Annotation = React.createClass
     favoriteClasses = cx({
       'favorite-btn': true
       'hidden': @state.user is false
+      'favorited': @state.favorited is true
+    })
+
+    guideClasses = cx({
+      'guide-btn': true
+      'guide-open': @props.guideIsOpen is true
     })
 
     previews = @props.previews.map (preview, i) =>
       figClasses = cx({
+        'animating-in': true
         'zoom-image': @state.zoomImage is true and i is @state.zoomImageIndex
         'fade-out': @state.zoomImage is true and i isnt @state.zoomImageIndex
+        'animating-out': @state.animating is true
       })
 
-      <figure key={i} ref="preview" className={figClasses} style={@getAnimatedStyle('image-slide')}>
-        <img style={if @state.zoomImage is true and @state.zoomImageIndex is i then @getAnimatedStyle("image-zoom")} src={preview} onClick={@zoomImage.bind(null, i) if window.innerWidth > 600} width="auto" />
+      <figure key={i} ref="preview" className={figClasses}>
+        <img ref="img-#{i}" style={if @state.zoomImage is true and @state.zoomImageIndex is i then @getAnimatedStyle("image-zoom")} src={preview} onClick={@zoomImage.bind(null, i) if window.innerWidth > 600} />
       </figure>
 
     <div className="annotation">
       <div className="subject">
-        <div className="guide-btn" onClick={@onClickGuide}><img ref="guideIcon" src="./assets/guide-icon.svg" alt="field guide button" /></div>
+        <button className={guideClasses} onClick={@onClickGuide}>Field Guide</button>
         <div className={previewClasses}>
           {previews}
         </div>
@@ -120,9 +129,9 @@ Annotation = React.createClass
             Your browser does not support the video format. Please upgrade your browser.
           </video>
         </div>
-        <div className={favoriteClasses} onClick={@onClickFavorite}>
-          <img ref="favoriteIcon" src="./assets/fav-icon.svg" alt="favorite button" />
-        </div>
+        {if @state.currentStep is steps.length - 1
+          <Summary notes={@state.notes} tutorialType={@state.tutorialType} openModal={@props.openModal} location={@props.location} />}
+        <button className={favoriteClasses} onClick={@onClickFavorite}>Favorite</button>
       </div>
       <Step
         step={cursor.refine('currentStep')}
@@ -131,9 +140,8 @@ Annotation = React.createClass
         notes={cursor.refine('notes')}
         subject={@props.subject}
         previews={@props.previews}
-        animateImages={@animateImages}
+        animating={cursor.refine('animating')}
         classification={@props.classification}
-        tutorialType={@state.tutorialType}
         openModal={@props.openModal}
       />
       <Notes notes={cursor.refine('notes')} step={cursor.refine('currentStep')} />

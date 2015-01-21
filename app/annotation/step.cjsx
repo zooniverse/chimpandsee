@@ -5,7 +5,6 @@ ImmutableOptimizations = require('react-cursor').ImmutableOptimizations
 
 Subject = require 'zooniverse/models/subject'
 Classification = require 'zooniverse/models/classification'
-Summary = require './summary'
 
 steps = require '../lib/steps'
 animatedScrollTo = require 'animated-scrollto'
@@ -16,23 +15,24 @@ Step = React.createClass
 
   onButtonClick: (event) ->
     button = event.target
-    notAChimp = _.without steps[2][0].animal.options, steps[2][0].animal.options[0] #chimp
+    notAChimp = _.without steps[2][0].animal.options, steps[2][0].animal.options[1] #chimp
     otherAnimal = notAChimp.map (animal) ->
       animal if animal is button.value
     otherAnimal = _.compact(otherAnimal)
 
     switch
       when button.value is steps[0][0].presence.options[0] and @props.step.value is 0
-        @props.animateImages()
+        @props.animating.set true
         @newSubject()
       when button.value is steps[0][0].presence.options[1]
         @moveToNextStep()
       when button.value is steps[1][0].annotation.options[0]
         @props.step.set 0
+        @props.animating.set true
         @newSubject()
       when button.value is steps[1][0].annotation.options[1] then @moveToNextStep()
       when button.value is steps[1][0].annotation.options[2] then @finishNote()
-      when button.value is steps[2][0].animal.options[0] #chimp
+      when button.value is steps[2][0].animal.options[1] #chimp
         @storeSelection(button.name, button.value)
         @moveToNextStep()
       when button.value is otherAnimal[0]
@@ -109,7 +109,7 @@ Step = React.createClass
     })
 
     addDisabled = switch
-      when _.values(@props.currentAnswers.value).length < 4 and _.values(@props.currentAnswers.value)[0] is steps[2][0].animal.options[0]
+      when _.values(@props.currentAnswers.value).length < 4 and _.values(@props.currentAnswers.value)[0] is steps[2][0].animal.options[1] #chimp
         true
       when _.values(@props.currentAnswers.value).length < 2 then true
 
@@ -166,8 +166,6 @@ Step = React.createClass
             </div>
           </div>}
         <div className="step-bottom">
-          {if @props.step.value is steps.length - 1
-            <Summary notes={@props.notes.value} tutorialType={@props.tutorialType} openModal={@props.openModal} />}
           <div className="buttons-container">
             {buttons}
           </div>

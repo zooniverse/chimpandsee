@@ -10,43 +10,56 @@
     align-items: center
     justify-content: space-between
 
-    @media screen and (max-width: 600px)
+    @media screen and (max-width: 870px)
       justify-content: space-around
 
-    @media screen and (min-width: 601px) and (max-width: 930px)
-      width: 98%
-
-    @media screen and (max-width: 600px)
+    @media screen and (max-width: 870px)
       flex-wrap: wrap
 
     .guide-btn, .favorite-btn
       cursor: pointer
-      display: table
-      background-color: $near-black
-      padding: 12.5px 13.5px
-      border-radius: 50%
+      font-size: 12px
+      line-height: 12px
+      color: #555656
       text-align: center
+      margin: 5px 0
+      background: transparent
+      width: 80px
 
-      img
-        display: table-cell
-        vertical-align: middle
+      &:before
+        content: ''
+        display: block
+        text-align: center
+        border-radius: 50%
+        width: 56px
+        height: 56px
+        margin: 0 auto 5px
 
     .guide-btn
-      margin: 0 5px 0 10px
+      &:before
+        background: $blackish url(./assets/guide-icon.svg) no-repeat center center
 
-      @media screen and (max-width: 600px)
+      @media screen and (max-width: 870px)
         order: 2
         margin: 0 0 25px
 
     .favorite-btn
-      margin: 0 10px 0 5px
+      &:before
+        background: $blackish url(./assets/fav-icon.svg) no-repeat center center
 
-      @media screen and (max-width: 600px)
+      @media screen and (max-width: 870px)
         order: 3
         margin: 0 0 25px
 
+    .guide-open:before
+      background-image: url(./assets/cancel-icon.svg)
+
+    .favorited:before
+      background-image: url(./assets/fav-icon-filled.svg)
+
     .preview-imgs
       margin-bottom: 10px
+      width: 100%
       max-width: 930px
       height: 100%
       min-height: 415px
@@ -54,8 +67,9 @@
 
       figure
         margin: 0
-        max-width: 33%
+        max-width: 33.33%
         float: left
+        transition: all 0.2s
 
         @media screen and (max-width: 600px)
           min-width: 100%
@@ -71,6 +85,15 @@
           @media screen and (max-width: 600px)
             max-width: 100%
 
+
+
+      .animating-in
+        animation: fadeIn 0.5s forwards
+
+      .animating-out
+        animation: fadeOut 0.5s forwards
+        // animation: slideOut 0.5s forwards
+
       .zoom-image
         max-width: inherit
         margin-top: 95px
@@ -80,6 +103,11 @@
         visibility: hidden
         opacity: 0
         transition: visibility 0s .25s, opacity .25s linear
+
+    .adjust-width
+      width: 400px
+      margin: 0 auto 10px
+      transition: width 0 .25s, margin 0 .25s linear
 
     .video
       margin: 10px auto
@@ -96,5 +124,18 @@
         max-width: 930px
         border-radius: 16px
 
+@keyframes slideOut {
+  from { transform: translateX(0) }
+  to { transform: translateX(310px) }
+}
 
+@keyframes fadeOut {
+  from { opacity: 1; }
+  to { opacity: 0; }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
 

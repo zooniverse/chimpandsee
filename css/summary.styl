@@ -24,8 +24,20 @@
       font-size: 24px
 
     ul
+      padding: 0
+      font-size: 24px
+      -webkit-font-smoothing: antialiased
+      -moz-osx-font-smoothing: grayscale
+
       li
+        margin-bottom: 15px
         list-style: none
+
+    .summary-location
+      flex-grow: 0
+
+    .summary-notes
+      flex-grow: 1
 
     .share
       p
@@ -51,11 +63,16 @@
         float: right
         margin-left: 75px
 
+  .no-chimp
+    height: 527px
+
   .map-container
     float: right
+    height: 527px
 
     .map
       margin: 0
+      height: 527px
 
   .chimp-summary
     float: left

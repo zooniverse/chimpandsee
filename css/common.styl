@@ -24,6 +24,8 @@ html, body
 
   .loading-spinner
     text-align: center
+    height: 200px
+    line-height: 200px
 
   .home-background //Overriding defaults for home page.
     background: url(./assets/home-background.jpg) no-repeat top 30px center
@@ -93,7 +95,7 @@ html, body
 
   button
     border-radius: 6px
-    background-color: $green
+    background-color: transparent
     color: white
     border: none
     margin: 10px
@@ -101,8 +103,10 @@ html, body
     -moz-osx-font-smoothing: grayscale
     cursor: pointer
 
-    &:focus
+    &:focus, &:active, &:visited
       outline: none
+      background-color: transparent
+
 
   .disabled
     cursor: not-allowed

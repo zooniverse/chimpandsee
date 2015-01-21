@@ -73,15 +73,21 @@ ProfileItems = React.createClass
   componentWillUnmount: ->
     @detachScrollListener()
 
+  showCaption: (e) ->
+    console.log e
+
   render: ->
     items = @state.items.map (item, i) =>
-      <video key={i} poster={item.subjects[0]?.location.previews[0]} src={item.subjects[0]?.location.standard} width="33%" type="video/mp4" controls>
-        Your browser does not support the video format. Please upgrade your browser.
-      </video>
+      <figure key={i}>
+        <video poster={item.subjects[0]?.location.previews[0][0]} src={item.subjects[0]?.location.standard} type="video/mp4" controls>
+          Your browser does not support the video format. Please upgrade your browser.
+        </video>
+        <figcaption><a href="www.somewhere.com">Talk</a> </figcaption>
+      </figure>
 
     <div>
       {items}
-      {<div className="loading-spinner"><i className="fa fa-spinner fa-spin"></i></div> if @state.isLoading is true}
+      {<div className="loading-spinner"><i className="fa fa-spinner fa-spin fa-2x"></i></div> if @state.isLoading is true}
       {<div><p>No more items.</p></div> if @state.hasMore is false}
     </div>
 

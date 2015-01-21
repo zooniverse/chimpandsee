@@ -27,14 +27,17 @@ Summary = React.createClass
         totals[notes[i].animal]++
       i++
 
-    console.log totals
-
   render: ->
     noteSummary = for animal, count of totals
       <li key={animal}>{count} {animal}{"s" if count > 1}</li>
 
+    generalClasses = cx({
+      'general-summary': true
+      'no-chimp': @state.chimpsSeen is false
+    })
+
     <div className="summary-content">
-      <section className="general-summary">
+      <section className={generalClasses}>
         <div className="summary-location">
           <h3>At Location:</h3>
           <p>{@props.location}</p>
@@ -64,9 +67,9 @@ Summary = React.createClass
             <p>Help us identify and name these chimps!</p>
           </div>
           <div className="chimp-btn-container">
-            <button>Learn More</button>
+            <button onClick={@props.openModal.bind(null, "chimps")}>Learn More</button>
             <button>Get Started</button>
-            <button onClick={@props.openModal.bind(null, "chimps")}>Known Chimps</button>
+            <button>Known Chimps</button>
           </div>
         </section>
       }

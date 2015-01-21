@@ -34,11 +34,36 @@
     line-height: 25px
     font-size: 14px
     font-weight: 700
+    background: transparent
+    border: 2px solid $green
+
+    &:hover, &.active
+      background: $green
 
   .items
-    video
-      padding: 2.5px
-      box-sizing: border-box
+    figure
+      width: 33%
+      margin: 0
+      display: inline-block
+      position: relative
+
+      video
+        width: 100%
+        padding: 2.5px
+        box-sizing: border-box
+
+      figcaption
+        visibility: hidden
+        position: absolute
+        z-index: 1
+        top: 0
+        right: 0
+        background: rgba(0, 0, 0, .7)
+        width: 50px
+        height: 244px
+
+        &.show
+          visibility: visible
 
   .profile-sign-in
     display: flex

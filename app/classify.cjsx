@@ -40,12 +40,13 @@ module?.exports = React.createClass
   onSubjectSelect: (e, subject) ->
     setTimeout ( =>
       previews = subject.location.previews
-      previews.pop() #temporary for fitting the current 9 preview image design
+      randomInt = Math.round(Math.random() * (2 - 0)) + 0
       @setState({
         subject: subject.location.standard
-        previews: previews
+        previews: previews[randomInt]
         classification: new Classification {subject}
       })
+      @state.classification.annotate previewsSet: randomInt
     ), 1000
 
   onNoSubjects: ->
@@ -93,7 +94,7 @@ module?.exports = React.createClass
           user={@props.user}
           location={@state.location} />
       else
-        <div ref="statusMessage" className="loading-container">Loading...</div>}
+        <div ref="statusMessage" className="loading-spinner"><i className="fa fa-spinner fa-spin fa-2x"></i></div>}
       <SlideTutorial modalIsOpen={@state.modalIsOpen} onClickCloseSlide={@closeModal} tutorialType={@state.tutorialType} />
       <img className="hidden-chimp" src="./assets/hidden-chimp.png" alt="" />
     </div>

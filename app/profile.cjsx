@@ -18,6 +18,14 @@ Profile = React.createClass
     @setState collection: event.target.value
 
   render: ->
+    recentClasses = cx({
+      'active': @state.collection is 'Recent'
+    })
+
+    favoriteClasses = cx({
+      'active': @state.collection is 'Favorite'
+    })
+
     userDetails = if @props.user?
       <div>
         <section className="profile-status">
@@ -35,8 +43,8 @@ Profile = React.createClass
         </section>
         <section className="items">
           <div className="content">
-            <button onClick={@toggleCollection} value="Recent">Recents</button>
-            <button onClick={@toggleCollection} value="Favorite">Favorites</button>
+            <button className={recentClasses} onClick={@toggleCollection} value="Recent">Recents</button>
+            <button className={favoriteClasses} onClick={@toggleCollection} value="Favorite">Favorites</button>
             <ProfileItems collection={@state.collection} user={@props.user} />
           </div>
         </section>

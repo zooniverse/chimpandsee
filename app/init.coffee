@@ -2,10 +2,13 @@ Api = require 'zooniverse/lib/api'
 TopBar = require 'zooniverse/controllers/top-bar'
 Footer = require 'zooniverse/controllers/footer'
 LanguageManager = require 'zooniverse/lib/language-manager'
+Subject = require 'zooniverse/models/subject'
 
 # Api
 Api = require 'zooniverse/lib/api'
 api = new Api project: 'chimp'
+
+Subject.group = true
 
 # Top Bar
 topBar = new TopBar

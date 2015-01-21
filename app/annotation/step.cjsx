@@ -22,11 +22,21 @@ Step = React.createClass
 
     switch
       when button.value is steps[0][0].presence.options[0] and @props.step.value is 0
-        @props.animating.set true
-        @newSubject()
+        @storeSelection(button.name, button.value)
+        setTimeout (=>
+          console?.log 'send to classification', @props.currentAnswers.value
+          @props.classification.annotate @props.currentAnswers.value
+          @sendClassification()
+          @props.animating.set true
+          @newSubject()
+        ), 100
       when button.value is steps[0][0].presence.options[1]
         @moveToNextStep()
       when button.value is steps[1][0].annotation.options[0]
+        @storeSelection(button.name, button.value)
+        console?.log 'send to classification', @props.currentAnswers.value
+        @props.classification.annotate @props.currentAnswers.value
+        @sendClassification()
         @props.step.set 0
         @props.animating.set true
         @newSubject()
@@ -86,7 +96,7 @@ Step = React.createClass
   finishNote: ->
     console?.log 'send to classification', @props.notes.value
     @props.classification.annotate @props.notes.value
-    @props.classification.send()
+    @sendClassification()
     @props.step.set steps.length - 1
     @props.subStep.set 0
 
@@ -94,6 +104,9 @@ Step = React.createClass
     @props.step.set 0
     @props.subStep.set 0
     @newSubject()
+
+  sendClassification: ->
+    @props.classification.send()
 
   render: ->
     cancelClasses = cx({
@@ -147,7 +160,7 @@ Step = React.createClass
               when @props.notes.value.length > 0 and option is steps[1][0].annotation.options[0] then true
 
         classes = cx({
-          'btn-active': option in _.values(@props.currentAnswers.value)
+          'btn-active': option in _.values(@props.currentAnswers.value) and @props.step.value > 1
           'finish-disabled': @props.notes.value.length is 0 and option is steps[1][0].annotation.options[2]
           'nothing-disabled': @props.notes.value.length > 0 and option is steps[1][0].annotation.options[0]
         })

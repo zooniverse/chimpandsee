@@ -67,7 +67,7 @@ stepChimp =
       'arboreal'
       'camera reaction'
       'carrying'
-      'climing'
+      'climbing'
       'cross-species interaction'
       'drinking/feeding'
       'drumming'

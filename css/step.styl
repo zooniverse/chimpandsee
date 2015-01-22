@@ -30,7 +30,16 @@
       top: 20px
       right: 10px
 
-      @media screen and (max-width: 600px)
+      small
+        font-size: 12px
+        line-height: 12px
+        color: #5c5c5c
+
+        @media screen and (max-width: 700px)
+          align-self: center
+          margin-top: 10px
+
+      @media screen and (max-width: 700px)
         display: inline-flex
         position: relative
         top: 10px
@@ -70,13 +79,13 @@
 
     @media screen and (max-width: 930px)
       width: 98%
-      margin: 0 auto
+      margin: -10px auto
 
     .buttons-container
       max-width: 720px
       margin: 0 auto
 
-      @media screen and (max-width: 750px)
+      @media screen and (max-width: 835px)
         max-width: 575px
 
     button
@@ -113,7 +122,6 @@
         &.nothing-disabled
           font-size: 0
           vertical-align: middle
-          cursor: not-allowed
 
           &:before
             opacity: 0.3
@@ -124,7 +132,7 @@
 
         &.finish-disabled
           color: #555656
-          cursor: not-allowed
+          opacity: 0.3
 
       &#presence-0:before, &#annotation-0:before // 'Nothing here' buttons
         content: ''
@@ -136,6 +144,7 @@
         border-radius: 50%
         margin: 0 10px 0 0
         float: left
+
       @media screen and (max-width: 560px)
         &#annotation-0:before
           display: none
@@ -198,10 +207,10 @@
     top: 100px
     font-size: 16px
 
-    @media screen and (max-width: 680px)
-      top: 75px
+    // @media screen and (max-width: 680px)
+    //   top: 75px
 
-    @media screen and (max-width: 600px)
+    @media screen and (max-width: 700px)
       top: 0
       z-index: 10
 
@@ -278,5 +287,5 @@
 
   .summary
     .step-bottom
-      margin: 10px 0 100px 0
+      margin: 10px auto 100px
 

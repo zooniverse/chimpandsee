@@ -97,7 +97,7 @@ Annotation = React.createClass
 
     favoriteClasses = cx({
       'favorite-btn': true
-      'hidden': @state.user is false
+      'disabled': @state.user is false
       'favorited': @state.favorited is true
     })
 
@@ -131,7 +131,7 @@ Annotation = React.createClass
         </div>
         {if @state.currentStep is steps.length - 1
           <Summary notes={@state.notes} tutorialType={@state.tutorialType} openModal={@props.openModal} location={@props.location} />}
-        <button className={favoriteClasses} onClick={@onClickFavorite}>Favorite</button>
+        <button className={favoriteClasses} onClick={@onClickFavorite} disabled={@state.user is false}>Favorite</button>
       </div>
       <Step
         step={cursor.refine('currentStep')}

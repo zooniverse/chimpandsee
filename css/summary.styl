@@ -4,13 +4,36 @@
   max-width: 930px
   margin: 0 auto
   border-radius: 8px
+  display: flex
+  flex-wrap: wrap
+
+  @media screen and (max-width: 870px)
+    width: 98%
+    margin: 0 auto 25px
 
   .general-summary
     display: inline-flex
     flex-direction: column
+    width: 50%
+    // max-width: 460px
     height: 460px
     justify-content: space-between
     padding-left: 20px
+    box-sizing: border-box
+
+    @media screen and (max-width: 870px)
+      min-height: 375px
+      max-height: 410px
+      height: 100%
+
+    @media screen and (max-width: 768px)
+      width: 100%
+      margin: 0 auto
+      display: flex
+      padding-left: 0
+
+    @media screen and (max-width: 400px)
+      padding-left: 20px
 
     h3
       font-size: 12px
@@ -40,11 +63,16 @@
       flex-grow: 1
 
     .share
+      min-width: 360px
+
       p
         font-size: 12px
         display: inline-block
         opacity: .5
         margin: 18px 15px 18px 0
+
+        @media screen and (max-width: 900px)
+          margin: 18px 5px 18px 0
 
       .share-btn
         width: 35px
@@ -61,36 +89,62 @@
         font-size: 12px
         line-height: 40px
         float: right
-        margin-left: 75px
+        margin: 10px 10px 10px 0
+
+        @media screen and (max-width: 768px)
+          margin: 10px
+          float: none
 
   .no-chimp
-    height: 527px
+    @media screen and (min-width: 871px)
+      height: 527px
+
+    @media screen and (max-width: 870px)
+      height: 460px
 
   .map-container
-    float: right
-    height: 527px
+    width: 50%
+    min-height: 410px
+    height: 100%
+
+    @media screen and (min-width: 871px)
+      height: 527px
+
+    @media screen and (max-width: 768px)
+      width: 100%
 
     .map
       margin: 0
-      height: 527px
+
+      img
+        width: 100%
+        // max-width: 460px
+        box-sizing: border-box
+
+        @media screen and (min-width: 871px)
+          height: 527px
 
   .chimp-summary
+    display: flex
+    flex-wrap: wrap
     float: left
-    clear: both
     background: $topbar-green
     width: 100%
     border-bottom-left-radius: 8px
     border-bottom-right-radius: 8px
     margin-top: -70px
 
+    @media screen and (max-width: 400px)
+      margin-top: -85px
+
     img
-      float: left
+      width: 92px
+      height: 90px
       border-bottom-left-radius: 8px
 
     .chimp-content
-      display: inline-block
-      float: left
-      margin: 22px 0
+      margin: 22px 0 0 0
+      flex: 1 0 33%
 
       h3
         font-size: 16px
@@ -98,11 +152,14 @@
 
       p
         margin: 0
+        line-height: 16px
+
+      @media screen and (max-width: 400px)
+        max-width: 270px
 
     .chimp-btn-container
-      display: inline-block
-      float: right
       margin: 15px 25px
+      flex: 1 0 auto
 
       button
         background-color: $green
@@ -112,3 +169,9 @@
         height: 40px
         border-radius: 4px
         padding: 0
+
+      @media screen and (max-width: 1100px)
+        margin: 15px auto
+
+      @media screen and (max-width: 400px)
+        margin: 15px 0

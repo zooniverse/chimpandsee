@@ -17,10 +17,9 @@
       flex-wrap: wrap
 
     .guide-btn, .favorite-btn
-      cursor: pointer
       font-size: 12px
       line-height: 12px
-      color: #555656
+      color: #5c5c5c
       text-align: center
       margin: 5px 0
       background: transparent
@@ -34,6 +33,9 @@
         width: 56px
         height: 56px
         margin: 0 auto 5px
+
+      &.disabled
+        opacity: 0.5
 
     .guide-btn
       &:before
@@ -112,12 +114,13 @@
     .video
       margin: 10px auto
 
-      @media screen and (max-width: 600px)
-        margin-bottom: 25px
-
-      @media screen and (max-width: 400px)
+      @media screen and (max-width: 870px)
+        width: 98%
         order: 1
         align-self: center
+
+      @media screen and (max-width: 600px)
+        margin-bottom: 25px
 
       video, img // placeholder img
         width: 100%

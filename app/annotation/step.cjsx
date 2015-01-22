@@ -34,12 +34,14 @@ Step = React.createClass
         @moveToNextStep()
       when button.value is steps[1][0].annotation.options[0]
         @storeSelection(button.name, button.value)
-        console?.log 'send to classification', @props.currentAnswers.value
-        @props.classification.annotate @props.currentAnswers.value
-        @sendClassification()
-        @props.step.set 0
-        @props.animating.set true
-        @newSubject()
+        setTimeout ( =>
+          console?.log 'send to classification', @props.currentAnswers.value
+          @props.classification.annotate @props.currentAnswers.value
+          @sendClassification()
+          @props.step.set 0
+          @props.animating.set true
+          @newSubject()
+        ), 100
       when button.value is steps[1][0].annotation.options[1] then @moveToNextStep()
       when button.value is steps[1][0].annotation.options[2] then @finishNote()
       when button.value is steps[2][0].animal.options[1] #chimp
@@ -161,8 +163,8 @@ Step = React.createClass
 
         classes = cx({
           'btn-active': option in _.values(@props.currentAnswers.value) and @props.step.value > 1
-          'finish-disabled': @props.notes.value.length is 0 and option is steps[1][0].annotation.options[2]
-          'nothing-disabled': @props.notes.value.length > 0 and option is steps[1][0].annotation.options[0]
+          'disabled finish-disabled': @props.notes.value.length is 0 and option is steps[1][0].annotation.options[2]
+          'disabled nothing-disabled': @props.notes.value.length > 0 and option is steps[1][0].annotation.options[0]
         })
         <button className={classes} key={i} id="#{name}-#{i}" name={name} value={option} onClick={@onButtonClick} disabled={disabled}>
           {option}
@@ -175,6 +177,7 @@ Step = React.createClass
               {step.question}
             </div>
             <div className="step-buttons">
+              <small>Steps</small>
               {stepButtons}
             </div>
           </div>}

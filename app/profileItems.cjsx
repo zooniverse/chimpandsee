@@ -3,6 +3,7 @@ cx = React.addons.classSet
 
 Favorite = require 'zooniverse/models/favorite'
 Recent = require 'zooniverse/models/recent'
+User = require 'zooniverse/models/user'
 
 ProfileItems = React.createClass
   displayName: 'ProfileItems'
@@ -12,6 +13,8 @@ ProfileItems = React.createClass
     isLoading: false
     hasMore: true
     page: 1
+    showCaption: false
+    video: null
 
   componentDidMount: ->
     if @props.user?
@@ -73,16 +76,31 @@ ProfileItems = React.createClass
   componentWillUnmount: ->
     @detachScrollListener()
 
-  showCaption: (e) ->
-    console.log e
+  toggleCaption: (i) ->
+    @setState({
+      showCaption: !@state.showCaption
+      video: i
+    })
+
+  unFavorite: (e) ->
+    id = e.target.value
+    favorite = Favorite.find id
+    favorite.delete()
+    @forceUpdate()
 
   render: ->
     items = @state.items.map (item, i) =>
-      <figure key={i}>
+      captionClasses = cx({
+        'show': @state.showCaption is true and @state.video is i
+      })
+      <figure key={i} onMouseEnter={@toggleCaption.bind(null, i)} onMouseLeave={@toggleCaption}>
         <video poster={item.subjects[0]?.location.previews[0][0]} src={item.subjects[0]?.location.standard} type="video/mp4" controls>
           Your browser does not support the video format. Please upgrade your browser.
         </video>
-        <figcaption><a href="www.somewhere.com">Talk</a> </figcaption>
+        <figcaption className={captionClasses}>
+          {<button name="unfavorite" value={item.id} onClick={@unFavorite}>&times;</button> if @props.collection is 'Favorite'}
+          <a href="talk">Talk</a>
+        </figcaption>
       </figure>
 
     <div>

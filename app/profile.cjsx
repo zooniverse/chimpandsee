@@ -45,13 +45,15 @@ Profile = React.createClass
           <div className="content">
             <button className={recentClasses} onClick={@toggleCollection} value="Recent">Recents</button>
             <button className={favoriteClasses} onClick={@toggleCollection} value="Favorite">Favorites</button>
-            <ProfileItems collection={@state.collection} user={@props.user} />
+            <ProfileItems collection={@state.collection} user={@props.user} userUpdate={@props.userUpdate} />
           </div>
         </section>
       </div>
     else
       <section className="profile-sign-in">
-        <p className="content">Please <a href="#/profile" onClick={@onClickSignIn}>sign in</a>.</p>
+        <div className="content">
+          <p>Please <a href="#/profile" onClick={@onClickSignIn}>sign in</a>.</p>
+        </div>
       </section>
 
     <div className="profile">

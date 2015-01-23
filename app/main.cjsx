@@ -31,13 +31,13 @@ Main = React.createClass
     <div>
       <Navigation user={@state.user} hash={window.location.hash} />
 
-      <RouteHandler user={@state.user} hash={window.location.hash} />
+      <RouteHandler user={@state.user} hash={window.location.hash} userUpdate={@onUserChange} />
     </div>
 
 routes =
   <Route name="root" path="/" handler={Main}>
     <Route name="classify" path="classify" handler={Classify} />
-    <Route name="about" path="about" handler={About}>
+    <Route name="about" path="about" handler={About} ignoreScrollBehavior>
       <Route name="team" path="team" handler={About} />
       <Route name="organizations" path="organizations" handler={About} />
     </Route>

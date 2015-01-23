@@ -59,16 +59,35 @@
         top: 0
         right: 0
         background: rgba(0, 0, 0, .7)
-        width: 50px
-        height: 244px
+        width: 0px
+        height: 98%
+        transition: visibility .25s 0s, width .25s 0s linear
+
+        a, button
+          visibility: hidden
+          transition: visibility 0s .15s linear
+
+        button
+          border: none
+          width: initial
+
+          &:hover
+            background: transparent
 
         &.show
           visibility: visible
+          width: 50px
+
+          a, button
+            visibility: visible
 
   .profile-sign-in
     display: flex
     align-items: center
     height: 200px
+
+    p
+      text-align: center
 
     a, a:visited
       color: white

@@ -17,6 +17,9 @@ Profile = React.createClass
   toggleCollection: (event) ->
     @setState collection: event.target.value
 
+  profileIsUpdated: ->
+    @forceUpdate()
+
   render: ->
     recentClasses = cx({
       'active': @state.collection is 'Recent'
@@ -45,7 +48,7 @@ Profile = React.createClass
           <div className="content">
             <button className={recentClasses} onClick={@toggleCollection} value="Recent">Recents</button>
             <button className={favoriteClasses} onClick={@toggleCollection} value="Favorite">Favorites</button>
-            <ProfileItems collection={@state.collection} user={@props.user} userUpdate={@props.userUpdate} />
+            <ProfileItems collection={@state.collection} user={@props.user} updateUser={@props.updateUser} profileIsUpdated={@profileIsUpdated}/>
           </div>
         </section>
       </div>

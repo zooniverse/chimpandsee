@@ -27,11 +27,15 @@ Main = React.createClass
   onUserChange: (e, user) ->
     @setState user: user
 
+  updateUser: ->
+    User.fetch()
+    @onUserChange
+
   render: ->
     <div>
       <Navigation user={@state.user} hash={window.location.hash} />
 
-      <RouteHandler user={@state.user} hash={window.location.hash} userUpdate={@onUserChange} />
+      <RouteHandler user={@state.user} hash={window.location.hash} updateUser={@updateUser} />
     </div>
 
 routes =

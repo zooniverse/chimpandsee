@@ -86,7 +86,8 @@ ProfileItems = React.createClass
     id = e.target.value
     favorite = Favorite.find id
     favorite.delete()
-    @forceUpdate()
+    @props.updateUser()
+    @props.profileIsUpdated()
 
   render: ->
     items = @state.items.map (item, i) =>

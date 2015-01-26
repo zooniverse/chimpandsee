@@ -17,7 +17,7 @@ ProfileItems = React.createClass
     video: null
 
   componentDidMount: ->
-    if @props.user?
+    if @props.user? and @state.items.length is 0
       @buildItems()
     @attachScrollListener()
 
@@ -67,7 +67,6 @@ ProfileItems = React.createClass
   attachScrollListener: ->
     window.addEventListener 'scroll', @scrollListener
     window.addEventListener 'resize', @scrollListener
-    # @scrollListener()
 
   detachScrollListener: ->
     window.removeEventListener 'scroll', @scrollListener
@@ -76,26 +75,38 @@ ProfileItems = React.createClass
   componentWillUnmount: ->
     @detachScrollListener()
 
-  toggleCaption: (i) ->
+  showCaption: (i) ->
     @setState({
       showCaption: !@state.showCaption
       video: i
     })
+    console.log @state.video
+
+  hideCaption: ->
+    @setState({
+      showCaption: !@state.showCaption
+      video: null
+    })
+    console.log @state.video
 
   unFavorite: (e) ->
     id = e.target.value
     favorite = Favorite.find id
     favorite.delete()
     @props.updateUser()
-    @props.profileIsUpdated()
 
   render: ->
     items = @state.items.map (item, i) =>
       captionClasses = cx({
         'show': @state.showCaption is true and @state.video is i
       })
-      <figure key={i} onMouseEnter={@toggleCaption.bind(null, i)} onMouseLeave={@toggleCaption}>
-        <video poster={item.subjects[0]?.location.previews[0][0]} src={item.subjects[0]?.location.standard} type="video/mp4" controls>
+
+      videoStyle = {
+        background: 'transparent url(' + item.subjects[0]?.location.previews[0][0] + ') no-repeat 0 0'
+        backgroundSize: 'cover'
+      }
+      <figure key={i} onMouseEnter={@showCaption.bind(null, i)} onMouseLeave={@hideCaption}>
+        <video poster="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" style={videoStyle} src={item.subjects[0]?.location.standard} type="video/mp4" controls>
           Your browser does not support the video format. Please upgrade your browser.
         </video>
         <figcaption className={captionClasses}>

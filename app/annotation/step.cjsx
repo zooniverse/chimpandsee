@@ -56,7 +56,7 @@ Step = React.createClass
         @storeSelection(button.name, button.value)
 
   componentWillReceiveProps: (nextProps) ->
-    animatedScrollTo document.body, 0, 1000 if window.innerWidth < 601 and nextProps.step.value < 3
+    animatedScrollTo document.body, 0, 1000 if window.innerWidth < 601 and nextProps.step.value < 2
 
   newSubject: ->
     @props.notes.set []

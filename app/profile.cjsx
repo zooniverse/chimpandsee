@@ -4,6 +4,7 @@ cx = React.addons.classSet
 ProfileItems = require './profileItems'
 
 loginDialog = require 'zooniverse/controllers/login-dialog'
+User = require 'zooniverse/models/user'
 
 Profile = React.createClass
   displayName: 'Profile'
@@ -11,14 +12,18 @@ Profile = React.createClass
   getInitialState: ->
     collection: 'Recent'
 
+  componentDidMount: ->
+    @updateUser()
+
   onClickSignIn: ->
     loginDialog.show()
 
   toggleCollection: (event) ->
     @setState collection: event.target.value
 
-  profileIsUpdated: ->
-    @forceUpdate()
+  updateUser: ->
+    if @props.user?
+      User.fetch()
 
   render: ->
     recentClasses = cx({
@@ -48,7 +53,7 @@ Profile = React.createClass
           <div className="content">
             <button className={recentClasses} onClick={@toggleCollection} value="Recent">Recents</button>
             <button className={favoriteClasses} onClick={@toggleCollection} value="Favorite">Favorites</button>
-            <ProfileItems collection={@state.collection} user={@props.user} updateUser={@props.updateUser} profileIsUpdated={@profileIsUpdated}/>
+            <ProfileItems collection={@state.collection} user={@props.user} updateUser={@updateUser} profileIsUpdated={@profileIsUpdated}/>
           </div>
         </section>
       </div>

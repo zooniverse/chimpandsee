@@ -27,12 +27,29 @@ html, body
     height: 200px
     line-height: 200px
 
+  #home-background-video
+    display: none
+
   .home-background //Overriding defaults for home page.
-    background: url(./assets/home-background.jpg) no-repeat top 30px center
+    // background: url(./assets/home-background.jpg) no-repeat top 30px center
 
     @media screen and (max-width: 710px)
       .color-background
         background-color: rgba(9, 41, 28, 0.85) !important
+
+    @media screen and (min-width: 768px)
+      #home-background-video
+        position: fixed
+        top: 30px
+        right: 0
+        bottom: 0
+        min-width: 100%
+        min-height: 100%
+        width: auto
+        height: auto
+        background: url(./assets/home-background.jpg) no-repeat top 30px fixed
+        background-size: cover
+        display: inherit
 
     .site-navigation
       background-color: transparent

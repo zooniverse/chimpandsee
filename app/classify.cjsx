@@ -17,8 +17,9 @@ module?.exports = React.createClass
   displayName: 'Classify'
 
   getInitialState: ->
-    subject: null
+    video: null
     previews: null
+    zooniverseId: null
     location: "Congo Rainforest"
     classification: null
     guideIsOpen: false
@@ -42,8 +43,9 @@ module?.exports = React.createClass
       previews = subject.location.previews
       randomInt = Math.round(Math.random() * (2 - 0)) + 0
       @setState({
-        subject: subject.location.standard
+        video: subject.location.standard
         previews: previews[randomInt]
+        zooniverseId: subject.zooniverse_id
         classification: new Classification {subject}
       })
       @state.classification.annotate previewsSet: randomInt
@@ -82,9 +84,9 @@ module?.exports = React.createClass
       <div className="location-container">
         <p><span className="bold">Site:</span> {@state.location}</p>
       </div>
-      {unless @state.previews is null and @state.subject is null
+      {unless @state.previews is null and @state.video is null
         <Annotation
-          subject={@state.subject}
+          video={@state.video}
           previews={@state.previews}
           classification={@state.classification}
           toggleGuide={@toggleGuide}
@@ -92,7 +94,8 @@ module?.exports = React.createClass
           tutorialType={@state.tutorialType}
           openModal={@openModal}
           user={@props.user}
-          location={@state.location} />
+          location={@state.location}
+          zooniverseId={@state.zooniverseId} />
       else
         <div ref="statusMessage" className="loading-spinner"><i className="fa fa-spinner fa-spin fa-2x"></i></div>}
       <SlideTutorial modalIsOpen={@state.modalIsOpen} onClickCloseSlide={@closeModal} tutorialType={@state.tutorialType} />

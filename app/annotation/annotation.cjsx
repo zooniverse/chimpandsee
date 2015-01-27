@@ -34,7 +34,7 @@ Annotation = React.createClass
       @setState user: true
 
   componentWillReceiveProps: (nextProps) ->
-    if nextProps.subject isnt @props.subject
+    if nextProps.video isnt @props.video
       @setState favorited: false
       # @animate "image-slide", {}, {animation: 'fadeIn 0.5s forwards'}, 'ease-in-out', 500
       setTimeout (=>
@@ -125,12 +125,14 @@ Annotation = React.createClass
           {previews}
         </div>
         <div className={videoClasses}>
-          <video poster={@props.previews[0]} src={@props.subject} width="100%" type="video/mp4" controls>
+          <video poster={@props.previews[0]} width="100%" controls>
+            <source src={@props.video.mp4} type="video/mp4" />
+            <source src={@props.video.webm} type="video/webm" />
             Your browser does not support the video format. Please upgrade your browser.
           </video>
         </div>
         {if @state.currentStep is steps.length - 1
-          <Summary notes={@state.notes} tutorialType={@state.tutorialType} openModal={@props.openModal} location={@props.location} />}
+          <Summary notes={@state.notes} openModal={@props.openModal} location={@props.location} video={@props.video} zooniverseId={@props.zooniverseId} />}
         <button className={favoriteClasses} onClick={@onClickFavorite} disabled={@state.user is false}>Favorite</button>
       </div>
       <Step
@@ -138,7 +140,7 @@ Annotation = React.createClass
         subStep={cursor.refine('subStep')}
         currentAnswers={cursor.refine('currentAnswers')}
         notes={cursor.refine('notes')}
-        subject={@props.subject}
+        video={@props.video}
         previews={@props.previews}
         animating={cursor.refine('animating')}
         classification={@props.classification}

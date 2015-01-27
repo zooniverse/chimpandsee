@@ -31,13 +31,14 @@ html, body
     display: none
 
   .home-background //Overriding defaults for home page.
-    // background: url(./assets/home-background.jpg) no-repeat top 30px center
+    @media screen and (max-width: 900px)
+      background: url(./assets/home-background.jpg) no-repeat top 30px center
 
     @media screen and (max-width: 710px)
       .color-background
         background-color: rgba(9, 41, 28, 0.85) !important
 
-    @media screen and (min-width: 768px)
+    @media screen and (min-width: 901px)
       #home-background-video
         position: fixed
         top: 30px

@@ -154,7 +154,7 @@ Step = React.createClass
     step = for name, step of steps[@props.step.value][@props.subStep.value]
       buttons = step.options.map (option, i) =>
         disabled =
-          if @props.subject.value is "http://placehold.it/300x150&text=loading"
+          if @props.video.value is null
             true
           else
             switch

@@ -1,6 +1,8 @@
 React = require 'react/addons'
 cx = React.addons.classSet
 
+Subject = require 'zooniverse/models/subject'
+Share = require '../share'
 steps = require '../lib/steps'
 
 totals = {}
@@ -48,13 +50,7 @@ Summary = React.createClass
             {noteSummary}
           </ul>
         </div>
-        <div className="share">
-          <p>Share this clip</p>
-          <button className="share-btn" ><i className="fa fa-facebook"></i></button>
-          <button className="share-btn"><i className="fa fa-twitter"></i></button>
-          <button className="share-btn"><i className="fa fa-vine"></i></button>
-          <button className="discuss-btn" value="Discuss">Discuss on Talk</button>
-        </div>
+        <Share video={@props.video.mp4} zooniverseId={@props.zooniverseId} />
       </section>
       <section className="map-container">
         <figure className="map"><img src="./assets/sample-map.png" alt="sample-map" /></figure>

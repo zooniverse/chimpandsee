@@ -5,6 +5,8 @@ Favorite = require 'zooniverse/models/favorite'
 Recent = require 'zooniverse/models/recent'
 User = require 'zooniverse/models/user'
 
+Share = require './share'
+
 ProfileItems = React.createClass
   displayName: 'ProfileItems'
 
@@ -105,13 +107,16 @@ ProfileItems = React.createClass
         background: 'transparent url(' + item.subjects[0]?.location.previews[0][0] + ') no-repeat 0 0'
         backgroundSize: 'cover'
       }
+
       <figure key={i} onMouseEnter={@showCaption.bind(null, i)} onMouseLeave={@hideCaption}>
-        <video poster="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" style={videoStyle} src={item.subjects[0]?.location.standard} type="video/mp4" controls>
+        <video poster="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" style={videoStyle} controls>
+          <source src={item.subjects[0]?.location.standard.mp4 || item.subjects[0]?.location.standard} type="video/mp4" />
+          <source src={item.subjects[0]?.location.standard.webm} type="video/webm" />
           Your browser does not support the video format. Please upgrade your browser.
         </video>
         <figcaption className={captionClasses}>
           {<button name="unfavorite" value={item.id} onClick={@unFavorite}>&times;</button> if @props.collection is 'Favorite'}
-          <a href="talk">Talk</a>
+          <Share video={item.subjects[0]?.location.standard.mp4 || item.subjects[0]?.location.standard} zooniverseId={item.subjects[0]?.zooniverse_id} />
         </figcaption>
       </figure>
 

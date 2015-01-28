@@ -49,13 +49,21 @@
       padding: 2.5px
       box-sizing: border-box
 
-      @media screen and (max-width: 600px)
+      @media screen and (max-width: 768px)
         width: 100%
 
       video
         width: 100%
-        max-height: 179px
-        border-radius: 16px
+        border-radius: 8px
+
+        @media screen and (min-width: 1100px)
+          min-height: 268px
+
+        @media screen and (max-width: 1099px)
+          max-height: 193px
+
+        @media screen and (max-width: 768px)
+          max-height: initial
 
       figcaption
         visibility: visible
@@ -66,9 +74,15 @@
         background: rgba(0, 0, 0, .7)
         width: 100%
         height: 0px
-        border-top-right-radius: 16px
-        border-top-left-radius: 16px
+        border-top-right-radius: 8px
+        border-top-left-radius: 8px
         transition: visibility .25s 0s, height .25s 0s linear
+
+        @media screen and (max-width: 768px)
+          position: relative
+          height: 50px
+          border-top-left-radius: 0px
+          border-top-right-radius: 0px
 
         .share
           text-align: center
@@ -80,14 +94,22 @@
           visibility: hidden
           transition: visibility 0s .15s linear
 
+          @media screen and (max-width: 768px)
+            visibility: visible
+
         button
           border: none
           width: initial
 
+          &.discuss-btn
+            span
+              display: none
+
           &:hover
             background: transparent
 
-        &.show
+      &:hover
+        figcaption
           visibility: visible
           height: 50px
 

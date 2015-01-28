@@ -1,6 +1,6 @@
 .step
   text-align: center
-  margin: 0 auto
+  margin: 5px auto 0
   width: 100%
   max-width: 930px
 
@@ -90,8 +90,8 @@
         max-width: 575px
 
     button
-      min-width: 90px
-      height: 45px
+      min-width: 60px
+      height: 30px
       border: solid 2px $green
       border-radius: 35px
       color: $green
@@ -100,17 +100,27 @@
       font-weight: 400
       line-height: 24px
       margin: 5px
+      padding: 0 10px
 
       // 'Nothing here', 'I see something', 'Add', 'Finish', and 'Next Subject' buttons
       &#presence-0, &#presence-1, &#annotation-0, &#annotation-1, &#annotation-2, &#summary-0
         max-width: 220px
-        height: 70px
-        color: #555656
+        height: 80px
+        color: white
         border: none
         display: inline-block
         margin: 0 10px
         font-size: 16px
         line-height: 65px
+
+        &:before
+          content: ''
+          display: block
+          border-radius: 50%
+          margin: 10.5px 10px 0 0
+          float: left
+          width: 39px
+          height: 39px
 
         @media screen and (max-width: 450px)
           width: 220px
@@ -127,77 +137,36 @@
           &:before
             opacity: 0.3
 
-      // finish button
-      &#annotation-2
-        color: white
+      // add button
+      &#annotation-1
+        border-left: solid $gray 1px
+        border-right: solid $gray 1px
+        border-radius: 0px
 
-        &.finish-disabled
-          color: #555656
-          opacity: 0.3
+      &#annotation-2.finish-disabled
+        color: #555656
+        opacity: 0.3
 
       &#presence-0:before, &#annotation-0:before // 'Nothing here' buttons
-        content: ''
-        display: block
         background: url(./assets/cancel-icon.svg) no-repeat center center
-        width: 60px
-        height: 60px
         border: solid 2px #c72c2c
-        border-radius: 50%
-        margin: 0 10px 0 0
-        float: left
 
       @media screen and (max-width: 560px)
         &#annotation-0:before
           display: none
 
-        &#annotation-0:before
-          content: ''
-          display: block
-          background: url(./assets/cancel-icon.svg) no-repeat center center
-          width: 60px
-          height: 60px
-          border: solid 2px #c72c2c
-          border-radius: 50%
-          margin: 0 10px 0 0
-          float: left
-
       @media screen and (max-width: 479px)
         &#presence-0:before
           display: none
 
-        &#presence-0:before
-          content: ''
-          display: block
-          background: url(./assets/cancel-icon.svg) no-repeat center center
-          width: 60px
-          height: 60px
-          border: solid 2px #c72c2c
-          border-radius: 50%
-          margin: 0 10px 0 0
-          float: left
-
       &#presence-1:before, &#annotation-2:before, &#summary-0:before // 'I see something' and 'Finish'
-        content: ''
-        display: block
-        background: url(./assets/check-icon.svg) no-repeat center center
-        width: 60px
-        height: 60px
+        background: url(./assets/arrow-icon.svg) no-repeat center center
         border: solid 2px $green
-        border-radius: 50%
-        margin: 0 10px 0 0
-        float: left
 
       // Add annotation button
       &#annotation-1:before
-        content: ''
-        display: block
-        background: $green url(./assets/plus-icon.svg) no-repeat center center
-        width: 60px
-        height: 60px
+        background: $green url(./assets/add-icon.svg) no-repeat center center
         border: solid 2px $green
-        border-radius: 50%
-        margin: 0 10px 0 0
-        float: left
 
     .btn-active
       background-color: $green
@@ -207,9 +176,6 @@
     position: relative
     top: 100px
     font-size: 16px
-
-    // @media screen and (max-width: 680px)
-    //   top: 75px
 
     @media screen and (max-width: 700px)
       top: 0
@@ -228,7 +194,7 @@
       content: ''
       background: $blackish url(./assets/cancel-icon.svg) no-repeat center center
       width: 54px
-      height: 48px
+      height: 54px
       border: solid 2px $green
       border-radius: 50%
       position: relative
@@ -248,7 +214,7 @@
       content: ''
       background: $green url(./assets/arrow-icon.svg) no-repeat center center
       width: 54px
-      height: 48px
+      height: 54px
       border: solid 2px $green
       border-radius: 50%
       position: relative
@@ -274,7 +240,7 @@
     background-color: $green
     margin: 0 0 5px 0
     width: 54px
-    height: 48px
+    height: 54px
     border: solid 2px $green
     border-radius: 50%
 
@@ -285,6 +251,29 @@
   .presence
     .step-bottom
       padding: 5px 0
+
+  .annotation
+    .step-bottom
+      padding: 0
+
+      .buttons-container
+        margin: 0
+        max-width: initial
+
+        button
+          max-width: 310px !important
+          width: 100%
+          margin: 0 !important
+
+          &#annotation-0
+            padding: 0 70px
+
+          &#annotation-1
+            padding: 0 60px
+
+          &#annotation-2
+            padding: 0 100px
+
   .age, .sex
     .step-bottom .buttons-container
       margin-top: 30px

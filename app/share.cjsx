@@ -47,7 +47,7 @@ Share = React.createClass
         <button ref="pinterestBtn" className="share-btn"><i className="fa fa-pinterest fa-lg"></i></button>
       </a>
       <a target="_blank" href={@talkHref()}>
-        <button ref="discussBtn" className="discuss-btn" value="Discuss">Discuss on Talk</button>
+        <button ref="discussBtn" className="discuss-btn" value="Discuss"><i className="fa fa-comments fa-lg"></i>Discuss on Talk</button>
       </a>
     </div>
 

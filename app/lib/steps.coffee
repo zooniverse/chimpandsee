@@ -11,7 +11,7 @@ stepTwo =
     question: null
     options: [
       'Nothing here'
-      'Add'
+      'Add Annotation'
       'Finish'
     ]
 

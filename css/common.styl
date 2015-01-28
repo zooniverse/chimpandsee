@@ -15,6 +15,8 @@ html, body
     transform: translateX(0)
     -webkit-transition: .3s ease all
     transition: .3s ease all
+    -webkit-font-smoothing: antialiased
+    -moz-osx-font-smoothing: grayscale
 
   .push-right
     transform: translateX(400px) !important
@@ -104,8 +106,6 @@ html, body
     font-weight: 400
     line-height: 24px
     color: $copy-gray
-    -webkit-font-smoothing: antialiased
-    -moz-osx-font-smoothing: grayscale
 
   a, img
     outline: none
@@ -117,8 +117,6 @@ html, body
     color: white
     border: none
     margin: 10px
-    -webkit-font-smoothing: antialiased
-    -moz-osx-font-smoothing: grayscale
     cursor: pointer
 
     &:focus, &:active, &:visited
@@ -130,7 +128,7 @@ html, body
     cursor: not-allowed
 
   .zooniverse-top-bar
-    background: $topbar-green
+    background: $green
     color: $mint
     left: 0
     text-align: left

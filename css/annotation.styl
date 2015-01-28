@@ -72,6 +72,7 @@
         max-width: 33.33%
         float: left
         transition: all 0.2s
+        // max-height: 176.5px
 
         @media screen and (max-width: 600px)
           min-width: 100%
@@ -79,15 +80,14 @@
         img
           padding: 5px
           border: .1px solid transparent //IE fix
-          border-radius: 16px
+          border-radius: 8px
           width: 100%
           max-width: 310px
           box-sizing: border-box
+          vertical-align: top
 
           @media screen and (max-width: 600px)
             max-width: 100%
-
-
 
       .animating-in
         animation: fadeIn 0.5s forwards
@@ -125,7 +125,7 @@
       video, img // placeholder img
         width: 100%
         max-width: 930px
-        border-radius: 16px
+        border-radius: 8px
 
 @keyframes slideOut {
   from { transform: translateX(0) }

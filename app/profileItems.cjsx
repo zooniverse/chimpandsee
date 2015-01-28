@@ -15,8 +15,6 @@ ProfileItems = React.createClass
     isLoading: false
     hasMore: true
     page: 1
-    showCaption: false
-    video: null
 
   componentDidMount: ->
     if @props.user? and @state.items.length is 0
@@ -77,20 +75,6 @@ ProfileItems = React.createClass
   componentWillUnmount: ->
     @detachScrollListener()
 
-  showCaption: (i) ->
-    @setState({
-      showCaption: !@state.showCaption
-      video: i
-    })
-    console.log @state.video
-
-  hideCaption: ->
-    @setState({
-      showCaption: !@state.showCaption
-      video: null
-    })
-    console.log @state.video
-
   unFavorite: (e) ->
     id = e.target.value
     favorite = Favorite.find id
@@ -99,22 +83,18 @@ ProfileItems = React.createClass
 
   render: ->
     items = @state.items.map (item, i) =>
-      captionClasses = cx({
-        'show': @state.showCaption is true and @state.video is i
-      })
-
       videoStyle = {
         background: 'transparent url(' + item.subjects[0]?.location.previews[0][0] + ') no-repeat 0 0'
         backgroundSize: 'cover'
       }
 
-      <figure key={i} onMouseEnter={@showCaption.bind(null, i)} onMouseLeave={@hideCaption}>
+      <figure key={i} className="profile-item">
         <video poster="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" style={videoStyle} controls>
           <source src={item.subjects[0]?.location.standard.mp4 || item.subjects[0]?.location.standard} type="video/mp4" />
           <source src={item.subjects[0]?.location.standard.webm} type="video/webm" />
           Your browser does not support the video format. Please upgrade your browser.
         </video>
-        <figcaption className={captionClasses}>
+        <figcaption>
           {<button name="unfavorite" value={item.id} onClick={@unFavorite}>&times;</button> if @props.collection is 'Favorite'}
           <Share video={item.subjects[0]?.location.standard.mp4 || item.subjects[0]?.location.standard} zooniverseId={item.subjects[0]?.zooniverse_id} />
         </figcaption>

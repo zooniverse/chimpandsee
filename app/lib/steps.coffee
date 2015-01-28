@@ -21,47 +21,53 @@ stepThree =
     options: [
       'bird'
       'chimpanzee'
+      'dark duiker'
       'elephant'
       'forest buffalo'
+      'giant forest hog'
       'gorilla'
       'hippopotamus'
       'human'
-      'hyneas'
+      'hynea'
       'Jentik\'s duiker'
-      'large duiker'
       'large ungulate'
       'leopard'
       'lion'
-      'lizard'
-      'medium red duiker'
       'other'
       'pangolin'
       'porcupine'
+      'red duiker'
+      'red river hog'
+      'reptile'
       'rodent'
       'small antelope'
-      'small blue duiker'
-      'small bodied monkey'
+      'small grey duiker'
+      'small bodied primate'
       'small cat'
       'warthog'
-      'wild dogs'
+      'wild dog'
       'zebra duiker'
     ]
 
-stepChimp =
+stepChimpAge =
   age:
-    question: "What is this chimpanzee doing?"
+    question: "What is its age?"
     options: [
       'youth'
       'adult'
     ]
+
+stepChimpSex =
   sex:
-    question: null
+    question: "What is its sex?"
     options: [
       'male'
       'female'
     ]
+
+stepChimpBehavior =
   behavior:
-    question: null
+    question: "What is this chimp doing?"
     options: [
       'aggression'
       'arboreal'
@@ -87,13 +93,24 @@ stepOther =
   behavior:
     question: "What is this animal doing?"
     options: [
-      'this'
-      'that'
-      'the other thing'
-      'drinking'
-      'feeding'
+      'aggression'
+      'arboreal'
+      'camera reaction'
+      'carrying'
+      'climbing'
+      'cross-species interaction'
+      'drinking/feeding'
+      'drumming'
+      'grooming'
+      'nursing'
+      'playing'
+      'resting'
+      'sex'
       'social interaction'
-      'something else'
+      'terrestrial'
+      'tool usage'
+      'traveling'
+      'vocalizing'
     ]
 
 stepFinal =
@@ -103,4 +120,4 @@ stepFinal =
       'Next Subject'
     ]
 
-module.exports = [[stepOne], [stepTwo], [stepThree], [stepChimp, stepOther], [stepFinal]]
+module.exports = [[stepOne], [stepTwo], [stepThree], [stepChimpAge, stepChimpSex, stepChimpBehavior, stepOther], [stepFinal]]

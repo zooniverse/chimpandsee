@@ -3,13 +3,14 @@
   left: -400px
   width: 100%
   max-width: 400px
-  height: 100%
+  height: 100vh
   position: absolute
   background-color: #e4f3e4
   box-sizing: border-box
   color: #3b413b
-  overflow-y: scroll
+  overflow: auto
   -ms-overflow-style: none
+  -webkit-overflow-scrolling: touch
 
   .guide-header
     background: url(./assets/guide-background.jpg)
@@ -74,17 +75,22 @@
       text-align: center
 
     .animal-list-item
-      height: 80px
-      background-color: #cce8cc
+      height: 62.5px
       color: #424a42
       list-style: none
       text-align: center
-      line-height: 80px
+      line-height: 62.5px
       font-size: 18px
       cursor: pointer
+      // width: 50%
+      // float: left
+      background-color: #e4f3e4
 
       &:nth-child(odd)
-        background-color: #e4f3e4
+        background-color: #cce8cc
+
+      // &:nth-child(4n+4), &:nth-child(4n+3)
+      //   background-color: #cce8cc
 
   .details
     padding: 20px

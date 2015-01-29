@@ -1,10 +1,12 @@
 .profile
   margin: 0 auto !important
   color: #eae9e9
+  height: 100%
 
   section
     background: $dark-gray
     height: 100%
+    min-height: 200px
     padding: 20px
 
     &:nth-child(odd)
@@ -14,7 +16,6 @@
     display: flex
     align-items: center
     text-align: center
-    min-height: 200px
 
     .greeting
       color: $green
@@ -118,8 +119,8 @@
 
   .profile-sign-in
     display: flex
-    align-items: center
-    height: 200px
+    align-items: flex-start
+    background: transparent !important
 
     p
       text-align: center

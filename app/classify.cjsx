@@ -77,7 +77,12 @@ module?.exports = React.createClass
     @setState modalIsOpen: false
 
   render: ->
-    <div className="classify content">
+    classifyClasses = cx({
+      'classify': true
+      'content': true
+      'open-guide': @state.guideIsOpen is true
+    })
+    <div className={classifyClasses}>
       <button className="tutorial-btn" onClick={@openModal.bind(null, "general")}>Tutorial</button>
 
       <Guide onClickClose={@onClickClose} guideIsOpen={@state.guideIsOpen} />
@@ -99,5 +104,5 @@ module?.exports = React.createClass
       else
         <div ref="statusMessage" className="loading-spinner"><i className="fa fa-spinner fa-spin fa-2x"></i></div>}
       <SlideTutorial modalIsOpen={@state.modalIsOpen} onClickCloseSlide={@closeModal} tutorialType={@state.tutorialType} />
-      <img className="hidden-chimp" src="./assets/hidden-chimp.png" alt="" />
+      <div className="hidden-chimp-container"><img className="hidden-chimp" src="./assets/hidden-chimp.png" alt="" /></div>
     </div>

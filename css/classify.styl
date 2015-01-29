@@ -6,15 +6,20 @@
     height: 415px
     line-height: 415px
 
-  .hidden-chimp
-    position: absolute
-    z-index: 0
-    right: 20px
-    bottom: 304px
-    transition: all 0.5s ease
+  .hidden-chimp-container
+    width: 100%
+    max-width: 72px
+    margin-left: auto
+    margin-right: 20px
 
-    &:hover
-      bottom: 330px
+    .hidden-chimp
+      position: relative
+      z-index: 0
+      bottom: -117px
+      transition: all 0.5s ease
+
+      &:hover
+        bottom: -90px
 
   .tutorial-btn
     display: none

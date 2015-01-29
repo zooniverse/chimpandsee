@@ -28,7 +28,7 @@ Main = React.createClass
     @setState user: user
 
   render: ->
-    <div>
+    <div className="main">
       <Navigation user={@state.user} hash={window.location.hash} />
 
       <RouteHandler user={@state.user} hash={window.location.hash} />

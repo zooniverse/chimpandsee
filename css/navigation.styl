@@ -58,6 +58,7 @@
     transform: translateY(0)
     background-color: transparent
     display: inline
+    will-change: transform
 
     a
       display: inline-block
@@ -91,6 +92,7 @@
       &.show-menu
         transform: translateY(347px)
         z-index: 20
+        will-change: transform
 
         a
           display: block
@@ -99,4 +101,4 @@
           z-index: 20
 
   .green-background
-    background-color: $green
+    background-color: $topbar-green

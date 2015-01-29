@@ -25,8 +25,10 @@ Guide = React.createClass
     @animate "close-details", {transitionProperty: 'opacity, left', transitionDuration: '.15s, 0s', transitionDelay: '0s, 0s', opacity: '0', left: '-400px'}, {opacity: '1', left: '0'}, 'in-out', 500
 
   onSelectGuideAnimal: (i) ->
+    guide = document.getElementsByClassName('guide')[0]
     @openAnimation()
     @setState guideDetailsIndex: i
+    guide.scrollTop = 0
 
   onClickBack: ->
     @closeAnimation()

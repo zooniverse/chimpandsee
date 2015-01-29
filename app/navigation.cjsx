@@ -22,7 +22,7 @@ module?.exports = React.createClass
     if nextProps isnt window.location.hash then @setState showMobileMenu: false
 
   link: (data, i) ->
-    <Link key={i} to={data.href}>{data.text}</Link>
+    <Link key={i} rel="prefetch" to={data.href}>{data.text}</Link>
 
   render: ->
     links = @links.map(@link)

@@ -56,15 +56,11 @@
       video
         width: 100%
         border-radius: 8px
-
-        @media screen and (min-width: 1100px)
-          min-height: 268px
-
-        @media screen and (max-width: 1099px)
-          max-height: 193px
+        background: black
+        height: calc((4/3)*18.5vh)
 
         @media screen and (max-width: 768px)
-          max-height: initial
+          height: auto
 
       figcaption
         visibility: visible
@@ -100,7 +96,7 @@
 
         button
           border: none
-          width: initial
+          width: 30px
 
           &.discuss-btn
             span
@@ -120,7 +116,7 @@
   .profile-sign-in
     display: flex
     align-items: flex-start
-    background: transparent !important
+    height: calc(100vh - 495px)
 
     p
       text-align: center

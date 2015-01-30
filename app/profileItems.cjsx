@@ -83,15 +83,10 @@ ProfileItems = React.createClass
 
   render: ->
     items = @state.items.map (item, i) =>
-      videoStyle = {
-        background: 'transparent url(' + item.subjects[0]?.location.previews[0][0] + ') no-repeat 0 0'
-        backgroundSize: 'cover'
-      }
-
       <figure key={i} className="profile-item">
-        <video poster="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" style={videoStyle} controls>
-          <source src={item.subjects[0]?.location.standard.mp4 || item.subjects[0]?.location.standard} type="video/mp4" />
+        <video controls preload>
           <source src={item.subjects[0]?.location.standard.webm} type="video/webm" />
+          <source src={item.subjects[0]?.location.standard.mp4 || item.subjects[0]?.location.standard} type="video/mp4" />
           Your browser does not support the video format. Please upgrade your browser.
         </video>
         <figcaption>

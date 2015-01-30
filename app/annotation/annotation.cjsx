@@ -125,9 +125,9 @@ Annotation = React.createClass
           {previews}
         </div>
         <div className={videoClasses}>
-          <video poster={@props.previews[0]} width="100%" controls>
-            <source src={@props.video.mp4} type="video/mp4" />
+          <video poster={@props.previews[0]} width="100%" controls muted>
             <source src={@props.video.webm} type="video/webm" />
+            <source src={@props.video.mp4} type="video/mp4" />
             Your browser does not support the video format. Please upgrade your browser.
           </video>
         </div>

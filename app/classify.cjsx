@@ -20,7 +20,7 @@ module?.exports = React.createClass
     video: null
     previews: null
     zooniverseId: null
-    location: "Congo Rainforest"
+    location: null
     classification: null
     guideIsOpen: false
     modalIsOpen: false
@@ -39,17 +39,19 @@ module?.exports = React.createClass
     body.classList.remove 'no-scroll'
 
   onSubjectSelect: (e, subject) ->
-    setTimeout ( =>
-      previews = subject.location.previews
-      randomInt = Math.round(Math.random() * (2 - 0)) + 0
-      @setState({
-        video: subject.location.standard
-        previews: previews[randomInt]
-        zooniverseId: subject.zooniverse_id
-        classification: new Classification {subject}
-      })
-      @state.classification.annotate previewsSet: randomInt
-    ), 1000
+    # setTimeout ( =>
+    previews = subject.location.previews
+    randomInt = Math.round(Math.random() * (2 - 0)) + 0
+
+    @setState({
+      video: subject.location.standard
+      previews: previews[randomInt]
+      zooniverseId: subject.zooniverse_id
+      location: subject.group.name
+      classification: new Classification {subject}
+    })
+    @state.classification.annotate previewsSet: randomInt
+    # ), 1000
 
   onNoSubjects: ->
     @refs.statusMessage.getDOMNode().innerHTML = "No more subjects. Please try again."

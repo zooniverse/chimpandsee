@@ -36,19 +36,14 @@ Annotation = React.createClass
   componentWillReceiveProps: (nextProps) ->
     if nextProps.video isnt @props.video
       @setState favorited: false
-      # @animate "image-slide", {}, {animation: 'fadeIn 0.5s forwards'}, 'ease-in-out', 500
+
       setTimeout (=>
         @setState animating: false
-      ), 100
+      ), 800
 
     if nextProps.user? then @setState user: true else @setState user: false
 
-  # animateImages: ->
-  #   @animate "image-slide", {}, {animation: 'fadeOut 0.5s forwards', animation: 'slideOut 0.5s forwards'}, 'ease-in-out', 500
-
   zoomImage: (i) ->
-    # image = @refs["img-#{i}"].getDOMNode()
-    # console.log image.clientWidth * 1/3
     if @state.zoomImage is false
       @setState({
         zoomImage: true
@@ -108,13 +103,13 @@ Annotation = React.createClass
 
     previews = @props.previews.map (preview, i) =>
       figClasses = cx({
-        'animating-in': true
+        # 'animating-in': true
         'zoom-image': @state.zoomImage is true and i is @state.zoomImageIndex
         'fade-out': @state.zoomImage is true and i isnt @state.zoomImageIndex
         'animating-out': @state.animating is true
       })
 
-      <figure key={i} ref="preview" className={figClasses}>
+      <figure key={i} ref="figure" className={figClasses}>
         <img ref="img-#{i}" style={if @state.zoomImage is true and @state.zoomImageIndex is i then @getAnimatedStyle("image-zoom")} src={preview} onClick={@zoomImage.bind(null, i) if window.innerWidth > 600} />
       </figure>
 
@@ -141,7 +136,7 @@ Annotation = React.createClass
         currentAnswers={cursor.refine('currentAnswers')}
         notes={cursor.refine('notes')}
         video={@props.video}
-        previews={@props.previews}
+        previews={cursor.refine('previews')}
         animating={cursor.refine('animating')}
         classification={@props.classification}
         openModal={@props.openModal}

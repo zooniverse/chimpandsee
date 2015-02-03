@@ -36,11 +36,11 @@ Step = React.createClass
         @storeSelection(button.name, button.value)
         setTimeout ( =>
           console?.log 'send to classification', @props.currentAnswers.value
+          @props.previews.set null
           @props.classification.annotate @props.currentAnswers.value
           @sendClassification()
-          @props.step.set 0
-          @props.animating.set true
           @newSubject()
+          @props.step.set 0
         ), 100
       when button.value is steps[1][0].annotation.options[1] then @moveToNextStep()
       when button.value is steps[1][0].annotation.options[2] then @finishNote()
@@ -93,12 +93,8 @@ Step = React.createClass
   goToAnimalStep: (event) ->
     button = event.target
 
-    console.log @props.step.value, @props.subStep.value
-
     @props.step.set button.value
     @props.subStep.set 0
-
-    console.log @props.step.value, @props.subStep.value
 
   goToSubStep: (event) ->
     button = event.target
@@ -168,7 +164,6 @@ Step = React.createClass
 
         if @props.currentAnswers.value.animal is _.values(@props.currentAnswers.value)[0] is steps[2][0].animal.options[1] #chimp
           subSteps = steps[3].map (step, i) =>
-            console.log @props.subStep.value, i - 1
             stepBtnDisabled = _.values(@props.currentAnswers.value).length < i + i
             stepBtnClasses = cx({
               'step-button': true

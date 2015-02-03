@@ -95,8 +95,7 @@
         animation: fadeIn 0.5s forwards
 
       .animating-out
-        animation: fadeOut 0.5s forwards
-        // animation: slideOut 0.5s forwards
+        animation: slideOut 0.75s forwards
 
       .zoom-image
         max-width: inherit
@@ -130,13 +129,9 @@
         border-radius: 8px
 
 @keyframes slideOut {
-  from { transform: translateX(0) }
-  to { transform: translateX(310px) }
-}
-
-@keyframes fadeOut {
-  from { opacity: 1; }
-  to { opacity: 0; }
+  0% { transform: translateX(0); opactiy: 1 }
+  50% { opacity: 0}
+  100% { transform: translateX(-310px); opacity: 0;}
 }
 
 @keyframes fadeIn {

@@ -47,9 +47,8 @@ module?.exports = React.createClass
     @setState activeContent: i
 
   render: ->
-    navLinkClasses = cx({
+    navLinkClasses = cx
       'about-link': window.location.hash isnt '#/about'
-    })
 
     links = @state.links.map (link, i) =>
       <Link key={i} to={link.href} className={navLinkClasses if link.href is 'about'} onClick={@onLinkClick.bind(null, i)}>{link.name}</Link>

@@ -28,6 +28,7 @@ Annotation = React.createClass
     favorited: false
     user: false
     animating: false
+    isLoading: false
 
   componentWillMount: ->
     if @props.user?
@@ -37,31 +38,41 @@ Annotation = React.createClass
     if nextProps.video isnt @props.video
       @setState favorited: false
 
-      setTimeout (=>
+      setTimeout ( =>
         @setState animating: false
-      ), 800
+      ), 750
 
     if nextProps.user? then @setState user: true else @setState user: false
 
+  componentDidMount: ->
+    @isLoading()
+
+  isLoading: ->
+    @setState isLoading: true
+    setTimeout (=>
+      @setState isLoading: false
+    ), 500
+
   zoomImage: (i) ->
     if @state.zoomImage is false
-      @setState({
+      @setState
         zoomImage: true
         zoomImageIndex: i
-      })
-      setTimeout ( =>
-        previews = document.getElementsByClassName('fade-out')
 
-        for preview in previews
-          preview.classList.add 'hide'
-      ), 500
-      @animate "image-zoom", {transform: 'scale3d(1,1,1)'}, {transform: 'scale3d(2,2,3)'}, 'linear', 500
+      @animate "image-zoom", {transform: 'scale3d(1,1,1)'}, {transform: 'scale3d(2,2,3)'}, 'linear', 500, @fadeout()
 
     else
-      @setState({
+      @setState
         zoomImage: false
         zoomImageIndex: null
-      })
+
+  fadeout: =>
+    setTimeout ( =>
+      previews = document.getElementsByClassName('fade-out')
+
+      for preview in previews
+        preview.classList.add 'hide'
+    ), 500
 
   onClickGuide: ->
     animatedScrollTo document.body, 0, 1000
@@ -79,46 +90,56 @@ Annotation = React.createClass
   render: ->
     cursor = Cursor.build(@)
 
-    previewClasses = cx({
+    previewClasses = cx
       'hide': cursor.refine('currentStep').value > 0
       'preview-imgs': true
       'adjust-width': @state.zoomImage is true
-    })
 
-    videoClasses = cx({
+    videoClasses = cx
       'hide': cursor.refine('currentStep').value is 0 or cursor.refine('currentStep').value is steps.length - 1
       'video': true
-    })
 
-    favoriteClasses = cx({
+    favoriteClasses = cx
       'favorite-btn': true
       'disabled': @state.user is false
       'favorited': @state.favorited is true
-    })
 
-    guideClasses = cx({
+    guideClasses = cx
       'guide-btn': true
       'guide-open': @props.guideIsOpen is true
-    })
 
     previews = @props.previews.map (preview, i) =>
-      figClasses = cx({
-        # 'animating-in': true
+      figClasses = cx
         'zoom-image': @state.zoomImage is true and i is @state.zoomImageIndex
         'fade-out': @state.zoomImage is true and i isnt @state.zoomImageIndex
-        'animating-out': @state.animating is true
-      })
+
+      imgClasses= cx
+        'animating-out': @state.animating is true and window.innerWidth > 600
+        'animating-in': true
+
+      imgStyle = {
+        width: @refs.figure.getDOMNode().clientWidth if @state.animating is true and window.innerWidth > 600
+        height: @refs.figure.getDOMNode().clientHeight if @state.animating is true and window.innerWidth > 600
+      }
 
       <figure key={i} ref="figure" className={figClasses}>
-        <img ref="img-#{i}" style={if @state.zoomImage is true and @state.zoomImageIndex is i then @getAnimatedStyle("image-zoom")} src={preview} onClick={@zoomImage.bind(null, i) if window.innerWidth > 600} />
+        <img
+          ref="img-#{i}"
+          className={imgClasses}
+          style={if @state.zoomImage is true and @state.zoomImageIndex is i then @getAnimatedStyle("image-zoom") else imgStyle}
+          src={preview}
+          onClick={@zoomImage.bind(null, i) if window.innerWidth > 600} />
       </figure>
 
     <div className="annotation">
       <div className="subject">
         <button className={guideClasses} onClick={@onClickGuide}>Field Guide</button>
-        <div className={previewClasses}>
-          {previews}
-        </div>
+        {if @state.isLoading is true
+          <div className="loading-spinner"><i className="fa fa-spinner fa-spin fa-2x"></i></div>
+        else
+          <div className={previewClasses}>
+            {previews}
+          </div>}
         <div className={videoClasses}>
           <video poster={@props.previews[0]} width="100%" controls muted>
             <source src={@props.video.webm} type="video/webm" />
@@ -140,6 +161,7 @@ Annotation = React.createClass
         animating={cursor.refine('animating')}
         classification={@props.classification}
         openModal={@props.openModal}
+        isLoading={@isLoading}
       />
       <Notes notes={cursor.refine('notes')} step={cursor.refine('currentStep')} />
     </div>

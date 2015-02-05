@@ -33,18 +33,16 @@ SlideTutorial = React.createClass
 
   render: ->
     slideDots = @state[@props.tutorialType]?.map (slide, i) =>
-      dotClasses = cx({
+      dotClasses = cx
         'slide-tutorial-dot': true
         'active': i is @state.activeSlide
-      })
 
       <div key={i} className={dotClasses} onClick={@onDotClick.bind(null, i)}></div>
 
     slides = @state[@props.tutorialType]?.map (slide, i) =>
-      slideClasses = cx({
+      slideClasses = cx
         'slide-tutorial-slide': true
         'active': i is @state.activeSlide
-      })
 
       <div key={i} className={slideClasses}>
         <div className="slide-tutorial-slide-top">
@@ -62,10 +60,9 @@ SlideTutorial = React.createClass
         </div>
       </div>
 
-    slideTutorialClasses = cx({
+    slideTutorialClasses = cx
       'slide-tutorial': true
       'show': @props.modalIsOpen
-    })
 
     <div className={slideTutorialClasses}>
       <div  className="slide-tutorial-container">

@@ -23,11 +23,11 @@ ProfileItems = React.createClass
 
   componentWillReceiveProps: (nextProps) ->
     @attachScrollListener()
-    @setState({
+    @setState
       items: []
       page: 1
       hasMore: true
-    })
+
     @getItems()
 
   buildItems: ->

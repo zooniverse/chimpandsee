@@ -115,10 +115,10 @@
 
         &:before
           content: ''
-          display: block
+          display: inline-block
           border-radius: 50%
-          margin: 10.5px 10px 0 0
-          float: left
+          margin: 0 10px 0 0
+          vertical-align: middle
           width: 39px
           height: 39px
 
@@ -143,6 +143,9 @@
         border-right: solid $gray 1px
         border-radius: 0px
 
+        @media screen and (max-width: 600px)
+          border: none
+
       &#annotation-2.finish-disabled
         color: #555656
         opacity: 0.3
@@ -150,14 +153,6 @@
       &#presence-0:before, &#annotation-0:before // 'Nothing here' buttons
         background: url(./assets/cancel-icon.svg) no-repeat center center
         border: solid 2px #c72c2c
-
-      @media screen and (max-width: 560px)
-        &#annotation-0:before
-          display: none
-
-      @media screen and (max-width: 479px)
-        &#presence-0:before
-          display: none
 
       &#presence-1:before, &#annotation-2:before, &#summary-0:before // 'I see something' and 'Finish'
         background: url(./assets/arrow-icon.svg) no-repeat center center
@@ -190,6 +185,9 @@
     background-color: transparent
     float: left
 
+    @media screen and (max-width: 700px)
+      font-size: 14px
+
     &:before
       content: ''
       background: $blackish url(./assets/cancel-icon.svg) no-repeat center center
@@ -201,14 +199,18 @@
       display: block
       margin: 0 0 10px 0
 
-      @media screen and (max-width: 450px)
+      @media screen and (max-width: 700px)
         width: 44px
-        height: 38px
+        height: 44px
+        margin: 0 0 5px 0
 
   .next
     color: #555656
     background-color: transparent
     float: right
+
+    @media screen and (max-width: 700px)
+      font-size: 14px
 
     &:before
       content: ''
@@ -221,9 +223,10 @@
       display: block
       margin: 0 0 10px 0
 
-      @media screen and (max-width: 450px)
+      @media screen and (max-width: 700px)
         width: 44px
-        height: 38px
+        height: 44px
+        margin: 0 0 5px 0
 
   .done
     color: #555656
@@ -232,6 +235,9 @@
 
     &.disabled:before
       background-color: transparent
+
+    @media screen and (max-width: 700px)
+      font-size: 14px
 
   .done:before
     content: ''
@@ -244,9 +250,9 @@
     border: solid 2px $green
     border-radius: 50%
 
-    @media screen and (max-width: 450px)
+    @media screen and (max-width: 700px)
       width: 44px
-      height: 38px
+      height: 44px
 
   .presence
     .step-bottom
@@ -259,20 +265,20 @@
       .buttons-container
         margin: 0
         max-width: 100%
+        display: flex
+
+        @media screen and (max-width: 600px)
+          flex-direction: column
+          align-items: center
 
         button
           max-width: 310px !important
           width: 100%
           margin: 0 !important
 
-          &#annotation-0
-            padding: 0 70px
-
-          &#annotation-1
-            padding: 0 60px
-
-          &#annotation-2
-            padding: 0 100px
+          @media screen and (max-width: 600px)
+            max-width: 220px !important
+            text-align: left
 
   .age, .sex
     .step-bottom .buttons-container

@@ -5,11 +5,10 @@ AboutPage = React.createClass
   displayName: 'AboutPage'
 
   render: ->
-    pageClasses = cx({
+    pageClasses = cx
       'page-one': @props.activeContent is 0
       'page-two': @props.activeContent is 1
       'page-three': @props.activeContent is 2
-    })
 
     pageContent = @props.pageContent.map (page, i) ->
       <section key={i} className="about-section">

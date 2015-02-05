@@ -33,10 +33,9 @@ Summary = React.createClass
     noteSummary = for animal, count of totals
       <li key={animal}>{count} {animal}{"s" if count > 1}</li>
 
-    generalClasses = cx({
+    generalClasses = cx
       'general-summary': true
       'no-chimp': @state.chimpsSeen is false
-    })
 
     <div className="summary-content">
       <section className={generalClasses}>

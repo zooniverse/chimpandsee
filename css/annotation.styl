@@ -67,7 +67,7 @@
       width: 100%
       max-width: 930px
       height: 100%
-      min-height: 450px
+      min-height: 410px
       display: block
 
       figure
@@ -92,7 +92,7 @@
             max-width: 100%
 
       .animating-in
-        animation: fadeIn 0.5s forwards
+        animation: fadeIn 0.1s forwards
 
       .animating-out
         animation: slideOut 0.75s forwards
@@ -129,9 +129,8 @@
         border-radius: 8px
 
 @keyframes slideOut {
-  0% { transform: translateX(0); opactiy: 1 }
-  50% { opacity: 0}
-  100% { transform: translateX(-310px); opacity: 0;}
+  0% { width: 100%; }
+  100% { width: 0%;}
 }
 
 @keyframes fadeIn {

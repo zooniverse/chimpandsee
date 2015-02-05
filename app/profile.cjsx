@@ -26,13 +26,11 @@ Profile = React.createClass
       User.fetch()
 
   render: ->
-    recentClasses = cx({
+    recentClasses = cx
       'active': @state.collection is 'Recent'
-    })
 
-    favoriteClasses = cx({
+    favoriteClasses = cx
       'active': @state.collection is 'Favorite'
-    })
 
     userDetails = if @props.user?
       <div>

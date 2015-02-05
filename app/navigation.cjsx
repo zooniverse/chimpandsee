@@ -27,14 +27,13 @@ module?.exports = React.createClass
   render: ->
     links = @links.map(@link)
 
-    navClasses = cx({
+    navClasses = cx
       'site-navigation': true
       'color-background': @state.showMobileMenu is true
-    })
-    menuClasses = cx({
+
+    menuClasses = cx
       'menu-list': true
       'show-menu green-background': @state.showMobileMenu is true
-    })
 
     <nav className={navClasses}>
       <div className="mobile-menu" onClick={@toggleMobileMenu}>

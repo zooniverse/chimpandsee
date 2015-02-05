@@ -43,15 +43,13 @@ Guide = React.createClass
     animals = steps[2][0].animal.options.map (animal, i) =>
       <li key={i} className="animal-list-item" onClick={@onSelectGuideAnimal.bind(null, i)}>{animal}</li>
 
-    detailsClasses = cx({
+    detailsClasses = cx
       'details': true
       'hide': @state.guideDetailsIndex is null
-    })
 
-    headerClasses = cx({
+    headerClasses = cx
       'guide-header': true
       'open-guide': @state.guideDetailsIndex isnt null
-    })
 
     details = if @state.guideDetailsIndex?
       exampleImages = guideDetails[@state.guideDetailsIndex].exampleImages.map (image, i) =>

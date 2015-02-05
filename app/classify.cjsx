@@ -25,6 +25,7 @@ module?.exports = React.createClass
     guideIsOpen: false
     modalIsOpen: false
     tutorialType: null
+    isLoading: false
 
   componentDidMount: ->
     Subject.on 'select', @onSubjectSelect
@@ -39,19 +40,19 @@ module?.exports = React.createClass
     body.classList.remove 'no-scroll'
 
   onSubjectSelect: (e, subject) ->
-    # setTimeout ( =>
-    previews = subject.location.previews
-    randomInt = Math.round(Math.random() * (2 - 0)) + 0
+    setTimeout ( =>
+      previews = subject.location.previews
+      randomInt = Math.round(Math.random() * (2 - 0)) + 0
 
-    @setState({
-      video: subject.location.standard
-      previews: previews[randomInt]
-      zooniverseId: subject.zooniverse_id
-      location: subject.group.name
-      classification: new Classification {subject}
-    })
-    @state.classification.annotate previewsSet: randomInt
-    # ), 1000
+      @setState
+        video: subject.location.standard
+        previews: previews[randomInt]
+        zooniverseId: subject.zooniverse_id
+        location: subject.group.name
+        classification: new Classification {subject}
+
+      @state.classification.annotate previewsSet: randomInt
+    ), 500
 
   onNoSubjects: ->
     @refs.statusMessage.getDOMNode().innerHTML = "No more subjects. Please try again."
@@ -70,20 +71,19 @@ module?.exports = React.createClass
     body.classList.remove 'no-scroll'
 
   openModal: (type) ->
-    @setState({
+    @setState
       modalIsOpen: true
       tutorialType: type
-    })
 
   closeModal: ->
     @setState modalIsOpen: false
 
   render: ->
-    classifyClasses = cx({
+    classifyClasses = cx
       'classify': true
       'content': true
       'open-guide': @state.guideIsOpen is true
-    })
+
     <div className={classifyClasses}>
       <button className="tutorial-btn" onClick={@openModal.bind(null, "general")}>Tutorial</button>
 
@@ -104,7 +104,7 @@ module?.exports = React.createClass
           location={@state.location}
           zooniverseId={@state.zooniverseId} />
       else
-        <div ref="statusMessage" className="loading-spinner"><i className="fa fa-spinner fa-spin fa-2x"></i></div>}
+        <div ref="statusMessage"></div>}
       <SlideTutorial modalIsOpen={@state.modalIsOpen} onClickCloseSlide={@closeModal} tutorialType={@state.tutorialType} />
       <div className="hidden-chimp-container"><img className="hidden-chimp" src="./assets/hidden-chimp.png" alt="" /></div>
     </div>

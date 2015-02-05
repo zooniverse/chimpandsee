@@ -28,7 +28,7 @@ Step = React.createClass
           @props.classification.annotate @props.currentAnswers.value
           @sendClassification()
           @props.animating.set true
-          @newSubject()
+          @nextSubject()
         ), 100
       when button.value is steps[0][0].presence.options[1]
         @moveToNextStep()
@@ -39,8 +39,8 @@ Step = React.createClass
           @props.previews.set null
           @props.classification.annotate @props.currentAnswers.value
           @sendClassification()
-          @newSubject()
-          @props.step.set 0
+          @props.isLoading()
+          @nextSubject()
         ), 100
       when button.value is steps[1][0].annotation.options[1] then @moveToNextStep()
       when button.value is steps[1][0].annotation.options[2] then @finishNote()
@@ -74,13 +74,6 @@ Step = React.createClass
 
   componentWillReceiveProps: (nextProps) ->
     animatedScrollTo document.body, 0, 1000 if window.innerWidth < 601 and nextProps.step.value < 2
-
-  newSubject: ->
-    @props.notes.set []
-    @props.currentAnswers.set {}
-    setTimeout ( =>
-      Subject.next()
-    ), 100
 
   storeSelection: (name, value) ->
     obj = {}
@@ -123,64 +116,62 @@ Step = React.createClass
   nextSubject: ->
     @props.step.set 0
     @props.subStep.set 0
-    @newSubject()
+    @props.notes.set []
+    @props.currentAnswers.set {}
+    Subject.next()
 
   sendClassification: ->
     # @props.classification.send()
     console.log 'classification send'
 
   render: ->
-    cancelClasses = cx({
+    cancelClasses = cx
       'cancel': true
       'hide': @props.step.value <= 1 or @props.step.value is steps.length - 1
-    })
 
     nextDisabled = _.values(@props.currentAnswers.value).length is 0
-    nextClasses = cx({
+    nextClasses = cx
       'disabled': nextDisabled
       'next': true
       'hide': @props.step.value <= 2 or @props.step.value >= steps.length - 2
-    })
 
     addDisabled = switch
       when _.values(@props.currentAnswers.value).length < 4 and _.values(@props.currentAnswers.value)[0] is steps[2][0].animal.options[1] #chimp
         true
       when _.values(@props.currentAnswers.value).length < 2 then true
 
-    addClasses = cx({
+    addClasses = cx
       'disabled': addDisabled
       'done': true
       'hidden': @props.step.value is 2
       'hide': @props.step.value < 2 or @props.step.value is steps.length - 1
-    })
 
     stepButtons =
       if @props.step.value > 2 and @props.step.value isnt steps.length - 1
-        firstStepClasses = cx({
+        firstStepClasses = cx
           'step-button': true
           'step-active': @props.step.value is 2
           'step-complete': @props.step.value > 2
-        })
 
         if @props.currentAnswers.value.animal is _.values(@props.currentAnswers.value)[0] is steps[2][0].animal.options[1] #chimp
           subSteps = steps[3].map (step, i) =>
             stepBtnDisabled = _.values(@props.currentAnswers.value).length < i + i
-            stepBtnClasses = cx({
+            stepBtnClasses = cx
               'step-button': true
               'step-active': @props.subStep.value is i
               'step-complete': i - 1 < @props.subStep.value - 1
               'disabled': stepBtnDisabled
-            })
+
             if i isnt steps[3].length - 1
               <span key={i}>
                 <button className={stepBtnClasses} value={i} onClick={@goToSubStep} disabled={stepBtnDisabled}>{i+2}</button>
                 <img src="./assets/small-dot.svg" alt="" />
               </span>
         else
-          stepBtnClasses = cx({
+          stepBtnClasses = cx
             'step-button': true
             'step-active': @props.subStep.value is 3
-          })
+
           subSteps =
             <span>
               <button className={stepBtnClasses} value="3" onClick={@goToSubStep}>2</button>
@@ -207,11 +198,11 @@ Step = React.createClass
               when @props.notes.value.length is 0 and option is steps[1][0].annotation.options[2] then true
               when @props.notes.value.length > 0 and option is steps[1][0].annotation.options[0] then true
 
-        classes = cx({
+        classes = cx
           'btn-active': option in _.values(@props.currentAnswers.value) and @props.step.value > 1
           'disabled finish-disabled': @props.notes.value.length is 0 and option is steps[1][0].annotation.options[2]
           'disabled nothing-disabled': @props.notes.value.length > 0 and option is steps[1][0].annotation.options[0]
-        })
+
         <button className={classes} key={i} id="#{name}-#{i}" name={name} value={option} onClick={@onButtonClick} disabled={disabled}>
           {option}
         </button>

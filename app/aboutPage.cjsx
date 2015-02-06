@@ -13,7 +13,7 @@ AboutPage = React.createClass
     pageContent = @props.pageContent.map (page, i) ->
       <section key={i} className="about-section">
         <div className="content">
-          <img src={page.image} alt={page.header} />
+          <img src={page.image} alt={page.imgAlt} />
           <div>
             <h2 className="name">{page.header}</h2>
             {<h3>{page.subHeader}</h3> if page.subHeader?}

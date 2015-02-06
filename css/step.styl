@@ -55,6 +55,9 @@
         font-weight: 400
         line-height: 24px
         margin: 0 10px
+        
+        @media screen and (max-width: 400px)
+          padding: 0
 
       .step-complete
         font-size: 0
@@ -131,7 +134,7 @@
           background-color: $blackish
 
         &.nothing-disabled
-          font-size: 0
+          opacity: 0.3
           vertical-align: middle
 
           &:before

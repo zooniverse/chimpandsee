@@ -125,7 +125,8 @@ Annotation = React.createClass
           </div>
         }
         {if @state.currentStep is steps.length - 1
-          <Summary notes={@state.notes} openModal={@props.openModal} location={@props.location} video={@props.video} zooniverseId={@props.zooniverseId} />}
+          <Summary notes={@state.notes} openTutorial={@props.openTutorial} location={@props.location} video={@props.video} zooniverseId={@props.zooniverseId} />
+        }
         <button className={favoriteClasses} onClick={@onClickFavorite} disabled={@state.user is false}>Favorite</button>
       </div>
       <Step
@@ -134,7 +135,6 @@ Annotation = React.createClass
         currentAnswers={cursor.refine('currentAnswers')}
         notes={cursor.refine('notes')}
         classification={@props.classification}
-        openModal={@props.openModal}
         isLoading={@props.isLoading}
       />
       <Notes notes={cursor.refine('notes')} step={cursor.refine('currentStep')} />

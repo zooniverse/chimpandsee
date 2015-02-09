@@ -62,7 +62,7 @@ Summary = React.createClass
             <p>Help us identify and name these chimps!</p>
           </div>
           <div className="chimp-btn-container">
-            <button onClick={@props.openModal.bind(null, "chimps")}>Learn More</button>
+            <button onClick={@props.openTutorial.bind(null, "chimps")}>Learn More</button>
             <button>Get Started</button>
             <button>Known Chimps</button>
           </div>

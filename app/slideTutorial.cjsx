@@ -6,19 +6,19 @@ SlideTutorial = React.createClass
 
   getInitialState: ->
     general: [
-      {image: 'http://placehold.it/560x280', title: 'Slide 1', content:'Slide 1', button: 'Next'}
-      {image: 'http://placehold.it/560x280', title: 'Slide 2', content:'Slide 2', button: 'Next'}
-      {image: 'http://placehold.it/560x280', title: 'Slide 3', content:'Slide 3', button: 'Finish'}
+      {image: 'http://placehold.it/400x275', title: 'Slide 1', content: 'Lorem ipsum dolor sit amet, mel ne idque evertitur ullamcorper, ne scaevola efficiantur nec, nobis menandri explicari te eos. Sea no munere laudem. Ne vis eripuit pericula hendrerit, diam veri aliquando vim ea. Eu prompta recusabo eum.', button: 'Next'}
+      {image: 'http://placehold.it/400x275', title: 'Slide 2', content: 'Lorem ipsum dolor sit amet, mel ne idque evertitur ullamcorper, ne scaevola efficiantur nec, nobis menandri explicari te eos. Sea no munere laudem. Ne vis eripuit pericula hendrerit, diam veri aliquando vim ea. Eu prompta recusabo eum.', button: 'Next'}
+      {image: 'http://placehold.it/400x275', title: 'Slide 3', content: 'Lorem ipsum dolor sit amet, mel ne idque evertitur ullamcorper, ne scaevola efficiantur nec, nobis menandri explicari te eos. Sea no munere laudem. Ne vis eripuit pericula hendrerit, diam veri aliquando vim ea. Eu prompta recusabo eum.', button: 'Finish'}
     ]
     chimps: [
-      {image: 'http://placehold.it/560x280', title: 'Slide 1', content:'Chimp Slide 1', button: 'Next'}
-      {image: 'http://placehold.it/560x280', title: 'Slide 2', content:'Chimp Slide 2', button: 'Next'}
-      {image: 'http://placehold.it/560x280', title: 'Slide 3', content:'Chimp Slide 3', button: 'Finish'}
+      {image: 'http://placehold.it/400x275', title: 'Chimp Slide 1', content: 'Lorem ipsum dolor sit amet, mel ne idque evertitur ullamcorper, ne scaevola efficiantur nec, nobis menandri explicari te eos. Sea no munere laudem. Ne vis eripuit pericula hendrerit, diam veri aliquando vim ea. Eu prompta recusabo eum.', button: 'Next'}
+      {image: 'http://placehold.it/400x275', title: 'Chimp Slide 2', content: 'Lorem ipsum dolor sit amet, mel ne idque evertitur ullamcorper, ne scaevola efficiantur nec, nobis menandri explicari te eos. Sea no munere laudem. Ne vis eripuit pericula hendrerit, diam veri aliquando vim ea. Eu prompta recusabo eum.', button: 'Next'}
+      {image: 'http://placehold.it/400x275', title: 'Chimp Slide 3', content: 'Lorem ipsum dolor sit amet, mel ne idque evertitur ullamcorper, ne scaevola efficiantur nec, nobis menandri explicari te eos. Sea no munere laudem. Ne vis eripuit pericula hendrerit, diam veri aliquando vim ea. Eu prompta recusabo eum.', button: 'Finish'}
     ]
     activeSlide: 0
 
   componentWillReceiveProps: (nextProps) ->
-    if nextProps.modalIsOpen is false
+    if nextProps.tutorialIsOpen is false
       @setState activeSlide: 0
 
   onClickButton: ->
@@ -60,11 +60,15 @@ SlideTutorial = React.createClass
         </div>
       </div>
 
+    # modifying height since footer and topbar exist outside of React's virtual DOM
+    slideTutorialStyle = if @props.tutorialIsOpen is true
+      height: document.getElementById('footer').clientHeight + document.getElementsByClassName('classify')[0].clientHeight + 100
+
     slideTutorialClasses = cx
       'slide-tutorial': true
-      'show': @props.modalIsOpen
+      'show': @props.tutorialIsOpen
 
-    <div className={slideTutorialClasses}>
+    <div className={slideTutorialClasses} style={slideTutorialStyle}>
       <div  className="slide-tutorial-container">
         <button className="slide-tutorial-close-button" onClick={@props.onClickCloseSlide}>X</button>
         {slides}

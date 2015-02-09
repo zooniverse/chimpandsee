@@ -34,7 +34,7 @@ module?.exports = React.createClass
     location: null
     classification: null
     guideIsOpen: false
-    modalIsOpen: false
+    tutorialIsOpen: false
     tutorialType: null
     isLoading: false
 
@@ -42,6 +42,10 @@ module?.exports = React.createClass
     Subject.on 'select', @onSubjectSelect
     Subject.on 'no-more', @onNoSubjects
     Subject.next()
+
+  componentWillReceiveProps: (nextProps) ->
+    unless nextProps.user?.classification_count > 0
+      @openTutorial 'general'
 
   componentWillUnmount: ->
     Subject.off 'select', @onSubjectSelect
@@ -91,13 +95,13 @@ module?.exports = React.createClass
     wrapper.classList.remove 'push-right'
     body.classList.remove 'no-scroll'
 
-  openModal: (type) ->
+  openTutorial: (type) ->
     @setState
-      modalIsOpen: true
+      tutorialIsOpen: true
       tutorialType: type
 
-  closeModal: ->
-    @setState modalIsOpen: false
+  closeTutorial: ->
+    @setState tutorialIsOpen: false
 
   render: ->
     classifyClasses = cx
@@ -105,12 +109,18 @@ module?.exports = React.createClass
       'content': true
       'open-guide': @state.guideIsOpen is true
 
-    <div className={classifyClasses}>
-      <button className="tutorial-btn" onClick={@openModal.bind(null, "general")}>Tutorial</button>
+    hiddenChimpClasses = cx
+      'hide': @state.isLoading is true or @state.previews is null
+      'hidden-chimp-container': true
 
+    <div className={classifyClasses}>
       <Guide onClickClose={@onClickClose} guideIsOpen={@state.guideIsOpen} />
       <div className="location-container">
-        <p><span className="bold">Site:</span> {@state.location}</p>
+        <p>
+          <span className="bold">Site:</span> {@state.location}
+          <button className="tutorial-btn" onClick={@openTutorial.bind(null, "general")}>Tutorial</button>
+          <a href="https://www.zooniverse.org" target="_blank"><button className="faq-btn">FAQs</button></a>
+        </p>
       </div>
       {unless @state.previews is null and @state.video is null
         <Annotation
@@ -120,7 +130,7 @@ module?.exports = React.createClass
           toggleGuide={@toggleGuide}
           guideIsOpen={@state.guideIsOpen}
           tutorialType={@state.tutorialType}
-          openModal={@openModal}
+          openTutorial={@openTutorial}
           user={@props.user}
           location={@state.location}
           zooniverseId={@state.zooniverseId}
@@ -128,6 +138,6 @@ module?.exports = React.createClass
           loadingState={@state.isLoading} />
       else
         <div ref="statusMessage"></div>}
-      <SlideTutorial modalIsOpen={@state.modalIsOpen} onClickCloseSlide={@closeModal} tutorialType={@state.tutorialType} />
-      <div className="hidden-chimp-container"><img className="hidden-chimp" src="./assets/hidden-chimp.png" alt="" /></div>
+      <SlideTutorial ref="slideTutorial" tutorialIsOpen={@state.tutorialIsOpen} onClickCloseSlide={@closeTutorial} tutorialType={@state.tutorialType} />
+      <div className={hiddenChimpClasses}><img className="hidden-chimp" src="./assets/hidden-chimp.png" alt="" /></div>
     </div>

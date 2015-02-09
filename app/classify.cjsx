@@ -12,6 +12,17 @@ Classification = require 'zooniverse/models/classification'
 # Grabbing DOM element outside of React components to be able to move everything to the right including top bar and footer
 wrapper = document.getElementById('wrapper')
 body = document.getElementsByTagName('body')['0']
+previewLoadingImages = [
+  "http://placehold.it/310x179/111111&text=loading",
+  "http://placehold.it/310x179/111111&text=loading",
+  "http://placehold.it/310x179/111111&text=loading",
+  "http://placehold.it/310x179/111111&text=loading",
+  "http://placehold.it/310x179/111111&text=loading",
+  "http://placehold.it/310x179/111111&text=loading",
+  "http://placehold.it/310x179/111111&text=loading",
+  "http://placehold.it/310x179/111111&text=loading",
+  "http://placehold.it/310x179/111111&text=loading"]
+
 
 module?.exports = React.createClass
   displayName: 'Classify'
@@ -27,7 +38,7 @@ module?.exports = React.createClass
     tutorialType: null
     isLoading: false
 
-  componentDidMount: ->
+  componentWillMount: ->
     Subject.on 'select', @onSubjectSelect
     Subject.on 'no-more', @onNoSubjects
     Subject.next()
@@ -39,7 +50,17 @@ module?.exports = React.createClass
     wrapper.classList.remove 'push-right'
     body.classList.remove 'no-scroll'
 
+  isLoading: ->
+    @setState
+      isLoading: true
+    setTimeout (=>
+      @setState isLoading: false
+    ), 500
+
   onSubjectSelect: (e, subject) ->
+    # if @state.isLoading is true
+    #   @setState previews: previewLoadingImages
+
     setTimeout ( =>
       previews = subject.location.previews
       randomInt = Math.round(Math.random() * (2 - 0)) + 0
@@ -102,7 +123,9 @@ module?.exports = React.createClass
           openModal={@openModal}
           user={@props.user}
           location={@state.location}
-          zooniverseId={@state.zooniverseId} />
+          zooniverseId={@state.zooniverseId}
+          isLoading={@isLoading}
+          loadingState={@state.isLoading} />
       else
         <div ref="statusMessage"></div>}
       <SlideTutorial modalIsOpen={@state.modalIsOpen} onClickCloseSlide={@closeModal} tutorialType={@state.tutorialType} />

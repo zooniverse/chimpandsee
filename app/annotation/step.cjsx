@@ -27,7 +27,7 @@ Step = React.createClass
           console?.log 'send to classification', @props.currentAnswers.value
           @props.classification.annotate @props.currentAnswers.value
           @sendClassification()
-          @props.animating.set true
+          @props.isLoading()
           @nextSubject()
         ), 100
       when button.value is steps[0][0].presence.options[1]
@@ -36,7 +36,6 @@ Step = React.createClass
         @storeSelection(button.name, button.value)
         setTimeout ( =>
           console?.log 'send to classification', @props.currentAnswers.value
-          @props.previews.set null
           @props.classification.annotate @props.currentAnswers.value
           @sendClassification()
           @props.isLoading()
@@ -114,10 +113,11 @@ Step = React.createClass
     @props.subStep.set 0
 
   nextSubject: ->
-    @props.step.set 0
-    @props.subStep.set 0
     @props.notes.set []
     @props.currentAnswers.set {}
+    @props.step.set 0
+    @props.subStep.set 0
+    @props.isLoading()
     Subject.next()
 
   sendClassification: ->
@@ -187,16 +187,12 @@ Step = React.createClass
           {subSteps}
         </div>
 
-
     step = for name, step of steps[@props.step.value][@props.subStep.value]
       buttons = step.options.map (option, i) =>
         disabled =
-          if @props.video.value is null
-            true
-          else
-            switch
-              when @props.notes.value.length is 0 and option is steps[1][0].annotation.options[2] then true
-              when @props.notes.value.length > 0 and option is steps[1][0].annotation.options[0] then true
+          switch
+            when @props.notes.value.length is 0 and option is steps[1][0].annotation.options[2] then true
+            when @props.notes.value.length > 0 and option is steps[1][0].annotation.options[0] then true
 
         classes = cx
           'btn-active': option in _.values(@props.currentAnswers.value) and @props.step.value > 1

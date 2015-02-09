@@ -27,8 +27,6 @@ Annotation = React.createClass
     zoomImageIndex: null
     favorited: false
     user: false
-    animating: false
-    isLoading: false
 
   componentWillMount: ->
     if @props.user?
@@ -38,20 +36,10 @@ Annotation = React.createClass
     if nextProps.video isnt @props.video
       @setState favorited: false
 
-      setTimeout ( =>
-        @setState animating: false
-      ), 750
-
     if nextProps.user? then @setState user: true else @setState user: false
 
   componentDidMount: ->
-    @isLoading()
-
-  isLoading: ->
-    @setState isLoading: true
-    setTimeout (=>
-      @setState isLoading: false
-    ), 500
+    @props.isLoading()
 
   zoomImage: (i) ->
     if @state.zoomImage is false
@@ -91,13 +79,8 @@ Annotation = React.createClass
     cursor = Cursor.build(@)
 
     previewClasses = cx
-      'hide': cursor.refine('currentStep').value > 0
       'preview-imgs': true
       'adjust-width': @state.zoomImage is true
-
-    videoClasses = cx
-      'hide': cursor.refine('currentStep').value is 0 or cursor.refine('currentStep').value is steps.length - 1
-      'video': true
 
     favoriteClasses = cx
       'favorite-btn': true
@@ -113,20 +96,10 @@ Annotation = React.createClass
         'zoom-image': @state.zoomImage is true and i is @state.zoomImageIndex
         'fade-out': @state.zoomImage is true and i isnt @state.zoomImageIndex
 
-      imgClasses= cx
-        'animating-out': @state.animating is true and window.innerWidth > 600
-        'animating-in': true
-
-      imgStyle = {
-        width: @refs.figure.getDOMNode().clientWidth if @state.animating is true and window.innerWidth > 600
-        height: @refs.figure.getDOMNode().clientHeight if @state.animating is true and window.innerWidth > 600
-      }
-
       <figure key={i} ref="figure" className={figClasses}>
         <img
           ref="img-#{i}"
-          className={imgClasses}
-          style={if @state.zoomImage is true and @state.zoomImageIndex is i then @getAnimatedStyle("image-zoom") else imgStyle}
+          style={if @state.zoomImage is true and @state.zoomImageIndex is i then @getAnimatedStyle("image-zoom")}
           src={preview}
           onClick={@zoomImage.bind(null, i) if window.innerWidth > 600} />
       </figure>
@@ -134,19 +107,23 @@ Annotation = React.createClass
     <div className="annotation">
       <div className="subject">
         <button className={guideClasses} onClick={@onClickGuide}>Field Guide</button>
-        {if @state.isLoading is true
-          <div className="loading-spinner"><i className="fa fa-spinner fa-spin fa-2x"></i></div>
-        else
+        {if @props.loadingState is true
+          <div className="loading-spinner"><i className="fa fa-spinner fa-spin fa-4x"></i></div>
+        }
+        {if cursor.refine('currentStep').value is 0
           <div className={previewClasses}>
             {previews}
-          </div>}
-        <div className={videoClasses}>
-          <video poster={@props.previews[0]} width="100%" controls muted>
-            <source src={@props.video.webm} type="video/webm" />
-            <source src={@props.video.mp4} type="video/mp4" />
-            Your browser does not support the video format. Please upgrade your browser.
-          </video>
-        </div>
+          </div>
+        }
+        {if cursor.refine('currentStep').value >= 1 and cursor.refine('currentStep').value isnt steps.length - 1
+          <div className="video">
+            <video ref="video" poster={@props.previews[0]} width="100%" controls muted>
+              <source src={@props.video.webm} type="video/webm" />
+              <source src={@props.video.mp4} type="video/mp4" />
+              Your browser does not support the video format. Please upgrade your browser.
+            </video>
+          </div>
+        }
         {if @state.currentStep is steps.length - 1
           <Summary notes={@state.notes} openModal={@props.openModal} location={@props.location} video={@props.video} zooniverseId={@props.zooniverseId} />}
         <button className={favoriteClasses} onClick={@onClickFavorite} disabled={@state.user is false}>Favorite</button>
@@ -156,12 +133,9 @@ Annotation = React.createClass
         subStep={cursor.refine('subStep')}
         currentAnswers={cursor.refine('currentAnswers')}
         notes={cursor.refine('notes')}
-        video={@props.video}
-        previews={cursor.refine('previews')}
-        animating={cursor.refine('animating')}
         classification={@props.classification}
         openModal={@props.openModal}
-        isLoading={@isLoading}
+        isLoading={@props.isLoading}
       />
       <Notes notes={cursor.refine('notes')} step={cursor.refine('currentStep')} />
     </div>

@@ -43,6 +43,10 @@ module?.exports = React.createClass
     Subject.on 'no-more', @onNoSubjects
     Subject.next()
 
+  componentDidMount: ->
+    unless @props.user?
+      @openTutorial 'general'
+
   componentWillReceiveProps: (nextProps) ->
     unless nextProps.user?.classification_count > 0
       @openTutorial 'general'

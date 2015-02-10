@@ -89,6 +89,9 @@ Annotation = React.createClass
       'guide-btn': true
       'guide-open': @props.guideIsOpen is true
 
+    favoriteToolTip = if @state.user is false
+      "Sign up or log in to favorite"
+
     previews = @props.previews.map (preview, i) =>
       <figure key={i} ref="figure">
         <img
@@ -124,7 +127,7 @@ Annotation = React.createClass
         {if @state.currentStep is steps.length - 1
           <Summary notes={@state.notes} openTutorial={@props.openTutorial} location={@props.location} video={@props.video} zooniverseId={@props.zooniverseId} />
         }
-        <button className={favoriteClasses} onClick={@onClickFavorite} disabled={@state.user is false}>Favorite</button>
+        <button data-tooltip={favoriteToolTip} className={favoriteClasses} onClick={@onClickFavorite} disabled={@state.user is false}>Favorite</button>
       </div>
       <Step
         step={cursor.refine('currentStep')}

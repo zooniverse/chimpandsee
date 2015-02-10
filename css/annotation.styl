@@ -63,6 +63,20 @@
       &.disabled:before
         background-image: url(./assets/fav-icon-disabled.svg)
 
+      &.disabled[data-tooltip]
+        position: relative
+
+        &:hover:after
+          content: attr(data-tooltip)
+          position: absolute
+          color: white
+          background-color: $blackish
+          padding: 5px
+          box-sizing: border-box
+          width: 75px
+          margin-left: -60px
+          margin-top: 15px
+
       @media screen and (max-width: 870px)
         order: 3
         margin: 0 0 25px

@@ -75,19 +75,19 @@ module?.exports = React.createClass
     # if @state.isLoading is true
     #   @setState previews: previewLoadingImages
 
-    # setTimeout ( =>
-    previews = subject.location.previews
-    randomInt = Math.round(Math.random() * (2 - 0)) + 0
+    setTimeout ( =>
+      previews = subject.location.previews
+      randomInt = Math.round(Math.random() * (2 - 0)) + 0
 
-    @setState
-      video: subject.location.standard
-      previews: previews[randomInt]
-      zooniverseId: subject.zooniverse_id
-      location: subject.group.name
-      classification: new Classification {subject}
+      @setState
+        video: subject.location.standard
+        previews: previews[randomInt]
+        zooniverseId: subject.zooniverse_id
+        location: subject.group.name
+        classification: new Classification {subject}
 
-    @state.classification.annotate previewsSet: randomInt
-    # ), 500
+      @state.classification.annotate previewsSet: randomInt
+    ), 500
 
   onNoSubjects: ->
     @refs.statusMessage.getDOMNode().innerHTML = "No more subjects. Please try again."

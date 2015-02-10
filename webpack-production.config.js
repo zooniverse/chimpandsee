@@ -14,11 +14,12 @@ module.exports = {
     chunkFilename: '[id].[hash].bundle.js'
   },
   resolve: {
-    extensions: ['', '.js', '.cjsx', '.coffee']
+    extensions: ['', '.js', 'jsx', '.cjsx', '.coffee']
   },
   module: {
     loaders: [
       { test: /\.cjsx$/, loaders: ['coffee-loader', 'cjsx-loader'] },
+      { test: /\.jsx$/, loader: 'jsx-loader'},
       { test: /\.coffee$/, loader: 'coffee-loader' },
     ],
     noParse: [

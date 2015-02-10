@@ -2,6 +2,7 @@ React = require 'react/addons'
 cx = React.addons.classSet
 _ = require 'underscore'
 Cursor = require('react-cursor').Cursor
+SkyLight = require 'react-skylight'
 
 AnimateMixin = require "react-animate"
 animatedScrollTo = require 'animated-scrollto'
@@ -23,8 +24,7 @@ Annotation = React.createClass
     subStep: 0
     notes: []
     currentAnswers: {}
-    zoomImage: false
-    zoomImageIndex: null
+    zoomImage: null
     favorited: false
     user: false
 
@@ -41,26 +41,9 @@ Annotation = React.createClass
   componentDidMount: ->
     @props.isLoading()
 
-  zoomImage: (i) ->
-    if @state.zoomImage is false
-      @setState
-        zoomImage: true
-        zoomImageIndex: i
-
-      @animate "image-zoom", {transform: 'scale3d(1,1,1)'}, {transform: 'scale3d(2,2,3)'}, 'linear', 500, @fadeout()
-
-    else
-      @setState
-        zoomImage: false
-        zoomImageIndex: null
-
-  fadeout: =>
-    setTimeout ( =>
-      previews = document.getElementsByClassName('fade-out')
-
-      for preview in previews
-        preview.classList.add 'hide'
-    ), 500
+  zoomImage: (preview) ->
+    @setState zoomImage: preview
+    @refs.imageZoom.show() if window.innerWidth > 600
 
   onClickGuide: ->
     animatedScrollTo document.body, 0, 1000
@@ -74,6 +57,20 @@ Annotation = React.createClass
     else
       @setState favorited: false
       @props.classification.favorite = false
+
+  modifyOverlay: ->
+    overlay = document.getElementsByClassName('skylight-dialog__overlay')[0]
+    classify = document.getElementsByClassName('classify')[0]
+    footer = document.getElementById('footer')
+    # modifying height since footer and topbar exist outside of React's virtual DOM
+    overlay.style.height = footer.clientHeight + classify.clientHeight + 100 + "px"
+    overlay.addEventListener 'click', @closeZoom
+
+  closeZoom: ->
+    overlay = document.getElementsByClassName('skylight-dialog__overlay')[0]
+
+    @refs.imageZoom.hide()
+    overlay.removeEventListener 'click'
 
   render: ->
     cursor = Cursor.build(@)
@@ -92,16 +89,10 @@ Annotation = React.createClass
       'guide-open': @props.guideIsOpen is true
 
     previews = @props.previews.map (preview, i) =>
-      figClasses = cx
-        'zoom-image': @state.zoomImage is true and i is @state.zoomImageIndex
-        'fade-out': @state.zoomImage is true and i isnt @state.zoomImageIndex
-
-      <figure key={i} ref="figure" className={figClasses}>
+      <figure key={i} ref="figure">
         <img
-          ref="img-#{i}"
-          style={if @state.zoomImage is true and @state.zoomImageIndex is i then @getAnimatedStyle("image-zoom")}
           src={preview}
-          onClick={@zoomImage.bind(null, i) if window.innerWidth > 600} />
+          onClick={@zoomImage.bind(null, preview) if window.innerWidth > 600} />
       </figure>
 
     <div className="annotation">
@@ -114,6 +105,11 @@ Annotation = React.createClass
           <div className={previewClasses}>
             {previews}
           </div>
+        }
+        {if window.innerWidth > 600
+          <SkyLight ref="imageZoom" showOverlay={true} afterOpen={@modifyOverlay}>
+            <img src={@state.zoomImage} alt="preview image" />
+          </SkyLight>
         }
         {if cursor.refine('currentStep').value >= 1 and cursor.refine('currentStep').value isnt steps.length - 1
           <div className="video">

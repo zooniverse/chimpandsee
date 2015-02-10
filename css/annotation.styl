@@ -102,27 +102,6 @@
           @media screen and (max-width: 600px)
             max-width: 100%
 
-      .animating-in
-        animation: fadeIn 0.1s forwards
-
-      .animating-out
-        animation: slideOut 0.75s forwards
-
-      .zoom-image
-        max-width: inherit
-        margin-top: 95px
-        transition: max-width 0s 0s, margin-top 0s 0s linear
-
-      .fade-out
-        visibility: hidden
-        opacity: 0
-        transition: visibility 0s .25s, opacity .25s linear
-
-    .adjust-width
-      width: 310px
-      margin: 0 auto 10px
-      transition: width 0 .25s, margin 0 .25s linear
-
     .video
       margin: 10px auto
 
@@ -139,13 +118,40 @@
         max-width: 930px
         border-radius: 8px
 
-@keyframes slideOut {
-  0% { width: 100%; }
-  100% { width: 0%;}
-}
 
-@keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
-}
+.skylight-dialog
+  position: fixed
+  top: 25%
+  left: 10%
+  width: 80%
+  background-color: $blackish
+  border-radius: 8px
+  z-index: 100
+  padding: 10px
+  box-sizing: border-box
+
+  h2
+    display: none
+
+  img
+    width: 100%
+    border-radius: 8px
+
+  .skylight-dialog--close
+    cursor: pointer
+    position: absolute
+    top: 5px
+    right: 15px
+    font-size: 1.6em
+
+
+.skylight-dialog__overlay
+  position: absolute
+  top: 0
+  left: 0
+  width: 100%
+  height: 100%
+  z-index: 99
+  background-color: rgba(0,0,0,0.7)
+
 

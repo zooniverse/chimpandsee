@@ -45,11 +45,17 @@ module?.exports = React.createClass
 
   componentDidMount: ->
     unless @props.user?
-      @openTutorial 'general'
+      # Wait for load
+      setTimeout ( =>
+        @openTutorial 'general'
+      ), 1500
 
   componentWillReceiveProps: (nextProps) ->
     unless nextProps.user?.classification_count > 0
-      @openTutorial 'general'
+      # Wait for load
+      setTimeout ( =>
+        @openTutorial 'general'
+      ), 1500
 
   componentWillUnmount: ->
     Subject.off 'select', @onSubjectSelect
@@ -69,19 +75,19 @@ module?.exports = React.createClass
     # if @state.isLoading is true
     #   @setState previews: previewLoadingImages
 
-    setTimeout ( =>
-      previews = subject.location.previews
-      randomInt = Math.round(Math.random() * (2 - 0)) + 0
+    # setTimeout ( =>
+    previews = subject.location.previews
+    randomInt = Math.round(Math.random() * (2 - 0)) + 0
 
-      @setState
-        video: subject.location.standard
-        previews: previews[randomInt]
-        zooniverseId: subject.zooniverse_id
-        location: subject.group.name
-        classification: new Classification {subject}
+    @setState
+      video: subject.location.standard
+      previews: previews[randomInt]
+      zooniverseId: subject.zooniverse_id
+      location: subject.group.name
+      classification: new Classification {subject}
 
-      @state.classification.annotate previewsSet: randomInt
-    ), 500
+    @state.classification.annotate previewsSet: randomInt
+    # ), 500
 
   onNoSubjects: ->
     @refs.statusMessage.getDOMNode().innerHTML = "No more subjects. Please try again."
@@ -119,13 +125,15 @@ module?.exports = React.createClass
 
     <div className={classifyClasses}>
       <Guide onClickClose={@onClickClose} guideIsOpen={@state.guideIsOpen} />
-      <div className="location-container">
-        <p>
-          <span className="bold">Site:</span> {@state.location}
-          <button className="tutorial-btn" onClick={@openTutorial.bind(null, "general")}>Tutorial</button>
-          <a href="https://www.zooniverse.org" target="_blank"><button className="faq-btn">FAQs</button></a>
-        </p>
-      </div>
+      {unless @state.location is null
+        <div className="location-container">
+          <p>
+            <span className="bold">Site:</span> {@state.location}
+            <button className="tutorial-btn" onClick={@openTutorial.bind(null, "general")}>Tutorial</button>
+            <a href="https://www.zooniverse.org" target="_blank"><button className="faq-btn">FAQs</button></a>
+          </p>
+        </div>
+      }
       {unless @state.previews is null and @state.video is null
         <Annotation
           video={@state.video}
@@ -141,7 +149,8 @@ module?.exports = React.createClass
           isLoading={@isLoading}
           loadingState={@state.isLoading} />
       else
-        <div ref="statusMessage"></div>}
-      <SlideTutorial ref="slideTutorial" tutorialIsOpen={@state.tutorialIsOpen} onClickCloseSlide={@closeTutorial} tutorialType={@state.tutorialType} />
+        <div ref="statusMessage"></div>
+      }
+      <SlideTutorial tutorialIsOpen={@state.tutorialIsOpen} onClickCloseSlide={@closeTutorial} tutorialType={@state.tutorialType} />
       <div className={hiddenChimpClasses}><img className="hidden-chimp" src="./assets/hidden-chimp.png" alt="" /></div>
     </div>

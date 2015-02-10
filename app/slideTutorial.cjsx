@@ -60,15 +60,15 @@ SlideTutorial = React.createClass
         </div>
       </div>
 
-    # modifying height since footer and topbar exist outside of React's virtual DOM
-    slideTutorialStyle = if @props.tutorialIsOpen is true
-      height: document.getElementById('footer').clientHeight + document.getElementsByClassName('classify')[0].clientHeight + 100
-
     slideTutorialClasses = cx
       'slide-tutorial': true
       'show': @props.tutorialIsOpen
 
-    <div className={slideTutorialClasses} style={slideTutorialStyle}>
+    overlayHeight = if @props.tutorialIsOpen is true
+      # modifying height since footer and topbar exist outside of React's virtual DOM
+      height: document.getElementById('footer').clientHeight + document.getElementsByClassName('classify')[0].clientHeight + 100
+
+    <div className={slideTutorialClasses} style={overlayHeight}>
       <div  className="slide-tutorial-container">
         <button className="slide-tutorial-close-button" onClick={@props.onClickCloseSlide}>X</button>
         {slides}

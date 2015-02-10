@@ -32,6 +32,9 @@ Annotation = React.createClass
     if @props.user?
       @setState user: true
 
+  componentWillUnmount: ->
+    @setState notes: []
+
   componentWillReceiveProps: (nextProps) ->
     if nextProps.video isnt @props.video
       @setState favorited: false

@@ -70,7 +70,7 @@ SlideTutorial = React.createClass
 
     <div className={slideTutorialClasses} style={overlayHeight}>
       <div  className="slide-tutorial-container">
-        <button className="slide-tutorial-close-button" onClick={@props.onClickCloseSlide}>X</button>
+        <button className="slide-tutorial-close-button" onClick={@props.onClickCloseSlide}>x</button>
         {slides}
       </div>
     </div>

@@ -5,13 +5,12 @@ Subject = require 'zooniverse/models/subject'
 Share = require '../share'
 steps = require '../lib/steps'
 
-totals = {}
-
 Summary = React.createClass
   displayName: 'Summary'
 
   getInitialState: ->
     chimpsSeen: false
+    totals: {}
 
   componentWillMount: ->
     @props.notes.map (note) =>
@@ -20,7 +19,12 @@ Summary = React.createClass
 
     @noteCount(@props.notes)
 
+  componentWillReceiveProps: (nextProps) ->
+    if nextProps isnt @props.notes
+      @totals = {}
+
   noteCount: (notes) ->
+    totals = {}
     i = 0
     while i < notes.length
       if typeof (totals[notes[i].animal]) is "undefined"
@@ -29,9 +33,12 @@ Summary = React.createClass
         totals[notes[i].animal]++
       i++
 
+    @setState totals: totals
+
   render: ->
-    noteSummary = for animal, count of totals
-      <li key={animal}>{count} {animal}{"s" if count > 1}</li>
+    noteSummary =
+      for animal, count of @state.totals
+        <li key={animal}>{count} {animal}{"s" if count > 1}</li>
 
     generalClasses = cx
       'general-summary': true

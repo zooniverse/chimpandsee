@@ -62,6 +62,7 @@ Annotation = React.createClass
     overlay = document.getElementsByClassName('skylight-dialog__overlay')[0]
     classify = document.getElementsByClassName('classify')[0]
     footer = document.getElementById('footer')
+
     # modifying height since footer and topbar exist outside of React's virtual DOM
     overlay.style.height = footer.clientHeight + classify.clientHeight + 100 + "px"
     overlay.addEventListener 'click', @closeZoom
@@ -108,7 +109,7 @@ Annotation = React.createClass
         }
         {if window.innerWidth > 600
           <SkyLight ref="imageZoom" showOverlay={true} afterOpen={@modifyOverlay}>
-            <img src={@state.zoomImage} alt="preview image" />
+            <img onClick={@closeZoom} src={@state.zoomImage} alt="preview image" />
           </SkyLight>
         }
         {if cursor.refine('currentStep').value >= 1 and cursor.refine('currentStep').value isnt steps.length - 1

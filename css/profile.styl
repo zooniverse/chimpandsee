@@ -3,7 +3,7 @@
   color: #eae9e9
   height: 100%
 
-  .loadi ng-spinner
+  .loading-spinner
     height: 200px
     line-height: 200px
 
@@ -120,11 +120,30 @@
   .profile-sign-in
     display: flex
     align-items: flex-start
-    height: calc(100vh - 495px)
+    // height: calc(100vh - 495px)
 
     p
       text-align: center
 
     a, a:visited
       color: white
+
+    #sign-in-form
+      margin: 0 auto
+      width: 100%
+      max-width: 400px
+      text-align: center
+
+      label
+        display: block
+        margin: 20px 0
+
+      input
+        width: 100%
+        border: 0
+        background: inherit
+        outline: 2px solid $topbar-green
+        font-size: 18px
+        padding: 10px
+        color: white
 

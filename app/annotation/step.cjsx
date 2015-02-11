@@ -24,23 +24,23 @@ Step = React.createClass
       when button.value is steps[0][0].presence.options[0] and @props.step.value is 0
         @storeSelection(button.name, button.value)
         setTimeout (=>
-          console?.log 'send to classification', @props.currentAnswers.value
+          console?.log 'send to classification', @props.classification
           @props.classification.annotate @props.currentAnswers.value
           @sendClassification()
           @props.isLoading()
           @nextSubject()
-        ), 100
+        )
       when button.value is steps[0][0].presence.options[1]
         @moveToNextStep()
       when button.value is steps[1][0].annotation.options[0]
         @storeSelection(button.name, button.value)
         setTimeout ( =>
-          console?.log 'send to classification', @props.currentAnswers.value
+          console?.log 'send to classification', @props.classification
           @props.classification.annotate @props.currentAnswers.value
           @sendClassification()
           @props.isLoading()
           @nextSubject()
-        ), 100
+        )
       when button.value is steps[1][0].annotation.options[1] then @moveToNextStep()
       when button.value is steps[1][0].annotation.options[2] then @finishNote()
       when button.value is steps[2][0].animal.options[1] #chimp
@@ -106,7 +106,7 @@ Step = React.createClass
     @props.currentAnswers.set {}
 
   finishNote: ->
-    console?.log 'send to classification', @props.notes.value
+    console?.log 'send to classification', @props.classification
     @props.classification.annotate @props.notes.value
     @sendClassification()
     @props.step.set steps.length - 1

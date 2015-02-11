@@ -26,7 +26,17 @@ SlideTutorial = React.createClass
       when @state.activeSlide < @state[@props.tutorialType]?.length - 1
         @setState activeSlide: @state.activeSlide + 1
       when @state.activeSlide is @state[@props.tutorialType]?.length - 1
-        @props.onClickCloseSlide()
+        @onClickCloseTutorial()
+
+  onClickCloseTutorial: ->
+    slideTutorial = @refs.slideTutorial.getDOMNode()
+    slideTutorial.classList.add 'fade-out'
+
+    #Wait for animation
+    setTimeout ( =>
+      slideTutorial.classList.remove 'fade-out'
+      @props.closeTutorial()
+    ), 500
 
   onDotClick: (i) ->
     @setState activeSlide: i
@@ -68,9 +78,9 @@ SlideTutorial = React.createClass
       # modifying height since footer and topbar exist outside of React's virtual DOM
       height: document.getElementById('footer').clientHeight + document.getElementsByClassName('classify')[0].clientHeight + 100
 
-    <div className={slideTutorialClasses} style={overlayHeight}>
+    <div ref="slideTutorial" className={slideTutorialClasses} style={overlayHeight} onClick={@onClickCloseTutorial}>
       <div  className="slide-tutorial-container">
-        <button className="slide-tutorial-close-button" onClick={@props.onClickCloseSlide}>x</button>
+        <button className="slide-tutorial-close-button" onClick={@onClickCloseTutorial}>x</button>
         {slides}
       </div>
     </div>

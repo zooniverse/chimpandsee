@@ -9,8 +9,15 @@
   left: 0
   right: 0
   z-index: 10
+
+  &.show
+    animation: fadeIn .5s forwards
+
   &.active
     display: block
+
+  &.fade-out
+    animation: fadeOut .5s forwards
 
   .slide-tutorial-slide
     display: none
@@ -82,3 +89,12 @@
         line-height: 50px
         font-size: 16px
 
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes fadeOut {
+  from { opacity: 1; }
+  to { opacity: 0; }
+}

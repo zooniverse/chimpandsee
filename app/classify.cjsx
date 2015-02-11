@@ -45,17 +45,11 @@ module?.exports = React.createClass
 
   componentDidMount: ->
     unless @props.user?
-      # Wait for load
-      setTimeout ( =>
-        @openTutorial 'general'
-      ), 1500
+      @openTutorial 'general'
 
   componentWillReceiveProps: (nextProps) ->
     unless nextProps.user?.classification_count > 0
-      # Wait for load
-      setTimeout ( =>
-        @openTutorial 'general'
-      ), 1500
+      @openTutorial 'general'
 
   componentWillUnmount: ->
     Subject.off 'select', @onSubjectSelect
@@ -65,29 +59,26 @@ module?.exports = React.createClass
     body.classList.remove 'no-scroll'
 
   isLoading: ->
-    @setState
-      isLoading: true
-    setTimeout (=>
-      @setState isLoading: false
-    ), 500
+    @setState isLoading: true
 
   onSubjectSelect: (e, subject) ->
-    # if @state.isLoading is true
-    #   @setState previews: previewLoadingImages
+    if @state.isLoading is true
+      @setState previews: previewLoadingImages
 
-    setTimeout ( =>
-      previews = subject.location.previews
-      randomInt = Math.round(Math.random() * (2 - 0)) + 0
+    previews = subject.location.previews
+    randomInt = Math.round(Math.random() * (2 - 0)) + 0
 
-      @setState
-        video: subject.location.standard
-        previews: previews[randomInt]
-        zooniverseId: subject.zooniverse_id
-        location: subject.group.name
-        classification: new Classification {subject}
+    @setState({
+      video: subject.location.standard
+      previews: previews[randomInt]
+      zooniverseId: subject.zooniverse_id
+      location: subject.group.name
+      classification: new Classification {subject}
+    }, => @onSubjectUpdate(randomInt))
 
-      @state.classification.annotate previewsSet: randomInt
-    ), 500
+  onSubjectUpdate: (integer) ->
+    @state.classification.annotate previewsSet: integer
+    setTimeout ( => @setState isLoading: false ), 500
 
   onNoSubjects: ->
     @refs.statusMessage.getDOMNode().innerHTML = "No more subjects. Please try again."
@@ -151,6 +142,6 @@ module?.exports = React.createClass
       else
         <div ref="statusMessage"></div>
       }
-      <SlideTutorial tutorialIsOpen={@state.tutorialIsOpen} onClickCloseSlide={@closeTutorial} tutorialType={@state.tutorialType} />
+      <SlideTutorial tutorialIsOpen={@state.tutorialIsOpen} closeTutorial={@closeTutorial} tutorialType={@state.tutorialType} />
       <div className={hiddenChimpClasses}><img className="hidden-chimp" src="./assets/hidden-chimp.png" alt="" /></div>
     </div>

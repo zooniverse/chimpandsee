@@ -3,7 +3,7 @@ cx = React.addons.classSet
 _ = require 'underscore'
 Cursor = require('react-cursor').Cursor
 SkyLight = require 'react-skylight'
-
+ImageLoader = require 'react-imageloader'
 AnimateMixin = require "react-animate"
 animatedScrollTo = require 'animated-scrollto'
 
@@ -14,6 +14,8 @@ Summary = require './summary'
 Notes = require './notes'
 
 steps = require '../lib/steps'
+
+imageLoadCount = 0
 
 Annotation = React.createClass
   displayName: 'Annotation'
@@ -82,6 +84,9 @@ Annotation = React.createClass
       overlay.removeEventListener 'click'
     ), 250
 
+  onImageLoad: (e) ->
+    console.log e
+
   render: ->
     cursor = Cursor.build(@)
 
@@ -97,10 +102,11 @@ Annotation = React.createClass
     favoriteToolTip = if @state.user is false
       "Sign up or log in to favorite"
 
-    previews = @props.previews.map (preview, i) =>
-      <figure key={i} ref="figure">
-        <img src={preview} onClick={@zoomImage.bind(null, preview) if window.innerWidth > 600} />
-      </figure>
+    previews =
+      @props.previews.map (preview, i) =>
+        <figure key={i} ref="figure">
+          <ImageLoader onLoad={@onImageLoad()} src={preview} onClick={@zoomImage.bind(null, preview) if window.innerWidth > 600} />
+        </figure>
 
     <div className="annotation">
       <div className="subject">

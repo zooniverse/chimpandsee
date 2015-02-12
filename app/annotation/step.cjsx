@@ -13,12 +13,14 @@ Step = React.createClass
   displayName: 'Step'
   mixins: [ImmutableOptimizations(['step', 'currentAnswers'])]
 
+  getInitialState: ->
+    values: []
+
   onButtonClick: (event) ->
     button = event.target
-    notAChimp = _.without steps[2][0].animal.options, steps[2][0].animal.options[1] #chimp
-    otherAnimal = notAChimp.map (animal) ->
-      animal if animal is button.value
-    otherAnimal = _.compact(otherAnimal)
+    chimp = steps[2][0].animal.options[1]
+    human = steps[2][0].animal.options[8]
+    notAChimp = @animalCheck(button.value, chimp)
 
     switch
       when button.value is steps[0][0].presence.options[0] and @props.step.value is 0
@@ -43,11 +45,15 @@ Step = React.createClass
         )
       when button.value is steps[1][0].annotation.options[1] then @moveToNextStep()
       when button.value is steps[1][0].annotation.options[2] then @finishNote()
-      when button.value is steps[2][0].animal.options[1] #chimp
+      when button.value is chimp
         @storeSelection(button.name, button.value)
         @props.step.set 3
         @props.subStep.set 0
-      when button.value is otherAnimal[0]
+      when button.value is human
+        @storeSelection(button.name, button.value)
+        @storeSelection('behavior', 'no behavior')
+        setTimeout (=> @addNote() )
+      when button.value is notAChimp[0]
         @storeSelection(button.name, button.value)
         @props.step.set 3
         @props.subStep.set 3
@@ -69,7 +75,27 @@ Step = React.createClass
         @props.subStep.set 2
       when button.value is steps[4][0].summary.options[0] then @nextSubject()
       else
-        @storeSelection(button.name, button.value)
+        selection = button.value
+
+        if @state.values.indexOf(selection) >= 0
+          index = @state.values.indexOf(selection)
+          # button.classList.remove 'btn-active'
+          currentValues = @state.values
+          currentValues.splice index, 1
+          @setState values: currentValues
+        else
+          # button.classList.add 'btn-active'
+          currentValues = @state.values
+          currentValues.push selection
+          @setState values: currentValues
+
+
+  animalCheck: (buttonValue, excludeThisAnimal) ->
+    notThisAnimal = _.without steps[2][0].animal.options, excludeThisAnimal
+    otherAnimal = notThisAnimal.map (animal) ->
+      animal if animal is buttonValue
+    otherAnimal = _.compact(otherAnimal)
+    otherAnimal
 
   componentWillReceiveProps: (nextProps) ->
     window.scrollTo 0, 0 if window.innerWidth < 601 and nextProps.step.value < 2
@@ -85,16 +111,19 @@ Step = React.createClass
   goToAnimalStep: (event) ->
     button = event.target
 
+    # @setState values: []
     @props.step.set button.value
     @props.subStep.set 0
 
   goToSubStep: (event) ->
     button = event.target
 
+    # @setState values: []
     @props.step.set 3
     @props.subStep.set button.value
 
   addNote: ->
+    @storeSelection('behavior', @state.values)
     @props.notes.push [@props.currentAnswers.value]
     @props.currentAnswers.set {}
     @props.step.set 1
@@ -135,15 +164,15 @@ Step = React.createClass
       'next': true
       'hide': @props.step.value <= 2 or @props.step.value >= steps.length - 2
 
-    addDisabled = switch
-      when _.values(@props.currentAnswers.value).length < 4 and _.values(@props.currentAnswers.value)[0] is steps[2][0].animal.options[1] #chimp
+    addDisabled =
+      if @state.values.length is 0
+        console.log @state.values.length
         true
-      when _.values(@props.currentAnswers.value).length < 2 then true
 
     addClasses = cx
       'disabled': addDisabled
       'done': true
-      'hidden': @props.step.value is 2
+      'hidden': @props.step.value is 2 or @props.subStep.value < 2
       'hide': @props.step.value < 2 or @props.step.value is steps.length - 1
 
     stepButtons =
@@ -195,7 +224,7 @@ Step = React.createClass
             when @props.notes.value.length > 0 and option is steps[1][0].annotation.options[0] then true
 
         classes = cx
-          'btn-active': option in _.values(@props.currentAnswers.value) and @props.step.value > 1
+          'btn-active': option in _.values(@props.currentAnswers.value) and @props.step.value > 1 or @state.values.indexOf(option) >= 0 and @props.step.value > 1
           'disabled finish-disabled': @props.notes.value.length is 0 and option is steps[1][0].annotation.options[2]
           'disabled nothing-disabled': @props.notes.value.length > 0 and option is steps[1][0].annotation.options[0]
 

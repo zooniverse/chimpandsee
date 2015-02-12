@@ -28,7 +28,7 @@ stepThree =
       'gorilla'
       'hippopotamus'
       'human'
-      'hynea'
+      'hyena'
       'Jentik\'s duiker'
       'large ungulate'
       'leopard'

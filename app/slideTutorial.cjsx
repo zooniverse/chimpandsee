@@ -1,15 +1,13 @@
 React = require 'react/addons'
 cx = React.addons.classSet
 
+slideTutorials = require './lib/slideTutorials'
+
 SlideTutorial = React.createClass
   displayName: 'SlideTutorial'
 
   getInitialState: ->
-    general: [
-      {image: 'http://placehold.it/400x275', title: 'Slide 1', content: 'Lorem ipsum dolor sit amet, mel ne idque evertitur ullamcorper, ne scaevola efficiantur nec, nobis menandri explicari te eos. Sea no munere laudem. Ne vis eripuit pericula hendrerit, diam veri aliquando vim ea. Eu prompta recusabo eum.', button: 'Next'}
-      {image: 'http://placehold.it/400x275', title: 'Slide 2', content: 'Lorem ipsum dolor sit amet, mel ne idque evertitur ullamcorper, ne scaevola efficiantur nec, nobis menandri explicari te eos. Sea no munere laudem. Ne vis eripuit pericula hendrerit, diam veri aliquando vim ea. Eu prompta recusabo eum.', button: 'Next'}
-      {image: 'http://placehold.it/400x275', title: 'Slide 3', content: 'Lorem ipsum dolor sit amet, mel ne idque evertitur ullamcorper, ne scaevola efficiantur nec, nobis menandri explicari te eos. Sea no munere laudem. Ne vis eripuit pericula hendrerit, diam veri aliquando vim ea. Eu prompta recusabo eum.', button: 'Finish'}
-    ]
+    general: slideTutorials.general
     chimps: [
       {image: 'http://placehold.it/400x275', title: 'Chimp Slide 1', content: 'Lorem ipsum dolor sit amet, mel ne idque evertitur ullamcorper, ne scaevola efficiantur nec, nobis menandri explicari te eos. Sea no munere laudem. Ne vis eripuit pericula hendrerit, diam veri aliquando vim ea. Eu prompta recusabo eum.', button: 'Next'}
       {image: 'http://placehold.it/400x275', title: 'Chimp Slide 2', content: 'Lorem ipsum dolor sit amet, mel ne idque evertitur ullamcorper, ne scaevola efficiantur nec, nobis menandri explicari te eos. Sea no munere laudem. Ne vis eripuit pericula hendrerit, diam veri aliquando vim ea. Eu prompta recusabo eum.', button: 'Next'}
@@ -30,13 +28,13 @@ SlideTutorial = React.createClass
 
   onClickCloseTutorial: ->
     slideTutorial = @refs.slideTutorial.getDOMNode()
-    slideTutorial.classList.add 'fade-out'
+    slideTutorial.classList.add 'fade-out' #css fade-out animation cause js animations aren't great in react yet.
 
     #Wait for animation
     setTimeout ( =>
       slideTutorial.classList.remove 'fade-out'
       @props.closeTutorial()
-    ), 500
+    ), 250
 
   onDotClick: (i) ->
     @setState activeSlide: i

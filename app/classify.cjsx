@@ -38,12 +38,11 @@ module?.exports = React.createClass
     tutorialType: null
     isLoading: false
 
-  componentWillMount: ->
+  componentDidMount: ->
     Subject.on 'select', @onSubjectSelect
     Subject.on 'no-more', @onNoSubjects
     Subject.next()
 
-  componentDidMount: ->
     unless @props.user?
       @openTutorial 'general'
 
@@ -62,12 +61,11 @@ module?.exports = React.createClass
     @setState isLoading: true
 
   onSubjectSelect: (e, subject) ->
-    if @state.isLoading is true
-      @setState previews: previewLoadingImages
+    # if @state.isLoading is true
+    #   @setState previews: previewLoadingImages
 
     previews = subject.location.previews
     randomInt = Math.round(Math.random() * (2 - 0)) + 0
-
     @setState({
       video: subject.location.standard
       previews: previews[randomInt]
@@ -78,7 +76,7 @@ module?.exports = React.createClass
 
   onSubjectUpdate: (integer) ->
     @state.classification.annotate previewsSet: integer
-    setTimeout ( => @setState isLoading: false ), 500
+    setTimeout ( => @setState isLoading: false )
 
   onNoSubjects: ->
     @refs.statusMessage.getDOMNode().innerHTML = "No more subjects. Please try again."

@@ -80,7 +80,7 @@ Annotation = React.createClass
       @refs.imageZoom.hide()
       @setState zoomImageSrc: null
       overlay.removeEventListener 'click'
-    ), 500
+    ), 250
 
   render: ->
     cursor = Cursor.build(@)
@@ -99,9 +99,7 @@ Annotation = React.createClass
 
     previews = @props.previews.map (preview, i) =>
       <figure key={i} ref="figure">
-        <img
-          src={preview}
-          onClick={@zoomImage.bind(null, preview) if window.innerWidth > 600} />
+        <img src={preview} onClick={@zoomImage.bind(null, preview) if window.innerWidth > 600} />
       </figure>
 
     <div className="annotation">

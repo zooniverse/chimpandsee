@@ -76,7 +76,7 @@ SlideTutorial = React.createClass
       # modifying height since footer and topbar exist outside of React's virtual DOM
       height: document.getElementById('footer').clientHeight + document.getElementsByClassName('classify')[0].clientHeight + 100
 
-    <div ref="slideTutorial" className={slideTutorialClasses} style={overlayHeight} onClick={@onClickCloseTutorial}>
+    <div ref="slideTutorial" className={slideTutorialClasses} style={overlayHeight}>
       <div  className="slide-tutorial-container">
         <button className="slide-tutorial-close-button" onClick={@onClickCloseTutorial}>x</button>
         {slides}

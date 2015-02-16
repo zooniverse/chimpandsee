@@ -21,9 +21,22 @@
 
     .step-question
       display: block
+      
+      .question
+        margin: 0
+        line-height: 18px
 
-      @media screen and (max-width: 480px)
+        @media screen and (max-width: 480px)
+          font-size: 14px
+          
+      .tip
         font-size: 14px
+        margin: 10px 0 0
+        line-height: 16px
+        
+        .guide-link
+          text-decoration: underline
+          cursor: pointer
 
     .step-buttons
       position: absolute

@@ -1,5 +1,5 @@
 .annotation
-  padding: 20px 0 0
+  padding: 0
   margin: 0 auto
 
   span
@@ -9,6 +9,7 @@
     display: flex
     align-items: center
     justify-content: space-between
+    padding: 20px 0
 
     @media screen and (max-width: 870px)
       justify-content: space-around
@@ -88,7 +89,6 @@
       background-image: url(./assets/fav-icon-filled.svg)
 
     .preview-imgs
-      margin-bottom: 10px
       width: 100%
       max-width: 930px
       height: 100%
@@ -117,7 +117,7 @@
             max-width: 100%
 
     .video
-      margin: 10px auto
+      margin: 0 auto
 
       @media screen and (max-width: 870px)
         width: 98%
@@ -135,7 +135,7 @@
 
   .skylight-dialog
     position: fixed
-    top: 22%
+    top: 40px
     width: 60%
     left: 20%
     background-color: $blackish
@@ -159,8 +159,8 @@
       cursor: pointer
       position: absolute
       top: 5px
-      right: 10px
-      font-size: 14px
+      right: -35px
+      font-size: 16px
 
   .skylight-dialog__overlay
     position: absolute

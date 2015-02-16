@@ -1,6 +1,6 @@
 .step
   text-align: center
-  margin: 5px auto 0
+  margin: 0 auto
   width: 100%
   max-width: 930px
 
@@ -47,6 +47,7 @@
         font-size: 12px
         line-height: 12px
         color: #5c5c5c
+        margin-right: 5px
 
         @media screen and (max-width: 700px)
           align-self: center
@@ -64,10 +65,11 @@
         height: 34px
         border-radius: 100%
         color: #7d7d7d
+        font-family: 'Nunito', sans-serif
         font-size: 16px
         font-weight: 400
         line-height: 24px
-        margin: 0 10px
+        margin: 0 5px
         
         @media screen and (max-width: 400px)
           padding: 0
@@ -75,7 +77,7 @@
       .step-complete
         font-size: 0
         vertical-align: middle
-        background: $blackish url(./assets/check-green-icon.svg) no-repeat center center
+        background: $green url(./assets/check-icon.svg) no-repeat center center
         background-size: 12px 9px
 
       .step-active
@@ -272,10 +274,12 @@
 
   .presence
     .step-bottom
+      margin-top: 0
       padding: 5px 0
 
   .annotation
     .step-bottom
+      margin-top: 0
       padding: 0
 
       .buttons-container

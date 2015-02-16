@@ -51,7 +51,7 @@ Step = React.createClass
         @props.subStep.set 0
       when button.value is human
         @storeSelection(button.name, button.value)
-        @storeSelection('behavior', 'no behavior')
+        @storeSelection('behavior', ['no behavior'])
         setTimeout (=> @addNote() )
       when button.value is notAChimp[0]
         @storeSelection(button.name, button.value)

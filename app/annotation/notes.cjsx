@@ -17,12 +17,8 @@ Notes = React.createClass
         age = "#{note.age}," if note.age?
         sex = "#{note.sex}," if note.sex?
         behavior = 
-          if note.behavior.length?
-            note.behavior.map (behavior, i) =>
-              if i is note.behavior.length - 1
-                "#{behavior}"
-              else
-                "#{behavior}, "
+          if note.behavior.length > 1
+            note.behavior.join ', '
           else
             "#{note.behavior}"
 

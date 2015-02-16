@@ -140,6 +140,7 @@ Annotation = React.createClass
         notes={cursor.refine('notes')}
         classification={@props.classification}
         isLoading={@props.isLoading}
+        onClickGuide={@onClickGuide}
       />
       <Notes notes={cursor.refine('notes')} step={cursor.refine('currentStep')} />
     </div>

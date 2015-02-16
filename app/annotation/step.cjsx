@@ -75,20 +75,7 @@ Step = React.createClass
         @props.subStep.set 2
       when button.value is steps[4][0].summary.options[0] then @nextSubject()
       else
-        selection = button.value
-
-        if @state.values.indexOf(selection) >= 0
-          index = @state.values.indexOf(selection)
-          # button.classList.remove 'btn-active'
-          currentValues = @state.values
-          currentValues.splice index, 1
-          @setState values: currentValues
-        else
-          # button.classList.add 'btn-active'
-          currentValues = @state.values
-          currentValues.push selection
-          @setState values: currentValues
-
+        @storeMultipleSelections(button.name, button.value)
 
   animalCheck: (buttonValue, excludeThisAnimal) ->
     notThisAnimal = _.without steps[2][0].animal.options, excludeThisAnimal
@@ -99,6 +86,20 @@ Step = React.createClass
 
   componentWillReceiveProps: (nextProps) ->
     window.scrollTo 0, 0 if window.innerWidth < 601 and nextProps.step.value < 2
+
+  storeMultipleSelections: (name, value) ->
+    index = @state.values.indexOf(value)
+
+    if index >= 0
+      currentValues = @state.values
+      currentValues.splice index, 1
+      @setState values: currentValues
+      @storeSelection(name, @state.values)
+    else
+      currentValues = @state.values
+      currentValues.push value
+      @setState values: currentValues
+      @storeSelection(name, @state.values)
 
   storeSelection: (name, value) ->
     obj = {}
@@ -111,19 +112,17 @@ Step = React.createClass
   goToAnimalStep: (event) ->
     button = event.target
 
-    # @setState values: []
     @props.step.set button.value
     @props.subStep.set 0
 
   goToSubStep: (event) ->
     button = event.target
 
-    # @setState values: []
     @props.step.set 3
     @props.subStep.set button.value
 
   addNote: ->
-    @storeSelection('behavior', @state.values)
+    @setState values: []
     @props.notes.push [@props.currentAnswers.value]
     @props.currentAnswers.set {}
     @props.step.set 1
@@ -164,10 +163,7 @@ Step = React.createClass
       'next': true
       'hide': @props.step.value <= 2 or @props.step.value >= steps.length - 2
 
-    addDisabled =
-      if @state.values.length is 0
-        console.log @state.values.length
-        true
+    addDisabled = @state.values.length is 0
 
     addClasses = cx
       'disabled': addDisabled
@@ -236,7 +232,8 @@ Step = React.createClass
         {unless step.question is null
           <div className="step-top">
             <div className="step-question">
-              {step.question}
+              <p className="question">{step.question}</p>
+              <p className="tip">Not sure? Check out the <a className="guide-link" onClick={@props.onClickGuide}>Field Guide</a>!</p>
             </div>
             {stepButtons}
           </div>}

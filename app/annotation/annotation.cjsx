@@ -41,6 +41,10 @@ Annotation = React.createClass
 
     if nextProps.user? then @setState user: true else @setState user: false
 
+    if nextProps.previews isnt @props.previews
+      @refs.loader.getDOMNode().classList.remove 'hide'
+      @refs.previewImgs.getDOMNode().classList.add 'hidden'
+
   zoomImage: (preview) ->
     @setState zoomImageSrc: preview
     @refs.imageZoom.show() if window.innerWidth > 600
@@ -84,8 +88,17 @@ Annotation = React.createClass
       overlay.removeEventListener 'click'
     ), 250
 
-  onImageLoad: (e) ->
-    console.log e
+  onImageLoad: (src, event) ->
+    console.log 'event', event.target, src
+    i = 0
+    while i < @props.previews.length
+      event.target.src = src
+      i++
+
+    if i is 9
+      console.log 'equals 9'
+      @refs.loader.getDOMNode().classList.add 'hide'
+      @refs.previewImgs.getDOMNode().classList.remove 'hidden'
 
   render: ->
     cursor = Cursor.build(@)
@@ -104,18 +117,16 @@ Annotation = React.createClass
 
     previews =
       @props.previews.map (preview, i) =>
-        <figure key={i} ref="figure">
-          <ImageLoader onLoad={@onImageLoad()} src={preview} onClick={@zoomImage.bind(null, preview) if window.innerWidth > 600} />
+        <figure key={i}>
+          <img src={preview} onLoad={@onImageLoad.bind(@, preview)} onClick={@zoomImage.bind(null, preview) if window.innerWidth > 600} />
         </figure>
 
     <div className="annotation">
       <div className="subject">
         <button className={guideClasses} onClick={@onClickGuide}>Field Guide</button>
-        {if @props.loadingState is true
-          <div className="loading-spinner"><i className="fa fa-spinner fa-spin fa-4x"></i></div>
-        }
+        <div ref="loader" className="loading-spinner"><i className="fa fa-spinner fa-spin fa-4x"></i></div>
         {if cursor.refine('currentStep').value is 0
-          <div className='preview-imgs'>
+          <div ref="previewImgs" className='preview-imgs hidden'>
             {previews}
           </div>
         }

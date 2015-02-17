@@ -157,12 +157,6 @@ Step = React.createClass
       'cancel': true
       'hide': @props.step.value <= 1 or @props.step.value is steps.length - 1
 
-    nextDisabled = _.values(@props.currentAnswers.value).length is 0
-    nextClasses = cx
-      'disabled': nextDisabled
-      'next': true
-      'hide': @props.step.value <= 2 or @props.step.value >= steps.length - 2
-
     addDisabled = @state.values.length is 0
 
     addClasses = cx
@@ -246,7 +240,6 @@ Step = React.createClass
 
     <div className="step">
       <button className={cancelClasses} onClick={@cancelNote}>Cancel</button>
-      <button className={nextClasses} onClick={@moveToNextStep} disabled={nextDisabled}>Next</button>
       <button className={addClasses} onClick={@addNote} disabled={addDisabled}>Done</button>
       {step}
     </div>

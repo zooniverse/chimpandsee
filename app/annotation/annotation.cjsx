@@ -121,7 +121,7 @@ Annotation = React.createClass
         }
         {if cursor.refine('currentStep').value >= 1 and cursor.refine('currentStep').value isnt steps.length - 1
           <div className="video">
-            <video ref="video" poster={@props.previews[0]} width="100%" controls muted>
+            <video ref="video" poster={@props.previews[0]} width="100%" controls>
               <source src={@props.video.webm} type="video/webm" />
               <source src={@props.video.mp4} type="video/mp4" />
               Your browser does not support the video format. Please upgrade your browser.

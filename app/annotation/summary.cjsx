@@ -63,7 +63,7 @@ Summary = React.createClass
       </section>
       {if @state.chimpsSeen is true
         <section className="chimp-summary">
-          <img src="./assets/named-chimp.png" alt="A named chimp" />
+          <img src="./assets/identified-chimp.gif" alt="An identified chimp" />
           <div className="chimp-content">
             <h3>Have you seen this chimp before?</h3>
             <p>Help us identify and name these chimps!</p>

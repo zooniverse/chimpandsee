@@ -53,14 +53,14 @@ Guide = React.createClass
 
     details = if @state.guideDetailsIndex?
       exampleImages = guideDetails[@state.guideDetailsIndex].exampleImages.map (image, i) =>
-        <figure key={i}><img src={image} alt="Example image of an animal" /></figure>
+        <figure key={i}><img src={image} alt="Example image of an animal" /><figcaption>{guideDetails[@state.guideDetailsIndex].credit if guideDetails[@state.guideDetailsIndex].credit?}</figcaption></figure>
 
       <section className={detailsClasses}>
         <button className="back-guide-btn" onClick={@onClickBack}><img className="back-icon" src="./assets/back-icon.svg" alt="back icon" /> Back</button>
-        <h2>{guideDetails[@state.guideDetailsIndex].header}</h2>
-        <h3>{guideDetails[@state.guideDetailsIndex].subHeader}</h3>
+        <h2 className="animal-name">{guideDetails[@state.guideDetailsIndex].header}</h2>
+        <h3 className="animal-taxonomy">{guideDetails[@state.guideDetailsIndex].subHeader}</h3>
         <p>{guideDetails[@state.guideDetailsIndex].description}</p>
-        <figcaption>Example Images</figcaption>
+        <h4 className="images-header">Example Images</h4>
         {exampleImages}
       </section>
 

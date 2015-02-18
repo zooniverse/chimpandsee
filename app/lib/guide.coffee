@@ -37,7 +37,7 @@ guideDetails = [{
     header: 'giant forest hog'
     subHeader: 'Hylochoerus meinertzhageni'
     description: 'The largest species of wild pig. Most identifiable by its size, coat of very long black hairs (thinner in older hogs), and upward-curved tusks that are proportionally smaller than a warthog’s. Males have large protruding swellings under each eye.'
-    exampleImages: ["http://placehold.it/360x230", "http://placehold.it/360x230", "http://placehold.it/360x230"]
+    exampleImages: ["./assets/guide/giant-forest-hog-1.jpg", "./assets/guide/giant-forest-hog-2.jpg"]
   },
 
   {
@@ -72,7 +72,8 @@ guideDetails = [{
     header: 'Jentik\'s duiker'
     subHeader: 'Cephalophus jentinki'
     description: 'Duiker with unique coloration: black head and shoulders, white band behind shoulders, and gray rest of body. Longer horns angling straight back from head. One of the largest species of duikers, with an extremely solid body.'
-    exampleImages: ["http://placehold.it/360x230", "http://placehold.it/360x230", "http://placehold.it/360x230"]
+    exampleImages: ["./assets/guide/jentiks-duiker-1.jpg"]
+    credit: "Credit: Brent Huffman - Ultimate Ungulate Images."
   },
 
   {
@@ -191,7 +192,8 @@ guideDetails = [{
     header: 'zebra duiker'
     subHeader: 'Cephalophus zebra'
     description: 'Easily identifiable by the unique dark zebra-like stripes that cover its chestnut-colored back. Like other duikers, it has an arched back and stocky body with slender legs. The head has conical horns, the muzzle is black, and the lower jaw and undersides white.'
-    exampleImages: ["http://placehold.it/360x230", "http://placehold.it/360x230", "http://placehold.it/360x230"]
+    exampleImages: ["./assets/guide/zebra-duiker-1.jpg"]
+    credit: "Credit: Brent Huffman - Ultimate Ungulate Images."
   }
 ]
 

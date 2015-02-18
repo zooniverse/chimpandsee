@@ -43,7 +43,7 @@ Annotation = React.createClass
     if nextProps.previews isnt @props.previews
       imageLoadCount = 0
       @refs.loader.getDOMNode().classList.remove 'hide'
-      @refs.previewImgs.getDOMNode().classList.remove 'full-opacity'
+      @refs.previewImgs?.getDOMNode().classList.remove 'full-opacity'
 
   zoomImage: (preview) ->
     @setState zoomImageSrc: preview

@@ -9,47 +9,53 @@ User = require 'zooniverse/models/user'
 Profile = React.createClass
   displayName: 'Profile'
 
+  usernameInput: ''
+  passwordInput: ''
+
   getInitialState: ->
     collection: 'Recent'
 
   componentDidMount: ->
     @updateUser()
 
-  onClickSignUn: ->
+    User.on 'change', =>
+      @onUserChange arguments...
+
+    @onUserChange()
+
+  onUserChange: (e, user) ->
+    @usernameInput = @refs.username?.getDOMNode() || ''
+    @passwordInput = @refs.password?.getDOMNode() || ''
+
+    @usernameInput.value? user?.name || ''
+    @passwordInput.value? user?.api_key || '' # Just for the dots.
+
+  onClickSignUp: ->
     signupDialog.show()
 
   toggleCollection: (event) ->
     @setState collection: event.target.value
 
   updateUser: ->
+    #Update the count if logged in
     if @props.user?
       User.fetch()
 
-  userLogin: ->
-    console.log 'click'
-    username = @refs.username.getDOMNode().value
-    password = @refs.password.getDOMNode().value
-    signInButton = @refs.signInButton.getDOMNode()
+  userLogin: (e) ->
+    e.preventDefault()
 
     login = User.login
-      username: username
-      password: password
-
-    console.log login.done
+      username: @usernameInput.value
+      password: @passwordInput.value
 
     login.done ({success, message}) =>
       unless success
         @showError message
 
     login.fail =>
-      console.log 'fail'
-
-    login.always =>
-      # @el.removeClass 'loading'
-      setTimeout => signInButton.disabled = true if User.current?
+      @showError 'Sign in failed.'
 
   showError: (message) ->
-    console.log message
     errorMessage = @refs.errorMessage
 
     errorMessage.getDOMNode().innerHTML = message
@@ -87,14 +93,13 @@ Profile = React.createClass
     else
       <section className="profile-sign-in">
         <div className="content">
-          <p>Please <a href="#/profile" onClick={@onClickSignIn}>sign in</a>.</p>
           <form id="sign-in-form">
             <h3>Sign in to see your profile.</h3>
             <label><input ref="username" type="text" name="username" required="required" placeholder="Username"/></label>
             <label><input ref="password" type="password" name="password" required="required" placeholder="Password"/></label>
             <div ref="errorMessage" className="error-message"></div>
             <div className="action"><button ref="signInButton" type="submit" onClick={@userLogin}>Sign in</button></div>
-            <p className="no-account">{"Don't have an account?"} <button onClick={@onClickSignUp} name="sign-up">Sign up</button></p>
+            <p className="no-account">{"Don't have an account?"} <a className="sign-up-link" onClick={@onClickSignUp} name="sign-up">Sign up</a></p>
           </form>
         </div>
       </section>

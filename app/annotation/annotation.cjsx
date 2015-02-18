@@ -15,6 +15,8 @@ Notes = require './notes'
 
 steps = require '../lib/steps'
 
+imageLoadCount = 0
+
 Annotation = React.createClass
   displayName: 'Annotation'
   mixins: [AnimateMixin]
@@ -31,13 +33,17 @@ Annotation = React.createClass
   componentWillMount: ->
     if @props.user?
       @setState user: true
-    @props.isLoading()
 
   componentWillReceiveProps: (nextProps) ->
     if nextProps.video isnt @props.video
       @setState favorited: false
 
     if nextProps.user? then @setState user: true else @setState user: false
+
+    if nextProps.previews isnt @props.previews
+      imageLoadCount = 0
+      @refs.loader.getDOMNode().classList.remove 'hide'
+      @refs.previewImgs.getDOMNode().classList.remove 'full-opacity'
 
   zoomImage: (preview) ->
     @setState zoomImageSrc: preview
@@ -82,6 +88,14 @@ Annotation = React.createClass
       overlay.removeEventListener 'click'
     ), 250
 
+  onImageLoad: (i, event) ->
+    if imageLoadCount < @props.previews.length
+      imageLoadCount += 1
+
+    if imageLoadCount is 9
+      @refs.loader.getDOMNode().classList.add 'hide'
+      @refs.previewImgs.getDOMNode().classList.add 'full-opacity'
+
   render: ->
     cursor = Cursor.build(@)
 
@@ -97,19 +111,18 @@ Annotation = React.createClass
     favoriteToolTip = if @state.user is false
       "Sign up or log in to favorite"
 
-    previews = @props.previews.map (preview, i) =>
-      <figure key={i} ref="figure">
-        <img src={preview} onClick={@zoomImage.bind(null, preview) if window.innerWidth > 600} />
-      </figure>
+    previews =
+      @props.previews.map (preview, i) =>
+        <figure key={i}>
+          <img src={preview} onLoad={@onImageLoad.bind(@, null)} onClick={@zoomImage.bind(null, preview) if window.innerWidth > 600} />
+        </figure>
 
     <div className="annotation">
       <div className="subject">
         <button className={guideClasses} onClick={@onClickGuide}>Field Guide</button>
-        {if @props.loadingState is true
-          <div className="loading-spinner"><i className="fa fa-spinner fa-spin fa-4x"></i></div>
-        }
+        <div ref="loader" className="loading-spinner"><i className="fa fa-spinner fa-spin fa-4x"></i></div>
         {if cursor.refine('currentStep').value is 0
-          <div className='preview-imgs'>
+          <div ref="previewImgs" className='preview-imgs'>
             {previews}
           </div>
         }
@@ -139,7 +152,6 @@ Annotation = React.createClass
         currentAnswers={cursor.refine('currentAnswers')}
         notes={cursor.refine('notes')}
         classification={@props.classification}
-        isLoading={@props.isLoading}
         onClickGuide={@onClickGuide}
       />
       <Notes notes={cursor.refine('notes')} step={cursor.refine('currentStep')} />

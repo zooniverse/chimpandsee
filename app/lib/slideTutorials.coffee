@@ -1,7 +1,7 @@
 slideTutorials = {
   general: [
     {
-      image: 'http://placehold.it/400x275',
+      image: './assets/general-tutorial/chimps-intro-1.png',
       title: 'Welcome to Chimp & See!',
       content: '''Thanks for checking out Chimp & See!
       In this project, you’ll watch videos taken by various camera traps in Africa.
@@ -11,7 +11,7 @@ slideTutorials = {
     },
 
     {
-      image: 'http://placehold.it/400x275',
+      image: './assets/general-tutorial/chimps-intro-2.gif',
       title: 'Scan screencaps for animals',
       content: ''''You'll first be given nine screenshots from the video.
       Desktop users can click any one of them to inspect it more closely;
@@ -22,7 +22,7 @@ slideTutorials = {
     },
 
     {
-      image: 'http://placehold.it/400x275',
+      image: './assets/general-tutorial/chimps-intro-3.gif',
       title: 'Annotate species and behavior',
       content: '''If you did see something, you’ll get the complete video: watch it!
       If an animal appears, click "add annotation,"
@@ -33,7 +33,7 @@ slideTutorials = {
     },
 
     {
-      image: 'http://placehold.it/400x275',
+      image: './assets/general-tutorial/chimps-intro-4.gif',
       title: 'Educated guessing and field guide',
       content: '''Important: if you are not sure about an animal,
       just mark your best guess! Many people will mark each video,
@@ -44,18 +44,18 @@ slideTutorials = {
     },
 
     {
-      image: 'http://placehold.it/400x275',
+      image: './assets/general-tutorial/chimps-intro-5.gif',
       title: 'Help us ID and "name" chimps',
       content: '''If you’re up for an extra challenge,
       you can help out even more by identifying
-      individual chimps&mdash;and even giving them "names"
+      individual chimps—and even giving them "names"
       to help others spot them! Find out more about individual
       chimp IDs by following the prompts after marking a chimp.''',
       button: 'Next'
     },
 
     {
-      image: 'http://placehold.it/400x275',
+      image: './assets/general-tutorial/chimps-intro-6.gif',
       title: '''That's it!''',
       content: '''You can also chat with other volunteers on Talk,
       check out your history and favorites in your Profile,

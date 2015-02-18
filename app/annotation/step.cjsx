@@ -27,7 +27,6 @@ Step = React.createClass
           console?.log 'send to classification', @props.classification
           @props.classification.annotate @props.currentAnswers.value
           @sendClassification()
-          @props.isLoading()
           @nextSubject()
         )
       when button.value is steps[0][0].presence.options[1]
@@ -38,7 +37,6 @@ Step = React.createClass
           console?.log 'send to classification', @props.classification
           @props.classification.annotate @props.currentAnswers.value
           @sendClassification()
-          @props.isLoading()
           @nextSubject()
         )
       when button.value is steps[1][0].annotation.options[1] then @moveToNextStep()
@@ -117,7 +115,6 @@ Step = React.createClass
     @props.currentAnswers.set {}
     @props.step.set 0
     @props.subStep.set 0
-    @props.isLoading()
     Subject.next()
 
   sendClassification: ->

@@ -12,17 +12,6 @@ Classification = require 'zooniverse/models/classification'
 # Grabbing DOM element outside of React components to be able to move everything to the right including top bar and footer
 wrapper = document.getElementById('wrapper')
 body = document.getElementsByTagName('body')['0']
-previewLoadingImages = [
-  "http://placehold.it/310x179/111111&text=loading",
-  "http://placehold.it/310x179/111111&text=loading",
-  "http://placehold.it/310x179/111111&text=loading",
-  "http://placehold.it/310x179/111111&text=loading",
-  "http://placehold.it/310x179/111111&text=loading",
-  "http://placehold.it/310x179/111111&text=loading",
-  "http://placehold.it/310x179/111111&text=loading",
-  "http://placehold.it/310x179/111111&text=loading",
-  "http://placehold.it/310x179/111111&text=loading"]
-
 
 module?.exports = React.createClass
   displayName: 'Classify'
@@ -36,7 +25,6 @@ module?.exports = React.createClass
     guideIsOpen: false
     tutorialIsOpen: false
     tutorialType: null
-    isLoading: false
 
   componentDidMount: ->
     Subject.on 'select', @onSubjectSelect
@@ -61,9 +49,6 @@ module?.exports = React.createClass
     @setState isLoading: true
 
   onSubjectSelect: (e, subject) ->
-    # if @state.isLoading is true
-    #   @setState previews: previewLoadingImages
-
     previews = subject.location.previews
     randomInt = Math.round(Math.random() * (2 - 0)) + 0
     @setState({
@@ -76,7 +61,6 @@ module?.exports = React.createClass
 
   onSubjectUpdate: (integer) ->
     @state.classification.annotate previewsSet: integer
-    setTimeout ( => @setState isLoading: false )
 
   onNoSubjects: ->
     @refs.statusMessage.getDOMNode().innerHTML = "No more subjects. Please try again."
@@ -109,7 +93,7 @@ module?.exports = React.createClass
       'open-guide': @state.guideIsOpen is true
 
     hiddenChimpClasses = cx
-      'hide': @state.isLoading is true or @state.previews is null
+      'hide': @state.previews is null
       'hidden-chimp-container': true
 
     <div className={classifyClasses}>

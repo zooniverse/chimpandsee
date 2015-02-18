@@ -3,7 +3,7 @@ cx = React.addons.classSet
 _ = require 'underscore'
 Cursor = require('react-cursor').Cursor
 SkyLight = require 'react-skylight'
-ImageLoader = require 'react-imageloader'
+
 AnimateMixin = require "react-animate"
 animatedScrollTo = require 'animated-scrollto'
 
@@ -33,7 +33,6 @@ Annotation = React.createClass
   componentWillMount: ->
     if @props.user?
       @setState user: true
-    @props.isLoading()
 
   componentWillReceiveProps: (nextProps) ->
     if nextProps.video isnt @props.video
@@ -42,8 +41,9 @@ Annotation = React.createClass
     if nextProps.user? then @setState user: true else @setState user: false
 
     if nextProps.previews isnt @props.previews
+      imageLoadCount = 0
       @refs.loader.getDOMNode().classList.remove 'hide'
-      @refs.previewImgs.getDOMNode().classList.add 'hidden'
+      @refs.previewImgs.getDOMNode().classList.remove 'full-opacity'
 
   zoomImage: (preview) ->
     @setState zoomImageSrc: preview
@@ -88,17 +88,13 @@ Annotation = React.createClass
       overlay.removeEventListener 'click'
     ), 250
 
-  onImageLoad: (src, event) ->
-    console.log 'event', event.target, src
-    i = 0
-    while i < @props.previews.length
-      event.target.src = src
-      i++
+  onImageLoad: (i, event) ->
+    if imageLoadCount < @props.previews.length
+      imageLoadCount += 1
 
-    if i is 9
-      console.log 'equals 9'
+    if imageLoadCount is 9
       @refs.loader.getDOMNode().classList.add 'hide'
-      @refs.previewImgs.getDOMNode().classList.remove 'hidden'
+      @refs.previewImgs.getDOMNode().classList.add 'full-opacity'
 
   render: ->
     cursor = Cursor.build(@)
@@ -118,7 +114,7 @@ Annotation = React.createClass
     previews =
       @props.previews.map (preview, i) =>
         <figure key={i}>
-          <img src={preview} onLoad={@onImageLoad.bind(@, preview)} onClick={@zoomImage.bind(null, preview) if window.innerWidth > 600} />
+          <img src={preview} onLoad={@onImageLoad.bind(@, null)} onClick={@zoomImage.bind(null, preview) if window.innerWidth > 600} />
         </figure>
 
     <div className="annotation">
@@ -126,7 +122,7 @@ Annotation = React.createClass
         <button className={guideClasses} onClick={@onClickGuide}>Field Guide</button>
         <div ref="loader" className="loading-spinner"><i className="fa fa-spinner fa-spin fa-4x"></i></div>
         {if cursor.refine('currentStep').value is 0
-          <div ref="previewImgs" className='preview-imgs hidden'>
+          <div ref="previewImgs" className='preview-imgs'>
             {previews}
           </div>
         }
@@ -156,7 +152,6 @@ Annotation = React.createClass
         currentAnswers={cursor.refine('currentAnswers')}
         notes={cursor.refine('notes')}
         classification={@props.classification}
-        isLoading={@props.isLoading}
       />
       <Notes notes={cursor.refine('notes')} step={cursor.refine('currentStep')} />
     </div>

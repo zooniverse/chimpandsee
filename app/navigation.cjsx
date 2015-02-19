@@ -48,8 +48,7 @@ module?.exports = React.createClass
       <a href="#/" className="logo-link"><img className="logo" src={if window.location.hash is '#/' then "./assets/chimp-logo-home.png" else "./assets/chimp-logo.png"} alt="logo" /></a>
       <div className={menuClasses}>
         {links}
-        <a href="#">Talk</a>
-        <a href="#">Blog</a>
+        <a href="https://docs.google.com/a/zooniverse.org/forms/d/1OF4FwFcLp6UThhFXS2lRKYhO5McRsSzhS9h5i3g9ZJ0/viewform" target="_blank">Survey</a>
       </div>
       {if @props.user?
         <div className="zooniverse-info">

@@ -53,7 +53,8 @@ Annotation = React.createClass
     #workaround for animatedScrollTo bug
     isFirefox = typeof InstallTrigger isnt 'undefined'
     scrollElement = if isFirefox then document.documentElement else document.body
-    animatedScrollTo scrollElement, 0, 1000
+    document.body.scrollTop = 0
+    # animatedScrollTo scrollElement, 0, 1000
 
     @props.toggleGuide()
 

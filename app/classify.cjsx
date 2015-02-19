@@ -67,6 +67,7 @@ module?.exports = React.createClass
 
   toggleGuide: (e) ->
     if @state.guideIsOpen is false
+      @refs.guide.getDOMNode().scrollTop = 0
       @setState guideIsOpen: true
       wrapper.classList.add 'push-right'
       body.classList.add 'no-scroll'
@@ -97,7 +98,7 @@ module?.exports = React.createClass
       'hidden-chimp-container': true
 
     <div className={classifyClasses}>
-      <Guide onClickClose={@onClickClose} guideIsOpen={@state.guideIsOpen} />
+      <Guide ref="guide" onClickClose={@onClickClose} guideIsOpen={@state.guideIsOpen} />
       {unless @state.location is null
         <div className="location-container">
           <p>

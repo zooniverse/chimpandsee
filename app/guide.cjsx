@@ -11,8 +11,13 @@ Guide = React.createClass
   displayName: 'Guide'
   mixins: [AnimateMixin]
 
+  guideContainer: null
+
   getInitialState: ->
     guideDetailsIndex: null
+
+  componentDidMount: ->
+    @guideContainer = @refs.guideContainer.getDOMNode()
 
   componentWillReceiveProps: (nextProps) ->
     if nextProps.guideIsOpen is false
@@ -25,10 +30,9 @@ Guide = React.createClass
     @animate "close-details", {transitionProperty: 'opacity, left', transitionDuration: '.15s, 0s', transitionDelay: '0s, 0s', opacity: '0', left: '-400px'}, {opacity: '1', left: '0'}, 'in-out', 500
 
   onSelectGuideAnimal: (i) ->
-    guide = document.getElementsByClassName('guide')[0]
     @openAnimation()
     @setState guideDetailsIndex: i
-    guide.scrollTop = 0
+    @guide.scrollTop = 0
 
   onClickBack: ->
     @closeAnimation()
@@ -64,7 +68,7 @@ Guide = React.createClass
         {exampleImages}
       </section>
 
-    <div className="guide">
+    <div ref="guideContainer" className="guide">
       <header className={headerClasses}>
         <button className="close-guide-btn" onClick={@onClickClose}>X</button>
         <h2>Field Guide</h2>

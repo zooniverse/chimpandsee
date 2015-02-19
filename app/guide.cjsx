@@ -32,7 +32,7 @@ Guide = React.createClass
   onSelectGuideAnimal: (i) ->
     @openAnimation()
     @setState guideDetailsIndex: i
-    @guide.scrollTop = 0
+    @guideContainer.scrollTop = 0
 
   onClickBack: ->
     @closeAnimation()

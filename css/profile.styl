@@ -148,8 +148,12 @@
         font-size: 18px
         padding: 10px
         color: white
+        box-sizing: border-box
 
         &:focus
           outline: 4px solid $topbar-green
           outline-offset: 0
+
+        @media screen and (max-width: 400px)
+          max-width: 310px
 

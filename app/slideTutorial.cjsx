@@ -73,7 +73,7 @@ SlideTutorial = React.createClass
       'show': @props.tutorialIsOpen
 
     overlayHeight = if @props.tutorialIsOpen is true
-      # modifying height since footer and topbar exist outside of React's virtual DOM
+      # modifying height since topbar exist outside of React's virtual DOM
       height: document.getElementById('footer').clientHeight + document.getElementsByClassName('classify')[0].clientHeight + 100
 
     <div ref="slideTutorial" className={slideTutorialClasses} style={overlayHeight}>

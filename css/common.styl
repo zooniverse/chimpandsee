@@ -19,6 +19,12 @@ html, body
     transition: .3s ease all
     -webkit-font-smoothing: antialiased
     -moz-osx-font-smoothing: grayscale
+    min-height: 100%
+    margin-bottom: -395px
+
+    &:after
+      content: ""
+      display: block
 
   .push-right
     transform: translateX(400px) !important
@@ -74,13 +80,6 @@ html, body
           color: white
 
   #app
-    min-height: 100%
-    margin-bottom: -395px
-
-    &:after
-      content: ""
-      display: block
-
     .content
       width: 100%
       max-width: 1100px
@@ -170,35 +169,35 @@ html, body
         border-radius: 50%
 
   #footer, #app:after
-    height: 395px
+    min-height: 395px
+    height: 100%
 
-  #footer
-    .zooniverse-footer
-      background-color: #1f1f1f
-      color: #eae9e9
-      padding: 20px
-      position: relative
+  .zooniverse-footer
+    background-color: #1f1f1f
+    color: #eae9e9
+    padding: 20px
+    position: relative
 
-      .zooniverse-logo-container
-        display: block
-        width: 100%
+    .zooniverse-logo-container
+      display: block
+      width: 100%
+      text-align: center
+
+      .zooniverse-logo
+        width: 90px
+        margin-bottom: 30px
+
+    .zooniverse-footer-content
+      float: none
+      width: 100%
+      max-width: 920px
+      margin: 0 auto
+
+      .zooniverse-footer-heading
+        max-width: 720px
+        margin: 0 auto 20px
         text-align: center
-
-        .zooniverse-logo
-          width: 90px
-          margin-bottom: 30px
-
-      .zooniverse-footer-content
-        float: none
-        width: 100%
-        max-width: 920px
-        margin: 0 auto
-
-        .zooniverse-footer-heading
-          max-width: 720px
-          margin: 0 auto 20px
-          text-align: center
-          font-size: 16px
+        font-size: 16px
 
 .zooniverse-dialog .underlay .container .dialog
   @media screen and (max-width: 400px)

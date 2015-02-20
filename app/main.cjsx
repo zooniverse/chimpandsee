@@ -4,6 +4,7 @@ Router = require 'react-router'
 {Route, RouteHandler, DefaultRoute, Link} = require 'react-router'
 
 Navigation = require './navigation'
+Footer = require './footer'
 Home = require './home'
 Classify = require './classify'
 About = require './about'
@@ -32,6 +33,7 @@ Main = React.createClass
       <Navigation user={@state.user} hash={window.location.hash} />
 
       <RouteHandler user={@state.user} hash={window.location.hash} />
+      <Footer />
     </div>
 
 routes =

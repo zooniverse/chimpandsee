@@ -57,7 +57,7 @@
 
       @media screen and (max-width: 870px)
         order: 2
-        margin: 0 0 25px
+        margin: 20px 0 0
 
     .favorite-btn
       &:before
@@ -82,7 +82,7 @@
 
       @media screen and (max-width: 870px)
         order: 3
-        margin: 0 0 25px
+        margin: 20px 0 0
 
     .guide-open:before
       background-image: url(./assets/cancel-icon.svg)
@@ -94,10 +94,12 @@
       width: 100%
       max-width: 930px
       height: 100%
-      min-height: 537px
       display: block
       opacity: 0.3
       transition: opacity .5s ease-in-out
+
+      @media screen and (min-width: 870px)
+        min-height: 537px
 
       figure
         margin: 0
@@ -106,7 +108,7 @@
         transition: all 0.2s
 
         @media screen and (max-width: 600px)
-          min-width: 100%
+          max-width: 100%
 
         img
           padding: 5px
@@ -135,7 +137,6 @@
         width: 100%
         max-width: 930px
         border-radius: 8px
-
 
   .skylight-dialog
     position: fixed

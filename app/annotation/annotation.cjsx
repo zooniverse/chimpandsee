@@ -39,7 +39,6 @@ Annotation = React.createClass
   componentWillReceiveProps: (nextProps) ->
     if nextProps.video isnt @props.video
       @setState favorited: false
-      console.log document.getElementsByTagName('figure')[0].childNodes[0].clientWidth
 
     if nextProps.user? then @setState user: true else @setState user: false
 
@@ -140,8 +139,8 @@ Annotation = React.createClass
           </SkyLight>
         }
         {if cursor.refine('currentStep').value >= 1 and cursor.refine('currentStep').value isnt steps.length - 1
-          <div className="video">
-            <video ref="video" poster={@props.previews[0]} controls width={@srcWidth}>
+          <div className="video-container">
+            <video ref="video" autoPlay poster={@props.previews[0]} controls width={@srcWidth}>
               <source src={@props.video.webm} type="video/webm" />
               <source src={@props.video.mp4} type="video/mp4" />
               Your browser does not support the video format. Please upgrade your browser.

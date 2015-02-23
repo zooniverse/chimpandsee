@@ -42,7 +42,7 @@ stepThree =
       'rodent'
       'small antelope'
       'small grey duiker'
-      'small bodied primate'
+      'other primate'
       'small cat'
       'warthog'
       'wild dog'

@@ -21,6 +21,8 @@ Annotation = React.createClass
   displayName: 'Annotation'
   mixins: [AnimateMixin]
 
+  srcWidth: 0
+
   getInitialState: ->
     currentStep: 0
     subStep: 0
@@ -37,6 +39,7 @@ Annotation = React.createClass
   componentWillReceiveProps: (nextProps) ->
     if nextProps.video isnt @props.video
       @setState favorited: false
+      console.log document.getElementsByTagName('figure')[0].childNodes[0].clientWidth
 
     if nextProps.user? then @setState user: true else @setState user: false
 
@@ -50,11 +53,11 @@ Annotation = React.createClass
     @refs.imageZoom.show() if window.innerWidth > 600
 
   onClickGuide: ->
-    #workaround for animatedScrollTo bug
+    #workaround for Firefox bug
     isFirefox = typeof InstallTrigger isnt 'undefined'
     scrollElement = if isFirefox then document.documentElement else document.body
-    document.body.scrollTop = 0
-    # animatedScrollTo scrollElement, 0, 1000
+
+    animatedScrollTo scrollElement, 0, 1000
 
     @props.toggleGuide()
 
@@ -68,12 +71,7 @@ Annotation = React.createClass
 
   modifyOverlay: ->
     overlay = @refs.imageZoom.getDOMNode().childNodes[0] #skylight-dialog__overlay
-    classify = @getDOMNode().parentNode #classify
-    footer = document.getElementById('footer')
-    dialog = @refs.imageZoom.getDOMNode().childNodes[1] #skylight-dialog
 
-    # modifying height since footer and topbar exist outside of React's virtual DOM
-    overlay.style.height = footer.clientHeight + classify.clientHeight + 100 + "px"
     overlay.addEventListener 'click', @closeZoom
 
   closeZoom: ->
@@ -97,6 +95,7 @@ Annotation = React.createClass
       imageLoadCount += 1
 
     if imageLoadCount is 9
+      @srcWidth = event.target.naturalWidth
       @refs.loader.getDOMNode().classList.add 'hide'
       @refs.previewImgs.getDOMNode().classList.add 'full-opacity'
 
@@ -115,6 +114,10 @@ Annotation = React.createClass
     favoriteToolTip = if @state.user is false
       "Sign up or log in to favorite"
 
+    loaderStyle =
+      height: @refs.previewImgs?.getDOMNode().clientHeight
+      lineHeight: @refs.previewImgs?.getDOMNode().clientHeight + "px"
+
     previews =
       @props.previews.map (preview, i) =>
         <figure key={i}>
@@ -124,7 +127,7 @@ Annotation = React.createClass
     <div className="annotation">
       <div className="subject">
         <button className={guideClasses} onClick={@onClickGuide}>Field Guide</button>
-        <div ref="loader" className="loading-spinner"><i className="fa fa-spinner fa-spin fa-4x"></i></div>
+        <div ref="loader" className="loading-spinner" style={loaderStyle}><i className="fa fa-spinner fa-spin fa-4x"></i></div>
         {if cursor.refine('currentStep').value is 0
           <div ref="previewImgs" className='preview-imgs'>
             {previews}
@@ -138,7 +141,7 @@ Annotation = React.createClass
         }
         {if cursor.refine('currentStep').value >= 1 and cursor.refine('currentStep').value isnt steps.length - 1
           <div className="video">
-            <video ref="video" poster={@props.previews[0]} width="100%" controls>
+            <video ref="video" poster={@props.previews[0]} controls width={@srcWidth}>
               <source src={@props.video.webm} type="video/webm" />
               <source src={@props.video.mp4} type="video/mp4" />
               Your browser does not support the video format. Please upgrade your browser.

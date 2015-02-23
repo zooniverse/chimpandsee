@@ -71,6 +71,7 @@ module?.exports = React.createClass
       @setState guideIsOpen: true
       wrapper.classList.add 'push-right'
       body.classList.add 'no-scroll'
+      document.getElementsByClassName('main')[0].classList.add 'scroll'
     else
       @onClickClose()
 
@@ -78,6 +79,7 @@ module?.exports = React.createClass
     @setState guideIsOpen: false
     wrapper.classList.remove 'push-right'
     body.classList.remove 'no-scroll'
+    document.getElementsByClassName('main')[0].classList.remove 'scroll'
 
   openTutorial: (type) ->
     @setState

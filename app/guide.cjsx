@@ -19,9 +19,20 @@ Guide = React.createClass
   componentDidMount: ->
     @guideContainer = @refs.guideContainer.getDOMNode()
 
+    @guideContainer.addEventListener 'scroll', @preventWindowScroll
+
+  componentWillUnmount: ->
+    @guideContainer.removeEventListener 'scroll', @preventWindowScroll
+
   componentWillReceiveProps: (nextProps) ->
     if nextProps.guideIsOpen is false
       @setState guideDetailsIndex: null
+
+  preventWindowScroll: (e) ->
+    document.onscroll = (e) ->
+      console.log 'works', e
+      e.preventDefault()
+      console.log e
 
   openAnimation: ->
     @animate "show-details", {transitionProperty: 'opacity, left', transitionDuration: '.15s, 0s', transitionDelay: '0s, 0s', opacity: '1', left: '0'}, {opacity: '0', left: '-400px'}, 'in-out', 500

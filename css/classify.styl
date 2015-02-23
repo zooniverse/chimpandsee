@@ -1,8 +1,16 @@
+
+
 .classify
-  padding: 20px 0
+  padding: 10px 0
   color: white
   min-height: 600px
   height: 100%
+
+  &.open-guide
+    min-height: 1050px
+
+    .hidden-chimp-container
+      display: none
 
   .loading-spinner
     height: 415px
@@ -18,11 +26,11 @@
     .hidden-chimp
       position: relative
       z-index: 0
-      bottom: 10px
+      bottom: 20px
       transition: all 0.5s ease
 
       &:hover
-        bottom: 30px
+        bottom: 40px
 
     @media screen and (max-width: 400px)
       margin: 0 auto

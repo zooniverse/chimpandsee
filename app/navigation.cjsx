@@ -50,15 +50,4 @@ module?.exports = React.createClass
         {links}
         <a href="https://docs.google.com/a/zooniverse.org/forms/d/1OF4FwFcLp6UThhFXS2lRKYhO5McRsSzhS9h5i3g9ZJ0/viewform" target="_blank">Survey</a>
       </div>
-      {if @props.user?
-        <div className="zooniverse-info">
-          <svg xmlns="http://www.w3.org/2000/svg" className="zooniverse-logo" viewBox="0 0 100 100" width="1em" height="1em">
-            <g fill="currentColor" stroke="transparent" strokeWidth="0" transform="translate(50, 50)">
-              <path d="M 0 -45 A 45 45 0 0 1 0 45 A 45 45 0 0 1 0 -45 Z M 0 -30 A 30 30 0 0 0 0 30 A 30 30 0 0 0 0 -30 Z" />
-              <path d="M 0 -12.5 A 12.5 12.5 0 0 1 0 12.5 A 12.5 12.5 0 0 1 0 -12.5 Z" />
-              <path d="M 0 -75 L 5 0 L 0 75 L -5 0 Z" transform="rotate(50)" />
-            </g>
-          </svg>
-          <span>A Zooniverse project</span>
-        </div>}
     </nav>

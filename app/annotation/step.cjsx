@@ -146,7 +146,7 @@ Step = React.createClass
     Subject.next()
 
   sendClassification: ->
-    @props.classification.send()
+    # @props.classification.send()
     console?.log 'classification send'
 
   render: ->

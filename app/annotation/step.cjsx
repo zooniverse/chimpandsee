@@ -130,6 +130,7 @@ Step = React.createClass
     @props.step.set 1
     @props.subStep.set 0
     @props.currentAnswers.set {}
+    @setState values: []
 
   finishNote: ->
     console?.log 'send to classification', @props.classification

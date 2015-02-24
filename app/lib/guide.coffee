@@ -105,6 +105,13 @@ guideDetails = [{
   },
 
   {
+    header: 'other primate'
+    subHeader: 'Cercopithecidae family and Lorisoidea superfamily'
+    description: 'Monkeys and prosimians are different from apes in several ways. They typically are smaller, with tails, less broad chests, and less upright posture. African monkeys have non-prehensile tails, hind legs longer than forearms, and downward-pointing nostrils. Coloration varies between species.'
+    exampleImages: ["./assets/guide/small-primates-1.jpg", "./assets/guide/small-primates-2.jpg", "./assets/guide/small-primates-3.jpg"]
+  },
+
+  {
     header: 'pangolin'
     subHeader: 'Manis genus'
     description: 'Also called “scaly anteater,” this unique creature’s body is covered from snout to long tail in overlapping earth-toned plates. Can curl into a ball to protect itself from threats. Ranges in size from one to three feet. Primarily nocturnal.'
@@ -158,13 +165,6 @@ guideDetails = [{
     subHeader: 'Cephalophus monticola and Cephalophus maxwelli'
     description: 'Some of the smallest antelopes. Brown coat with slight bluish tinge on back; pale chest and underbelly. Small spiky horns in most males and some females. Stocky body, arched back, large hindquarters and thin legs.'
     exampleImages: ["./assets/guide/sm-gray-duiker-1.jpg", "./assets/guide/sm-gray-duiker-2.jpg", "./assets/guide/sm-gray-duiker-3.jpg"]
-  },
-
-  {
-    header: 'small-bodied primate'
-    subHeader: 'Cercopithecidae family and Lorisoidea superfamily'
-    description: 'Monkeys and prosimians are different from apes in several ways. They typically are smaller, with tails, less broad chests, and less upright posture. African monkeys have non-prehensile tails, hind legs longer than forearms, and downward-pointing nostrils. Coloration varies between species.'
-    exampleImages: ["./assets/guide/small-primates-1.jpg", "./assets/guide/small-primates-2.jpg", "./assets/guide/small-primates-3.jpg"]
   },
 
   {

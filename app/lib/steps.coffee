@@ -34,6 +34,7 @@ stepThree =
       'leopard'
       'lion'
       'other'
+      'other primate'
       'pangolin'
       'porcupine'
       'red duiker'
@@ -42,7 +43,6 @@ stepThree =
       'rodent'
       'small antelope'
       'small grey duiker'
-      'other primate'
       'small cat'
       'warthog'
       'wild dog'
@@ -91,7 +91,7 @@ stepChimpBehavior =
 
 stepOther =
   behavior:
-    question: "What is this animal doing?"
+    question: "What is this animal doing and how many are there?"
     options: [
       'aggression'
       'arboreal'
@@ -111,6 +111,15 @@ stepOther =
       'tool usage'
       'traveling'
       'vocalizing'
+    ]
+  number:
+    question: null
+    options: [
+      '1'
+      '2'
+      '3'
+      '4'
+      '5+'
     ]
 
 stepFinal =

@@ -23,7 +23,7 @@ Notes = React.createClass
             "#{note.behavior}"
 
         <p key={i} className="note #{note.animal}">
-          {note.animal} {age} {sex} {behavior}
+          {note.number} <span className="note-animal">{note.animal}{"s" if note.number > 1}</span> {age} {sex} {behavior}
           <button className="delete" onClick={@deleteNote.bind(null, i)}><img src="./assets/close-icon.svg" alt="X" /></button>
         </p>
 

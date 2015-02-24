@@ -10,35 +10,15 @@ Summary = React.createClass
 
   getInitialState: ->
     chimpsSeen: false
-    totals: {}
 
   componentWillMount: ->
     @props.notes.map (note) =>
       if note.animal is steps[2][0].animal.options[1] #chimp
         @setState chimpsSeen: true
 
-    @noteCount(@props.notes)
-
-  componentWillReceiveProps: (nextProps) ->
-    if nextProps isnt @props.notes
-      @totals = {}
-
-  noteCount: (notes) ->
-    totals = {}
-    i = 0
-    while i < notes.length
-      if typeof (totals[notes[i].animal]) is "undefined"
-        totals[notes[i].animal] = 1
-      else
-        totals[notes[i].animal]++
-      i++
-
-    @setState totals: totals
-
   render: ->
-    noteSummary =
-      for animal, count of @state.totals
-        <li key={animal}>{count} {animal}{"s" if count > 1}</li>
+    noteSummary = @props.notes.map (note, i) =>
+      <li key={i}>{note.number} {note.animal}{"s" if note.number > 1}</li>
 
     generalClasses = cx
       'general-summary': true

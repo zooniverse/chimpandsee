@@ -129,8 +129,8 @@
         padding: 2px 6px 3px
         border: none
         margin: 10px
-        height: initial
-        border-radius: initial
+        height: 100%
+        border-radius: 0px
         background-color: transparent
 
         &:before
@@ -265,6 +265,7 @@
   .animal, .age, .sex, .behavior
     .step-bottom
       display: flex
+      align-items: center
 
       @media screen and (max-width: 450px)
         justify-content: space-between
@@ -286,6 +287,21 @@
 
       @media screen and (max-width: 450px)
         margin-top: -60px
+
+  // .behavior
+  //   .step-bottom
+  //     .cancel, .done
+  //       margin-top: 52.5px
+
+  .number
+    .step-bottom
+      padding: 0 0 20px
+
+      .cancel, .done
+        display: none
+
+      .buttons-container
+        min-height: 100%
 
   .summary
     .step-bottom

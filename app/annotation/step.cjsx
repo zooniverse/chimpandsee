@@ -45,33 +45,30 @@ Step = React.createClass
       when button.value is steps[1][0].annotation.options[2] then @finishNote()
       when button.value is chimp
         @storeSelection(button.name, button.value)
+        @storeSelection('number', '1')
         @props.step.set 3
         @props.subStep.set 0
       when button.value is human
         @storeSelection(button.name, button.value)
+        @storeSelection('number', '1')
         @storeSelection('behavior', ['no behavior'])
         setTimeout (=> @addNote() )
       when button.value is notAChimp[0]
         @storeSelection(button.name, button.value)
+        @storeSelection('number', '1')
         @props.step.set 3
         @props.subStep.set 3
-      when button.value is steps[3][0].age.options[0]
+      when steps[3][0].age.options.indexOf(button.value) >= 0
         @storeSelection(button.name, button.value)
         @props.step.set 3
         @props.subStep.set 1
-      when button.value is steps[3][0].age.options[1]
-        @storeSelection(button.name, button.value)
-        @props.step.set 3
-        @props.subStep.set 1
-      when button.value is steps[3][1].sex.options[0]
-        @storeSelection(button.name, button.value)
-        @props.step.set 3
-        @props.subStep.set 2
-      when button.value is steps[3][1].sex.options[1]
+      when steps[3][1].sex.options.indexOf(button.value) >= 0
         @storeSelection(button.name, button.value)
         @props.step.set 3
         @props.subStep.set 2
       when button.value is steps[4][0].summary.options[0] then @nextSubject()
+      when steps[3][3].number.options.indexOf(button.value) >= 0
+        @storeSelection(button.name, button.value)
       else
         @storeMultipleSelections(button.name, button.value)
 
@@ -230,11 +227,11 @@ Step = React.createClass
             {stepButtons}
           </div>}
         <div className="step-bottom">
-          <button className={cancelClasses} onClick={@cancelNote}>Cancel</button>
+          <button className={cancelClasses} onClick={@cancelNote} style={marginTop: "52.5px" if @props.subStep.value is 3 and window.innerWidth > 450}>Cancel</button>
           <div className="buttons-container">
             {buttons}
           </div>
-          <button className={addClasses} onClick={@addNote} disabled={addDisabled}>Done</button>
+          <button className={addClasses} onClick={@addNote} disabled={addDisabled} style={marginTop: "52.5px" if @props.subStep.value is 3 and window.innerWidth > 450}>Done</button>
         </div>
       </div>
 

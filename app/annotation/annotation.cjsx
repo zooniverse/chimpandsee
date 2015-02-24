@@ -135,12 +135,12 @@ Annotation = React.createClass
         {if window.innerWidth > 600
           <SkyLight ref="imageZoom" showOverlay={true} afterOpen={@modifyOverlay}>
             <img onClick={@closeZoom} src={@state.zoomImageSrc} alt="preview image" />
-            <button className="close-zoom-btn" onClick={@closeZoom}>x</button>
+            <button className="close-zoom-btn" onClick={@closeZoom}><img src="./assets/cancel-icon.svg" alt="cancel icon" /></button>
           </SkyLight>
         }
         {if cursor.refine('currentStep').value >= 1 and cursor.refine('currentStep').value isnt steps.length - 1
           <div className="video-container">
-            <video ref="video" autoPlay poster={@props.previews[0]} controls width={@srcWidth}>
+            <video ref="video" poster={@props.previews[0]} controls width={if @srcWidth is 640 then @srcWidth else '100%'}>
               <source src={@props.video.webm} type="video/webm" />
               <source src={@props.video.mp4} type="video/mp4" />
               Your browser does not support the video format. Please upgrade your browser.

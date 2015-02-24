@@ -54,7 +54,7 @@ SlideTutorial = React.createClass
 
       <div key={i} className={slideClasses}>
         <div className="slide-tutorial-slide-top">
-          <img src={slide.image} />
+          <img src={slide.image} alt="" />
         </div>
         <div className="slide-tutorial-slide-bottom">
           <h1>{slide.title}</h1>
@@ -74,7 +74,7 @@ SlideTutorial = React.createClass
 
     <div ref="slideTutorial" className={slideTutorialClasses}>
       <div  className="slide-tutorial-container">
-        <button className="slide-tutorial-close-button" onClick={@onClickCloseTutorial}>x</button>
+        <button className="slide-tutorial-close-button" onClick={@onClickCloseTutorial}><img src="./assets/cancel-icon.svg" alt="cancel icon" /></button>
         {slides}
       </div>
     </div>

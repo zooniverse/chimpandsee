@@ -6,23 +6,6 @@
   @media screen and (max-width: 710px)
     text-align: center
 
-  .zooniverse-info
-    font: bold 13px "Helvetica Neue", Arial, Helvetica, sans-serif
-    display: inline-block
-    margin: 5px
-    vertical-align: middle
-    color: $mint
-    position: absolute
-    z-index: 2
-    top: 0
-    left: 0
-
-    .zooniverse-logo
-      width: 25px
-      height: 25px
-      margin: -2px 9px 0 0
-      vertical-align: middle
-
   .mobile-menu
     width: 15px
     display: none
@@ -33,7 +16,7 @@
       display: inline-block
       position: absolute
       z-index: 10
-      top: 34.5px
+      top: 4.5px
       right: 4.5px
       padding: 20px
 
@@ -85,6 +68,7 @@
       top: -347px
       padding: 10px 0
       display: block
+      will-change: transform
 
       a
         display: none
@@ -92,7 +76,6 @@
       &.show-menu
         transform: translateY(347px)
         z-index: 20
-        will-change: transform
 
         a
           display: block

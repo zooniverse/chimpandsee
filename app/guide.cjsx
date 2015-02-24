@@ -81,7 +81,7 @@ Guide = React.createClass
 
     <div ref="guideContainer" className="guide">
       <header className={headerClasses}>
-        <button className="close-guide-btn" onClick={@onClickClose}>X</button>
+        <button className="close-guide-btn" onClick={@onClickClose}><img src="./assets/cancel-icon.svg" alt="cancel icon" /></button>
         <h2>Field Guide</h2>
       </header>
       <nav style={if @state.guideDetailsIndex isnt null then @getAnimatedStyle("show-details") else @getAnimatedStyle("close-details")} className="animal-list">

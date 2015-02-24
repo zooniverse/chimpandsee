@@ -230,15 +230,15 @@ Step = React.createClass
             {stepButtons}
           </div>}
         <div className="step-bottom">
+          <button className={cancelClasses} onClick={@cancelNote}>Cancel</button>
           <div className="buttons-container">
             {buttons}
           </div>
+          <button className={addClasses} onClick={@addNote} disabled={addDisabled}>Done</button>
         </div>
       </div>
 
     <div className="step">
-      <button className={cancelClasses} onClick={@cancelNote}>Cancel</button>
-      <button className={addClasses} onClick={@addNote} disabled={addDisabled}>Done</button>
       {step}
     </div>
 

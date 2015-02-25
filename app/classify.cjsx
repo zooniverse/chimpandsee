@@ -9,12 +9,12 @@ Subject = require 'zooniverse/models/subject'
 Favorite = require 'zooniverse/models/favorite'
 Classification = require 'zooniverse/models/classification'
 
-# Grabbing DOM element outside of React components to be able to move everything to the right including top bar and footer
-wrapper = document.getElementById('wrapper')
-body = document.getElementsByTagName('body')['0']
-
 module?.exports = React.createClass
   displayName: 'Classify'
+
+  wrapper: null
+  body: null
+  main: null
 
   getInitialState: ->
     video: null
@@ -32,8 +32,20 @@ module?.exports = React.createClass
     Subject.on 'no-more', @onNoSubjects
     Subject.next()
 
-    unless @props.user?
-      @openTutorial 'general'
+    # Waiting for zoo-library to authenticate. Ugh.
+    setTimeout ( =>
+      if @props.user?
+        if @props.user.preferences.chimp?.skip_first_step is "true"
+          @setState skipImages: true
+          @refs.skipCheckbox?.getDOMNode().setAttribute 'checked', 'true'
+      else
+        @openTutorial 'general'
+    ), 2000
+
+    # Grabbing DOM element outside of React components to be able to move everything to the right including top bar and footer
+    @wrapper = document.getElementById('wrapper')
+    @body = document.getElementsByTagName('body')[0]
+    @main = document.getElementsByClassName('main')[0]
 
   componentWillReceiveProps: (nextProps) ->
     unless nextProps.user?.classification_count > 0
@@ -43,8 +55,7 @@ module?.exports = React.createClass
     Subject.off 'select', @onSubjectSelect
     Subject.off 'no-more', @onNoSubjects
 
-    wrapper.classList.remove 'push-right'
-    body.classList.remove 'no-scroll'
+    @removeClassesForGuide()
 
   onSubjectSelect: (e, subject) ->
     previews = subject.location.previews
@@ -67,17 +78,23 @@ module?.exports = React.createClass
     if @state.guideIsOpen is false
       @refs.guide.getDOMNode().scrollTop = 0
       @setState guideIsOpen: true
-      wrapper.classList.add 'push-right'
-      body.classList.add 'no-scroll'
-      document.getElementsByClassName('main')[0].classList.add 'scroll'
+      @addClassesForGuide()
     else
       @onClickClose()
 
   onClickClose: ->
     @setState guideIsOpen: false
-    wrapper.classList.remove 'push-right'
-    body.classList.remove 'no-scroll'
-    document.getElementsByClassName('main')[0].classList.remove 'scroll'
+    @removeClassesForGuide()
+
+  addClassesForGuide: ->
+    @wrapper.classList.add 'push-right'
+    @body.classList.add 'no-scroll'
+    @main.classList.add 'scroll'
+
+  removeClassesForGuide: ->
+    @wrapper.classList.remove 'push-right'
+    @body.classList.remove 'no-scroll'
+    @main.classList.remove 'scroll'
 
   openTutorial: (type) ->
     @setState
@@ -87,14 +104,19 @@ module?.exports = React.createClass
   closeTutorial: ->
     @setState tutorialIsOpen: false
 
-
   onClickSkipCheckbox: (e) ->
     checkbox = e.target
 
     if checkbox.checked is true
       @setState skipImages: true
+      @checkUserPreferences(true)
     else
       @setState skipImages: false
+      @checkUserPreferences(false)
+
+  checkUserPreferences: (preference) ->
+    if @props.user?
+      @props.user.setPreference 'skip_first_step', preference
 
   render: ->
     classifyClasses = cx
@@ -112,8 +134,8 @@ module?.exports = React.createClass
         <div className="location-container">
           <p>
             <span className="bold">Site:</span> {@state.location}
-            <label className="skip-checkbox">
-              <input type="checkbox" onClick={@onClickSkipCheckbox}/> Skip images?
+            <label className="skip-checkbox-label" htmlFor="skip-checkbox">
+              <input ref="skipCheckbox" type="checkbox" id="skip-checkbox" onClick={@onClickSkipCheckbox}/> Skip images?
             </label>
             <button className="tutorial-btn" onClick={@openTutorial.bind(null, "general")}>Tutorial</button>
             <a href="https://www.zooniverse.org" target="_blank"><button className="faq-btn">FAQs</button></a>
@@ -131,7 +153,8 @@ module?.exports = React.createClass
           openTutorial={@openTutorial}
           user={@props.user}
           location={@state.location}
-          zooniverseId={@state.zooniverseId} />
+          zooniverseId={@state.zooniverseId}
+          skipImages={@state.skipImages} />
       else
         <div ref="statusMessage"></div>
       }

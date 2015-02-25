@@ -38,7 +38,7 @@ html, body
 
   .home-background //Overriding defaults for home page.
     @media screen and (max-width: 900px)
-      background: url(./assets/home-background.jpg) no-repeat top 30px center
+      background: url(./assets/home-background.jpg) no-repeat center center fixed
       background-size: cover
 
     @media screen and (max-width: 710px)
@@ -48,14 +48,14 @@ html, body
     @media screen and (min-width: 901px)
       #home-background-video
         position: fixed
-        top: 30px
+        top: 0
         right: 0
         bottom: 0
         min-width: 100%
         min-height: 100%
         width: auto
         height: auto
-        background: url(./assets/home-background.jpg) no-repeat top 30px fixed
+        background: url(./assets/home-background.jpg) no-repeat center center fixed
         background-size: cover
         display: inherit
 

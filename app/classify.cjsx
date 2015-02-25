@@ -25,6 +25,7 @@ module?.exports = React.createClass
     guideIsOpen: false
     tutorialIsOpen: false
     tutorialType: null
+    skipImages: false
 
   componentDidMount: ->
     Subject.on 'select', @onSubjectSelect
@@ -44,9 +45,6 @@ module?.exports = React.createClass
 
     wrapper.classList.remove 'push-right'
     body.classList.remove 'no-scroll'
-
-  isLoading: ->
-    @setState isLoading: true
 
   onSubjectSelect: (e, subject) ->
     previews = subject.location.previews
@@ -89,6 +87,15 @@ module?.exports = React.createClass
   closeTutorial: ->
     @setState tutorialIsOpen: false
 
+
+  onClickSkipCheckbox: (e) ->
+    checkbox = e.target
+
+    if checkbox.checked is true
+      @setState skipImages: true
+    else
+      @setState skipImages: false
+
   render: ->
     classifyClasses = cx
       'classify': true
@@ -105,6 +112,9 @@ module?.exports = React.createClass
         <div className="location-container">
           <p>
             <span className="bold">Site:</span> {@state.location}
+            <label className="skip-checkbox">
+              <input type="checkbox" onClick={@onClickSkipCheckbox}/> Skip images?
+            </label>
             <button className="tutorial-btn" onClick={@openTutorial.bind(null, "general")}>Tutorial</button>
             <a href="https://www.zooniverse.org" target="_blank"><button className="faq-btn">FAQs</button></a>
           </p>
@@ -121,9 +131,7 @@ module?.exports = React.createClass
           openTutorial={@openTutorial}
           user={@props.user}
           location={@state.location}
-          zooniverseId={@state.zooniverseId}
-          isLoading={@isLoading}
-          loadingState={@state.isLoading} />
+          zooniverseId={@state.zooniverseId} />
       else
         <div ref="statusMessage"></div>
       }

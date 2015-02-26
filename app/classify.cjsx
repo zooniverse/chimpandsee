@@ -8,6 +8,7 @@ Guide = require './guide'
 Subject = require 'zooniverse/models/subject'
 Favorite = require 'zooniverse/models/favorite'
 Classification = require 'zooniverse/models/classification'
+User = require 'zooniverse/models/user'
 
 module?.exports = React.createClass
   displayName: 'Classify'
@@ -35,7 +36,6 @@ module?.exports = React.createClass
     if @props.user?
       if @props.user.preferences.chimp?.skip_first_step is "true"
         @setState skipImages: true
-        @refs.skipCheckbox?.getDOMNode().setAttribute 'checked', 'true'
     else
       @openTutorial 'general'
 
@@ -105,15 +105,14 @@ module?.exports = React.createClass
     checkbox = e.target
 
     if checkbox.checked is true
+      @setUserSkipPreference(true)
       @setState skipImages: true
-      @checkUserPreferences(true)
     else
+      @setUserSkipPreference(false)
       @setState skipImages: false
-      @checkUserPreferences(false)
 
-  checkUserPreferences: (preference) ->
-    if @props.user?
-      @props.user.setPreference 'skip_first_step', preference
+  setUserSkipPreference: (value) ->
+    User.current?.setPreference 'skip_first_step', value
 
   render: ->
     classifyClasses = cx
@@ -132,7 +131,7 @@ module?.exports = React.createClass
           <p>
             <span className="bold">Site:</span> {@state.location}
             <label className="skip-checkbox-label" htmlFor="skip-checkbox">
-              <input ref="skipCheckbox" type="checkbox" id="skip-checkbox" onClick={@onClickSkipCheckbox}/> Skip images?
+              <input ref="skipCheckbox" defaultChecked={@props.user?.preferences?.chimp?.skip_first_step is "true"} type="checkbox" id="skip-checkbox" onClick={@onClickSkipCheckbox}/> Skip images?
             </label>
             <button className="tutorial-btn" onClick={@openTutorial.bind(null, "general")}>Tutorial</button>
             <a href="https://www.zooniverse.org" target="_blank"><button className="faq-btn">FAQs</button></a>

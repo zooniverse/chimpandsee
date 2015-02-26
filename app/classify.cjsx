@@ -104,16 +104,13 @@ module?.exports = React.createClass
   onClickSkipCheckbox: (e) ->
     checkbox = e.target
 
-    if checkbox.checked is true
-      @setState skipImages: true
-      @checkUserPreferences(true)
-    else
-      @setState skipImages: false
-      @checkUserPreferences(false)
-
-  checkUserPreferences: (preference) ->
     if @props.user?
-      @props.user.setPreference 'skip_first_step', preference
+      @setUserPreferences(checkbox.checked)
+    else
+      @setState skipImages: checkbox.checked
+
+  setUserPreferences: (preference) ->
+    @props.user.setPreference 'skip_first_step', preference, @setState skipImages: preference
 
   render: ->
     classifyClasses = cx

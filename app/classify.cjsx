@@ -32,15 +32,12 @@ module?.exports = React.createClass
     Subject.on 'no-more', @onNoSubjects
     Subject.next()
 
-    # Waiting for zoo-library to authenticate. Ugh.
-    setTimeout ( =>
-      if @props.user?
-        if @props.user.preferences.chimp?.skip_first_step is "true"
-          @setState skipImages: true
-          @refs.skipCheckbox?.getDOMNode().setAttribute 'checked', 'true'
-      else
-        @openTutorial 'general'
-    ), 2000
+    if @props.user?
+      if @props.user.preferences.chimp?.skip_first_step is "true"
+        @setState skipImages: true
+        @refs.skipCheckbox?.getDOMNode().setAttribute 'checked', 'true'
+    else
+      @openTutorial 'general'
 
     # Grabbing DOM element outside of React components to be able to move everything to the right including top bar and footer
     @wrapper = document.getElementById('wrapper')

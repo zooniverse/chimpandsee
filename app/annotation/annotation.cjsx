@@ -47,6 +47,9 @@ Annotation = React.createClass
 
   componentWillReceiveProps: (nextProps) ->
     if nextProps.video isnt @props.video
+      console.log 'new video'
+      @srcWidth = 0
+      @showLoader()
       @setState favorited: false
 
     if nextProps.user? then @setState user: true else @setState user: false
@@ -57,7 +60,6 @@ Annotation = React.createClass
       @refs.previewImgs?.getDOMNode().classList.remove 'full-opacity'
 
     if nextProps.skipImages is true
-      @showLoader()
       @setState currentStep: 1
 
   zoomImage: (preview) ->
@@ -103,34 +105,28 @@ Annotation = React.createClass
       @imageLoadCount += 1
 
     if @imageLoadCount is 9
-      # @srcWidth = event.target.naturalWidth
+      @srcWidth = event.target.naturalWidth
       @hideLoader()
       @refs.previewImgs?.getDOMNode().classList.add 'full-opacity'
 
+  onVideoLoad: ->
+    console.log 'video load'
+    @checkSrcWidth()
+    @hideLoader()
+
+  checkSrcWidth: ->
+    console.log 'check width'
+    image = new Image()
+    image.onload = ->
+      @srcWidth = image.naturalWidth
+    image.src = @props.previews[0]
+
   showLoader: ->
+    console.log 'showloader'
     @loader.classList.remove 'hide'
 
   hideLoader: ->
     @loader.classList.add 'hide'
-
-  onVideoLoad: ->
-    @checkSrcWidth()
-    unless @loader.classList.contains 'hide'
-      @hideLoader()
-
-  checkSrcWidth: ->
-    image = new Image
-    width = ""
-    image.onload = ->
-      # console.log image.width
-      width = image.width
-    image.src = @props.previews[0]
-    console.log width, typeof width
-    if width is "640"
-      console.log '640'
-      return "640px"
-    else
-      return "100%"
 
   render: ->
     cursor = Cursor.build(@)
@@ -174,7 +170,7 @@ Annotation = React.createClass
         }
         {if cursor.refine('currentStep').value >= 1 and cursor.refine('currentStep').value isnt steps.length - 1
           <div className="video-container" style={minHeight: 480 + "px" if cursor.refine('currentStep').value is 1}>
-            <video ref="video" onload={@onVideoLoad() if cursor.refine('currentStep').value is 1} poster={@props.previews[0]} controls width={@checkSrcWidth()}>
+            <video ref="video" onload={@onVideoLoad() if cursor.refine('currentStep').value is 1} poster={@props.previews[0]} controls width={if @srcWidth is 640 then @srcWidth else '100%'}>
               <source src={@props.video.webm} type="video/webm" />
               <source src={@props.video.mp4} type="video/mp4" />
               Your browser does not support the video format. Please upgrade your browser.

@@ -17,6 +17,8 @@ LanguageManager = require 'zooniverse/lib/language-manager'
 Main = React.createClass
   displayName: 'Main'
 
+  user: User.fetch()
+
   getInitialState: ->
     user: null
     language: null

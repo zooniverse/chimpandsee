@@ -280,6 +280,33 @@
     .buttons-container
       button
         text-transform: capitalize
+        position: relative
+
+        &#animal-1, &#animal-18
+          &:after
+            content: '.'
+            display: block
+            position: absolute
+            border: solid 4px $topbar-green
+            border-radius: 50%
+            background: $topbar-green
+            width: 75px
+            height: 75px
+            bottom: 150%
+            text-align: center
+
+          &:before
+            z-index: 1001
+            border: 6px solid transparent
+            background: transparent
+            content: ""
+            border-top-color: $topbar-green
+            position: absolute
+            left: 50%
+            bottom: 100%
+
+        &#animal-1:after
+          background-image: url(./assets/tooltips/chimp.jpg)
 
   .age, .sex
     .step-bottom .buttons-container
@@ -287,11 +314,6 @@
 
       @media screen and (max-width: 450px)
         margin-top: -60px
-
-  // .behavior
-  //   .step-bottom
-  //     .cancel, .done
-  //       margin-top: 52.5px
 
   .number
     .step-bottom

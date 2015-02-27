@@ -2,6 +2,8 @@ Api = require 'zooniverse/lib/api'
 TopBar = require 'zooniverse/controllers/top-bar'
 LanguageManager = require 'zooniverse/lib/language-manager'
 Subject = require 'zooniverse/models/subject'
+User = require 'zooniverse/models/user'
+
 $ = window.jQuery
 
 # Api
@@ -10,11 +12,9 @@ api = new Api project: 'chimp'
 
 Subject.group = true
 
-$(document).ready(
   # Top Bar
-  topBar = new TopBar
-  document.getElementById('top-bar').appendChild topBar.el[0]
-)
+topBar = new TopBar
+document.getElementById('top-bar').appendChild topBar.el[0]
 
 LanguageManager = require 'zooniverse/lib/language-manager'
 #languageManager = new LanguageManager
@@ -24,3 +24,5 @@ LanguageManager = require 'zooniverse/lib/language-manager'
 #languageManager.on 'change-language', (e, code, strings) ->
 #  translate.load strings
 #  translate.refresh()
+
+

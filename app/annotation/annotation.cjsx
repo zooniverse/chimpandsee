@@ -15,13 +15,17 @@ Notes = require './notes'
 
 steps = require '../lib/steps'
 
-imageLoadCount = 0
-
 Annotation = React.createClass
   displayName: 'Annotation'
   mixins: [AnimateMixin]
 
   srcWidth: 0
+
+  imageLoadCount: 0
+
+  loader: null
+  overlay: null
+  dialog: null
 
   getInitialState: ->
     currentStep: 0
@@ -36,16 +40,32 @@ Annotation = React.createClass
     if @props.user?
       @setState user: true
 
+  componentDidMount: ->
+    @loader = @refs.loader.getDOMNode()
+    @overlay = @refs.imageZoom.getDOMNode().childNodes[0] #skylight-dialog__overlay
+    @dialog = @refs.imageZoom.getDOMNode().childNodes[1] #skylight-dialog
+
+    if @props.skipImages is true
+      @setState currentStep: 1
+
   componentWillReceiveProps: (nextProps) ->
     if nextProps.video isnt @props.video
+      # console.log 'new video'
+      # @srcWidth = 0
+      @showLoader()
       @setState favorited: false
 
     if nextProps.user? then @setState user: true else @setState user: false
 
     if nextProps.previews isnt @props.previews
-      imageLoadCount = 0
-      @refs.loader.getDOMNode().classList.remove 'hide'
+      @imageLoadCount = 0
+      @showLoader()
       @refs.previewImgs?.getDOMNode().classList.remove 'full-opacity'
+
+    if nextProps.skipImages is true
+      @setState currentStep: 1
+    else
+      @setState currentStep: 0
 
   zoomImage: (preview) ->
     @setState zoomImageSrc: preview
@@ -69,34 +89,49 @@ Annotation = React.createClass
       @props.classification.favorite = false
 
   modifyOverlay: ->
-    overlay = @refs.imageZoom.getDOMNode().childNodes[0] #skylight-dialog__overlay
-
-    overlay.addEventListener 'click', @closeZoom
+    @overlay.addEventListener 'click', @closeZoom
 
   closeZoom: ->
-    overlay = @refs.imageZoom.getDOMNode().childNodes[0] #skylight-dialog__overlay
-    dialog = @refs.imageZoom.getDOMNode().childNodes[1] #skylight-dialog
-    dialog.classList.add 'fade-out'
-    overlay.classList.add 'fade-out'
+    @dialog.classList.add 'fade-out'
+    @overlay.classList.add 'fade-out'
 
     #Wait for fade out animation
     setTimeout ( =>
-      dialog.classList.remove 'fade-out'
-      overlay.classList.remove 'fade-out'
+      @dialog.classList.remove 'fade-out'
+      @overlay.classList.remove 'fade-out'
 
       @refs.imageZoom.hide()
       @setState zoomImageSrc: null
-      overlay.removeEventListener 'click'
+      @overlay.removeEventListener 'click'
     ), 250
 
   onImageLoad: (i, event) ->
-    if imageLoadCount < @props.previews.length
-      imageLoadCount += 1
+    if @imageLoadCount < @props.previews.length
+      @imageLoadCount += 1
 
-    if imageLoadCount is 9
+    if @imageLoadCount is 9
       @srcWidth = event.target.naturalWidth
-      @refs.loader.getDOMNode().classList.add 'hide'
-      @refs.previewImgs.getDOMNode().classList.add 'full-opacity'
+      @hideLoader()
+      @refs.previewImgs?.getDOMNode().classList.add 'full-opacity'
+
+  onVideoLoad: ->
+    # console.log 'video load'
+    @checkSrcWidth()
+    @hideLoader()
+
+  checkSrcWidth: ->
+    # console.log 'check width'
+    image = new Image()
+    image.onload = ->
+      @srcWidth = image.naturalWidth
+    image.src = @props.previews[0]
+
+  showLoader: ->
+    # console.log 'showloader'
+    @loader.classList.remove 'hide'
+
+  hideLoader: ->
+    @loader.classList.add 'hide'
 
   render: ->
     cursor = Cursor.build(@)
@@ -139,8 +174,8 @@ Annotation = React.createClass
           </SkyLight>
         }
         {if cursor.refine('currentStep').value >= 1 and cursor.refine('currentStep').value isnt steps.length - 1
-          <div className="video-container">
-            <video ref="video" poster={@props.previews[0]} controls width={if @srcWidth is 640 then @srcWidth else '100%'}>
+          <div className="video-container" style={minHeight: 480 + "px" if cursor.refine('currentStep').value is 1}>
+            <video ref="video" onload={@onVideoLoad() if cursor.refine('currentStep').value is 1} poster={@props.previews[0]} controls width={if @srcWidth is 640 then @srcWidth else '100%'}>
               <source src={@props.video.webm} type="video/webm" />
               <source src={@props.video.mp4} type="video/mp4" />
               Your browser does not support the video format. Please upgrade your browser.
@@ -159,6 +194,7 @@ Annotation = React.createClass
         notes={cursor.refine('notes')}
         classification={@props.classification}
         onClickGuide={@onClickGuide}
+        skipImages={@props.skipImages}
       />
       <Notes notes={cursor.refine('notes')} step={cursor.refine('currentStep')} />
     </div>

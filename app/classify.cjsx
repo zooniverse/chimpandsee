@@ -8,13 +8,14 @@ Guide = require './guide'
 Subject = require 'zooniverse/models/subject'
 Favorite = require 'zooniverse/models/favorite'
 Classification = require 'zooniverse/models/classification'
-
-# Grabbing DOM element outside of React components to be able to move everything to the right including top bar and footer
-wrapper = document.getElementById('wrapper')
-body = document.getElementsByTagName('body')['0']
+User = require 'zooniverse/models/user'
 
 module?.exports = React.createClass
   displayName: 'Classify'
+
+  wrapper: null
+  body: null
+  main: null
 
   getInitialState: ->
     video: null
@@ -25,16 +26,32 @@ module?.exports = React.createClass
     guideIsOpen: false
     tutorialIsOpen: false
     tutorialType: null
+    skipImages: false
 
   componentDidMount: ->
     Subject.on 'select', @onSubjectSelect
     Subject.on 'no-more', @onNoSubjects
     Subject.next()
 
-    unless @props.user?
-      @openTutorial 'general'
+    # Grabbing DOM element outside of React components to be able to move everything to the right including top bar
+    @wrapper = document.getElementById('wrapper')
+    @body = document.getElementsByTagName('body')[0]
+    @main = document.getElementsByClassName('main')[0]
 
   componentWillReceiveProps: (nextProps) ->
+    console.log 'receiving props'
+    if nextProps.user isnt @props.user
+      if nextProps.user?.preferences?.chimp?.skip_first_step is "true"
+        @setState skipImages: true
+        @refs.skipCheckbox?.getDOMNode().checked = true
+
+    if nextProps.user is null
+      console.log 'no user'
+      @setState skipImages: false
+      @refs.skipCheckbox?.getDOMNode().checked = false
+
+      # @openTutorial 'general'
+
     unless nextProps.user?.classification_count > 0
       @openTutorial 'general'
 
@@ -42,11 +59,7 @@ module?.exports = React.createClass
     Subject.off 'select', @onSubjectSelect
     Subject.off 'no-more', @onNoSubjects
 
-    wrapper.classList.remove 'push-right'
-    body.classList.remove 'no-scroll'
-
-  isLoading: ->
-    @setState isLoading: true
+    @removeClassesForGuide()
 
   onSubjectSelect: (e, subject) ->
     previews = subject.location.previews
@@ -69,17 +82,23 @@ module?.exports = React.createClass
     if @state.guideIsOpen is false
       @refs.guide.getDOMNode().scrollTop = 0
       @setState guideIsOpen: true
-      wrapper.classList.add 'push-right'
-      body.classList.add 'no-scroll'
-      document.getElementsByClassName('main')[0].classList.add 'scroll'
+      @addClassesForGuide()
     else
       @onClickClose()
 
   onClickClose: ->
     @setState guideIsOpen: false
-    wrapper.classList.remove 'push-right'
-    body.classList.remove 'no-scroll'
-    document.getElementsByClassName('main')[0].classList.remove 'scroll'
+    @removeClassesForGuide()
+
+  addClassesForGuide: ->
+    @wrapper.classList.add 'push-right'
+    @body.classList.add 'no-scroll'
+    @main.classList.add 'scroll'
+
+  removeClassesForGuide: ->
+    @wrapper.classList.remove 'push-right'
+    @body.classList.remove 'no-scroll'
+    @main.classList.remove 'scroll'
 
   openTutorial: (type) ->
     @setState
@@ -88,6 +107,17 @@ module?.exports = React.createClass
 
   closeTutorial: ->
     @setState tutorialIsOpen: false
+
+  onClickSkipCheckbox: (e) ->
+    checkbox = e.target
+
+    if @props.user?
+      @setUserSkipPreference(checkbox.checked)
+    else
+      @setState skipImages: checkbox.checked
+
+  setUserSkipPreference: (preference) ->
+    User.current?.setPreference 'skip_first_step', preference, @setState skipImages: preference
 
   render: ->
     classifyClasses = cx
@@ -105,6 +135,9 @@ module?.exports = React.createClass
         <div className="location-container">
           <p>
             <span className="bold">Site:</span> {@state.location}
+            <label className="skip-checkbox-label" htmlFor="skip-checkbox">
+              <input ref="skipCheckbox" defaultChecked={@props.user?.preferences?.chimp?.skip_first_step is "true"} type="checkbox" id="skip-checkbox" onClick={@onClickSkipCheckbox}/> Skip images?
+            </label>
             <button className="tutorial-btn" onClick={@openTutorial.bind(null, "general")}>Tutorial</button>
             <a href="https://www.zooniverse.org" target="_blank"><button className="faq-btn">FAQs</button></a>
           </p>
@@ -122,8 +155,7 @@ module?.exports = React.createClass
           user={@props.user}
           location={@state.location}
           zooniverseId={@state.zooniverseId}
-          isLoading={@isLoading}
-          loadingState={@state.isLoading} />
+          skipImages={@state.skipImages} />
       else
         <div ref="statusMessage"></div>
       }

@@ -45,10 +45,13 @@ Annotation = React.createClass
     @overlay = @refs.imageZoom.getDOMNode().childNodes[0] #skylight-dialog__overlay
     @dialog = @refs.imageZoom.getDOMNode().childNodes[1] #skylight-dialog
 
+    if @props.skipImages is true
+      @setState currentStep: 1
+
   componentWillReceiveProps: (nextProps) ->
     if nextProps.video isnt @props.video
-      console.log 'new video'
-      @srcWidth = 0
+      # console.log 'new video'
+      # @srcWidth = 0
       @showLoader()
       @setState favorited: false
 
@@ -61,6 +64,8 @@ Annotation = React.createClass
 
     if nextProps.skipImages is true
       @setState currentStep: 1
+    else
+      @setState currentStep: 0
 
   zoomImage: (preview) ->
     @setState zoomImageSrc: preview
@@ -110,19 +115,19 @@ Annotation = React.createClass
       @refs.previewImgs?.getDOMNode().classList.add 'full-opacity'
 
   onVideoLoad: ->
-    console.log 'video load'
+    # console.log 'video load'
     @checkSrcWidth()
     @hideLoader()
 
   checkSrcWidth: ->
-    console.log 'check width'
+    # console.log 'check width'
     image = new Image()
     image.onload = ->
       @srcWidth = image.naturalWidth
     image.src = @props.previews[0]
 
   showLoader: ->
-    console.log 'showloader'
+    # console.log 'showloader'
     @loader.classList.remove 'hide'
 
   hideLoader: ->

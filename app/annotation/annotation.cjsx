@@ -19,10 +19,7 @@ Annotation = React.createClass
   displayName: 'Annotation'
   mixins: [AnimateMixin]
 
-  srcWidth: 0
-
-  imageLoadCount: 0
-
+  loadCount: 0
   loader: null
   overlay: null
   dialog: null
@@ -50,22 +47,22 @@ Annotation = React.createClass
 
   componentWillReceiveProps: (nextProps) ->
     if nextProps.video isnt @props.video
-      # console.log 'new video'
-      # @srcWidth = 0
-      @showLoader()
+      @loadCount = 0
       @setState favorited: false
 
     if nextProps.user? then @setState user: true else @setState user: false
 
     if nextProps.previews isnt @props.previews
-      @imageLoadCount = 0
-      @showLoader()
+      @loadCount = 0
       @refs.previewImgs?.getDOMNode().classList.remove 'full-opacity'
 
     if nextProps.skipImages is true
       @setState currentStep: 1
-    else
-      @setState currentStep: 0
+    # else
+    # else if nextProps.skipImages is false
+    #   @setState currentStep: 0
+    #   console.log 'current step 0'
+    #   @showLoader()
 
   zoomImage: (preview) ->
     @setState zoomImageSrc: preview
@@ -106,28 +103,21 @@ Annotation = React.createClass
     ), 250
 
   onImageLoad: (i, event) ->
-    if @imageLoadCount < @props.previews.length
-      @imageLoadCount += 1
+    if @loadCount < @props.previews.length
+      @loadCount += 1
 
-    if @imageLoadCount is 9
-      @srcWidth = event.target.naturalWidth
+    if @loadCount is 9
       @hideLoader()
       @refs.previewImgs?.getDOMNode().classList.add 'full-opacity'
 
   onVideoLoad: ->
-    # console.log 'video load'
-    @checkSrcWidth()
-    @hideLoader()
+    @loadCount = 1
 
-  checkSrcWidth: ->
-    # console.log 'check width'
-    image = new Image()
-    image.onload = ->
-      @srcWidth = image.naturalWidth
-    image.src = @props.previews[0]
+    if @loadCount is 1
+      #works for now
+      setTimeout ( => @hideLoader()), 750
 
   showLoader: ->
-    # console.log 'showloader'
     @loader.classList.remove 'hide'
 
   hideLoader: ->
@@ -175,7 +165,7 @@ Annotation = React.createClass
         }
         {if cursor.refine('currentStep').value >= 1 and cursor.refine('currentStep').value isnt steps.length - 1
           <div className="video-container" style={minHeight: 480 + "px" if cursor.refine('currentStep').value is 1}>
-            <video ref="video" onload={@onVideoLoad() if cursor.refine('currentStep').value is 1} poster={@props.previews[0]} controls width={if @srcWidth is 640 then @srcWidth else '100%'}>
+            <video ref="video" onload={@onVideoLoad() if cursor.refine('currentStep').value is 1} poster={@props.previews[0]} controls width={if @props.srcWidth is 640 then @props.srcWidth else '100%'}>
               <source src={@props.video.webm} type="video/webm" />
               <source src={@props.video.mp4} type="video/mp4" />
               Your browser does not support the video format. Please upgrade your browser.
@@ -195,6 +185,7 @@ Annotation = React.createClass
         classification={@props.classification}
         onClickGuide={@onClickGuide}
         skipImages={@props.skipImages}
+        showLoader={@showLoader}
       />
       <Notes notes={cursor.refine('notes')} step={cursor.refine('currentStep')} />
     </div>

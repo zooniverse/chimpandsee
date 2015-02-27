@@ -13,11 +13,12 @@ slideTutorials = {
     {
       image: './assets/general-tutorial/chimps-intro-2.gif',
       title: 'Scan screencaps for animals',
-      content: ''''You'll first be given nine screenshots from the video.
-      Desktop users can click any one of them to inspect it more closely;
-      click it again to go back to the nine screenshots.
+      content: '''First, scan the nine screenshots from the video.
+      Click any one of them to inspect it more closely; click again to go back.
       If you think there might be an animal anywhere in the video,
-      click "I see something!" If not, click "nothing here."''',
+      click "I see something!" If not, click "nothing here."
+      (If you prefer, you can turn off this step by checking the
+      "Skip Images" box to the top right of the page.)''',
       button: 'Next'
     },
 

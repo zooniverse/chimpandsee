@@ -55,7 +55,7 @@ module?.exports = React.createClass
 
     <div className="about">
       <section className="about-hero">
-        <h2>About<br />Chimp<span className="amp">&</span>See</h2>
+        <h2>About<br /><img className="logo" src="./assets/chimpnsee-logo.svg" alt="logo" /></h2>
       </section>
       <nav className="about-nav">
         <div className="content">

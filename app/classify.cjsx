@@ -27,6 +27,7 @@ module?.exports = React.createClass
     tutorialIsOpen: false
     tutorialType: null
     skipImages: false
+    srcWidth: null
 
   componentDidMount: ->
     Subject.on 'select', @onSubjectSelect
@@ -70,9 +71,16 @@ module?.exports = React.createClass
 
   onSubjectUpdate: (integer) ->
     @state.classification.annotate previewsSet: integer
+    @checkSrcWidth()
 
   onNoSubjects: ->
     @refs.statusMessage.getDOMNode().innerHTML = "No more subjects. Please try again."
+
+  checkSrcWidth: ->
+    image = new Image()
+    image.src = @state.previews[0]
+    image.onload = =>
+      @setState srcWidth: image.naturalWidth
 
   toggleGuide: (e) ->
     if @state.guideIsOpen is false
@@ -151,7 +159,8 @@ module?.exports = React.createClass
           user={@props.user}
           location={@state.location}
           zooniverseId={@state.zooniverseId}
-          skipImages={@state.skipImages} />
+          skipImages={@state.skipImages}
+          srcWidth={@state.srcWidth} />
       else
         <div ref="statusMessage"></div>
       }

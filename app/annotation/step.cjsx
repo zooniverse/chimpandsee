@@ -141,6 +141,7 @@ Step = React.createClass
     @props.currentAnswers.set {}
     @props.step.set 0
     @props.subStep.set 0
+    @props.showLoader()
     Subject.next()
 
   sendClassification: ->

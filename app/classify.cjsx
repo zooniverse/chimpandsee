@@ -39,18 +39,14 @@ module?.exports = React.createClass
     @main = document.getElementsByClassName('main')[0]
 
   componentWillReceiveProps: (nextProps) ->
-    console.log 'receiving props'
     if nextProps.user isnt @props.user
       if nextProps.user?.preferences?.chimp?.skip_first_step is "true"
         @setState skipImages: true
         @refs.skipCheckbox?.getDOMNode().checked = true
 
     if nextProps.user is null
-      console.log 'no user'
       @setState skipImages: false
       @refs.skipCheckbox?.getDOMNode().checked = false
-
-      # @openTutorial 'general'
 
     unless nextProps.user?.classification_count > 0
       @openTutorial 'general'

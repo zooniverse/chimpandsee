@@ -1,4 +1,6 @@
 .about
+  color: #eae9e9
+
   .about-hero
     background: url(./assets/about/about-hero.jpg) no-repeat center center
     background-size: cover
@@ -68,6 +70,11 @@
 
           h2
             color: $green
+            font-weight: 400
+
+          h3
+            color: #bbbaba
+            font-size: 14px
             font-weight: 400
 
           p
@@ -185,17 +192,44 @@
 
   .page-two, .page-three
     @media screen and (max-width: 768px)
-      h2, h3
+      h2
         text-align: center
 
   .page-two
     h2
       margin: 0 0 5px
+
     h3
-      color: #bbbaba
-      font-size: 14px
-      font-weight: 400
       margin-top: 0
+
+  .page-three
+    .about-section
+      &:last-of-type
+        height: 100%
+        padding: 125px 0
+
+        .about-org-lists
+          flex-direction: column
+
+          div
+            padding: 0 110px 0 85px
+
+            h3
+              font-weight: 400
+
+            ul
+              padding: 0
+
+              li
+                list-style: none
+
+                a
+                  display: inline
+                  color: #eae9e9
+
+                  &:visited, &:focus, &:active
+                    color: #eae9e9
+
 
 
 

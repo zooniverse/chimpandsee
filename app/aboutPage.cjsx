@@ -29,7 +29,7 @@ AboutPage = React.createClass
           <div>
             <h2 className="name">{page.header}</h2>
             {<h3>{page.subHeader}</h3> if page.subHeader?}
-            <p  dangerouslySetInnerHTML={{__html: page.content}}></p>
+            <p dangerouslySetInnerHTML={{__html: page.content}}></p>
             <a href="#/classify">{page.content}</a>
           </div>
         </div>

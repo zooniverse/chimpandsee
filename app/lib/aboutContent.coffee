@@ -107,7 +107,7 @@ aboutContent = [
     },
 
     {
-      header: "Nuria",
+      header: "Nuria Maldonado",
       subHeader: "Scientist",
       content: '''Nuria is a scientist in charge of the video coding of the Pan African
       Programme: The Cultured Chimpanzee project at the Max Planck Institute for Evolutionary
@@ -118,8 +118,8 @@ aboutContent = [
       ecology projects by making monthly censuses and radio trackings of different species of birds.
       She founded the "Kalinga Animal Shelter and Fauna Research" association for wildlife protection
       and conservation, and for the development of zoo animals' welfare worldwide.''',
-      image: "./assets/about/nuria.jpg",
-      imgeAlt: "Nuria"
+      image: "./assets/about/nuria-maldonado.jpg",
+      imgeAlt: "Nuria Maldonado"
     }
   ],
 

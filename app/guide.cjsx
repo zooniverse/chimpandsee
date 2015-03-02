@@ -62,7 +62,7 @@ Guide = React.createClass
       <section className={detailsClasses}>
         <button className="back-guide-btn" onClick={@onClickBack}><img className="back-icon" src="./assets/back-icon.svg" alt="back icon" /> Back</button>
         <h2 className="animal-name">{guideDetails[@state.guideDetailsIndex].header}</h2>
-        <h3 className="animal-taxonomy">{guideDetails[@state.guideDetailsIndex].subHeader}</h3>
+        <h3 className="animal-taxonomy" dangerouslySetInnerHTML={{__html: guideDetails[@state.guideDetailsIndex].subHeader}}></h3>
         <p>{guideDetails[@state.guideDetailsIndex].description}</p>
         <h4 className="images-header">Example Images</h4>
         {exampleImages}
@@ -71,20 +71,23 @@ Guide = React.createClass
           <div>
             <h4>Male</h4>
             <p>Males can be identified by the presence of testicles. Chimpanzees also posses calloused structures in their gluteal region (sometime referred to as ischial callosities). These calloused pads are most evident on the posterior of males (as they lack a swelling), are dark in color and often appear in the shape of a heart.</p>
-            <figure><img src="./assets/guide/chimp-adult-male-1.jpg" alt="Example of male chimp" /></figure>
-            <figure><img src="./assets/guide/chimp-adult-male-2.jpg" alt="Example of male chimp" /></figure>
-            <figure><img src="./assets/guide/chimp-adult-male-3.jpg" alt="Example of male chimp" /></figure>
+            <figure><img src="./assets/guide/chimps-adult-male-1.jpg" alt="Example of male chimp" /></figure>
+            <figure><img src="./assets/guide/chimps-adult-male-2.jpg" alt="Example of male chimp" /></figure>
+            <figure><img src="./assets/guide/chimps-adult-male-3.jpg" alt="Example of male chimp" /></figure>
+            <figure><img src="./assets/guide/chimps-adult-male-4.jpg" alt="Example of male chimp" /></figure>
             <h4>Female</h4>
             <p>Females have a pink sexual swelling‎ on their posteriors that can be inflated or deflated depending on where they are in the estrous cycle. Females can often be differentiated based on their swellings.</p>
-            <figure><img src="./assets/guide/chimp-adult-female-1.jpg" alt="Example of female chimp" /></figure>
-            <figure><img src="./assets/guide/chimp-adult-female-2.jpg" alt="Example of female chimp" /></figure>
-            <figure><img src="./assets/guide/chimp-adult-female-juvenile-1.jpg" alt="Example of female chimp" /></figure>
-            <figure><img src="./assets/guide/chimp-adult-female-juvenile-2.jpg" alt="Example of female chimp" /></figure>
-            <figure><img src="./assets/guide/chimp-adult-female-juvenile-3.jpg" alt="Example of female chimp" /></figure>
+            <figure><img src="./assets/guide/chimps-adult-female-1.jpg" alt="Example of female chimp" /></figure>
+            <figure><img src="./assets/guide/chimps-adult-female-2.jpg" alt="Example of female chimp" /></figure>
+            <figure><img src="./assets/guide/chimps-adult-female-juvenile-1.jpg" alt="Example of female chimp" /></figure>
+            <figure><img src="./assets/guide/chimps-adult-female-juvenile-2.jpg" alt="Example of female chimp" /></figure>
             <h4>Juvenile</h4>
             <p>Juveniles will often be smaller and have lighter faces; very young individuals will also have a white tuft of hair on their posteriors.</p>
-            <figure><img src="./assets/guide/chimp-juvenile-1.jpg" alt="Example of juvenile chimp" /></figure>
-            <figure><img src="./assets/guide/chimp-juvenile-2.jpg" alt="Example of juvenile chimp" /></figure>
+            <figure><img src="./assets/guide/chimps-juvenile-1.jpg" alt="Example of juvenile chimp" /></figure>
+            <figure><img src="./assets/guide/chimps-juvenile-2.jpg" alt="Example of juvenile chimp" /></figure>
+            <figure><img src="./assets/guide/chimps-juvenile-3.jpg" alt="Example of juvenile chimp" /></figure>
+            <figure><img src="./assets/guide/chimps-juvenile-4.jpg" alt="Example of juvenile chimp" /></figure>
+
           </div>
         }
       </section>

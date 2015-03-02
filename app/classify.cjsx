@@ -39,6 +39,9 @@ module?.exports = React.createClass
     @body = document.getElementsByTagName('body')[0]
     @main = document.getElementsByClassName('main')[0]
 
+    if @props.user?.preferences?.chimp?.skip_first_step is "true"
+      @setState skipImages: true
+
   componentWillReceiveProps: (nextProps) ->
     if nextProps.user isnt @props.user
       if nextProps.user?.preferences?.chimp?.skip_first_step is "true"

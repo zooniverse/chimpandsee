@@ -58,11 +58,6 @@ Annotation = React.createClass
 
     if nextProps.skipImages is true
       @setState currentStep: 1
-    # else
-    # else if nextProps.skipImages is false
-    #   @setState currentStep: 0
-    #   console.log 'current step 0'
-    #   @showLoader()
 
   zoomImage: (preview) ->
     @setState zoomImageSrc: preview

@@ -45,7 +45,10 @@ Guide = React.createClass
 
   render: ->
     animals = steps[2][0].animal.options.map (animal, i) =>
-      <li key={i} className="animal-list-item" onClick={@onSelectGuideAnimal.bind(null, i)}>{animal}</li>
+      <li key={i} className="animal-list-item" onClick={@onSelectGuideAnimal.bind(null, i)}>
+        <span id="animal-#{i}" className="tooltip"></span>
+        <span className="animal-name">{animal}</span>
+      </li>
 
     detailsClasses = cx
       'details': true
@@ -67,7 +70,6 @@ Guide = React.createClass
         <h4 className="images-header">Example Images</h4>
         {exampleImages}
         {if @state.guideDetailsIndex is 1
-          console.log 'index is 1', @state.guideDetailsIndex
           <div>
             <h4>Male</h4>
             <p>Males can be identified by the presence of testicles. Chimpanzees also posses calloused structures in their gluteal region (sometime referred to as ischial callosities). These calloused pads are most evident on the posterior of males (as they lack a swelling), are dark in color and often appear in the shape of a heart.</p>

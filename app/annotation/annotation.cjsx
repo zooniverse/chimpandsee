@@ -125,10 +125,12 @@ Annotation = React.createClass
       'favorite-btn': true
       'disabled': @state.user is false
       'favorited': @state.favorited is true
+      'hide': true if window.innerWidth < 401 and cursor.refine('currentStep').value is steps.length - 1
 
     guideClasses = cx
       'guide-btn': true
       'guide-open': @props.guideIsOpen is true
+      'hide': true if window.innerWidth < 401 and cursor.refine('currentStep').value is steps.length - 1
 
     favoriteToolTip = if @state.user is false
       "Sign up or log in to favorite"
@@ -159,7 +161,7 @@ Annotation = React.createClass
           </SkyLight>
         }
         {if cursor.refine('currentStep').value >= 1 and cursor.refine('currentStep').value isnt steps.length - 1
-          <div className="video-container" style={minHeight: 480 + "px" if cursor.refine('currentStep').value is 1}>
+          <div className="video-container" style={minHeight: 480 + "px" if cursor.refine('currentStep').value is 1 and window.innerWidth > 768}>
             <video ref="video" onload={@onVideoLoad() if cursor.refine('currentStep').value is 1} poster={@props.previews[0]} controls width={if @props.srcWidth is 640 then @props.srcWidth else '100%'}>
               <source src={@props.video.webm} type="video/webm" />
               <source src={@props.video.mp4} type="video/mp4" />

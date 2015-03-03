@@ -21,6 +21,10 @@
 
     .step-question
       display: block
+      
+      @media screen and (max-width: 400px)
+        max-width: 200px
+        margin: 0 auto
 
       .question
         margin: 0
@@ -282,114 +286,115 @@
         text-transform: capitalize
         position: relative
 
-        &:hover:after
-          content: ''
-          display: block
-          position: absolute
-          border: solid 4px $topbar-green
-          border-radius: 50%
-          background: $topbar-green
-          width: 75px
-          height: 75px
-          bottom: 150%
-          left: calc(50% - 40px)
-          background-image: url(./assets/chimps-tooltip-sprite.jpg)
+        @media screen and (min-width: 769px)
+          &:hover:after
+            content: ''
+            display: block
+            position: absolute
+            border: solid 4px $topbar-green
+            border-radius: 50%
+            background: $topbar-green
+            width: 75px
+            height: 75px
+            bottom: 150%
+            left: calc(50% - 40px)
+            background-image: url(./assets/chimps-tooltip-sprite.jpg)
 
-        &:hover:before
-          z-index: 1001
-          background: url(./assets/arrow-down.svg)
-          content: ''
-          position: absolute
-          bottom: 100%
-          width: 16px
-          height: 16px
-          left: 50%
-          top: -20px
-          margin-left: -7px
+          &:hover:before
+            z-index: 1001
+            background: url(./assets/arrow-down.svg)
+            content: ''
+            position: absolute
+            bottom: 100%
+            width: 16px
+            height: 16px
+            left: 50%
+            top: -20px
+            margin-left: -7px
 
-        &#animal-0:hover:after
-          background-position: 0px 0px
+          &#animal-0:hover:after
+            background-position: 0px 0px
 
-        &#animal-1:hover:after
-          background-position: 0px -75px
+          &#animal-1:hover:after
+            background-position: 0px -75px
 
-        &#animal-2:hover:after
-          background-position: 0px -150px
+          &#animal-2:hover:after
+            background-position: 0px -150px
 
-        &#animal-3:hover:after
-          background-position: 0px -225px
+          &#animal-3:hover:after
+            background-position: 0px -225px
 
-        &#animal-4:hover:after
-          background-position: 0px -300px
+          &#animal-4:hover:after
+            background-position: 0px -300px
 
-        &#animal-5:hover:after
-          background-position: 0px -375px
+          &#animal-5:hover:after
+            background-position: 0px -375px
 
-        &#animal-6:hover:after
-          background-position: 0px -450px
+          &#animal-6:hover:after
+            background-position: 0px -450px
 
-        &#animal-7:hover:after
-          background-position: 0px -525px
+          &#animal-7:hover:after
+            background-position: 0px -525px
 
-        &#animal-8:hover:after
-          background-position: 0px -600px
+          &#animal-8:hover:after
+            background-position: 0px -600px
 
-        &#animal-9:hover:after
-          background-position: 0px -675px
+          &#animal-9:hover:after
+            background-position: 0px -675px
 
-        &#animal-10:hover:after
-          background-position: 0px -750px
+          &#animal-10:hover:after
+            background-position: 0px -750px
 
-        &#animal-11:hover:after
-          background-position: 0px -820px
+          &#animal-11:hover:after
+            background-position: 0px -820px
 
-        &#animal-12:hover:after
-          background-position: 0px -900px
+          &#animal-12:hover:after
+            background-position: 0px -900px
 
-        &#animal-13:hover:after
-          background-position: 0px -975px
+          &#animal-13:hover:after
+            background-position: 0px -975px
 
-        &#animal-14:hover:after
-          background-position: 0px -1050px
+          &#animal-14:hover:after
+            background-position: 0px -1050px
 
-        &#animal-15:hover:after
-          background-position: 0px -1650px
+          &#animal-15:hover:after
+            background-position: 0px -1650px
 
-        &#animal-16:hover:after
-          background-position: 0px -1125px
+          &#animal-16:hover:after
+            background-position: 0px -1125px
 
-        &#animal-17:hover:after
-          background-position: 0px -1200px
+          &#animal-17:hover:after
+            background-position: 0px -1200px
 
-        &#animal-18:hover:after
-          background-position: 0px -1275px
+          &#animal-18:hover:after
+            background-position: 0px -1275px
 
-        &#animal-19:hover:after
-          background-position: 0px -1350px
+          &#animal-19:hover:after
+            background-position: 0px -1350px
 
-        &#animal-20:hover:after
-          background-position: 0px -1425px
+          &#animal-20:hover:after
+            background-position: 0px -1425px
 
-        &#animal-21:hover:after
-          background-position: 0px -1500px
+          &#animal-21:hover:after
+            background-position: 0px -1500px
 
-        &#animal-22:hover:after
-          background-position: 0px -1575px
+          &#animal-22:hover:after
+            background-position: 0px -1575px
 
-        &#animal-23:hover:after
-          background-position: 0px -1725px
+          &#animal-23:hover:after
+            background-position: 0px -1725px
 
-        &#animal-24:hover:after
-          background-position: 0px -1800px
+          &#animal-24:hover:after
+            background-position: 0px -1800px
 
-        &#animal-25:hover:after
-          background-position: 0px -1875px
+          &#animal-25:hover:after
+            background-position: 0px -1875px
 
-        &#animal-26:hover:after
-          background-position: 0px -1950px
+          &#animal-26:hover:after
+            background-position: 0px -1950px
 
-        &#animal-27:hover:after
-          background-position: 0px -2025px
+          &#animal-27:hover:after
+            background-position: 0px -2025px
 
   .age, .sex
     .step-bottom .buttons-container

@@ -12,12 +12,14 @@ Guide = React.createClass
   mixins: [AnimateMixin]
 
   guideContainer: null
+  body: null
 
   getInitialState: ->
     guideDetailsIndex: null
 
   componentDidMount: ->
     @guideContainer = @refs.guideContainer.getDOMNode()
+    @body = document.getElementsByTagName('body')[0]
 
   componentWillReceiveProps: (nextProps) ->
     if nextProps.guideIsOpen is false
@@ -33,6 +35,9 @@ Guide = React.createClass
     @openAnimation()
     @setState guideDetailsIndex: i
     @guideContainer.scrollTop = 0
+
+    #For iOS Safari
+    @body.scrollTop = 0 if window.innerWidth < 401
 
   onClickBack: ->
     @closeAnimation()

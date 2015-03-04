@@ -37,6 +37,7 @@ module?.exports = React.createClass
     # Grabbing DOM element outside of React components to be able to move everything to the right including top bar
     @wrapper = document.getElementById('wrapper')
     @body = document.getElementsByTagName('body')[0]
+    @html = document.getElementsByTagName('html')[0]
     @main = document.getElementsByClassName('main')[0]
 
     if @props.user?.preferences?.chimp?.skip_first_step is "true"
@@ -100,12 +101,20 @@ module?.exports = React.createClass
   addClassesForGuide: ->
     @wrapper.classList.add 'push-right'
     @body.classList.add 'no-scroll'
-    @main.classList.add 'scroll'
+    @main.classList.add 'scroll' if window.innerWidth > 400
+
+    #For iOS Safari
+    @html.style.overflow = 'hidden' if window.innerWidth < 401
+    @body.style.cssText = 'overflow: hidden; max-height: 2420px' if window.innerWidth < 401
 
   removeClassesForGuide: ->
     @wrapper.classList.remove 'push-right'
     @body.classList.remove 'no-scroll'
-    @main.classList.remove 'scroll'
+    @main.classList.remove 'scroll' if window.innerWidth > 400
+
+    #For iOS Safari
+    @html.style.overflow = 'initial' if window.innerWidth < 401
+    @body.style.cssText = 'overflow: initial; max-height: 100%' if window.innerWidth < 401
 
   openTutorial: (type) ->
     @setState

@@ -17,6 +17,9 @@
       padding: 143px 249px
       max-width: 300px
       width: 100%
+      
+      @media screen and (max-width: 400px)
+        padding: 143px 10px
 
       img
         width: 100%
@@ -114,6 +117,7 @@
 
           @media screen and (max-width: 768px)
             order: 1
+            margin: 20px 20px 5px
 
       &:nth-child(odd)
         .content
@@ -180,6 +184,9 @@
 
             @media screen and (max-width: 571px)
               bottom: -120px
+              
+            @media screen and (max-width: 350px)
+              bottom: -105px
 
             &:hover
               bottom: -58px
@@ -189,6 +196,9 @@
 
               @media screen and (max-width: 571px)
                 bottom: -100px
+              
+              @media screen and (max-width: 350px)
+                bottom: -85px
 
 
   .page-two, .page-three
@@ -202,6 +212,9 @@
 
     h3
       margin-top: 0
+      
+      @media screen and (max-width: 768px)
+        text-align: center
 
     img
       border-radius: 50%
@@ -209,16 +222,25 @@
 
   .page-three
     .about-section
+      .about-org-lists
+        display: none
+        
       &:last-of-type
         height: 100%
         padding: 125px 0
+        
+        @media screen and (max-width: 768px)
+          padding: 0
 
         .about-org-lists
+          display: flex
           flex-direction: column
 
           div
             padding: 0 110px 0 85px
-
+            
+            @media screen and (max-width: 768px)
+              padding: 0 20px
 
             h3
               font-weight: 400

@@ -5,16 +5,36 @@ Subject = require 'zooniverse/models/subject'
 Share = require '../share'
 steps = require '../lib/steps'
 
+sites =
+  siteA: ["Guinea_FoutahDjalon", "Guinea_Sangaredi", "GuineaBissau_Boe_Part1", "GuineaBissau_Boe_Part2", "IvoryCoast_Azagny", "IvoryCoast_Djouroutou", "IvoryCoast_TaiE", "IvoryCoast_TaiR", "Liberia_EastNimba", "Liberia_Grebo_Sala_part1", "Liberia_Grebo_Sala_part2", "Liberia_Grebo_Tasla", "Liberia_Sapo", "Senegal_Kayan"]
+  siteB: ["Nigeria_Gashaka"]
+  siteC: ["EquatorialGuinea_Nationwide"]
+  siteD: ["DRC_BiliUere", "Uganda_Budongo", "Uganda_Bwindi", "Uganda_Ngogo", "Tanzania_Ugalla"]
+
 Summary = React.createClass
   displayName: 'Summary'
 
   getInitialState: ->
     chimpsSeen: false
+    siteLocation: null
 
   componentWillMount: ->
     @props.notes.map (note) =>
       if note.animal is steps[2][0].animal.options[1] #chimp
         @setState chimpsSeen: true
+
+    @getSiteLocation()
+
+  getSiteLocation: ->
+    locationName = Subject.current.metadata.file.split('/')[2]
+
+    siteLocation = switch
+      when sites.siteA.indexOf(locationName) > -1 then "site-a"
+      when sites.siteB.indexOf(locationName) > -1 then "site-b"
+      when sites.siteC.indexOf(locationName) > -1 then "site-c"
+      when sites.siteD.indexOf(locationName) > -1 then "site-d"
+
+    @setState siteLocation: siteLocation
 
   render: ->
     noteSummary = @props.notes.map (note, i) =>
@@ -39,7 +59,7 @@ Summary = React.createClass
         <Share video={@props.video.mp4} zooniverseId={@props.zooniverseId} />
       </section>
       <section className="map-container">
-        <figure className="map"><img src="./assets/sample-map.png" alt="sample-map" /></figure>
+        <figure className="map"><img src={unless @state.siteLocation is null then "./assets/#{@state.siteLocation}.jpg" else "./assets/sample-map.png"} alt="site location map" /></figure>
       </section>
       {if @state.chimpsSeen is true
         <section className="chimp-summary">

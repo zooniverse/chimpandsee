@@ -12,7 +12,7 @@ api = new Api project: 'chimp'
 
 Subject.group = true
 
-  # Top Bar
+# Top Bar
 topBar = new TopBar
 document.getElementById('top-bar').appendChild topBar.el[0]
 

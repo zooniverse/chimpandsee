@@ -135,13 +135,18 @@ Step = React.createClass
     @sendClassification()
     @props.step.set steps.length - 1
     @props.subStep.set 0
+    @props.disableSkip()
 
   nextSubject: ->
     @props.notes.set []
     @props.currentAnswers.set {}
-    @props.step.set 0
+    if @props.skipImages is true
+      @props.step.set 1
+    else
+      @props.step.set 0
     @props.subStep.set 0
     @props.showLoader()
+    @props.enableSkip()
     Subject.next()
 
   sendClassification: ->
@@ -154,6 +159,11 @@ Step = React.createClass
       'hide': @props.step.value <= 1 or @props.step.value is steps.length - 1
 
     addDisabled = @state.values.length is 0
+
+    addAndCancelStyle = switch
+      when @props.step.value is 2 and window.innerWidth < 451 then "top": "-110px"
+      when @props.step.value is 3 and window.innerWidth < 451 then "top": "-125px"
+      when @props.subStep.value is 3 and window.innerWidth > 450 then "marginTop": "52.5px"
 
     addClasses = cx
       'disabled': addDisabled
@@ -228,11 +238,11 @@ Step = React.createClass
             {stepButtons}
           </div>}
         <div className="step-bottom">
-          <button className={cancelClasses} onClick={@cancelNote} style={marginTop: "52.5px" if @props.subStep.value is 3 and window.innerWidth > 450}>Cancel</button>
+          <button className={cancelClasses} onClick={@cancelNote} style={addAndCancelStyle}>Cancel</button>
           <div className="buttons-container">
             {buttons}
           </div>
-          <button className={addClasses} onClick={@addNote} disabled={addDisabled} style={marginTop: "52.5px" if @props.subStep.value is 3 and window.innerWidth > 450}>Done</button>
+          <button className={addClasses} onClick={@addNote} disabled={addDisabled} style={addAndCancelStyle}>Done</button>
         </div>
       </div>
 

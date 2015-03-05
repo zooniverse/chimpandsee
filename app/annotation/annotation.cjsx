@@ -39,8 +39,8 @@ Annotation = React.createClass
 
   componentDidMount: ->
     @loader = @refs.loader.getDOMNode()
-    @overlay = @refs.imageZoom.getDOMNode().childNodes[0] #skylight-dialog__overlay
-    @dialog = @refs.imageZoom.getDOMNode().childNodes[1] #skylight-dialog
+    @overlay = @refs.imageZoom?.getDOMNode().childNodes[0] #skylight-dialog__overlay
+    @dialog = @refs.imageZoom?.getDOMNode().childNodes[1] #skylight-dialog
 
     if @props.skipImages is true
       @setState currentStep: 1
@@ -56,7 +56,7 @@ Annotation = React.createClass
       @loadCount = 0
       @refs.previewImgs?.getDOMNode().classList.remove 'full-opacity'
 
-    if nextProps.skipImages is true
+    if nextProps.skipImages is true and nextProps.skipImages isnt @props.skipImages
       @setState currentStep: 1
 
   zoomImage: (preview) ->
@@ -183,6 +183,8 @@ Annotation = React.createClass
         onClickGuide={@onClickGuide}
         skipImages={@props.skipImages}
         showLoader={@showLoader}
+        enableSkip={@props.enableSkip}
+        disableSkip={@props.disableSkip}
       />
       <Notes notes={cursor.refine('notes')} step={cursor.refine('currentStep')} />
     </div>

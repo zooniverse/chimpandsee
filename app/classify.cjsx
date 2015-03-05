@@ -10,6 +10,8 @@ Favorite = require 'zooniverse/models/favorite'
 Classification = require 'zooniverse/models/classification'
 User = require 'zooniverse/models/user'
 
+steps = require './lib/steps'
+
 module?.exports = React.createClass
   displayName: 'Classify'
 
@@ -28,6 +30,7 @@ module?.exports = React.createClass
     tutorialType: null
     skipImages: false
     srcWidth: null
+    toggleSkip: false
 
   componentDidMount: ->
     Subject.on 'select', @onSubjectSelect
@@ -105,7 +108,7 @@ module?.exports = React.createClass
 
     #For iOS Safari
     @html.style.overflow = 'hidden' if window.innerWidth < 401
-    @body.style.cssText = 'overflow: hidden; max-height: 2420px' if window.innerWidth < 401
+    @body.style.cssText = 'overflow: hidden; max-height: 2520px' if window.innerWidth < 401
 
   removeClassesForGuide: ->
     @wrapper.classList.remove 'push-right'
@@ -132,6 +135,12 @@ module?.exports = React.createClass
     else
       @setState skipImages: checkbox.checked
 
+  enableSkip: ->
+    @setState toggleSkip: false
+
+  disableSkip: ->
+    @setState toggleSkip: true
+
   setUserSkipPreference: (preference) ->
     User.current?.setPreference 'skip_first_step', preference, @setState skipImages: preference
 
@@ -145,18 +154,31 @@ module?.exports = React.createClass
       'hide': @state.previews is null
       'hidden-chimp-container': true
 
+    skipCheckboxDisabled = true if @state.toggleSkip is true
+
     <div className={classifyClasses}>
       <Guide ref="guide" onClickClose={@onClickClose} guideIsOpen={@state.guideIsOpen} />
       {unless @state.location is null
         <div className="location-container">
-          <p>
-            <span className="bold">Site:</span> {@state.location}
-            <label className="skip-checkbox-label" htmlFor="skip-checkbox">
-              <input ref="skipCheckbox" defaultChecked={@props.user?.preferences?.chimp?.skip_first_step is "true"} type="checkbox" id="skip-checkbox" onClick={@onClickSkipCheckbox}/> Skip images?
-            </label>
-            <button className="tutorial-btn" onClick={@openTutorial.bind(null, "general")}>Tutorial</button>
-            <a href="https://www.zooniverse.org" target="_blank"><button className="faq-btn">FAQs</button></a>
-          </p>
+          <div>
+            <p><span className="bold">Site:</span> {@state.location}</p>
+            <div className="btn-container">
+              <button className="tutorial-btn" onClick={@openTutorial.bind(null, "general")}>Tutorial</button>
+              <a href="https://www.zooniverse.org" target="_blank" className="faq-link"><button className="faq-btn">FAQs</button></a>
+              <label className="skip-checkbox-label" htmlFor="skip-checkbox">
+                <input
+                  ref="skipCheckbox"
+                  defaultChecked={@props.user?.preferences?.chimp?.skip_first_step is "true"}
+                  type="checkbox"
+                  id="skip-checkbox"
+                  onClick={@onClickSkipCheckbox}
+                  disabled={skipCheckboxDisabled}
+                  className={"disabled" if skipCheckboxDisabled}
+                />
+                  Skip images?
+              </label>
+            </div>
+          </div>
         </div>
       }
       {unless @state.previews is null and @state.video is null
@@ -172,7 +194,9 @@ module?.exports = React.createClass
           location={@state.location}
           zooniverseId={@state.zooniverseId}
           skipImages={@state.skipImages}
-          srcWidth={@state.srcWidth} />
+          srcWidth={@state.srcWidth}
+          enableSkip={@enableSkip}
+          disableSkip={@disableSkip} />
       else
         <div ref="statusMessage"></div>
       }

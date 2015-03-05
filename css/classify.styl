@@ -38,38 +38,17 @@
     margin: 20px auto
 
   .location-container
-
-    .tutorial-btn, .faq-btn
-      float: right
-      margin: 0 10px
-      line-height: 40px
-      padding: 0 5px
-      font-size: 11px
-
-      @media screen and (max-width: 400px)
-        margin: 0 5px
-        float: none
-
-    .skip-checkbox-label
-      float: right
-      font-size: 11px
-      margin: 0 10px
-
-    p
       background: $blackish
       margin: 0 auto
       border-radius: 8px
       width: 98%
       max-width: 930px
       box-sizing: border-box
-      line-height: 40px
+      display: flex
 
-      @media screen and (max-width: 400px)
+      @media screen and (max-width: 480px)
         font-size: 14px
         height: 80px
-        
-        .bold
-          margin-left: 10px
 
       &:before
         content: ''
@@ -77,12 +56,65 @@
         width: 60px
         height: 40px
         display: inline-block
-        float: left
         border-bottom-left-radius: 8px
         border-top-left-radius: 8px
         margin-right: 20px
 
-        @media screen and (max-width: 400px)
+        @media screen and (max-width: 480px)
           width: 40px
+          min-width: 40px
           height: 80px
           margin-right: 0px
+
+      div
+        display: inline-flex
+        height: 40px
+        width: 100%
+
+        @media screen and (max-width: 480px)
+          display: block
+
+    .btn-container
+      justify-content: flex-end
+      flex: 2 1
+
+      @media screen and (max-width: 480px)
+        display: flex
+        flex-wrap: wrap-reverse
+
+      .tutorial-btn, .faq-btn
+        margin: 0 10px
+        line-height: 40px
+        padding: 0 5px
+        font-size: 11px
+
+        @media screen and (max-width: 480px)
+          margin: 0 5px
+          height: 40px
+
+      .faq-link
+        @media screen and (max-width: 480px)
+          height: 40px
+
+      .skip-checkbox-label
+        font-size: 11px
+        margin: 0 10px
+        line-height: 40px
+
+        @media screen and (max-width: 480px)
+          height: 40px
+
+    p
+      line-height: 40px
+      margin: 0
+      flex: 1 1
+      min-width: 160px
+
+      @media screen and (max-width: 480px)
+        height: 40px
+        min-width: 200px
+
+        .bold
+          margin-left: 10px
+
+

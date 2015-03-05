@@ -43,22 +43,22 @@ module?.exports = React.createClass
     @html = document.getElementsByTagName('html')[0]
     @main = document.getElementsByClassName('main')[0]
 
-    @startGuide(@props)
 
-    if @props.user?.preferences?.chimp?.skip_first_step is "true"
-      @setState skipImages: true
+    unless @props.user?.classification_count > 0
+      @openTutorial 'general'
+
+    @setSkipPreference(@props)
 
   componentWillReceiveProps: (nextProps) ->
     if nextProps.user isnt @props.user
-      if nextProps.user?.preferences?.chimp?.skip_first_step is "true"
-        @setState skipImages: true
-        @refs.skipCheckbox?.getDOMNode().checked = true
+      @setSkipPreference(nextProps)
 
     if nextProps.user is null
       @setState skipImages: false
       @refs.skipCheckbox?.getDOMNode().checked = false
 
-    @startGuide(nextProps)
+    unless nextProps.user?.classification_count > 0
+      @openTutorial 'general'
 
   componentWillUnmount: ->
     Subject.off 'select', @onSubjectSelect
@@ -84,9 +84,8 @@ module?.exports = React.createClass
   onNoSubjects: ->
     @refs.statusMessage.getDOMNode().innerHTML = "No more subjects. Please try again."
 
-  startGuide: (props) ->
-    unless props.user?.classification_count > 0
-      @openTutorial 'general'
+  # startGuide: (props) ->
+
 
   checkSrcWidth: ->
     image = new Image()
@@ -145,6 +144,11 @@ module?.exports = React.createClass
 
   disableSkip: ->
     @setState toggleSkip: true
+
+  setSkipPreference: (prop) ->
+    if prop.user?.preferences?.chimp?.skip_first_step is "true"
+        @setState skipImages: true
+        @refs.skipCheckbox?.getDOMNode().checked = true
 
   setUserSkipPreference: (preference) ->
     User.current?.setPreference 'skip_first_step', preference, @setState skipImages: preference

@@ -43,6 +43,8 @@ module?.exports = React.createClass
     @html = document.getElementsByTagName('html')[0]
     @main = document.getElementsByClassName('main')[0]
 
+    @startGuide(@props)
+
     if @props.user?.preferences?.chimp?.skip_first_step is "true"
       @setState skipImages: true
 
@@ -56,8 +58,7 @@ module?.exports = React.createClass
       @setState skipImages: false
       @refs.skipCheckbox?.getDOMNode().checked = false
 
-    unless nextProps.user?.classification_count > 0
-      @openTutorial 'general'
+    @startGuide(nextProps)
 
   componentWillUnmount: ->
     Subject.off 'select', @onSubjectSelect
@@ -82,6 +83,10 @@ module?.exports = React.createClass
 
   onNoSubjects: ->
     @refs.statusMessage.getDOMNode().innerHTML = "No more subjects. Please try again."
+
+  startGuide: (props) ->
+    unless props.user?.classification_count > 0
+      @openTutorial 'general'
 
   checkSrcWidth: ->
     image = new Image()
@@ -108,7 +113,7 @@ module?.exports = React.createClass
 
     #For iOS Safari
     @html.style.overflow = 'hidden' if window.innerWidth < 401
-    @body.style.cssText = 'overflow: hidden; max-height: 2520px' if window.innerWidth < 401
+    @body.style.cssText = 'overflow: hidden;' if window.innerWidth < 401
 
   removeClassesForGuide: ->
     @wrapper.classList.remove 'push-right'
@@ -117,7 +122,7 @@ module?.exports = React.createClass
 
     #For iOS Safari
     @html.style.overflow = 'initial' if window.innerWidth < 401
-    @body.style.cssText = 'overflow: initial; max-height: 100%' if window.innerWidth < 401
+    @body.style.cssText = 'overflow: initial;' if window.innerWidth < 401
 
   openTutorial: (type) ->
     @setState

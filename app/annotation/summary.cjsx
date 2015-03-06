@@ -56,22 +56,33 @@ Summary = React.createClass
             {noteSummary}
           </ul>
         </div>
-        <Share video={@props.video.mp4} zooniverseId={@props.zooniverseId} />
+        <Share video={@props.video.mp4} zooniverseId={Subject.current.zooniverse_id} />
       </section>
       <section className="map-container">
-        <figure className="map"><img src={unless @state.siteLocation is null then "./assets/#{@state.siteLocation}.jpg" else "./assets/sample-map.png"} alt="site location map" /></figure>
+        <figure className="map"><img src={
+          unless @state.siteLocation is null
+            if @state.chimpsSeen is true
+              "./assets/summary/chimp-#{@state.siteLocation}.jpg"
+            else
+              "./assets/summary/#{@state.siteLocation}.jpg" 
+          else 
+            "./assets/summary/sample-map.png"
+          } 
+          alt="site location map" />
+        </figure>
       </section>
       {if @state.chimpsSeen is true
         <section className="chimp-summary">
-          <img src="./assets/identified-chimp.gif" alt="An identified chimp" />
+          <img src="./assets/summary/identified-chimp.gif" alt="An identified chimp" />
           <div className="chimp-content">
             <h3>Have you seen this chimp before?</h3>
             <p>Help us identify and name these chimps!</p>
           </div>
           <div className="chimp-btn-container">
             <button onClick={@props.openTutorial.bind(null, "chimps")}>Learn More</button>
-            <button>Get Started</button>
             <button>Known Chimps</button>
+            <a href={Subject.current.talkHref()} target="_blank"><button>ID This Chimp</button></a>
+            <button>Found New Chimp</button>
           </div>
         </section>
       }

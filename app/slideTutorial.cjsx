@@ -8,11 +8,7 @@ SlideTutorial = React.createClass
 
   getInitialState: ->
     general: slideTutorials.general
-    chimps: [
-      {image: 'http://placehold.it/400x275', title: 'Chimp Slide 1', content: 'Lorem ipsum dolor sit amet, mel ne idque evertitur ullamcorper, ne scaevola efficiantur nec, nobis menandri explicari te eos. Sea no munere laudem. Ne vis eripuit pericula hendrerit, diam veri aliquando vim ea. Eu prompta recusabo eum.', button: 'Next'}
-      {image: 'http://placehold.it/400x275', title: 'Chimp Slide 2', content: 'Lorem ipsum dolor sit amet, mel ne idque evertitur ullamcorper, ne scaevola efficiantur nec, nobis menandri explicari te eos. Sea no munere laudem. Ne vis eripuit pericula hendrerit, diam veri aliquando vim ea. Eu prompta recusabo eum.', button: 'Next'}
-      {image: 'http://placehold.it/400x275', title: 'Chimp Slide 3', content: 'Lorem ipsum dolor sit amet, mel ne idque evertitur ullamcorper, ne scaevola efficiantur nec, nobis menandri explicari te eos. Sea no munere laudem. Ne vis eripuit pericula hendrerit, diam veri aliquando vim ea. Eu prompta recusabo eum.', button: 'Finish'}
-    ]
+    chimps: slideTutorials.chimps
     activeSlide: 0
 
   componentWillReceiveProps: (nextProps) ->

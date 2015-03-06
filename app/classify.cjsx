@@ -22,7 +22,6 @@ module?.exports = React.createClass
   getInitialState: ->
     video: null
     previews: null
-    zooniverseId: null
     location: null
     classification: null
     guideIsOpen: false
@@ -42,7 +41,6 @@ module?.exports = React.createClass
     @body = document.getElementsByTagName('body')[0]
     @html = document.getElementsByTagName('html')[0]
     @main = document.getElementsByClassName('main')[0]
-
 
     unless @props.user?.classification_count > 0
       @openTutorial 'general'
@@ -72,7 +70,6 @@ module?.exports = React.createClass
     @setState({
       video: subject.location.standard
       previews: previews[randomInt]
-      zooniverseId: subject.zooniverse_id
       location: subject.group.name
       classification: new Classification {subject}
     }, => @onSubjectUpdate(randomInt))
@@ -82,10 +79,19 @@ module?.exports = React.createClass
     @checkSrcWidth()
 
   onNoSubjects: ->
-    @refs.statusMessage.getDOMNode().innerHTML = "No more subjects. Please try again."
+    @refs.statusMessage.getDOMNode().innerHTML =
+      '''<h3>We're out of data!<h3>
 
-  # startGuide: (props) ->
+      <p>Unfortunately, we don't have any more videos to show you right now! 
+      Either all current videos have been explored, or you personally 
+      may have explored every available video. We should have more 
+      data for you fairly soon, so don't forget about us!</p>
 
+      <p>In the meantime, you can continue working on this project 
+      by helping us ID and name individual chimps on <a href="http://talk.chimpandsee.org" target="_blank">Chimp & See Talk</a>. 
+      Or check out any of our dozens of other Zooniverse projects at 
+      <a href="https://www.zooniverse.org/" target="_blank">zooniverse.org</a>. Thanks!</p>
+    '''
 
   checkSrcWidth: ->
     image = new Image()
@@ -201,13 +207,12 @@ module?.exports = React.createClass
           openTutorial={@openTutorial}
           user={@props.user}
           location={@state.location}
-          zooniverseId={@state.zooniverseId}
           skipImages={@state.skipImages}
           srcWidth={@state.srcWidth}
           enableSkip={@enableSkip}
           disableSkip={@disableSkip} />
       else
-        <div ref="statusMessage"></div>
+        <div className="status-message" ref="statusMessage"></div>
       }
       <SlideTutorial tutorialIsOpen={@state.tutorialIsOpen} closeTutorial={@closeTutorial} tutorialType={@state.tutorialType} />
       <div className={hiddenChimpClasses}><img className="hidden-chimp" src="./assets/hidden-chimp.png" alt="" /></div>

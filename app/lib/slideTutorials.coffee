@@ -65,6 +65,68 @@ slideTutorials = {
       button: 'Finish'
     }
   ]
+
+  chimps: [
+    {
+      image: 'http://placehold.it/400x275',
+      title: 'Marking individual chimpanzees',
+      content: '''While it is useful just to know that there is a 
+      chimp is in a video, the science team can learn even more 
+      when users identify individual chimps. For this task, 
+      citizen scientists can use the Talk discussion system 
+      to give chimps "names" and mark videos with hashtags 
+      when they see those chimps.''',
+      button: 'Next'
+    },
+
+    {      
+      image: 'http://placehold.it/400x275',
+      title: 'First: check known chimps and tag them',
+      content: '''When you have finished a classification in 
+      which you marked a chimp, click the "Known Chimps"
+       button to view a list of individuals already identified 
+       at that site. If the video you just watched has a known chimp, 
+       click "ID This Chimp" and comment with its dedicated 
+       hashtag (for example: #caesar).''',
+      button: 'Next'
+    },
+
+    {      
+      image: 'http://placehold.it/400x275',
+      title: 'Start discussions on Talk for new chimps',
+      content: '''If you have seen a chimp multiple times that 
+      is not listed in "Known Chimps,"" let us know! Click 
+      "Found New Chimp" to go the Talk board for discussing 
+      chimps at that site. Start a discussion that links to 
+      the videos of your new chimp. (You can find previously 
+      classified and favorited videos in your Profile.) At 
+      least two videos are required per new chimp.''',
+      button: 'Next'
+    },
+
+    {      
+      image: 'http://placehold.it/400x275',
+      title: 'Propose a "name" and log a known chimp',
+      content: '''Other users may discuss your new-chimp candidate. 
+      If you have indeed found an identifiable and previously 
+      unknown chimp at that location, you may get to propose 
+      a "name" for the chimp. If accepted, the chimp will 
+      be added to the "Known Chimps" page, and the 
+      "name" will become his/her hashtag!''',
+      button: 'Next'
+    },
+
+    {      
+      image: 'http://placehold.it/400x275',
+      title: 'Keep an eye out!',
+      content: '''When each site's data launches, there initially 
+      be no known chimps at the site—they all must be found by 
+      Chimp & See volunteers—so we're counting on you! More tips 
+      for spotting and identifying individual chimps will be 
+      available on Talk and on the Chimp & See blog. Good luck, and thanks!''',
+      button: 'Finish'
+    }
+  ]
 }
 
 module.exports = slideTutorials

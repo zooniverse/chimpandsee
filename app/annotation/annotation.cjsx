@@ -170,7 +170,7 @@ Annotation = React.createClass
           </div>
         }
         {if @state.currentStep is steps.length - 1
-          <Summary notes={@state.notes} openTutorial={@props.openTutorial} location={@props.location} video={@props.video} zooniverseId={@props.zooniverseId} />
+          <Summary notes={@state.notes} openTutorial={@props.openTutorial} location={@props.location} video={@props.video} />
         }
         <button data-tooltip={favoriteToolTip} className={favoriteClasses} onClick={@onClickFavorite} disabled={@state.user is false}>Favorite</button>
       </div>

@@ -4,7 +4,6 @@ _ = require 'underscore'
 Cursor = require('react-cursor').Cursor
 SkyLight = require 'react-skylight'
 
-AnimateMixin = require "react-animate"
 animatedScrollTo = require 'animated-scrollto'
 
 Subject = require 'zooniverse/models/subject'
@@ -17,7 +16,6 @@ steps = require '../lib/steps'
 
 Annotation = React.createClass
   displayName: 'Annotation'
-  mixins: [AnimateMixin]
 
   loadCount: 0
   loader: null

@@ -45,11 +45,11 @@ module?.exports = React.createClass
     unless @props.user?.classification_count > 0
       @openTutorial 'general'
 
-    @setSkipPreference(@props)
+    @setInitialSkipPreference(@props)
 
   componentWillReceiveProps: (nextProps) ->
     if nextProps.user isnt @props.user
-      @setSkipPreference(nextProps)
+      @setInitialSkipPreference(nextProps)
 
     if nextProps.user is null
       @setState skipImages: false
@@ -82,14 +82,14 @@ module?.exports = React.createClass
     @refs.statusMessage.getDOMNode().innerHTML =
       '''<h3>We're out of data!<h3>
 
-      <p>Unfortunately, we don't have any more videos to show you right now! 
-      Either all current videos have been explored, or you personally 
-      may have explored every available video. We should have more 
+      <p>Unfortunately, we don't have any more videos to show you right now!
+      Either all current videos have been explored, or you personally
+      may have explored every available video. We should have more
       data for you fairly soon, so don't forget about us!</p>
 
-      <p>In the meantime, you can continue working on this project 
-      by helping us ID and name individual chimps on <a href="http://talk.chimpandsee.org" target="_blank">Chimp & See Talk</a>. 
-      Or check out any of our dozens of other Zooniverse projects at 
+      <p>In the meantime, you can continue working on this project
+      by helping us ID and name individual chimps on <a href="http://talk.chimpandsee.org" target="_blank">Chimp & See Talk</a>.
+      Or check out any of our dozens of other Zooniverse projects at
       <a href="https://www.zooniverse.org/" target="_blank">zooniverse.org</a>. Thanks!</p>
     '''
 
@@ -151,10 +151,10 @@ module?.exports = React.createClass
   disableSkip: ->
     @setState toggleSkip: true
 
-  setSkipPreference: (prop) ->
+  setInitialSkipPreference: (prop) ->
     if prop.user?.preferences?.chimp?.skip_first_step is "true"
-        @setState skipImages: true
-        @refs.skipCheckbox?.getDOMNode().checked = true
+      @setState skipImages: true
+      @refs.skipCheckbox?.getDOMNode().checked = true
 
   setUserSkipPreference: (preference) ->
     User.current?.setPreference 'skip_first_step', preference, @setState skipImages: preference

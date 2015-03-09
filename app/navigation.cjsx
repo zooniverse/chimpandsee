@@ -48,6 +48,8 @@ module?.exports = React.createClass
       <a href="#/" className="logo-link"><img className="logo" src="./assets/chimpnsee-logo.svg" alt="logo" /></a>
       <div className={menuClasses}>
         {links}
-        <a href="http://goo.gl/forms/Yj5ruVRXhZ" target="_blank">Survey</a>
+        <a href="http://talk.chimpandsee.org/" target="chimptalk">Discuss</a>
+        <a href="http://blog.chimpandsee.org/" target="chimpblog">Blog</a>
       </div>
+      <img className="chimpster" src="./assets/chimpster.png" alt="" />
     </nav>

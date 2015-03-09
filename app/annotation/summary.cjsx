@@ -64,10 +64,10 @@ Summary = React.createClass
             if @state.chimpsSeen is true
               "./assets/summary/chimp-#{@state.siteLocation}.jpg"
             else
-              "./assets/summary/#{@state.siteLocation}.jpg" 
-          else 
+              "./assets/summary/#{@state.siteLocation}.jpg"
+          else
             "./assets/summary/sample-map.png"
-          } 
+          }
           alt="site location map" />
         </figure>
       </section>
@@ -81,7 +81,7 @@ Summary = React.createClass
           <div className="chimp-btn-container">
             <button onClick={@props.openTutorial.bind(null, "chimps")}>Learn More</button>
             <button>Known Chimps</button>
-            <a href={Subject.current.talkHref()} target="_blank"><button>ID This Chimp</button></a>
+            <a href={Subject.current.talkHref()} target="chimptalksubject"><button>ID This Chimp</button></a>
             <button>Found New Chimp</button>
           </div>
         </section>

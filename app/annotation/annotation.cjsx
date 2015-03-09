@@ -45,6 +45,8 @@ Annotation = React.createClass
     if @props.skipImages is true
       @setState currentStep: 1
 
+    window.addEventListener 'keydown', @onPressSpaceBar
+
   componentWillReceiveProps: (nextProps) ->
     if nextProps.video isnt @props.video
       @loadCount = 0
@@ -58,6 +60,9 @@ Annotation = React.createClass
 
     if nextProps.skipImages is true and nextProps.skipImages isnt @props.skipImages
       @setState currentStep: 1
+
+  componentWillUnmount: ->
+    window.removeEventListener 'keydown', @onPressSpaceBar
 
   zoomImage: (preview) ->
     @setState zoomImageSrc: preview
@@ -117,6 +122,15 @@ Annotation = React.createClass
 
   hideLoader: ->
     @loader.classList.add 'hide'
+
+  onPressSpaceBar: (e) ->
+    if e.keyCode is 32
+      e.preventDefault()
+
+      if @refs.video.getDOMNode().paused
+        @refs.video.getDOMNode().play()
+      else
+        @refs.video.getDOMNode().pause()
 
   render: ->
     cursor = Cursor.build(@)

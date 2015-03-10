@@ -98,6 +98,7 @@ Profile = React.createClass
             <label><input ref="username" type="text" name="username" required="required" placeholder="Username"/></label>
             <label><input ref="password" type="password" name="password" required="required" placeholder="Password"/></label>
             <div ref="errorMessage" className="error-message"></div>
+            <a className="forgot-password-link" href="https://www.zooniverse.org/password/reset" target="_blank">Forgot your password?</a>
             <div className="action"><button ref="signInButton" type="submit" onClick={@userLogin}>Sign in</button></div>
             <p className="no-account">{"Don't have an account?"} <a className="sign-up-link" onClick={@onClickSignUp} name="sign-up">Sign up</a></p>
           </form>

@@ -37,13 +37,14 @@ module?.exports = React.createClass
 
     <nav className={navClasses}>
       <div className="mobile-menu" onClick={@toggleMobileMenu}>
-        <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" viewBox="0 0 30 30">
+        <svg className="menu-icon" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" viewBox="0 0 30 30">
           <g>
             <rect className="bars" y="2.5" width="30" height="5"/>
             <rect className="bars" y="12.5" width="30" height="5"/>
             <rect className="bars" y="22.5" width="30" height="5"/>
           </g>
         </svg>
+        {<span className="mobile-menu-title">Menu</span> if window.innerWidth <= 320}
       </div>
       <a href="#/" className="logo-link"><img className="logo" src="./assets/chimpnsee-logo.svg" alt="logo" /></a>
       <div className={menuClasses}>

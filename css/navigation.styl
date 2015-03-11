@@ -17,11 +17,25 @@
       position: absolute
       z-index: 30
       top: 4.5px
-      right: 4.5px
-      padding: 20px
+      left: 4.5px
+      padding: 22.5px 20px
 
-    .bars
-      fill: #424242
+    @media screen and (max-width: 320px)
+      width: 55px
+
+      .mobile-menu-title
+        font-size: 12px
+        vertical-align: top
+        margin-left: 5px
+        color: #424242
+
+    .menu-icon
+      .bars
+        fill: #424242
+
+      @media screen and (max-width: 320px)
+        width: 15px
+        height: 15px
 
   .logo-link
     line-height: 70px
@@ -36,6 +50,9 @@
 
       @media screen and (max-width: 710px)
         margin: 0
+
+      @media screen and (max-width: 320px)
+        width: 95px
 
   .menu-list
     transition: .3s ease all

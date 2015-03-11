@@ -62,8 +62,12 @@ html, body
       background-color: transparent
       color: white
 
-      .mobile-menu .bars
-        fill: white
+      .mobile-menu
+        .mobile-menu-title
+          color: white
+
+        .bars
+          fill: white
 
       .menu-list
         background-color: transparent
@@ -134,7 +138,6 @@ html, body
       outline: none
       background-color: transparent
 
-
   .disabled
     cursor: not-allowed
 
@@ -161,8 +164,9 @@ html, body
 
         @media screen and (max-width: 768px)
           top: 25px
-          left: 10px
+          right: 5px
           width: 90px
+          text-align: right
 
     .current-user
       position: absolute
@@ -170,8 +174,9 @@ html, body
       right: 10px
 
       @media screen and (max-width: 768px)
-        left: 10px
+        right: 5px
         width: 120px
+        text-align: right
 
       img
         border-radius: 50%

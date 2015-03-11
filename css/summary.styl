@@ -148,13 +148,16 @@
   .chimp-summary
     display: flex
     flex-wrap: wrap
-    float: left
+    // float: left
     background: $topbar-green
     width: 100%
     border-bottom-left-radius: 8px
     border-bottom-right-radius: 8px
     margin-top: -60px
     position: relative
+
+    @media screen and (max-width: 1170px)
+      justify-content: center
 
     @media screen and (max-width: 400px)
       margin-top: 0
@@ -200,7 +203,8 @@
         background-color: $green
         font-size: 12px
         line-height: 40px
-        width: 230px
+        width: 100%
+        max-width: 230px
         height: 40px
         border-radius: 4px
         padding: 0
@@ -211,11 +215,11 @@
         &.new-chimp-btn
           margin: 10px 10px 10px 5px
 
-      // @media screen and (max-width: 1100px)
-      //   margin: 15px auto
+      @media screen and (max-width: 1170px)
+        text-align: center
+        width: 100%
 
-      @media screen and (max-width: 400px)
+      @media screen and (max-width: 515px)
         max-width: 100%
         line-height: initial
-        text-align: center
         margin: 0

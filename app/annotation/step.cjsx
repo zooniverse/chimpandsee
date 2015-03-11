@@ -161,8 +161,10 @@ Step = React.createClass
     addDisabled = @state.values.length is 0
 
     addAndCancelStyle = switch
-      when @props.step.value is 2 and window.innerWidth < 451 then "top": "-110px"
-      when @props.step.value is 3 and window.innerWidth < 451 then "top": "-125px"
+      when @props.step.value is 2 and window.innerWidth <= 400 then "top": "-110px"
+      when @props.step.value is 2 and window.innerWidth > 400 and window.innerWidth <=450 then "top": "-95px"
+      when @props.step.value is 3 and window.innerWidth <= 400 then "top": "-125px"
+      when @props.step.value is 3 and window.innerWidth > 400 and window.innerWidth <= 450 then "top": "-115px"
       when @props.subStep.value is 3 and window.innerWidth > 450 then "marginTop": "52.5px"
 
     addClasses = cx

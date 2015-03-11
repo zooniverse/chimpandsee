@@ -77,12 +77,12 @@ Summary = React.createClass
           <div className="chimp-content">
             <h3>Have you seen this chimp before?</h3>
             <p>Help us identify and name these chimps!</p>
-            <button className="learn-more-btn" onClick={@props.openTutorial.bind(null, "chimps")}>Learn More</button>
-            <button className="all-chimps-btn">See all known Chimps</button>
+            <button className="learn-more-btn" onClick={@props.openTutorial.bind(null, "chimps")}>How does this work?</button>
+            <button className="all-chimps-btn">Known chimps at this site</button>
           </div>
           <div className="chimp-btn-container">
-            <a href={Subject.current.talkHref()} target="chimptalksubject"><button className="seen-chimp-btn">{"Yes, I've seen this Chimp before!"}</button></a>
-            <button className="new-chimp-btn">No, this is a new Chimp.</button>
+            <a href={Subject.current.talkHref()} target="chimptalksubject"><button className="seen-chimp-btn">This is a known chimp!</button></a>
+            <button className="new-chimp-btn">This is a new chimp!</button>
           </div>
         </section>
       }

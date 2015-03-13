@@ -177,21 +177,29 @@
         padding: 0
 
         &.learn-more-btn
-          margin: 10px 10px 10px 0
+          margin: 10px 5px 10px 0
+
+          @media screen and (max-width: 320px)
+            margin: 10px 0
 
         &.all-chimps-btn
-          margin: 10px 0 10px 10px
+          margin: 10px 0 10px 5px
 
-      h3
+          @media screen and (max-width: 320px)
+            margin: 10px 0
+
+      h3, p
         font-size: 16px
         margin: 0
 
+        @media screen and (max-width: 450px)
+          font-size: 14px
+
       p
-        margin: 0
         line-height: 16px
 
       @media screen and (max-width: 400px)
-        max-width: 240px
+        max-width: 270px
         margin: 10px 0 0 0
 
     .chimp-btn-container

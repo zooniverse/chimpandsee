@@ -182,7 +182,7 @@ Step = React.createClass
 
         if @props.currentAnswers.value.animal is _.values(@props.currentAnswers.value)[0] is steps[2][0].animal.options[1] #chimp
           subSteps = steps[3].map (step, i) =>
-            stepBtnDisabled = _.values(@props.currentAnswers.value).length < i + i
+            stepBtnDisabled = _.values(@props.currentAnswers.value).length < i + 2
             stepBtnClasses = cx
               'step-button': true
               'step-active': @props.subStep.value is i

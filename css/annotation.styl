@@ -58,12 +58,18 @@
       &:before
         background: $blackish url(./assets/guide/guide-icon.svg) no-repeat center center
 
+      &:hover:before
+        background-color: rgba(17, 17, 17, 0.7)
+
       @media screen and (max-width: 870px)
         order: 2
 
     .favorite-btn
       &:before
         background: $blackish url(./assets/fav-icon.svg) no-repeat center center
+
+      &:hover:before
+        background-color: rgba(17, 17, 17, 0.7)
 
       &.disabled:before
         background-image: url(./assets/fav-icon-disabled.svg)

@@ -130,6 +130,9 @@ Annotation = React.createClass
       else
         @refs.video.getDOMNode().pause()
 
+  stopVideo: ->
+    @refs.video.getDOMNode().pause()
+
   render: ->
     cursor = Cursor.build(@)
 
@@ -197,6 +200,7 @@ Annotation = React.createClass
         showLoader={@showLoader}
         enableSkip={@props.enableSkip}
         disableSkip={@props.disableSkip}
+        stopVideo={@stopVideo}
       />
       <Notes notes={cursor.refine('notes')} step={cursor.refine('currentStep')} />
     </div>

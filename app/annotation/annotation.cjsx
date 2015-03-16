@@ -70,7 +70,7 @@ Annotation = React.createClass
 
   onClickGuide: ->
     #workaround for Firefox bug
-    scrollElement = if isFirefox then document.documentElement else document.body
+    scrollElement = if @isFirefox then document.documentElement else document.body
 
     animatedScrollTo scrollElement, 0, 1000
 

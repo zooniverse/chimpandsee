@@ -21,6 +21,7 @@ Annotation = React.createClass
   loader: null
   overlay: null
   dialog: null
+  isFirefox: false
 
   getInitialState: ->
     currentStep: 0
@@ -39,6 +40,7 @@ Annotation = React.createClass
     @loader = @refs.loader.getDOMNode()
     @overlay = @refs.imageZoom?.getDOMNode().childNodes[0] #skylight-dialog__overlay
     @dialog = @refs.imageZoom?.getDOMNode().childNodes[1] #skylight-dialog
+    @isFirefox = typeof InstallTrigger isnt 'undefined'
 
     if @props.skipImages is true
       @setState currentStep: 1
@@ -68,7 +70,6 @@ Annotation = React.createClass
 
   onClickGuide: ->
     #workaround for Firefox bug
-    isFirefox = typeof InstallTrigger isnt 'undefined'
     scrollElement = if isFirefox then document.documentElement else document.body
 
     animatedScrollTo scrollElement, 0, 1000
@@ -130,8 +131,9 @@ Annotation = React.createClass
       else
         @refs.video.getDOMNode().pause()
 
-  stopVideo: ->
+  resetVideo: ->
     @refs.video.getDOMNode().pause()
+    @refs.video.getDOMNode().currentTime = 0
 
   render: ->
     cursor = Cursor.build(@)
@@ -160,6 +162,9 @@ Annotation = React.createClass
           <img src={preview} onLoad={@onImageLoad.bind(@, null)} onClick={@zoomImage.bind(null, preview) if window.innerWidth > 600} />
         </figure>
 
+    source = if @isFirefox then @props.video.webm else @props.video.mp4
+    type = if @isFirefox then "video/webm" else "video/mp4"
+
     <div className="annotation">
       <div className="subject">
         <button className={guideClasses} onClick={@onClickGuide}>Field Guide</button>
@@ -177,9 +182,15 @@ Annotation = React.createClass
         }
         {if cursor.refine('currentStep').value >= 1 and cursor.refine('currentStep').value isnt steps.length - 1
           <div className="video-container" style={minHeight: 480 + "px" if cursor.refine('currentStep').value is 1 and window.innerWidth > 768}>
-            <video ref="video" onload={@onVideoLoad() if cursor.refine('currentStep').value is 1} poster={@props.previews[0]} controls width={if @props.srcWidth is 640 then @props.srcWidth else '100%'}>
-              <source src={@props.video.webm} type="video/webm" />
-              <source src={@props.video.mp4} type="video/mp4" />
+            <video
+              ref="video"
+              onload={@onVideoLoad() if cursor.refine('currentStep').value is 1}
+              poster={@props.previews[0]}
+              controls
+              width={if @props.srcWidth is 640 then @props.srcWidth else '100%'}
+              src={source}
+              type={type}
+            >
               Your browser does not support the video format. Please upgrade your browser.
             </video>
           </div>
@@ -200,7 +211,7 @@ Annotation = React.createClass
         showLoader={@showLoader}
         enableSkip={@props.enableSkip}
         disableSkip={@props.disableSkip}
-        stopVideo={@stopVideo}
+        resetVideo={@resetVideo}
       />
       <Notes notes={cursor.refine('notes')} step={cursor.refine('currentStep')} />
     </div>

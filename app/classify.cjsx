@@ -118,7 +118,7 @@ module?.exports = React.createClass
 
     #For iOS Safari
     @html.style.overflow = 'hidden' if window.innerWidth < 401
-    @body.style.cssText = 'overflow: hidden;' if window.innerWidth < 401
+    @body.style.overflow =  'hidden' if window.innerWidth < 401
 
   removeClassesForGuide: ->
     @wrapper.classList.remove 'push-right'
@@ -127,7 +127,7 @@ module?.exports = React.createClass
 
     #For iOS Safari
     @html.style.overflow = 'initial' if window.innerWidth < 401
-    @body.style.cssText = 'overflow: initial;' if window.innerWidth < 401
+    @body.style.overflow = 'initial' if window.innerWidth < 401
 
   openTutorial: (type) ->
     @setState

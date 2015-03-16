@@ -38,6 +38,7 @@ Step = React.createClass
         setTimeout ( =>
           console?.log 'send to classification', @props.classification
           @props.classification.annotate @props.currentAnswers.value
+          @props.resetVideo()
           @sendClassification()
           @nextSubject()
         )

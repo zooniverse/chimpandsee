@@ -24,7 +24,9 @@ Guide = React.createClass
 
   componentWillReceiveProps: (nextProps) ->
     if nextProps.guideIsOpen is false
-      @setState guideDetailsIndex: null
+      @setState
+        guideDetailsIndex: null
+        showBehaviorList: false
 
   openAnimation: ->
     @animate "show-details", {transitionProperty: 'opacity, left', transitionDuration: '.15s, 0s', transitionDelay: '0s, 0s', opacity: '1', left: '0'}, {opacity: '0', left: '-400px'}, 'in-out', 500
@@ -35,16 +37,17 @@ Guide = React.createClass
   onSelectGuideAnimal: (i) ->
     @openAnimation()
     @setState guideDetailsIndex: i
+    @goToTop()
+
+  onClickBehaviorList: ->
+    @openAnimation()
+    @setState showBehaviorList: true
+    @goToTop()
+
+  goToTop: ->
     @guideContainer.scrollTop = 0
 
     #For iOS Safari
-    @body.scrollTop = 0 if window.innerWidth < 401
-
-  onClickBehaviorList: ->
-    console.log 'click'
-    @openAnimation()
-    @setState showBehaviorList: true
-    @guideContainer.scrollTop = 0
     @body.scrollTop = 0 if window.innerWidth < 401
 
   onClickBack: ->
@@ -134,7 +137,10 @@ Guide = React.createClass
       </header>
       <nav style={if @state.guideDetailsIndex isnt null or @state.showBehaviorList is true then @getAnimatedStyle("show-details") else @getAnimatedStyle("close-details")} className="animal-list">
         <header className="nav-header">What animal do you want to know about?</header>
-        <li className="behavior-list-item" onClick={@onClickBehaviorList}>Behaviors</li>
+        <li className="behavior-list-item" onClick={@onClickBehaviorList}>
+          <span id="behavior-icon" className="tooltip"></span>
+          Behaviors
+        </li>
         {animals}
       </nav>
       {details}

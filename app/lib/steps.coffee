@@ -63,6 +63,7 @@ stepChimpSex =
     options: [
       'male'
       'female'
+      'unidentifiable'
     ]
 
 stepChimpBehavior =

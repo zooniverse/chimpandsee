@@ -81,14 +81,14 @@ Guide = React.createClass
 
     details =
       if @state.guideDetailsIndex?
-        exampleImages = guideDetails[@state.guideDetailsIndex].exampleImages.map (image, i) =>
-          <figure key={i}><img src={image} alt="Example image of an animal" /><figcaption>{guideDetails[@state.guideDetailsIndex].credit if guideDetails[@state.guideDetailsIndex].credit?}</figcaption></figure>
+        exampleImages = guideDetails.animals[@state.guideDetailsIndex].exampleImages.map (image, i) =>
+          <figure key={i}><img src={image} alt="Example image of an animal" /><figcaption>{guideDetails.animals[@state.guideDetailsIndex].credit if guideDetails.animals[@state.guideDetailsIndex].credit?}</figcaption></figure>
 
         <section className={detailsClasses}>
           <button className="back-guide-btn" onClick={@onClickBack}><img className="back-icon" src="./assets/back-icon.svg" alt="back icon" /> Back</button>
-          <h2 className="animal-name">{guideDetails[@state.guideDetailsIndex].header}</h2>
-          <h3 className="animal-taxonomy" dangerouslySetInnerHTML={{__html: guideDetails[@state.guideDetailsIndex].subHeader}}></h3>
-          <p>{guideDetails[@state.guideDetailsIndex].description}</p>
+          <h2 className="animal-name">{guideDetails.animals[@state.guideDetailsIndex].header}</h2>
+          <h3 className="animal-taxonomy" dangerouslySetInnerHTML={{__html: guideDetails.animals[@state.guideDetailsIndex].subHeader}}></h3>
+          <p>{guideDetails.animals[@state.guideDetailsIndex].description}</p>
           <h4 className="images-header">Example Images</h4>
           {exampleImages}
           {if @state.guideDetailsIndex is 1
@@ -111,15 +111,20 @@ Guide = React.createClass
               <figure><img src="./assets/guide/chimps-juvenile-2.jpg" alt="Example of juvenile chimp" /></figure>
               <figure><img src="./assets/guide/chimps-juvenile-3.jpg" alt="Example of juvenile chimp" /></figure>
               <figure><img src="./assets/guide/chimps-juvenile-4.jpg" alt="Example of juvenile chimp" /></figure>
-
             </div>
           }
         </section>
       else if @state.showBehaviorList is true
+        behavior = guideDetails.behaviors.map (behavior, i) =>
+          <div key={i} className="behavior-details">
+            <h3>{behavior.header}</h3>
+            <p>{behavior.description}</p>
+          </div>
+
         <section className={behaviorDetailsClasses}>
           <button className="back-guide-btn" onClick={@onClickBack}><img className="back-icon" src="./assets/back-icon.svg" alt="back icon" /> Back</button>
           <h2 className="animal-name">Behaviors</h2>
-          <p>Lorem Ipsum</p>
+          {behavior}
         </section>
 
     <div ref="guideContainer" className="guide">

@@ -71,7 +71,7 @@ stepChimpBehavior =
     question: "What is this chimp doing?"
     options: [
       'aggression'
-      'arboreal'
+      'in a tree'
       'camera reaction'
       'carrying object'
       'carrying young'
@@ -85,7 +85,7 @@ stepChimpBehavior =
       'resting'
       'sex/mounting'
       'social interaction'
-      'terrestrial'
+      'on the ground'
       'tool usage'
       'traveling'
       'vocalizing'
@@ -96,7 +96,7 @@ stepOther =
     question: "What is this animal doing and how many are there?"
     options: [
       'aggression'
-      'arboreal'
+      'in a tree'
       'camera reaction'
       'carrying object'
       'carrying young'
@@ -110,7 +110,7 @@ stepOther =
       'resting'
       'sex/mounting'
       'social interaction'
-      'terrestrial'
+      'on the ground'
       'tool usage'
       'traveling'
       'vocalizing'

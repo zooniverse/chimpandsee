@@ -50,10 +50,11 @@ SlideTutorial = React.createClass
 
       <div key={i} className={slideClasses}>
         <div className="slide-tutorial-slide-top">
-          <img src={slide.image} alt="" />
+          {<img src={slide.image} alt="" /> if slide.image?}
+          {<h1>{slide.title}</h1> if @props.tutorialType is 'chimps'}
         </div>
         <div className="slide-tutorial-slide-bottom">
-          <h1>{slide.title}</h1>
+          {<h1>{slide.title}</h1> if @props.tutorialType is 'general'}
           <p>{slide.content}</p>
         </div>
         <div className="slide-tutorial-button-container">
@@ -67,6 +68,7 @@ SlideTutorial = React.createClass
     slideTutorialClasses = cx
       'slide-tutorial': true
       'show': @props.tutorialIsOpen
+      'chimps': @props.tutorialType is 'chimps'
 
     <div ref="slideTutorial" className={slideTutorialClasses}>
       <div  className="slide-tutorial-container">

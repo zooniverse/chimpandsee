@@ -68,7 +68,7 @@ slideTutorials = {
 
   chimps: [
     {
-      image: 'http://placehold.it/400x275',
+      image: null,
       title: 'Marking individual chimpanzees',
       content: '''While it is useful just to know that there is a chimp
       in a video, the science team can learn even more when users
@@ -79,7 +79,7 @@ slideTutorials = {
     },
 
     {
-      image: 'http://placehold.it/400x275',
+      image: null,
       title: 'First: check known chimps and tag them',
       content: '''When you have finished exploring a video in which you
       marked a chimp, click the “Known chimps at this site” button to
@@ -90,7 +90,7 @@ slideTutorials = {
     },
 
     {
-      image: 'http://placehold.it/400x275',
+      image: null,
       title: 'Start discussions on Talk for new chimps',
       content: '''If the chimp that you see is not a known chimp,
       you can work with other users to get it added! Click "This is a new chimp!"
@@ -102,7 +102,7 @@ slideTutorials = {
     },
 
     {
-      image: 'http://placehold.it/400x275',
+      image: null,
       title: 'Propose a "name" and log a known chimp',
       content: '''Users can work together on Talk to match videos of
       unknown chimps. At least two videos of the same chimp are
@@ -115,7 +115,7 @@ slideTutorials = {
     },
 
     {
-      image: 'http://placehold.it/400x275',
+      image: null,
       title: 'Keep an eye out!',
       content: '''When each site's data launches, there initially
       will be no known chimps at that site—they all must be found

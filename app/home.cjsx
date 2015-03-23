@@ -3,14 +3,20 @@ React = require 'react/addons'
 module?.exports = React.createClass
   displayName: 'Home'
 
+  body: null
+  video: null
+
   componentDidMount: ->
     if @props.hash is '#/'
-      body = document.getElementsByTagName 'body'
-      body[0].classList.add 'home-background'
+      @body = document.getElementsByTagName('body')[0]
+      @body.classList.add 'home-background'
+
+    @video = document.getElementsByTagName('video')[0]
+    @video.play()
 
   componentWillUnmount: ->
-    body = document.getElementsByTagName 'body'
-    body[0].classList.remove 'home-background'
+    @body.classList.remove 'home-background'
+    @video.pause()
 
   render: ->
     <div className="home">

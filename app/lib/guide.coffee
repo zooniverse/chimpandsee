@@ -99,14 +99,14 @@ guideDetails = {
     },
 
     {
-      header: 'other'
+      header: 'other (non-primate)'
       subHeader: null
       description: 'Mark any animal that does not fall into the above categories as "other."'
       exampleImages: ["./assets/guide/other-1.jpg", "./assets/guide/other-2.jpg", "./assets/guide/other-3.jpg"]
     },
 
     {
-      header: 'other primate'
+      header: 'other (primate)'
       subHeader: '<em>Cercopithecidae</em> family and <em>Lorisoidea</em> superfamily'
       description: 'Monkeys and prosimians are different from apes in several ways. They typically are smaller, with tails, less broad chests, and less upright posture. African monkeys have non-prehensile tails, hind legs longer than forearms, and downward-pointing nostrils. Coloration varies between species.'
       exampleImages: ["./assets/guide/small-primates-1.jpg", "./assets/guide/small-primates-2.jpg", "./assets/guide/small-primates-3.jpg"]
@@ -203,10 +203,6 @@ guideDetails = {
       header: 'aggression'
       description: 'Animal is displaying angry and/or threatening behaviour directed towards another animal or towards the camera.'
     },
-    {
-      header: 'arboreal'
-      description: 'Animal is perched on a tree, climbing a tree, or is travelling through the trees at any point during the video.'
-    },
 
     {
       header: 'camera reaction'
@@ -258,8 +254,18 @@ guideDetails = {
     },
 
     {
+      header: 'in a tree'
+      description: 'Animal is perched on a tree, climbing a tree, or is travelling through the trees at any point during the video.'
+    },
+
+    {
       header: 'nursing'
       description: 'Female animal is giving a teat to its young, which is then suckling to obtain milk.'
+    },
+
+    {
+      header: 'on the ground'
+      description: 'Animal is on the ground, either standing or moving.'
     },
 
     {
@@ -287,11 +293,6 @@ guideDetails = {
       that the actions of one individual is followed by an action in another individual, whereby the second
       appears to be a response to the first one. This does not include two individuals just walking by the
       camera or simply appearing at the same time in the video.'
-    },
-
-    {
-      header: 'terrestrial'
-      description: 'Animal is on the ground, either standing or moving.'
     },
 
     {

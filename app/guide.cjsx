@@ -94,7 +94,7 @@ Guide = React.createClass
           <p>{guideDetails.animals[@state.guideDetailsIndex].description}</p>
           <h4 className="images-header">Example Images</h4>
           {exampleImages}
-          {if @state.guideDetailsIndex is 1
+          {if @state.guideDetailsIndex is 2 #chimp
             <div>
               <h4>Male</h4>
               <p>Males can be identified by the presence of testicles. Chimpanzees also posses calloused structures in their gluteal region (sometime referred to as ischial callosities). These calloused pads are most evident on the posterior of males (as they lack a swelling), are dark in color and often appear in the shape of a heart.</p>

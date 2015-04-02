@@ -20,6 +20,7 @@ stepThree =
     question: 'Which species do you want to annotate?'
     options: [
       'bird'
+      'cattle'
       'chimpanzee'
       'dark duiker'
       'elephant'

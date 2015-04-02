@@ -20,7 +20,7 @@ Summary = React.createClass
 
   componentWillMount: ->
     @props.notes.map (note) =>
-      if note.animal is steps[2][0].animal.options[1] #chimp
+      if note.animal is steps[2][0].animal.options[2] #chimp
         @setState chimpsSeen: true
 
     @getSiteLocation()

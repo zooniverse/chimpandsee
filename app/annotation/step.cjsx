@@ -18,7 +18,7 @@ Step = React.createClass
 
   onButtonClick: (event) ->
     button = event.target
-    chimp = steps[2][0].animal.options[1]
+    chimp = steps[2][0].animal.options[2]
     human = steps[2][0].animal.options[8]
     notAChimp = @animalCheck(button.value, chimp)
 
@@ -181,7 +181,7 @@ Step = React.createClass
           'step-active': @props.step.value is 2
           'step-complete': @props.step.value > 2
 
-        if @props.currentAnswers.value.animal is _.values(@props.currentAnswers.value)[0] is steps[2][0].animal.options[1] #chimp
+        if @props.currentAnswers.value.animal is _.values(@props.currentAnswers.value)[0] is steps[2][0].animal.options[2] #chimp
           subSteps = steps[3].map (step, i) =>
             stepBtnDisabled = _.values(@props.currentAnswers.value).length < i + 2
             stepBtnClasses = cx

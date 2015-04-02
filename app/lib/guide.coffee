@@ -5,6 +5,12 @@ guideDetails = {
       description: 'All birds can be classified using this option. Birds have wings, feathers, and beaks; most are capable of flight. A wide variety of birds can be found throughout Africa.'
       exampleImages: ["./assets/guide/bird-1.jpg", "./assets/guide/bird-2.jpg", "./assets/guide/bird-3.jpg"]
     },
+    {
+      header: 'cattle'
+      subHeader: '<em>Bos taurus</em>'
+      description: 'Domestic cattle (cows, bulls, and steers) can sometimes be seen in these videos. Cattle are large ungulates typically raised as livestock. Often horned, they can vary in color, but are most often brown, black, tan, and/or white. Branding may be visible on side/flank.'
+      exampleImages: ["./assets/guide/cattle-1.jpg"]
+    },
 
     {
       header: 'chimpanzee'
@@ -102,7 +108,7 @@ guideDetails = {
       header: 'other (non-primate)'
       subHeader: null
       description: 'Mark any animal that does not fall into the above categories as "other."'
-      exampleImages: ["./assets/guide/other-1.jpg", "./assets/guide/other-2.jpg", "./assets/guide/other-3.jpg"]
+      exampleImages: ["./assets/guide/other-1.jpg", "./assets/guide/other-2.jpg"]
     },
 
     {

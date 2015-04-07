@@ -7,6 +7,7 @@ Subject = require 'zooniverse/models/subject'
 Classification = require 'zooniverse/models/classification'
 
 steps = require '../lib/steps'
+chimp = steps[2][0].animal.options[2]
 animatedScrollTo = require 'animated-scrollto'
 
 Step = React.createClass
@@ -16,9 +17,8 @@ Step = React.createClass
   getInitialState: ->
     values: []
 
-  onButtonClick: (event) ->
-    button = event.target
-    chimp = steps[2][0].animal.options[2]
+  onButtonClick: ({currentTarget}) ->
+    button = currentTarget
     human = steps[2][0].animal.options[8]
     notAChimp = @animalCheck(button.value, chimp)
 
@@ -71,6 +71,7 @@ Step = React.createClass
       when steps[3][3].number.options.indexOf(button.value) >= 0
         @storeSelection(button.name, button.value)
       else
+        button.classList.toggle 'btn-active' #Directly managing class on el because of bug
         @storeMultipleSelections(button.name, button.value)
 
   animalCheck: (buttonValue, excludeThisAnimal) ->
@@ -151,7 +152,7 @@ Step = React.createClass
     Subject.next()
 
   sendClassification: ->
-    #@props.classification.send()
+    @props.classification.send()
     console?.log 'classification send'
 
   render: ->
@@ -181,7 +182,7 @@ Step = React.createClass
           'step-active': @props.step.value is 2
           'step-complete': @props.step.value > 2
 
-        if @props.currentAnswers.value.animal is _.values(@props.currentAnswers.value)[0] is steps[2][0].animal.options[2] #chimp
+        if @props.currentAnswers.value.animal is _.values(@props.currentAnswers.value)[0] is chimp
           subSteps = steps[3].map (step, i) =>
             stepBtnDisabled = _.values(@props.currentAnswers.value).length < i + 2
             stepBtnClasses = cx
@@ -223,7 +224,7 @@ Step = React.createClass
             when @props.notes.value.length > 0 and option is steps[1][0].annotation.options[0] then true
 
         classes = cx
-          'btn-active': option in _.values(@props.currentAnswers.value) and @props.step.value > 1 or @state.values.indexOf(option) >= 0 and @props.step.value > 1
+          'btn-active': option in _.values(@props.currentAnswers.value)
           'disabled finish-disabled': @props.notes.value.length is 0 and option is steps[1][0].annotation.options[2]
           'disabled nothing-disabled': @props.notes.value.length > 0 and option is steps[1][0].annotation.options[0]
 

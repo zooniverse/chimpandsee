@@ -163,9 +163,7 @@
           margin: 0 auto 5px
 
         &:hover:before
-          background-color: rgba(17, 17, 17, 0.7)
-          color: rgba(34, 171, 116, 0.7)
-          border-color: rgba(34, 171, 116, 0.7)
+          opacity: 0.7
 
         @media screen and (max-width: 450px)
           margin: 10px 5px
@@ -182,9 +180,11 @@
           order: 1
 
       &.done
-
         &.disabled:before
           background-color: transparent
+
+          &:hover
+            opacity: 0.7
 
         &:before
           background: $green url(./assets/check-icon.svg) no-repeat center center
@@ -260,6 +260,11 @@
     .btn-active
       background-color: $green
       color: white
+
+      &:hover
+        background-color: rgba(34, 171, 116, 0.7)
+        color: white
+        border-color: solid 2px rgba(34, 171, 116, 0.7)
 
   .presence
     .step-bottom

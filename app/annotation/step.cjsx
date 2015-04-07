@@ -19,7 +19,7 @@ Step = React.createClass
 
   onButtonClick: ({currentTarget}) ->
     button = currentTarget
-    human = steps[2][0].animal.options[8]
+    human = steps[2][0].animal.options[9]
     notAChimp = @animalCheck(button.value, chimp)
 
     switch

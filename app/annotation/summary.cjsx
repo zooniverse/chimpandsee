@@ -2,6 +2,7 @@ React = require 'react/addons'
 cx = React.addons.classSet
 
 Subject = require 'zooniverse/models/subject'
+ProjectGroup = require 'zooniverse/models/project-group'
 Share = require '../share'
 steps = require '../lib/steps'
 
@@ -17,6 +18,8 @@ Summary = React.createClass
   getInitialState: ->
     chimpsSeen: false
     siteLocation: null
+    knownChimpsLink: null
+    newChimpsLink: null
 
   componentWillMount: ->
     @props.notes.map (note) =>
@@ -24,6 +27,17 @@ Summary = React.createClass
         @setState chimpsSeen: true
 
     @getSiteLocation()
+
+  componentDidMount: ->
+    ProjectGroup.on 'fetch', @onProjectGroupFetch
+    ProjectGroup.fetch()
+
+  onProjectGroupFetch: ->
+    groupId = Subject.current.group_id
+    group = ProjectGroup.find groupId
+    @setState
+      knownChimpsLink: group.metadata.known_chimps_link
+      newChimpsLink: group.metadata.new_chimps_link
 
   getSiteLocation: ->
     locationName = Subject.current.metadata.file.split('/')[2]
@@ -78,11 +92,11 @@ Summary = React.createClass
             <h3>Have you seen this chimp before?</h3>
             <p>Help us identify and name these chimps!</p>
             <button className="learn-more-btn" onClick={@props.openTutorial.bind(null, "chimps")}>How does this work?</button>
-            <button className="all-chimps-btn">Known chimps at this site</button>
+            <a href={@state.knownChimpsLink} target="allchimps"><button className="all-chimps-btn">Known chimps at this site</button></a>
           </div>
           <div className="chimp-btn-container">
             <a href={Subject.current.talkHref()} target="chimptalksubject"><button className="seen-chimp-btn">This is a known chimp!</button></a>
-            <button className="new-chimp-btn">This is a new chimp!</button>
+            <a href={@state.newChimpsLink} target="newchimp"><button className="new-chimp-btn">This is a new chimp!</button></a>
           </div>
         </section>
       }

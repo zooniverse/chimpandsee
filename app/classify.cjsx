@@ -179,7 +179,7 @@ module?.exports = React.createClass
             <p><span className="bold">Site:</span> {@state.location}</p>
             <div className="btn-container">
               <button className="tutorial-btn" onClick={@openTutorial.bind(null, "general")}>Tutorial</button>
-              <a href="https://www.zooniverse.org" target="_blank" className="faq-link"><button className="faq-btn">FAQs</button></a>
+              <a href="http://talk.chimpandsee.org/#/boards/BCP0000007" target="faq-link" className="faq-link"><button className="faq-btn">FAQs</button></a>
               <label className="skip-checkbox-label" htmlFor="skip-checkbox">
                 <input
                   ref="skipCheckbox"

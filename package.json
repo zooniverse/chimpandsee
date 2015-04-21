@@ -8,7 +8,7 @@
     "deploy-to-staging": "gulp clean && gulp build && publisssh ./public/build demo.zooniverse.org/chimps-staging && gulp clean",
     "deploy-to-beta": "gulp clean && gulp build && publisssh ./public/build zooniverse-static/www.chimpandsee.org/beta && gulp clean",
     "deploy-to-production": "gulp clean && gulp build && publisssh ./public/build zooniverse-static/www.chimpandsee.org && gulp clean",
-    "deploy": "deploy-to-staging deploy-to-production"
+    "deploy": "npm run deploy-to-staging && npm run deploy-to-production"
   },
   "devDependencies": {
     "cjsx-loader": "^1.0.0",

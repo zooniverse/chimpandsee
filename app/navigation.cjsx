@@ -50,7 +50,7 @@ module?.exports = React.createClass
       <div className={menuClasses}>
         {links}
         <a href="http://talk.chimpandsee.org/" target="chimptalk">Discuss</a>
-        <a href="http://blog.chimpandsee.org/" target="chimpblog">Blog</a>
+        <a href="http://chimpandsee.blogspot.de/" target="chimpblog">Blog</a>
       </div>
       <img className="chimpster" src="./assets/chimpster.png" alt="" />
     </nav>

@@ -21,9 +21,13 @@ Notes = React.createClass
             note.behavior.join ', '
           else
             "#{note.behavior}"
+        plural = switch
+          when note.animal is "hippopotamus" then "es"
+          when note.animal is "cattle" then null
+          else "s"
 
         <p key={i} className="note #{note.animal}">
-          {note.number} <span className="note-animal">{note.animal}{"s" if note.number > 1}</span> {age} {sex} {behavior}
+          {if note.animal is "human" then "N/A" else note.number} <span className="note-animal">{note.animal}{plural if note.number > 1 or note.number is "5+"}</span> {age} {sex} {behavior}
           <button className="delete" onClick={@deleteNote.bind(null, i)}><img src="./assets/close-icon.svg" alt="X" /></button>
         </p>
 

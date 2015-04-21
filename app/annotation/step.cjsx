@@ -98,6 +98,9 @@ Step = React.createClass
       @setState values: currentValues
       @storeSelection(name, @state.values)
 
+  clearMultipleSelection: ->
+    @setState values: []
+
   storeSelection: (name, value) ->
     obj = {}
     obj[name] = value
@@ -107,19 +110,21 @@ Step = React.createClass
     @props.step.set Math.min @props.step.value + 1, steps.length
 
   goToAnimalStep: (event) ->
+    @clearMultipleSelection()
     button = event.target
 
     @props.step.set button.value
     @props.subStep.set 0
 
   goToSubStep: (event) ->
+    @clearMultipleSelection()
     button = event.target
 
     @props.step.set 3
     @props.subStep.set button.value
 
   addNote: ->
-    @setState values: []
+    @clearMultipleSelection()
     @props.notes.push [@props.currentAnswers.value]
     @props.currentAnswers.set {}
     @props.step.set 1
@@ -129,7 +134,7 @@ Step = React.createClass
     @props.step.set 1
     @props.subStep.set 0
     @props.currentAnswers.set {}
-    @setState values: []
+    @clearMultipleSelection()
 
   finishNote: ->
     console?.log 'send to classification', @props.classification

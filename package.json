@@ -7,10 +7,9 @@
     "start": "gulp",
     "deploy-to-staging": "gulp clean && gulp build && publisssh ./public/build demo.zooniverse.org/chimps-staging && gulp clean",
     "deploy-to-beta": "gulp clean && gulp build && publisssh ./public/build zooniverse-static/www.chimpandsee.org/beta && gulp clean",
-    "deploy-to-prod": "gulp clean && gulp build && publisssh ./public/build zooniverse-static/www.chimpandsee.org && gulp clean"
+    "deploy-to-production": "gulp clean && gulp build && publisssh ./public/build zooniverse-static/www.chimpandsee.org && gulp clean",
+    "deploy": "deploy-to-staging deploy-to-production"
   },
-  "author": "",
-  "license": "ISC",
   "devDependencies": {
     "cjsx-loader": "^1.0.0",
     "coffee-loader": "^0.7.2",

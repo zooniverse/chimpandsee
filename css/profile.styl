@@ -78,6 +78,7 @@
         border-top-right-radius: 8px
         border-top-left-radius: 8px
         transition: visibility .25s 0s, height .25s 0s linear
+        text-align: center
 
         @media screen and (max-width: 768px)
           position: relative
@@ -87,6 +88,7 @@
 
         .share
           text-align: center
+          display: inline-block
 
           p
             display: none
@@ -101,6 +103,9 @@
         button
           border: none
           width: 30px
+
+          &[name="unfavorite"]
+            font-size: 24px
 
           &.discuss-btn
             span

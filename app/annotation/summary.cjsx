@@ -18,31 +18,32 @@ Summary = React.createClass
   getInitialState: ->
     chimpsSeen: false
     siteLocation: null
+    group: null
     knownChimpsLink: null
     newChimpsLink: null
 
-  componentWillMount: ->
+  componentDidMount: ->
     @props.notes.map (note) =>
       if note.animal is steps[2][0].animal.options[2] #chimp
         @setState chimpsSeen: true
 
-  componentDidMount: ->
     ProjectGroup.on 'fetch', @onProjectGroupFetch
     ProjectGroup.fetch()
+
+  componentWillUnmount: ->
+    ProjectGroup.off 'fetch', @onProjectGroupFetch
 
   onProjectGroupFetch: ->
     groupId = Subject.current.group_id
     group = ProjectGroup.find groupId
-    @setState
+    @setState({
+      group: group
       knownChimpsLink: group.metadata.known_chimps_link
       newChimpsLink: group.metadata.new_chimps_link
-
-    @getSiteLocation()
+    }, => @getSiteLocation())
 
   getSiteLocation: ->
-    groupId = Subject.current.group_id
-    group = ProjectGroup.find groupId
-    locationName = group.metadata.site
+    locationName = @state.group.metadata.site
 
     siteLocation = switch
       when sites.siteA.indexOf(locationName) > -1 then "site-a"

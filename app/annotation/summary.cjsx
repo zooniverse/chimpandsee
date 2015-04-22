@@ -54,7 +54,12 @@ Summary = React.createClass
 
   render: ->
     noteSummary = @props.notes.map (note, i) =>
-      <li key={i}>{note.number} {note.animal}{"s" if note.number > 1}</li>
+      plural = switch
+          when note.animal is "hippopotamus" then "es"
+          when note.animal is "cattle" then null
+          else "s"
+
+      <li key={i}>{if note.animal is "human" then "N/A" else note.number} {note.animal}{plural if note.number > 1 or note.number is "5+"}</li>
 
     generalClasses = cx
       'general-summary': true
@@ -81,8 +86,6 @@ Summary = React.createClass
               "./assets/summary/chimp-#{@state.siteLocation}.jpg"
             else
               "./assets/summary/#{@state.siteLocation}.jpg"
-          else
-            "./assets/summary/sample-map.png"
           }
           alt="site location map" />
         </figure>

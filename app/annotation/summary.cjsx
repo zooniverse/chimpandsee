@@ -26,8 +26,6 @@ Summary = React.createClass
       if note.animal is steps[2][0].animal.options[2] #chimp
         @setState chimpsSeen: true
 
-    @getSiteLocation()
-
   componentDidMount: ->
     ProjectGroup.on 'fetch', @onProjectGroupFetch
     ProjectGroup.fetch()
@@ -39,8 +37,12 @@ Summary = React.createClass
       knownChimpsLink: group.metadata.known_chimps_link
       newChimpsLink: group.metadata.new_chimps_link
 
+    @getSiteLocation()
+
   getSiteLocation: ->
-    locationName = Subject.current.metadata.file.split('/')[2]
+    groupId = Subject.current.group_id
+    group = ProjectGroup.find groupId
+    locationName = group.metadata.site
 
     siteLocation = switch
       when sites.siteA.indexOf(locationName) > -1 then "site-a"

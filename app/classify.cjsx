@@ -67,7 +67,7 @@ module?.exports = React.createClass
 
   onSubjectSelect: (e, subject) ->
     previews = subject.location.previews
-    randomInt = Math.round(Math.random() * (2 - 0)) + 0
+    randomInt = if subject.location.previews.length is 2 then Math.round(Math.random()) else Math.round(Math.random() * (2 - 0)) + 0
     @setState({
       video: subject.location.standard
       previews: previews[randomInt]

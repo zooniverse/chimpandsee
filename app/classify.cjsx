@@ -34,6 +34,7 @@ module?.exports = React.createClass
   componentDidMount: ->
     Subject.on 'select', @onSubjectSelect
     Subject.on 'no-more', @onNoSubjects
+    Subject.on 'fetch-fail', @onSubjectFetchFail
     Subject.next()
 
     # Grabbing DOM element outside of React components to be able to move everything to the right including top bar
@@ -61,7 +62,7 @@ module?.exports = React.createClass
   componentWillUnmount: ->
     Subject.off 'select', @onSubjectSelect
     Subject.off 'no-more', @onNoSubjects
-
+    Subject.off 'fetch-fail', @onSubjectFetchFail
     @removeClassesForGuide()
 
   onSubjectSelect: (e, subject) ->
@@ -78,7 +79,32 @@ module?.exports = React.createClass
     @state.classification.annotate previewsSet: integer
     @checkSrcWidth()
 
-  onNoSubjects: ->
+  onSubjectFetchFail: ->
+    unless Subject.count() is 0
+      @refs.statusMessage.getDOMNode().innerHTML =
+        '''<p>Hey Chimp & See explorer—something's gone wrong!
+          Our system is having trouble finding a video for you right now. We're sorry about that!</p>
+
+          <p>Let us know about this bug on the <a href="http://talk.chimpandsee.org/#/boards/BCP0000008" target="_blank">Technical Support</a>
+          board on C&S Talk, and we'll try to get it fixed as soon as possible. Thanks for your help, efforts, and patience!</p>
+        '''
+    else
+      @refs.statusMessage.getDOMNode().innerHTML =
+        '''<h3>We're out of data!<h3>
+
+        <p>Unfortunately, we don't have any more videos to show you right now!
+        Either all current videos have been explored, or you personally
+        may have explored every available video. We should have more
+        data for you fairly soon, so don't forget about us!</p>
+
+        <p>In the meantime, you can continue working on this project
+        by helping us ID and name individual chimps on <a href="http://talk.chimpandsee.org" target="_blank">Chimp & See Talk</a>.
+        Or check out any of our dozens of other Zooniverse projects at
+        <a href="https://www.zooniverse.org/" target="_blank">zooniverse.org</a>. Thanks!</p>
+      '''
+
+
+  onNoSubjects: =>
     @refs.statusMessage.getDOMNode().innerHTML =
       '''<h3>We're out of data!<h3>
 
@@ -210,10 +236,10 @@ module?.exports = React.createClass
           skipImages={@state.skipImages}
           srcWidth={@state.srcWidth}
           enableSkip={@enableSkip}
-          disableSkip={@disableSkip} />
-      else
-        <div className="status-message" ref="statusMessage"></div>
+          disableSkip={@disableSkip}
+        />
       }
+      <div className="status-message" ref="statusMessage"></div>
       <SlideTutorial tutorialIsOpen={@state.tutorialIsOpen} closeTutorial={@closeTutorial} tutorialType={@state.tutorialType} />
       <div className={hiddenChimpClasses}><img className="hidden-chimp" src="./assets/hidden-chimp.png" alt="" /></div>
     </div>

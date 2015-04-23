@@ -7,6 +7,7 @@ SkyLight = require 'react-skylight'
 animatedScrollTo = require 'animated-scrollto'
 
 Subject = require 'zooniverse/models/subject'
+Favorite = require 'zooniverse/models/favorite'
 
 Step = require './step'
 Summary = require './summary'
@@ -84,6 +85,16 @@ Annotation = React.createClass
       @setState favorited: false
       @props.classification.favorite = false
 
+    if @state.currentStep is 4 #Summary step
+      @manuallyFavoriteSubject()
+
+  manuallyFavoriteSubject: ->
+    favorite = new Favorite subjects: [Subject.current]
+    if @state.favorited is false
+      favorite.send().then => @setState favorited: true
+    else
+      favorite.delete().then => @setState favorited: true
+
   modifyOverlay: ->
     @overlay.addEventListener 'click', @closeZoom
 
@@ -157,7 +168,7 @@ Annotation = React.createClass
       lineHeight: @refs.previewImgs?.getDOMNode().clientHeight + "px"
 
     previews =
-      @props.previews.map (preview, i) =>
+      @props.previews?.map (preview, i) =>
         <figure key={i}>
           <img src={preview} onLoad={@onImageLoad.bind(@, null)} onClick={@zoomImage.bind(null, preview) if window.innerWidth > 600} />
         </figure>

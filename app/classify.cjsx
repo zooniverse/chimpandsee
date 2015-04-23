@@ -103,7 +103,6 @@ module?.exports = React.createClass
         <a href="https://www.zooniverse.org/" target="_blank">zooniverse.org</a>. Thanks!</p>
       '''
 
-
   onNoSubjects: =>
     @refs.statusMessage.getDOMNode().innerHTML =
       '''<h3>We're out of data!<h3>

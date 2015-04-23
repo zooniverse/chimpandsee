@@ -46,11 +46,9 @@ ProfileItems = React.createClass
       @setState hasMore: false
 
   getItems: ->
-    @setState isLoading: true
-    setTimeout ( =>
-      @buildItems()
-      @setState isLoading: false
-    ), 2000
+    @setState({
+      isLoading: true
+    }, => @buildItems().then => @setState isLoading: false)
 
   scrollListener: ->
     scrollTop =

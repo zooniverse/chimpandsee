@@ -198,7 +198,7 @@ Annotation = React.createClass
               onload={@onVideoLoad() if cursor.refine('currentStep').value is 1}
               poster={@props.previews[0]}
               controls
-              width={if @props.srcWidth is 640 then @props.srcWidth else '100%'}
+              width={@props.srcWidth}
               src={source}
               type={type}
             >

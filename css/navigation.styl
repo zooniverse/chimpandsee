@@ -114,3 +114,62 @@
 
     @media screen and (max-width: 1199px)
       display: none
+
+
+.home-background-video
+  display: none
+
+.home-background //Overriding defaults for home page.
+  .zooniverse-top-bar
+    z-index: 30
+
+  @media screen and (max-width: 900px)
+    background: url(./assets/home-background.jpg) no-repeat center center fixed
+    background-size: cover
+
+  @media screen and (max-width: 710px)
+    .color-background
+      background-color: rgba(0, 0, 0, 0.85) !important
+
+  @media screen and (min-width: 901px)
+    .home-background-video
+      position: fixed
+      top: 0
+      right: 0
+      bottom: 0
+      min-width: 100%
+      min-height: 100%
+      width: auto
+      height: auto
+      background: url(./assets/home-background.jpg) no-repeat center center fixed
+      background-size: cover
+      display: inherit
+
+  .site-navigation
+    background-color: transparent
+    color: white
+    position: relative
+    z-index: 20
+
+    .chimpster
+      display: none
+
+    .mobile-menu
+      .mobile-menu-title
+        color: white
+
+      .bars
+        fill: white
+
+    .menu-list
+      background-color: transparent
+
+      @media screen and (max-width: 710px)
+        background-color: rgba(0, 0, 0, 0.85)
+
+      a
+        color: white
+
+
+  .current-user, .no-user
+    color: white

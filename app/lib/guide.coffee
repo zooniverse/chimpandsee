@@ -76,7 +76,7 @@ guideDetails = {
     },
 
     {
-      header: 'Jentik\'s duiker'
+      header: 'Jentink\'s duiker'
       subHeader: '<em>Cephalophus jentinki</em>'
       description: 'Duiker with unique coloration: black head and shoulders, white band behind shoulders, and gray rest of body. Longer horns angling straight back from head. One of the largest species of duikers, with an extremely solid body.'
       exampleImages: ["./assets/guide/jentiks-duiker-1.jpg"]

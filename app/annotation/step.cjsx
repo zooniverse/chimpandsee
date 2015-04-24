@@ -84,19 +84,23 @@ Step = React.createClass
   componentWillReceiveProps: (nextProps) ->
     window.scrollTo 0, 0 if window.innerWidth < 601 and nextProps.step.value < 2
 
+    # console.log 'state', @state, 'currentAnswers', @props.currentAnswers.value
+
   storeMultipleSelections: (name, value) ->
     index = @state.values.indexOf(value)
 
     if index >= 0
       currentValues = @state.values
       currentValues.splice index, 1
-      @setState values: currentValues
-      @storeSelection(name, @state.values)
+      @setState({
+        values: currentValues
+      }, @storeSelection(name, @state.values))
     else
       currentValues = @state.values
       currentValues.push value
-      @setState values: currentValues
-      @storeSelection(name, @state.values)
+      @setState({
+        values: currentValues
+      }, @storeSelection(name, @state.values))
 
   clearMultipleSelection: ->
     @setState values: []
@@ -104,7 +108,10 @@ Step = React.createClass
   storeSelection: (name, value) ->
     obj = {}
     obj[name] = value
+    console.log 'obj', obj
+    console.log 'pre merge currentAnswers', @props.currentAnswers.value
     @props.currentAnswers.merge obj
+    console.log 'post merge currentAnswers', @props.currentAnswers.value, 'obj', obj
 
   moveToNextStep: ->
     @props.step.set Math.min @props.step.value + 1, steps.length
@@ -113,26 +120,29 @@ Step = React.createClass
     @clearMultipleSelection()
     button = event.target
 
-    @props.step.set button.value
-    @props.subStep.set 0
+    @goToStep(button.value, 0)
 
   goToSubStep: (event) ->
     @clearMultipleSelection()
     button = event.target
 
-    @props.step.set 3
-    @props.subStep.set button.value
+    @goToStep(3, button.value)
+
+  goToStep: (step, subStep)->
+    @props.step.set step
+    @props.subStep.set subStep
 
   addNote: ->
-    @clearMultipleSelection()
-    @props.notes.push [@props.currentAnswers.value]
-    @props.currentAnswers.set {}
-    @props.step.set 1
-    @props.subStep.set 0
+    @setState({
+      values: []
+    }, =>
+      @props.notes.push [@props.currentAnswers.value]
+      @props.currentAnswers.set {}
+      @goToStep(1, 0)
+    )
 
   cancelNote: ->
-    @props.step.set 1
-    @props.subStep.set 0
+    @goToStep(1, 0)
     @props.currentAnswers.set {}
     @clearMultipleSelection()
 
@@ -140,24 +150,22 @@ Step = React.createClass
     console?.log 'send to classification', @props.classification
     @props.classification.annotate @props.notes.value
     @sendClassification()
-    @props.step.set steps.length - 1
-    @props.subStep.set 0
+    @goToStep(steps.length - 1, 0)
     @props.disableSkip()
 
   nextSubject: ->
     @props.notes.set []
     @props.currentAnswers.set {}
     if @props.skipImages is true
-      @props.step.set 1
+      @goToStep(1, 0)
     else
-      @props.step.set 0
-    @props.subStep.set 0
+      @goToStep(0, 0)
     @props.showLoader()
     @props.enableSkip()
     Subject.next()
 
   sendClassification: ->
-    @props.classification.send()
+    #@props.classification.send()
     console?.log 'classification send'
 
   render: ->

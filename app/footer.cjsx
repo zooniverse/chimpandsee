@@ -65,7 +65,7 @@ Footer = React.createClass
           </div>
 
           <div className="zooniverse-footer-category">
-            <a href="https://github.com/zooniverse">Source & Bugs</a>
+            <a href="https://github.com/zooniverse/Chimp-Zoo">Source & Bugs</a>
           </div>
         </div>
       </div>

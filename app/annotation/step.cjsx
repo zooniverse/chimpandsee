@@ -12,7 +12,7 @@ animatedScrollTo = require 'animated-scrollto'
 
 Step = React.createClass
   displayName: 'Step'
-  mixins: [ImmutableOptimizations(['step', 'currentAnswers'])]
+  mixins: [ImmutableOptimizations(['step', 'notes'])]
 
   getInitialState: ->
     values: []
@@ -27,7 +27,7 @@ Step = React.createClass
         @storeSelection(button.name, button.value)
         setTimeout (=>
           console?.log 'send to classification', @props.classification
-          @props.classification.annotate @props.currentAnswers.value
+          @props.classification.annotate @props.currentAnswers
           @sendClassification()
           @nextSubject()
         )
@@ -37,7 +37,7 @@ Step = React.createClass
         @storeSelection(button.name, button.value)
         setTimeout ( =>
           console?.log 'send to classification', @props.classification
-          @props.classification.annotate @props.currentAnswers.value
+          @props.classification.annotate @props.currentAnswers
           @props.resetVideo()
           @sendClassification()
           @nextSubject()
@@ -71,7 +71,6 @@ Step = React.createClass
       when steps[3][3].number.options.indexOf(button.value) >= 0
         @storeSelection(button.name, button.value)
       else
-        button.classList.toggle 'btn-active' #Directly managing class on el because of bug
         @storeMultipleSelections(button.name, button.value)
 
   animalCheck: (buttonValue, excludeThisAnimal) ->
@@ -90,13 +89,11 @@ Step = React.createClass
     if index >= 0
       currentValues = @state.values
       currentValues.splice index, 1
-      @setState values: currentValues
-      @storeSelection(name, @state.values)
+      @setState({values: currentValues}, @storeSelection(name, @state.values))
     else
       currentValues = @state.values
       currentValues.push value
-      @setState values: currentValues
-      @storeSelection(name, @state.values)
+      @setState({values: currentValues}, @storeSelection(name, @state.values))
 
   clearMultipleSelection: ->
     @setState values: []
@@ -104,7 +101,10 @@ Step = React.createClass
   storeSelection: (name, value) ->
     obj = {}
     obj[name] = value
-    @props.currentAnswers.merge obj
+    currentAnswers = @props.currentAnswers
+    newAnswers = _.extend currentAnswers, obj
+    @props.setCurrentAnswers newAnswers
+    @forceUpdate()
 
   moveToNextStep: ->
     @props.step.set Math.min @props.step.value + 1, steps.length
@@ -113,45 +113,46 @@ Step = React.createClass
     @clearMultipleSelection()
     button = event.target
 
-    @props.step.set button.value
-    @props.subStep.set 0
+    @goToStep(button.value, 0)
 
   goToSubStep: (event) ->
     @clearMultipleSelection()
     button = event.target
 
-    @props.step.set 3
-    @props.subStep.set button.value
+    @goToStep(3, button.value)
+
+  goToStep: (step, subStep)->
+    @props.step.set step
+    @props.subStep.set subStep
 
   addNote: ->
-    @clearMultipleSelection()
-    @props.notes.push [@props.currentAnswers.value]
-    @props.currentAnswers.set {}
-    @props.step.set 1
-    @props.subStep.set 0
+    @setState({
+      values: []
+    }, =>
+      @props.notes.push [@props.currentAnswers]
+      @props.resetCurrentAnswers()
+      @goToStep(1, 0)
+    )
 
   cancelNote: ->
-    @props.step.set 1
-    @props.subStep.set 0
-    @props.currentAnswers.set {}
+    @goToStep(1, 0)
+    @props.resetCurrentAnswers()
     @clearMultipleSelection()
 
   finishNote: ->
     console?.log 'send to classification', @props.classification
     @props.classification.annotate @props.notes.value
     @sendClassification()
-    @props.step.set steps.length - 1
-    @props.subStep.set 0
+    @goToStep(steps.length - 1, 0)
     @props.disableSkip()
 
   nextSubject: ->
     @props.notes.set []
-    @props.currentAnswers.set {}
+    @props.resetCurrentAnswers()
     if @props.skipImages is true
-      @props.step.set 1
+      @goToStep(1, 0)
     else
-      @props.step.set 0
-    @props.subStep.set 0
+      @goToStep(0, 0)
     @props.showLoader()
     @props.enableSkip()
     Subject.next()
@@ -187,9 +188,9 @@ Step = React.createClass
           'step-active': @props.step.value is 2
           'step-complete': @props.step.value > 2
 
-        if @props.currentAnswers.value.animal is _.values(@props.currentAnswers.value)[0] is chimp
+        if @props.currentAnswers.animal is chimp
           subSteps = steps[3].map (step, i) =>
-            stepBtnDisabled = _.values(@props.currentAnswers.value).length < i + 2
+            stepBtnDisabled = _.values(@props.currentAnswers).length < i + 2
             stepBtnClasses = cx
               'step-button': true
               'step-active': @props.subStep.value is i
@@ -223,13 +224,15 @@ Step = React.createClass
 
     step = for name, step of steps[@props.step.value][@props.subStep.value]
       buttons = step.options.map (option, i) =>
+        currentAnswersValues = _.values(@props.currentAnswers)
+        currentAnswersValues = _.flatten(currentAnswersValues)
         disabled =
           switch
             when @props.notes.value.length is 0 and option is steps[1][0].annotation.options[2] then true
             when @props.notes.value.length > 0 and option is steps[1][0].annotation.options[0] then true
 
         classes = cx
-          'btn-active': option in _.values(@props.currentAnswers.value)
+          'btn-active': option in currentAnswersValues
           'disabled finish-disabled': @props.notes.value.length is 0 and option is steps[1][0].annotation.options[2]
           'disabled nothing-disabled': @props.notes.value.length > 0 and option is steps[1][0].annotation.options[0]
 
@@ -250,6 +253,7 @@ Step = React.createClass
           <button className={cancelClasses} onClick={@cancelNote} style={addAndCancelStyle}>Cancel</button>
           <div className="buttons-container">
             {buttons}
+            {<p className="tip">Please add a separate annotation for each chimpanzee.</p> if @props.currentAnswers.animal is chimp}
           </div>
           <button className={addClasses} onClick={@addNote} disabled={addDisabled} style={addAndCancelStyle}>Done</button>
         </div>

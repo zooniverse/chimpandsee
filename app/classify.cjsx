@@ -17,6 +17,7 @@ module?.exports = React.createClass
 
   wrapper: null
   body: null
+  html: null
   main: null
 
   getInitialState: ->
@@ -43,7 +44,7 @@ module?.exports = React.createClass
     @html = document.getElementsByTagName('html')[0]
     @main = document.getElementsByClassName('main')[0]
 
-    unless @props.user?.classification_count > 0
+    if User.current is null
       @openTutorial 'general'
 
     @setInitialSkipPreference(@props)

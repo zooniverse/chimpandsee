@@ -93,7 +93,7 @@ Annotation = React.createClass
     if @state.favorited is false
       favorite.send().then => @setState favorited: true
     else
-      favorite.delete().then => @setState favorited: true
+      favorite.delete().then => @setState favorited: false
 
   modifyOverlay: ->
     @overlay.addEventListener 'click', @closeZoom

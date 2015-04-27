@@ -146,6 +146,12 @@ Annotation = React.createClass
     @refs.video.getDOMNode().pause()
     @refs.video.getDOMNode().currentTime = 0
 
+  setCurrentAnswers: (currentAnswers) ->
+    @setState currentAnswers: currentAnswers
+
+  resetCurrentAnswers: ->
+    @setState currentAnswers: {}
+
   render: ->
     cursor = Cursor.build(@)
 
@@ -214,7 +220,7 @@ Annotation = React.createClass
       <Step
         step={cursor.refine('currentStep')}
         subStep={cursor.refine('subStep')}
-        currentAnswers={cursor.refine('currentAnswers')}
+        currentAnswers={@state.currentAnswers}
         notes={cursor.refine('notes')}
         classification={@props.classification}
         onClickGuide={@onClickGuide}
@@ -223,6 +229,8 @@ Annotation = React.createClass
         enableSkip={@props.enableSkip}
         disableSkip={@props.disableSkip}
         resetVideo={@resetVideo}
+        setCurrentAnswers={@setCurrentAnswers}
+        resetCurrentAnswers={@resetCurrentAnswers}
       />
       <Notes notes={cursor.refine('notes')} step={cursor.refine('currentStep')} />
     </div>

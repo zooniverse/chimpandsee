@@ -12,6 +12,7 @@ sites =
   siteC: ["EquatorialGuinea_Nationwide"]
   siteD: ["DRC_BiliUere", "Uganda_Budongo", "Uganda_Bwindi", "Uganda_Ngogo", "Tanzania_Ugalla"]
 
+# Note: group metadata does not exist in dev db, so buttons and location image will not work locally or on staging
 Summary = React.createClass
   displayName: 'Summary'
 

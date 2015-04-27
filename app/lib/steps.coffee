@@ -30,7 +30,7 @@ stepThree =
       'hippopotamus'
       'human'
       'hyena'
-      'Jentik\'s duiker'
+      'Jentink\'s duiker'
       'large ungulate'
       'leopard'
       'lion'

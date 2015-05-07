@@ -70,59 +70,58 @@ slideTutorials = {
     {
       image: null,
       title: 'Marking individual chimpanzees',
-      content: '''While it is useful just to know that there is a chimp
-      in a video, the science team can learn even more when users
-      identify the individual chimps that they see. For this task,
-      citizen scientists can use the Talk discussion system to
-      give chimps "names" and mark videos with hashtags when they see those chimps.''',
+      content: '''While it is useful just to know that there is a chimp in a video,
+      the science team can learn even more when volunteers identify the individual
+      chimps that they see. For this task, volunteers can use the Talk discussion
+      system to give chimps "names," and mark videos with hashtags when they see
+      those chimps.'''
       button: 'Next'
     },
 
     {
       image: null,
-      title: 'First: check known chimps and tag them',
-      content: '''When you have finished exploring a video in which you
-      marked a chimp, click the “Known chimps at this site” button to
-      view a list of individuals already identified at that site.
-      If the video you just watched has a known chimp, click "This is a known chimp!"
-      and comment with its dedicated hashtag (for example: #caesar).''',
+      title: 'Collect or "favorite" chimp videos',
+      content: '''Keep track of videos that you find with chimps in them by adding
+      them to your Favorites or other collections. Use the "Discuss on Talk"
+      button after exploring a video to access the video’s Talk page, where
+      you can add it to a collection or hashtag it as #chimp or #chimps.
+      This will help you (and others) find the videos later on in order to
+      match them up and ID the individual chimps.''',
       button: 'Next'
     },
 
     {
       image: null,
-      title: 'Start discussions on Talk for new chimps',
-      content: '''If the chimp that you see is not a known chimp,
-      you can work with other users to get it added! Click "This is a new chimp!"
-      to go to the Talk board for discussing chimps at that video's site.
-      Start a discussion that links to the video. (You can get the video's
-      URL from the "Discuss on Talk" button, and you can find previously
-      explored and favorited videos in your Profile.)''',
+      title: 'Discuss and compare chimps on Talk',
+      content: '''Approximately two days after each new site debuts, a
+      board will appear on Talk for Chimp ID at that site, as
+      well as pinned lists of "Known" and "Prospective" chimps at the site.
+      Volunteers can work together on that board to match their videos to those lists,
+      and to others' videos. (You can obtain the video's URL from the "Discuss on Talk"
+      button, and you can find previously explored and favorited videos in your Profile.)''',
       button: 'Next'
     },
 
     {
       image: null,
       title: 'Propose a "name" and log a known chimp',
-      content: '''Users can work together on Talk to match videos of
-      unknown chimps. At least two videos of the same chimp are
-      required to log it as a known chimp. Once those two (or more)
-      videos are found, the users (you!) can propose a "name" for
-      the chimp. If it is accepted by the site's designated curator,
-      the chimp will be added to the "Known Chimps" page, and
-      the "name" will become his/her hashtag!''',
+      content: '''At least two videos of the same chimp are required to log it
+      as a known chimp. Once those two (or more) videos are found, the volunteers
+      (you!) can propose a "name" for the chimp. If the site's designated curator
+      accepts the name, the chimp will be added to the "Known Chimps" page, and
+      the "name" will become his/her hashtag (for example: #caesar). All volunteers
+      can then tag videos of your chimp with its name.'''
       button: 'Next'
     },
 
     {
       image: null,
       title: 'Keep an eye out!',
-      content: '''When each site's data launches, there initially
-      will be no known chimps at that site—they all must be found
-      by Chimp & See volunteers—so we're counting on you! More
-      tips for spotting and identifying individual chimps will
-      be available on Talk and on the Chimp & See blog.
-      Good luck, and thanks!''',
+      content: '''When each site's data launches, there initially will be
+      no known chimps at that site—they all must be found by Chimp & See
+      volunteers—so we're counting on you! More tips for spotting and
+      identifying individual chimps will be available on Talk and on
+      the Chimp & See blog. Good luck, and thanks!''',
       button: 'Finish'
     }
   ]

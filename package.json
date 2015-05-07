@@ -45,5 +45,6 @@
     "react-translate-component": "0.7.0",
     "underscore": "1.7.0",
     "zooniverse": "0.7.1"
-  }
+  },
+  "engine": "node 0.10.x"
 }

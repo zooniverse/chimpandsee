@@ -73,11 +73,18 @@ ProfileItems = React.createClass
   componentWillUnmount: ->
     @detachScrollListener()
 
-  unFavorite: (e) ->
-    id = e.target.value
+  unFavorite: ({currentTarget}) ->
+    id = currentTarget.value
     favorite = Favorite.find id
     favorite.delete()
     @props.updateUser()
+
+  # onClickFavorite: ({currentTarget}) ->
+  #       favorite = new Favorite subjects: [Subject.current]
+  #   if @state.favorited is false
+  #     favorite.send().then => @setState favorited: true
+  #   else
+  #     favorite.delete().then => @setState favorited: false
 
   render: ->
     items = @state.items.map (item, i) =>
@@ -88,7 +95,8 @@ ProfileItems = React.createClass
           Your browser does not support the video format. Please upgrade your browser.
         </video>
         <figcaption>
-          {<button name="unfavorite" value={item.id} onClick={@unFavorite}>&times;</button> if @props.collection is 'Favorite'}
+          {if @props.collection is 'Favorite'
+            <button name="unfavorite" value={item.id} onClick={@unFavorite}>&times;</button>}
           <Share video={item.subjects[0]?.location.standard.mp4 || item.subjects[0]?.location.standard} zooniverseId={item.subjects[0]?.zooniverse_id} />
         </figcaption>
       </figure>

@@ -20,7 +20,6 @@ Summary = React.createClass
     chimpsSeen: false
     siteLocation: null
     group: null
-    knownChimpsLink: null
     newChimpsLink: null
 
   componentDidMount: ->
@@ -39,7 +38,6 @@ Summary = React.createClass
     group = ProjectGroup.find groupId
     @setState({
       group: group
-      knownChimpsLink: group.metadata.known_chimps_link
       newChimpsLink: group.metadata.new_chimps_link
     }, => @getSiteLocation())
 
@@ -99,11 +97,10 @@ Summary = React.createClass
             <h3>Have you seen this chimp before?</h3>
             <p>Help us identify and name these chimps!</p>
             <button className="learn-more-btn" onClick={@props.openTutorial.bind(null, "chimps")}>How does this work?</button>
-            <a href={@state.knownChimpsLink} target="allchimps"><button className="all-chimps-btn">Known chimps at this site</button></a>
           </div>
           <div className="chimp-btn-container">
-            <a href={Subject.current.talkHref()} target="chimptalksubject"><button className="seen-chimp-btn">This is a known chimp!</button></a>
-            <a href={@state.newChimpsLink} target="newchimp"><button className="new-chimp-btn">This is a new chimp!</button></a>
+            <a href="http://talk.chimpandsee.org/#/boards" target="allchimps"><button className="all-chimps-btn">All Chimp ID Boards</button></a>
+            <a href={@state.newChimpsLink} target="newchimp"><button className="new-chimp-btn">Site Chimp ID Board</button></a>
           </div>
         </section>
       }

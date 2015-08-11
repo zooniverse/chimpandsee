@@ -23,7 +23,7 @@ guideDetails = {
       header: 'dark duiker'
       subHeader: '<em>Cephalophus</em> genus'
       description: '''
-        Use this option to mark any duikers that are grey, black, or dark brown in color: for example, the yellow-backed duiker, a large duiker notable for a bright yellowish stripe on the back of a brown coat, as well as a partially yellow muzzle. Like other duikers, they have arched backs, stocky bodies and slender legs. <p><a href="http://talk.chimpandsee.org/#/boards/BCP000000e/discussions/DCP0000asr" target="_blank">Duiker's Guide</a></p>
+        Use this option to mark any duikers that are grey, black, or dark brown in color: for example, the yellow-backed duiker, a large duiker notable for a bright yellowish stripe on the back of a brown coat, as well as a partially yellow muzzle. Like other duikers, they have arched backs, stocky bodies and slender legs. <p class="talk-link"><a href="http://talk.chimpandsee.org/#/boards/BCP000000e/discussions/DCP0000asr" target="_blank">Duiker's Guide</a></p>
       '''
       exampleImages: ["./assets/guide/dark-duiker-1.jpg", "./assets/guide/dark-duiker-2.jpg", "./assets/guide/dark-duiker-3.jpg"]
     },
@@ -81,7 +81,7 @@ guideDetails = {
       header: 'Jentink\'s duiker'
       subHeader: '<em>Cephalophus jentinki</em>'
       description: '''
-        Duiker with unique coloration: black head and shoulders, white band behind shoulders, and gray rest of body. Longer horns angling straight back from head. One of the largest species of duikers, with an extremely solid body. <p><a href="http://talk.chimpandsee.org/#/boards/BCP000000e/discussions/DCP0000asr" target="_blank">Duiker's Guide</a></p>
+        Duiker with unique coloration: black head and shoulders, white band behind shoulders, and gray rest of body. Longer horns angling straight back from head. One of the largest species of duikers, with an extremely solid body. <p class="talk-link"><a href="http://talk.chimpandsee.org/#/boards/BCP000000e/discussions/DCP0000asr" target="_blank">Duiker's Guide</a></p>
       '''
       exampleImages: ["./assets/guide/jentiks-duiker-1.jpg"]
       credit: "Credit: Brent Huffman - Ultimate Ungulate Images."
@@ -119,7 +119,7 @@ guideDetails = {
       header: 'other (primate)'
       subHeader: '<em>Cercopithecidae</em> family and <em>Lorisoidea</em> superfamily'
       description: '''
-        Monkeys and prosimians are different from apes in several ways. They typically are smaller, with tails, less broad chests, and less upright posture. African monkeys have non-prehensile tails, hind legs longer than forearms, and downward-pointing nostrils. Coloration varies between species. <p><a href="http://talk.chimpandsee.org/#/boards/BCP000000e/discussions/DCP00007sb" target="_blank">Monkey's Guide</a></p>
+        Monkeys and prosimians are different from apes in several ways. They typically are smaller, with tails, less broad chests, and less upright posture. African monkeys have non-prehensile tails, hind legs longer than forearms, and downward-pointing nostrils. Coloration varies between species. <p class="talk-link"><a href="http://talk.chimpandsee.org/#/boards/BCP000000e/discussions/DCP00007sb" target="_blank">Monkey's Guide</a></p>
       '''
       exampleImages: ["./assets/guide/small-primates-1.jpg", "./assets/guide/small-primates-2.jpg", "./assets/guide/small-primates-3.jpg"]
     },
@@ -142,7 +142,7 @@ guideDetails = {
       header: 'red duiker'
       subHeader: '<em>Sylvicapra</em> and <em>Cephalophus</em> genuses'
       description: '''
-        Use this option to mark small to medium duikers with chestnut-red fur; for example: the bush duiker which is small and reddish-brown, or the Bay duiker, notable for its red body colour and black stripe down its back. Like other duikers, they have arched backs,stocky bodies and slender legs. <p><a href="http://talk.chimpandsee.org/#/boards/BCP000000e/discussions/DCP0000asr" target="_blank">Duiker's Guide</a></p>
+        Use this option to mark small to medium duikers with chestnut-red fur; for example: the bush duiker which is small and reddish-brown, or the Bay duiker, notable for its red body colour and black stripe down its back. Like other duikers, they have arched backs,stocky bodies and slender legs. <p class="talk-link"><a href="http://talk.chimpandsee.org/#/boards/BCP000000e/discussions/DCP0000asr" target="_blank">Duiker's Guide</a></p>
       '''
       exampleImages: ["./assets/guide/red-duiker-1.jpg", "./assets/guide/red-duiker-2.jpg", "./assets/guide/red-duiker-3.jpg"]
     },
@@ -179,7 +179,7 @@ guideDetails = {
       header: 'small grey duiker'
       subHeader: '<em>Cephalophus monticola</em> and <em>Cephalophus maxwelli</em>'
       description: '''
-        Some of the smallest antelopes. Brown coat with slight bluish tinge on back; pale chest and underbelly. Small spiky horns in most males and some females. Stocky body, arched back, large hindquarters and thin legs. <p><a href="http://talk.chimpandsee.org/#/boards/BCP000000e/discussions/DCP0000asr" target="_blank">Duiker's Guide</a></p>
+        Some of the smallest antelopes. Brown coat with slight bluish tinge on back; pale chest and underbelly. Small spiky horns in most males and some females. Stocky body, arched back, large hindquarters and thin legs. <p class="talk-link"><a href="http://talk.chimpandsee.org/#/boards/BCP000000e/discussions/DCP0000asr" target="_blank">Duiker's Guide</a></p>
       '''
       exampleImages: ["./assets/guide/sm-gray-duiker-1.jpg", "./assets/guide/sm-gray-duiker-2.jpg", "./assets/guide/sm-gray-duiker-3.jpg"]
     },
@@ -209,7 +209,7 @@ guideDetails = {
       header: 'zebra duiker'
       subHeader: '<em>Cephalophus zebra</em>'
       description: '''
-        Easily identifiable by the unique dark zebra-like stripes that cover its chestnut-colored back. Like other duikers, it has an arched back and stocky body with slender legs. The head has conical horns, the muzzle is black, and the lower jaw and undersides white. <p><a href="http://talk.chimpandsee.org/#/boards/BCP000000e/discussions/DCP0000asr" target="_blank">Duiker's Guide</a></p>
+        Easily identifiable by the unique dark zebra-like stripes that cover its chestnut-colored back. Like other duikers, it has an arched back and stocky body with slender legs. The head has conical horns, the muzzle is black, and the lower jaw and undersides white. <p class="talk-link"><a href="http://talk.chimpandsee.org/#/boards/BCP000000e/discussions/DCP0000asr" target="_blank">Duiker's Guide</a></p>
       '''
       exampleImages: ["./assets/guide/zebra-duiker-1.jpg"]
       credit: "Credit: Brent Huffman - Ultimate Ungulate Images."

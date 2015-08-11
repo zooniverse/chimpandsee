@@ -35,7 +35,7 @@
   "dependencies": {
     "animated-scrollto": "1.1.0",
     "counterpart": "0.16.4",
-    "publisssh": "0.2.6",
+    "publisssh": "1.0.0",
     "react": "0.12.1",
     "react-animate": "0.1.5",
     "react-cursor": "0.9.2",

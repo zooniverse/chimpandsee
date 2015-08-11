@@ -91,7 +91,7 @@ Guide = React.createClass
           <button className="back-guide-btn" onClick={@onClickBack}><img className="back-icon" src="./assets/back-icon.svg" alt="back icon" /> Back</button>
           <h2 className="animal-name">{guideDetails.animals[@state.guideDetailsIndex].header}</h2>
           <h3 className="animal-taxonomy" dangerouslySetInnerHTML={{__html: guideDetails.animals[@state.guideDetailsIndex].subHeader}}></h3>
-          <p>{guideDetails.animals[@state.guideDetailsIndex].description}</p>
+          <p dangerouslySetInnerHTML={{__html: guideDetails.animals[@state.guideDetailsIndex].description}}></p>
           <h4 className="images-header">Example Images</h4>
           {exampleImages}
           {if @state.guideDetailsIndex is 2 #chimp

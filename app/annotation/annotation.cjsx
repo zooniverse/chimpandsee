@@ -110,8 +110,7 @@ Annotation = React.createClass
       @overlay.classList.remove 'fade-out'
 
       @refs.imageZoom.hide()
-      @setState zoomImageCurrent: null
-      @setState zoomImageSrc: null
+      @setState({zoomImageCurrent: null, zoomImageSrc: null})
       @overlay.removeEventListener 'click', @closeZoom
       window.removeEventListener 'keydown', @onPressKeyInZoom
     ), 250

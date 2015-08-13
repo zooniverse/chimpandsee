@@ -67,8 +67,7 @@ Annotation = React.createClass
     window.removeEventListener 'keydown', @onPressSpaceBar
 
   zoomImage: (i, preview) ->
-    @setState zoomImageCurrent: i
-    @setState zoomImageSrc: preview
+    @setState({zoomImageCurrent: i, zoomImageSrc: preview})
     @refs.imageZoom.show() if window.innerWidth > 600
 
   onClickGuide: ->
@@ -124,6 +123,8 @@ Annotation = React.createClass
       i = @state.zoomImageCurrent
       if e.keyCode is 37
         i = (i - 1) % @props.previews.length
+        if i < 0
+          i = @props.previews.length - 1
       else
         i = (i + 1) % @props.previews.length
 

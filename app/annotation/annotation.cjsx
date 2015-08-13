@@ -109,7 +109,7 @@ Annotation = React.createClass
 
       @refs.imageZoom.hide()
       @setState zoomImageSrc: null
-      @overlay.removeEventListener 'click'
+      @overlay.removeEventListener 'click', @closeZoom
     ), 250
 
   onImageLoad: (i, event) ->

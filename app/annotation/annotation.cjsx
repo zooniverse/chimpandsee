@@ -122,7 +122,7 @@ Annotation = React.createClass
 
       i = @state.zoomImageCurrent
       if e.keyCode is 37
-        i = (i - 1) % @props.previews.length
+        i -= 1
         if i < 0
           i = @props.previews.length - 1
       else

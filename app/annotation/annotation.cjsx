@@ -29,6 +29,7 @@ Annotation = React.createClass
     subStep: 0
     notes: []
     currentAnswers: {}
+    zoomImageCurrent: null
     zoomImageSrc: null
     favorited: false
     user: false
@@ -65,7 +66,8 @@ Annotation = React.createClass
   componentWillUnmount: ->
     window.removeEventListener 'keydown', @onPressSpaceBar
 
-  zoomImage: (preview) ->
+  zoomImage: (i, preview) ->
+    @setState zoomImageCurrent: i
     @setState zoomImageSrc: preview
     @refs.imageZoom.show() if window.innerWidth > 600
 
@@ -97,6 +99,7 @@ Annotation = React.createClass
 
   modifyOverlay: ->
     @overlay.addEventListener 'click', @closeZoom
+    window.addEventListener 'keydown', @onPressKeyInZoom
 
   closeZoom: ->
     @dialog.classList.add 'fade-out'
@@ -108,9 +111,23 @@ Annotation = React.createClass
       @overlay.classList.remove 'fade-out'
 
       @refs.imageZoom.hide()
+      @setState zoomImageCurrent: null
       @setState zoomImageSrc: null
-      @overlay.removeEventListener 'click'
+      @overlay.removeEventListener 'click', @closeZoom
+      window.removeEventListener 'keydown', @onPressKeyInZoom
     ), 250
+
+  onPressKeyInZoom: (e) ->
+    if e.keyCode is 37 or e.keyCode is 39
+      e.preventDefault()
+
+      i = @state.zoomImageCurrent
+      if e.keyCode is 37
+        i = (i - 1) % @props.previews.length
+      else
+        i = (i + 1) % @props.previews.length
+
+      @zoomImage(i, @props.previews[i])
 
   onImageLoad: (i, event) ->
     if @loadCount < @props.previews.length
@@ -176,7 +193,7 @@ Annotation = React.createClass
     previews =
       @props.previews?.map (preview, i) =>
         <figure key={i}>
-          <img src={preview} onLoad={@onImageLoad.bind(@, null)} onClick={@zoomImage.bind(null, preview) if window.innerWidth > 600} />
+          <img src={preview} onLoad={@onImageLoad.bind(@, null)} onClick={@zoomImage.bind(null, i, preview) if window.innerWidth > 600} />
         </figure>
 
     source = if @isFirefox then @props.video.webm else @props.video.mp4

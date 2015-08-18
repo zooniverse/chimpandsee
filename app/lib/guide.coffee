@@ -111,8 +111,8 @@ guideDetails = {
     {
       header: 'other (non-primate)'
       subHeader: null
-      description: 'Mark any animal that does not fall into the above categories as "other."'
-      exampleImages: ["./assets/guide/other-1.jpg", "./assets/guide/other-2.jpg"]
+      description: 'Mark any animal that does not fall into the above categories as "other." This includes cat-like viverrids like the civet and genet.'
+      exampleImages: ["./assets/guide/other-1.jpg", "./assets/guide/other-2.jpg", "./assets/guide/other-3.jpg", "./assets/guide/other-4.jpg"]
     },
 
     {
@@ -187,7 +187,7 @@ guideDetails = {
     {
       header: 'small cat'
       subHeader: '<em>Felinae</em> subfamily'
-      description: 'Several species of small felines can be found in Africa, including the caracal, the serval, the African golden cat, and the African wildcat. Any cat smaller than a leopard or a cheetah can be classified as a "small cat."'
+      description: 'Several species of small felines can be found in Africa, including the caracal, the serval, the African golden cat, and the African wildcat. Any cat smaller than a leopard or a cheetah can be classified as a "small cat." Please note that viverrids, like civets and genets, are not cats, and should be marked as "other."'
       exampleImages: ["./assets/guide/small-cat-1.jpg", "./assets/guide/small-cat-2.jpg", "./assets/guide/small-cat-3.jpg"]
     },
 

@@ -7,7 +7,7 @@ Share = require '../share'
 steps = require '../lib/steps'
 
 sites =
-  siteA: ["Guinea_FoutahDjalon", "Guinea_Sangaredi", "GuineaBissau_Boe_Part1", "GuineaBissau_Boe_Part2", "IvoryCoast_Azagny", "IvoryCoast_Djouroutou", "IvoryCoast_TaiE", "IvoryCoast_TaiR", "Liberia_EastNimba", "Liberia_Grebo_Sala_part1", "Liberia_Grebo_Sala_part2", "Liberia_Grebo_Tasla", "Liberia_Sapo", "Senegal_Kayan"]
+  siteA: ["Guinea_FoutahDjalon", "Guinea_Sangaredi", "GuineaBissau_Boe_Part1", "GuineaBissau_Boe_Part2", "IvoryCoast_Azagny", "IvoryCoast_Djouroutou", "IvoryCoast_TaiE", "IvoryCoast_TaiR", "Liberia_EastNimba", "Liberia_Grebo_Sala_part1", "Liberia_Grebo_Sala_part2", "Liberia_Grebo_Tasla", "Liberia_Sapo", "Senegal_Kayan", "Liberia_Grebo_Part1"]
   siteB: ["Nigeria_Gashaka"]
   siteC: ["EquatorialGuinea_Nationwide"]
   siteD: ["DRC_BiliUere", "Uganda_Budongo", "Uganda_Bwindi", "Uganda_Ngogo", "Tanzania_Ugalla"]

@@ -3,20 +3,20 @@ guideDetails = {
       header: 'bird'
       subHeader: '<em>Aves</em> class'
       description: '''
-		All birds can be classified using this option. Birds have wings, feathers, and beaks; most are capable of flight. A wide variety of birds can be found throughout Africa.  Examples of birds seen on Chimp & See include guineafowl, ibis, hornbills, and rails.  Usually seen during the day or at dawn/dusk.
+        All birds can be classified using this option. Birds have wings, feathers, and beaks; most are capable of flight. A wide variety of birds can be found throughout Africa.  Examples of birds seen on Chimp & See include guineafowl, ibis, hornbills, and rails.  Usually seen during the day or at dawn/dusk.
 
-		Sometimes confused with: other non-primate:bat
-	  '''
+        Sometimes confused with: other non-primate:bat
+      '''
       exampleImages: ["./assets/guide/bird-1.jpg", "./assets/guide/bird-2.jpg", "./assets/guide/bird-3.jpg"]
     },
     {
       header: 'cattle'
       subHeader: '<em>Bos taurus</em>'
       description: '''
-		Domestic cattle (cows, bulls, and steers) can sometimes be seen in these videos. Cattle are large ungulates typically raised as livestock. Often horned, they can vary in color, but are most often brown, black, tan, and/or white. Branding may be visible on side/flank.  Usually seen during the day.
+        Domestic cattle (cows, bulls, and steers) can sometimes be seen in these videos. Cattle are large ungulates typically raised as livestock. Often horned, they can vary in color, but are most often brown, black, tan, and/or white. Branding may be visible on side/flank.  Usually seen during the day.
 
-		Sometimes confused with: forest buffalo
-	  '''
+        Sometimes confused with: forest buffalo
+      '''
       exampleImages: ["./assets/guide/cattle-1.jpg"]
     },
 
@@ -24,11 +24,11 @@ guideDetails = {
       header: 'chimpanzee'
       subHeader: '<em>Pan</em> genus'
       description: '''
-		This large primate, a close relative of humans, has no tail and is usually seen on the ground.  The hair is most often black, though it can appear grey or yellow-grey, especially on the lower back.  The face, ears, palms, and soles are hairless and skin color varies from peachy-pink to black.  They most often travel by knuckle-walking on all fours, and are occasionally seen in trees.  Males are slightly larger than females; infants have a white spot on rear.  Almost always seen during the day.
+        This large primate, a close relative of humans, has no tail and is usually seen on the ground.  The hair is most often black, though it can appear grey or yellow-grey, especially on the lower back.  The face, ears, palms, and soles are hairless and skin color varies from peachy-pink to black.  They most often travel by knuckle-walking on all fours, and are occasionally seen in trees.  Males are slightly larger than females; infants have a white spot on rear.  Almost always seen during the day.
 
-		Sometimes confused with: gorilla, other primate, human <p class="talk-link"><a href="http://talk.chimpandsee.org/#/boards/BCP0000001/discussions/DCP000015b" target="_blank">Chimp or gorilla?</a></p>
-		<p class="talk-link"><a href="http://talk.chimpandsee.org/#/boards/BCP0000002/discussions/DCP0000bwy" target="_blank">Youth or adult?</a></p>
-	  '''
+        Sometimes confused with: gorilla, other primate, human <p class="talk-link"><a href="http://talk.chimpandsee.org/#/boards/BCP0000001/discussions/DCP000015b" target="_blank">Chimp or gorilla?</a></p>
+        <p class="talk-link"><a href="http://talk.chimpandsee.org/#/boards/BCP0000002/discussions/DCP0000bwy" target="_blank">Youth or adult?</a></p>
+      '''
       exampleImages: ["./assets/guide/chimp-1.jpg", "./assets/guide/chimp-2.jpg", "./assets/guide/chimp-3.jpg"]
     },
 
@@ -38,7 +38,7 @@ guideDetails = {
       description: '''
         Use this option to mark any duikers that are dark grey, black, or dark brown in color.  Dark duikers include the yellow-backed duiker, a large duiker notable for a bright yellowish stripe on the back of a brown coat with a partially yellow muzzle, and the black duiker, which is medium-sized, solid black on the body, fading into red on the head, and with a white tail tip. Like other duikers, they have arched backs, stocky bodies and slender legs.  Yellow-backed duikers are more often seen at night, while black duikers are seen during the day or at dawn/dusk.
 
-		Sometimes confused with: large ungulate, small antelope <p class="talk-link"><a href="http://talk.chimpandsee.org/#/boards/BCP000000e/discussions/DCP0000asr" target="_blank">Duiker Guide</a></p>
+        Sometimes confused with: large ungulate, small antelope <p class="talk-link"><a href="http://talk.chimpandsee.org/#/boards/BCP000000e/discussions/DCP0000asr" target="_blank">Duiker Guide</a></p>
       '''
       exampleImages: ["./assets/guide/dark-duiker-1.jpg", "./assets/guide/dark-duiker-2.jpg", "./assets/guide/dark-duiker-3.jpg"]
     },
@@ -56,8 +56,8 @@ guideDetails = {
       description: '''
         Smaller (250-320 kg) subspecies of the African buffalo. Reddish-brown hide darkens to black around the face and lower legs, with a black dorsal stripe. Horns curl straight backwards in a C shape, with large, sometimes tufted ears. Solid, robust build with relatively short and thickset legs; typically carries head low.  More often seen at night, but sometimes active during the day.
 
-		Sometimes confused with: cattle
-	  '''
+        Sometimes confused with: cattle
+      '''
       exampleImages: ["./assets/guide/forest-buffalo-1.jpg", "./assets/guide/forest-buffalo-2.jpg", "./assets/guide/forest-buffalo-3.jpg"]
     },
 
@@ -65,10 +65,10 @@ guideDetails = {
       header: 'giant forest hog'
       subHeader: '<em>Hylochoerus meinertzhageni</em>'
       description: '''
-		The largest species of wild pig. Most identifiable by its size, coat of very long black hairs (thinner in older hogs), and upward-curved tusks that are proportionally smaller than a warthog’s. Skin color is dark brown.  Males have large protruding swellings under each eye.  Almost always seen during the day or at dawn/dusk.
+        The largest species of wild pig. Most identifiable by its size, coat of very long black hairs (thinner in older hogs), and upward-curved tusks that are proportionally smaller than a warthog’s. Skin color is dark brown.  Males have large protruding swellings under each eye.  Almost always seen during the day or at dawn/dusk.
 
-		Sometimes confused with: red river hog, warthog
-	  '''
+        Sometimes confused with: red river hog, warthog
+      '''
       exampleImages: ["./assets/guide/giant-forest-hog-1.jpg", "./assets/guide/giant-forest-hog-2.jpg"]
     },
 
@@ -78,8 +78,8 @@ guideDetails = {
       description: '''
         Like chimpanzees, gorillas are apes, but much bigger and more powerfully built. Gorillas also have black skin and faces throughout their lives, while chimpanzees are born with pink skin.  Gorillas have black/brown coats, extremely muscular arms, and large heads.  Males are larger, have silver-colored backs, and large domed crests on top of their heads. Almost always seen during the day. Gorillas are not found at any sites in Region A (West Africa).
 
-		Sometimes confused with: chimpanzee<p class="talk-link"><a href="http://talk.chimpandsee.org/#/boards/BCP0000001/discussions/DCP000015b" target="_blank">Chimp or gorilla?</a></p>
-	  '''
+        Sometimes confused with: chimpanzee<p class="talk-link"><a href="http://talk.chimpandsee.org/#/boards/BCP0000001/discussions/DCP000015b" target="_blank">Chimp or gorilla?</a></p>
+      '''
       exampleImages: ["./assets/guide/gorilla-1.jpg", "./assets/guide/gorilla-2.jpg", "./assets/guide/gorilla-3.jpg"]
     },
 
@@ -87,8 +87,8 @@ guideDetails = {
       header: 'hippopotamus'
       subHeader: '<em>Hippopotamus amphibius</em>'
       description:  '''
-		Large and round with short legs and smooth, shiny skin that appears dark grey to pink. Small ears and a massive, wide mouth. Short, thick tail is trimmed with black bristles.  Mostly seen at night.
-	  '''
+        Large and round with short legs and smooth, shiny skin that appears dark grey to pink. Small ears and a massive, wide mouth. Short, thick tail is trimmed with black bristles.  Mostly seen at night.
+      '''
       exampleImages: ["./assets/guide/hippos-1.jpg", "./assets/guide/hippos-2.jpg", "./assets/guide/hippos-3.jpg"]
     },
 
@@ -103,10 +103,10 @@ guideDetails = {
       header: 'hyena'
       subHeader: '<em>Hyaenidae</em> family'
       description:  '''
-		Looks dog-like. Broad head, with large pointed ears; body slopes dramatically from shoulder to hip. Two species in study range: spotted and striped. Spotted hyenas have speckled gray-red coats. Striped hyenas are slightly smaller, with dirty-gray, striped coats.
+        Looks dog-like. Broad head, with large pointed ears; body slopes dramatically from shoulder to hip. Two species in study range: spotted and striped. Spotted hyenas have speckled gray-red coats. Striped hyenas are slightly smaller, with dirty-gray, striped coats.
 
-		Sometimes confused with: other non-primate:viverrid
-	  '''
+        Sometimes confused with: other non-primate:viverrid
+      '''
       exampleImages: ["./assets/guide/hyenas-1.jpg", "./assets/guide/hyenas-2.jpg", "./assets/guide/hyenas-3.jpg"]
     },
 
@@ -116,7 +116,7 @@ guideDetails = {
       description: '''
         Duiker with unique coloration: black head and shoulders, thin white band behind shoulders, and gray rest of body. Longer horns angling straight back from head. One of the largest species of duikers, with an extremely solid body. Almost always seen at night.
 
-		Sometimes confused with: large ungulate <p class="talk-link"><a href="http://talk.chimpandsee.org/#/boards/BCP000000e/discussions/DCP0000asr" target="_blank">Duiker Guide</a></p>
+        Sometimes confused with: large ungulate <p class="talk-link"><a href="http://talk.chimpandsee.org/#/boards/BCP000000e/discussions/DCP0000asr" target="_blank">Duiker Guide</a></p>
      '''
       exampleImages: ["./assets/guide/jentiks-duiker-1.jpg"]
       credit: "Credit: Brent Huffman - Ultimate Ungulate Images."
@@ -126,10 +126,10 @@ guideDetails = {
       header: 'large ungulate'
       subHeader: '<em>Ungulata</em> superorder'
       description: '''
-		Use this option to mark any large hooved mammal other than those with separate categories; for instance, sitatungas, bongos, okapi, roan antelope, etc.  Water chevrotains are medium-sized, but get marked in this category.  Some species are more likely to be seen during the day, and others at night.
+        Use this option to mark any large hooved mammal other than those with separate categories; for instance, sitatungas, bongos, okapi, roan antelope, etc.  Water chevrotains are medium-sized, but get marked in this category.  Some species are more likely to be seen during the day, and others at night.
 
-		Sometimes confused with: duiker, small antelope
-	  '''
+        Sometimes confused with: duiker, small antelope
+      '''
       exampleImages: ["./assets/guide/large-ungulate-1.jpg", "./assets/guide/large-ungulate-2.jpg", "./assets/guide/large-ungulate-3.jpg"]
     },
 
@@ -151,10 +151,10 @@ guideDetails = {
       header: 'other (non-primate)'
       subHeader: null
       description: '''
-		Mark any animal that does not fall into the other categories as "other non-primate." This includes cat-like viverrids like the civet and genet (almost always seen at night), as well as honey badgers (night and day), hyrax (night and day) and bats (night).  Hyrax can be distinguished from rodents by their lack of a tail.  Domestic animals other than cattle (e.g. dogs, goats, sheep) should be marked in this category as well. Please mark “Nothing here” for insects and fires, but feel free to tag them on the talk page!
+        Mark any animal that does not fall into the other categories as "other non-primate." This includes cat-like viverrids like the civet and genet (almost always seen at night), as well as honey badgers (night and day), hyrax (night and day) and bats (night).  Hyrax can be distinguished from rodents by their lack of a tail.  Domestic animals other than cattle (e.g. dogs, goats, sheep) should be marked in this category as well. Please mark “Nothing here” for insects and fires, but feel free to tag them on the talk page!
 
-		Sometimes confused with: small cats (for civets and genets), rodents (for hyrax), birds (for bats)
-	  '''
+        Sometimes confused with: small cats (for civets and genets), rodents (for hyrax), birds (for bats)
+      '''
       exampleImages: ["./assets/guide/other-1.jpg", "./assets/guide/other-2.jpg", "./assets/guide/other-3.jpg", "./assets/guide/other-4.jpg"]
     },
 
@@ -164,7 +164,7 @@ guideDetails = {
       description: '''
         Non-ape primates are different from apes in several ways. They typically are smaller, with tails, less broad chests, and less upright posture. African monkeys have non-prehensile tails, hind legs longer than forearms, and downward-pointing nostrils. Coloration varies between species.  Africa is also home to galagos (sometimes called bushbabies) and pottos, two kinds of small primitive primate.  Monkeys are frequently seen in groups and during the day or at dawn/dusk.  Galagos and pottos are usually seen alone and at night.
 
-		Sometimes confused with: chimpanzee, rodent (for galagos/pottos) <p class="talk-link"><a href="http://talk.chimpandsee.org/#/boards/BCP000000e/discussions/DCP00007sb" target="_blank">Monkey Guide</a></p>
+        Sometimes confused with: chimpanzee, rodent (for galagos/pottos) <p class="talk-link"><a href="http://talk.chimpandsee.org/#/boards/BCP000000e/discussions/DCP00007sb" target="_blank">Monkey Guide</a></p>
       '''
       exampleImages: ["./assets/guide/small-primates-1.jpg", "./assets/guide/small-primates-2.jpg", "./assets/guide/small-primates-3.jpg"]
     },
@@ -180,10 +180,10 @@ guideDetails = {
       header: 'porcupine'
       subHeader: '<em>Hystricidae</em> family'
       description: '''
-		Porcupines are short, rounded creatures covered from head to tail with long quills. Two species of porcupine are found in the study area: the crested porcupine with long quills on the back and sides that are raised into a crest, and the smaller brush-tailed porcupine, which has a small tuft of quills at the end of its thin tail. Both species are almost always seen at night.
+        Porcupines are short, rounded creatures covered from head to tail with long quills. Two species of porcupine are found in the study area: the crested porcupine with long quills on the back and sides that are raised into a crest, and the smaller brush-tailed porcupine, which has a small tuft of quills at the end of its thin tail. Both species are almost always seen at night.
 
-		Sometimes confused with: rodent (although porcupines are rodents, please mark them separately) 
-	  '''
+        Sometimes confused with: rodent (although porcupines are rodents, please mark them separately) 
+      '''
       exampleImages: ["./assets/guide/porcupine-1.jpg", "./assets/guide/porcupine-2.jpg", "./assets/guide/porcupine-3.jpg"]
     },
 
@@ -193,7 +193,7 @@ guideDetails = {
       description: '''
         Use this option to mark small to medium duikers with chestnut-red fur; for example: the bush duiker which is small and reddish-brown, or the Bay duiker, notable for its red body colour and black stripe down its back. Like other duikers, they have arched backs, stocky bodies and slender legs. Some species are seen mainly at night, and others during the day.
 
-		Sometimes confused with: small antelope, large ungulate <p class="talk-link"><a href="http://talk.chimpandsee.org/#/boards/BCP000000e/discussions/DCP0000asr" target="_blank">Duiker Guide</a></p>
+        Sometimes confused with: small antelope, large ungulate <p class="talk-link"><a href="http://talk.chimpandsee.org/#/boards/BCP000000e/discussions/DCP0000asr" target="_blank">Duiker Guide</a></p>
       '''
       exampleImages: ["./assets/guide/red-duiker-1.jpg", "./assets/guide/red-duiker-2.jpg", "./assets/guide/red-duiker-3.jpg"]
     },
@@ -202,10 +202,10 @@ guideDetails = {
       header: 'red river hog'
       subHeader: '<em>Potamochoerus porcus</em>'
       description: '''
-		Pudgy pig-like animal notable for its bright red fur and its curled, pointed, elfin ears with white ear-tufts. The large muzzle is black with two small tusks and white markings around the eyes. Longer fur on flanks and underbelly. Has a line of spiky blonde hair down the spine.  Seen both at night and during the day. 
+        Pudgy pig-like animal notable for its bright red fur and its curled, pointed, elfin ears with white ear-tufts. The large muzzle is black with two small tusks and white markings around the eyes. Longer fur on flanks and underbelly. Has a line of spiky blonde hair down the spine.  Seen both at night and during the day. 
 
-		Sometimes confused with: giant forest hog, warthog
-	  '''
+        Sometimes confused with: giant forest hog, warthog
+      '''
       exampleImages: ["./assets/guide/red-river-hog-1.jpg", "./assets/guide/red-river-hog-2.jpg", "./assets/guide/red-river-hog-3.jpg"]
     },
 
@@ -220,10 +220,10 @@ guideDetails = {
       header: 'rodent'
       subHeader: '<em>Rodentia</em> order'
       description: '''
-		Rodents of Africa include mice, squirrels, gerbils, and rats. These animals are typically small, with short limbs, thick bodies, and long tails. Rats and mice are almost always seen at night, while squirrels are almost always seen during the day or at dawn/dusk.  (Note: Mark porcupines separately.)
+        Rodents of Africa include mice, squirrels, gerbils, and rats. These animals are typically small, with short limbs, thick bodies, and long tails. Rats and mice are almost always seen at night, while squirrels are almost always seen during the day or at dawn/dusk.  (Note: Mark porcupines separately.)
 
-		Sometimes confused with: other non-primate:hyrax
-	  '''
+        Sometimes confused with: other non-primate:hyrax
+      '''
       exampleImages: ["./assets/guide/rodent-1.jpg", "./assets/guide/rodent-2.jpg", "./assets/guide/rodent-3.jpg"]
     },
 
@@ -231,10 +231,10 @@ guideDetails = {
       header: 'small antelope'
       subHeader: '<em>Bovidae</em> family'
       description: '''
-		Use this option to mark any small antelope other than a listed type of duiker; for instance: bushbuck, royal antelope, dik-dik, oribi, pygmy antelope, reedbuck, etc.
+        Use this option to mark any small antelope other than a listed type of duiker; for instance: bushbuck, royal antelope, dik-dik, oribi, pygmy antelope, reedbuck, etc.
 
-		Sometimes confused with: duiker, large ungulate
-	  '''
+        Sometimes confused with: duiker, large ungulate
+      '''
       exampleImages: ["./assets/guide/sm-antelope-1.jpg", "./assets/guide/sm-antelope-2.jpg", "./assets/guide/sm-antelope-3.jpg"]
     },
 
@@ -244,7 +244,7 @@ guideDetails = {
       description: '''
         Some of the smallest antelopes. Coat ranges from light brown to blue-grey with paler chest and underbelly. Small spiky horns in most males and some females. Stocky body, arched back, large hindquarters and thin legs. Usually seen during the day or at dawn/dusk.
 
-		Sometimes confused with: small antelope <p class="talk-link"><a href="http://talk.chimpandsee.org/#/boards/BCP000000e/discussions/DCP0000asr" target="_blank">Duiker Guide</a></p>
+        Sometimes confused with: small antelope <p class="talk-link"><a href="http://talk.chimpandsee.org/#/boards/BCP000000e/discussions/DCP0000asr" target="_blank">Duiker Guide</a></p>
       '''
       exampleImages: ["./assets/guide/sm-gray-duiker-1.jpg", "./assets/guide/sm-gray-duiker-2.jpg", "./assets/guide/sm-gray-duiker-3.jpg"]
     },
@@ -260,10 +260,10 @@ guideDetails = {
       header: 'warthog'
       subHeader: '<em>Phacochoerus africanus</em>'
       description: '''
-		This pig-like animal has a grey body covered sparsely with darker hairs, and mane of long, wiry hairs along its neck and back. Its tail is thick with a black tassel. It has tusks that curve up around its snout.  More often seen during the day, but sometimes seen at night.
+        This pig-like animal has a grey body covered sparsely with darker hairs, and mane of long, wiry hairs along its neck and back. Its tail is thick with a black tassel. It has tusks that curve up around its snout.  More often seen during the day, but sometimes seen at night.
 
-		Sometimes confused with: red river hog, giant forest hog
-	  '''
+        Sometimes confused with: red river hog, giant forest hog
+      '''
       exampleImages: ["./assets/guide/warthog-1.jpg", "./assets/guide/warthog-2.jpg", "./assets/guide/warthog-3.jpg"]
     },
 
@@ -312,7 +312,7 @@ guideDetails = {
     },
 
 
-	{
+    {
       header: 'climbing'
       description: 'Animal is moving in a mostly vertical direction, usually in a tree or liana'
     },

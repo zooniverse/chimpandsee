@@ -255,10 +255,36 @@
       text-align: center
       font-weight: 400
 
-    p
+    .animal-description, .animal-confusions, .behavior-description
       color: #3b413b
       font-family: DroidSerif, serif
 
+    .animal-confusions p
+      margin: 0 0 0.5em 0
+        
+    .animal-confusions-list
+      margin: 0
+      padding: 0
+      
+    .animal-confusion-list-item
+      background-color: darken(#e4f3e4, 15%)
+      border-radius: 8px
+      color: #3b413b
+      cursor: pointer
+      display: list-item
+      font-family: 'Nunito', sans-serif
+      font-size: 14px
+      list-style: none
+      margin: 0.5em auto
+      max-width: 225px
+      padding: 5.5px 7.5px
+      text-align: center
+      text-decoration: none
+      width: 100%
+
+      &:hover
+        background-color: darken(#e4f3e4, 20%)
+        
     figure
       margin: 1em 0
 

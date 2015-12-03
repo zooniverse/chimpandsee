@@ -2,7 +2,11 @@ $ = window.jQuery
 
 # Api
 Api = require 'zooniverse/lib/api'
-api = new Api project: 'chimp'
+
+api = if window.location.hostname is 'www.chimpandsee.org'
+  new Api project: 'chimp', host: 'http://www.chimpandsee.org', path: '/_ouroboros_api/proxy'
+else
+  new Api project: 'chimp'
 
 # Subject group setup
 Subject = require 'zooniverse/models/subject'

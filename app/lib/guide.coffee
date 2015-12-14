@@ -151,10 +151,10 @@ guideDetails = {
       header: 'other (non-primate)'
       subHeader: null
       description: '''
-        <p>Mark any animal that does not fall into the other categories as "other non-primate." This includes cat-like viverrids like the civet and genet (almost always seen at night), as well as honey badgers (night and day), hyrax (night and day) and bats (night).  Hyrax can be distinguished from rodents by their lack of a tail.  Domestic animals other than cattle (e.g. dogs, goats, sheep) should be marked in this category as well. Please mark “Nothing here” for insects and fires, but feel free to tag them on the talk page!</p>
+        <p>Mark any animal that does not fall into the other categories as "other non-primate." This includes cat-like viverrids like the civet and genet (almost always seen at night), as well as honey badgers (night and day), hyrax (night and day), hares (night), and bats (night).  Hyrax can be distinguished from rodents by their lack of a tail.  Domestic animals other than cattle (e.g. dogs, goats, sheep) should be marked in this category as well. Please mark “Nothing here” for insects and fires, but feel free to tag them on the talk page!</p>
       '''
       confusions: ['small cat', 'rodent', 'bird']
-      confusionsDetail: [' (for civets and genets)', ' (for hyrax)', ' (for bats)']
+      confusionsDetail: [' (for civets and genets)', ' (for hyrax and hares)', ' (for bats)']
       exampleImages: ["./assets/guide/other-1.jpg", "./assets/guide/other-2.jpg", "./assets/guide/other-3.jpg", "./assets/guide/other-4.jpg"]
     },
 
@@ -222,10 +222,10 @@ guideDetails = {
       header: 'rodent'
       subHeader: '<em>Rodentia</em> order'
       description: '''
-        <p>Rodents of Africa include mice, squirrels, gerbils, and rats. These animals are typically small, with short limbs, thick bodies, and long tails. Rats and mice are almost always seen at night, while squirrels are almost always seen during the day or at dawn/dusk.  (Note: Mark porcupines separately.)</p>
+        <p>Rodents of Africa include mice, squirrels, gerbils, and rats, but not hares, which should be marked other non-primate. These animals are typically small, with short limbs, thick bodies, and long tails. Rats and mice are almost always seen at night, while squirrels are almost always seen during the day or at dawn/dusk.  (Note: please mark porcupines separately.)</p>
       '''
       confusions: ['other (non-primate)']
-      confusionsDetail: [':hyrax']
+      confusionsDetail: [':hyrax or hare']
       exampleImages: ["./assets/guide/rodent-1.jpg", "./assets/guide/rodent-2.jpg", "./assets/guide/rodent-3.jpg"]
     },
 

@@ -26,7 +26,6 @@ module?.exports = React.createClass
         <p>Welcome to Africa&mdash;home of the chimpanzee.<br />Our cameras have taken thousands of videos of these and other animals.<br />
         Now we need your help to study, explore, and learn from them.</p>
         <a href="#/classify" className="get-started-link">Get Started</a>
-        <a className="learn-more-link" href="http://cands.polldaddy.com/s/bestof2015">Vote for your favorite clips of 2015!<br />Hurry, voting ends 1/7/16!</a>
         <a href="#/about" className="learn-more-link">Learn More</a>
       </div>
     </div>

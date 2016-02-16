@@ -7,10 +7,10 @@ Share = require '../share'
 steps = require '../lib/steps'
 
 sites =
-  siteA: ["Guinea_FoutahDjalon", "Guinea_Sangaredi", "GuineaBissau_Boe_Part1", "GuineaBissau_Boe_Part2", "IvoryCoast_Azagny", "IvoryCoast_Djouroutou", "IvoryCoast_TaiE", "IvoryCoast_TaiR", "Liberia_EastNimba", "Liberia_Grebo_Sala_part1", "Liberia_Grebo_Sala_part2", "Liberia_Grebo_Tasla", "Liberia_Sapo", "Senegal_Kayan", "Liberia_Grebo_Part1"]
-  siteB: ["Nigeria_Gashaka"]
-  siteC: ["EquatorialGuinea_Nationwide"]
-  siteD: ["DRC_BiliUere", "Uganda_Budongo", "Uganda_Bwindi", "Uganda_Ngogo", "Tanzania_Ugalla"]
+  siteA: ["guinea_foutahdjalon", "guinea_sangaredi", "guineabissau_boe_part1", "guineabissau_boe_part2", "ivorycoast_azagny", "ivorycoast_djouroutou", "ivorycoast_taie", "ivorycoast_tair", "liberia_eastnimba", "liberia_grebo_sala_part1", "liberia_grebo_sala_part2", "liberia_grebo_tasla", "liberia_sapo", "senegal_kayan", "liberia_grebo_part1"]
+  siteB: ["nigeria_gashaka"]
+  siteC: ["equatorialguinea_nationwide"]
+  siteD: ["drc_biliuere", "uganda_budongo", "uganda_bwindi", "uganda_ngogo", "tanzania_ugalla"]
 
 # Note: group metadata does not exist in dev db, so buttons and location image will not work locally or on staging
 Summary = React.createClass
@@ -45,10 +45,10 @@ Summary = React.createClass
     locationName = @state.group.metadata.site
 
     siteLocation = switch
-      when sites.siteA.indexOf(locationName) > -1 then "site-a"
-      when sites.siteB.indexOf(locationName) > -1 then "site-b"
-      when sites.siteC.indexOf(locationName) > -1 then "site-c"
-      when sites.siteD.indexOf(locationName) > -1 then "site-d"
+      when sites.siteA.indexOf(locationName.toLowerCase()) > -1 then "site-a"
+      when sites.siteB.indexOf(locationName.toLowerCase()) > -1 then "site-b"
+      when sites.siteC.indexOf(locationName.toLowerCase()) > -1 then "site-c"
+      when sites.siteD.indexOf(locationName.toLowerCase()) > -1 then "site-d"
 
     @setState siteLocation: siteLocation
 

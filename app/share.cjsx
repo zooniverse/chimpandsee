@@ -8,6 +8,10 @@ Share = React.createClass
     socialTitle: 'Zooniverse classification'
     socialMessage: 'Classifying on the Zooniverse!'
 
+  getDefaultProps: ->
+    zooniverseId: null
+    video: null
+
   talkHref: ->
     domain = location.hostname.replace /^www\./, ''
     "http://talk.#{domain}/#/subjects/#{@props.zooniverseId}"

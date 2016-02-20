@@ -28,18 +28,22 @@ Summary = React.createClass
         @setState chimpsSeen: true
 
     ProjectGroup.on 'fetch', @onProjectGroupFetch
+    ProjectGroup.on 'fetch-fail', @onProjectGroupFail
     ProjectGroup.fetch()
 
   componentWillUnmount: ->
     ProjectGroup.off 'fetch', @onProjectGroupFetch
+    ProjectGroup.off 'fetch-fail', @onProjectGroupFail
 
   onProjectGroupFetch: ->
-    groupId = Subject.current.group_id
     group = ProjectGroup.find groupId
     @setState({
       group: group
       newChimpsLink: group.metadata.new_chimps_link
     }, => @getSiteLocation())
+
+  onProjectGroupFail: ->
+    console.error 'Project Group fetch failed'
 
   getSiteLocation: ->
     locationName = @state.group.metadata.site
@@ -77,7 +81,7 @@ Summary = React.createClass
             {noteSummary}
           </ul>
         </div>
-        <Share video={@props.video.mp4} zooniverseId={Subject.current.zooniverse_id} />
+        <Share video={@props.video.mp4} zooniverseId={Subject.current?.zooniverse_id} />
       </section>
       <section className="map-container">
         <figure className="map"><img src={

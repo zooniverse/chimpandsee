@@ -36,6 +36,7 @@ Summary = React.createClass
     ProjectGroup.off 'fetch-fail', @onProjectGroupFail
 
   onProjectGroupFetch: ->
+    groupId = Subject.current?.group_id
     group = ProjectGroup.find groupId
     @setState({
       group: group

@@ -12,6 +12,28 @@ User = require 'zooniverse/models/user'
 
 steps = require './lib/steps'
 
+outOfSubjectsMessage = '''
+  <h3>We're out of data!<h3>
+
+  <p>Unfortunately, we don't have any more videos to show you right now!
+  Either all current videos have been explored, or you personally
+  may have explored every available video. We should have more
+  data for you fairly soon, so don't forget about us!</p>
+
+  <p>In the meantime, you can continue working on this project
+  by helping us ID and name individual chimps on <a href="http://talk.chimpandsee.org" target="_blank">Chimp & See Talk</a>.
+  Or check out any of our dozens of other Zooniverse projects at
+  <a href="https://www.zooniverse.org/" target="_blank">zooniverse.org</a>. Thanks!</p>
+'''
+
+fetchFailMessage = '''
+  <p>Hey Chimp & See explorer—something's gone wrong!
+  Our system is having trouble finding a video for you right now. We're sorry about that!</p>
+
+  <p>Let us know about this bug on the <a href="http://talk.chimpandsee.org/#/boards/BCP0000008" target="_blank">Technical Support</a>
+  board on C&S Talk, and we'll try to get it fixed as soon as possible. Thanks for your help, efforts, and patience!</p>
+'''
+
 module?.exports = React.createClass
   displayName: 'Classify'
 
@@ -31,6 +53,7 @@ module?.exports = React.createClass
     skipImages: false
     srcWidth: null
     toggleSkip: false
+    noSubjects: false
 
   componentDidMount: ->
     Subject.on 'select', @onSubjectSelect
@@ -81,43 +104,27 @@ module?.exports = React.createClass
     @checkSrcWidth()
 
   onSubjectFetchFail: ->
-    unless Subject.count() is 0
-      @refs.statusMessage.getDOMNode().innerHTML =
-        '''<p>Hey Chimp & See explorer—something's gone wrong!
-          Our system is having trouble finding a video for you right now. We're sorry about that!</p>
-
-          <p>Let us know about this bug on the <a href="http://talk.chimpandsee.org/#/boards/BCP0000008" target="_blank">Technical Support</a>
-          board on C&S Talk, and we'll try to get it fixed as soon as possible. Thanks for your help, efforts, and patience!</p>
-        '''
-    else
-      @refs.statusMessage.getDOMNode().innerHTML =
-        '''<h3>We're out of data!<h3>
-
-        <p>Unfortunately, we don't have any more videos to show you right now!
-        Either all current videos have been explored, or you personally
-        may have explored every available video. We should have more
-        data for you fairly soon, so don't forget about us!</p>
-
-        <p>In the meantime, you can continue working on this project
-        by helping us ID and name individual chimps on <a href="http://talk.chimpandsee.org" target="_blank">Chimp & See Talk</a>.
-        Or check out any of our dozens of other Zooniverse projects at
-        <a href="https://www.zooniverse.org/" target="_blank">zooniverse.org</a>. Thanks!</p>
-      '''
+    @setState({
+      video: null
+      previews: null
+      location: null
+      classification: null
+      noSubjects: true
+    }, ->
+      unless Subject.count() is 0
+        @refs.statusMessage.getDOMNode().innerHTML = fetchFailMessage
+      else
+        @refs.statusMessage.getDOMNode().innerHTML = outOfSubjectsMessage
+    )
 
   onNoSubjects: ->
-    @refs.statusMessage.getDOMNode().innerHTML =
-      '''<h3>We're out of data!<h3>
-
-      <p>Unfortunately, we don't have any more videos to show you right now!
-      Either all current videos have been explored, or you personally
-      may have explored every available video. We should have more
-      data for you fairly soon, so don't forget about us!</p>
-
-      <p>In the meantime, you can continue working on this project
-      by helping us ID and name individual chimps on <a href="http://talk.chimpandsee.org" target="_blank">Chimp & See Talk</a>.
-      Or check out any of our dozens of other Zooniverse projects at
-      <a href="https://www.zooniverse.org/" target="_blank">zooniverse.org</a>. Thanks!</p>
-    '''
+    @setState({
+      video: null
+      previews: null
+      location: null
+      classification: null
+      noSubjects: true
+    }, -> @refs.statusMessage.getDOMNode().innerHTML = outOfSubjectsMessage)
 
   checkSrcWidth: ->
     image = new Image()
@@ -239,7 +246,8 @@ module?.exports = React.createClass
           disableSkip={@disableSkip}
         />
       }
-      <div className="status-message" ref="statusMessage"></div>
+      {if @state.noSubjects
+        <div className="status-message" ref="statusMessage"></div>}
       <SlideTutorial tutorialIsOpen={@state.tutorialIsOpen} closeTutorial={@closeTutorial} tutorialType={@state.tutorialType} />
       <div className={hiddenChimpClasses}><img className="hidden-chimp" src="./assets/hidden-chimp.png" alt="" /></div>
     </div>

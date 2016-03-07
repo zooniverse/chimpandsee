@@ -205,7 +205,7 @@ guideDetails = {
       header: 'red river hog'
       subHeader: '<em>Potamochoerus porcus</em>'
       description: '''
-        <p>Pudgy pig-like animal notable for its bright red fur and its curled, pointed, elfin ears with white ear-tufts. The large muzzle is black with two small tusks and white markings around the eyes. Longer fur on flanks and underbelly. Has a line of spiky blonde hair down the spine.  Seen both at night and during the day.</p> 
+        <p>Pudgy pig-like animal notable for its bright red fur and its curled, pointed, elfin ears with white ear-tufts. The large muzzle is black with two small tusks and white markings around the eyes. Longer fur on flanks and underbelly. Has a line of spiky blonde hair down the spine.  Seen both at night and during the day.  Bushpigs, close relatives of red river hogs, should also be marked using this classifications. </p> 
       '''
       confusions: ['giant forest hog', 'warthog']
       exampleImages: ["./assets/guide/red-river-hog-1.jpg", "./assets/guide/red-river-hog-2.jpg", "./assets/guide/red-river-hog-3.jpg"]

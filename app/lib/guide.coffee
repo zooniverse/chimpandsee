@@ -248,7 +248,7 @@ guideDetails = {
         <p class="talk-link"><a href="http://talk.chimpandsee.org/#/boards/BCP000000e/discussions/DCP0000asr" target="_blank">Duiker Guide</a></p>
       '''
       confusions: ['small antelope']
-      exampleImages: ["./assets/guide/sm-gray-duiker-1.jpg", "./assets/guide/sm-gray-duiker-2.jpg", "./assets/guide/sm-gray-duiker-3.jpg"]
+      exampleImages: ["./assets/guide/sm-gray-duiker-1.jpg", "./assets/guide/sm-gray-duiker-2.jpg"]
     },
 
     {

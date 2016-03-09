@@ -169,6 +169,17 @@ Annotation = React.createClass
   resetCurrentAnswers: ->
     @setState currentAnswers: {}
 
+  createPreviewImages: ->
+      if @props.previews?.length is 9
+        @props.previews
+      else
+        previewsWithPlaceholders = @props.previews
+        count = 9 - @props.previews?.length
+        for i in [0...count] by 1
+          previewsWithPlaceholders.push "./assets/placeholder-preview.png"
+
+        previewsWithPlaceholders
+
   render: ->
     cursor = Cursor.build(@)
 
@@ -190,8 +201,10 @@ Annotation = React.createClass
       height: @refs.previewImgs?.getDOMNode().clientHeight
       lineHeight: @refs.previewImgs?.getDOMNode().clientHeight + "px"
 
+    previewImages = @createPreviewImages()
+
     previews =
-      @props.previews?.map (preview, i) =>
+      previewImages.map (preview, i) =>
         <figure key={i}>
           <img src={preview} onLoad={@onImageLoad.bind(@, null)} onClick={@zoomImage.bind(null, i, preview) if window.innerWidth > 600} />
         </figure>

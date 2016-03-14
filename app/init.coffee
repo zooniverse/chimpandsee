@@ -4,7 +4,7 @@ $ = window.jQuery
 Api = require 'zooniverse/lib/api'
 
 api = if window.location.hostname is 'www.chimpandsee.org'
-  new Api project: 'chimp', host: 'http://www.chimpandsee.org', path: '/_ouroboros_api/proxy'
+  new Api project: 'chimp', host: 'https://www.chimpandsee.org', path: '/_ouroboros_api/proxy'
 else
   new Api project: 'chimp'
 

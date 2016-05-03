@@ -1,5 +1,5 @@
-React = require 'react/addons'
-cx = React.addons.classSet
+React = require 'react'
+classnames = require 'classnames'
 
 slideTutorials = require './lib/slideTutorials'
 
@@ -37,14 +37,14 @@ SlideTutorial = React.createClass
 
   render: ->
     slideDots = @state[@props.tutorialType]?.map (slide, i) =>
-      dotClasses = cx
+      dotClasses = classnames
         'slide-tutorial-dot': true
         'active': i is @state.activeSlide
 
       <div key={i} className={dotClasses} onClick={@onDotClick.bind(null, i)}></div>
 
     slides = @state[@props.tutorialType]?.map (slide, i) =>
-      slideClasses = cx
+      slideClasses = classnames
         'slide-tutorial-slide': true
         'active': i is @state.activeSlide
 
@@ -65,7 +65,7 @@ SlideTutorial = React.createClass
         </div>
       </div>
 
-    slideTutorialClasses = cx
+    slideTutorialClasses = classnames
       'slide-tutorial': true
       'show': @props.tutorialIsOpen
       'chimps': @props.tutorialType is 'chimps'

@@ -1,5 +1,5 @@
-React = require 'react/addons'
-cx = React.addons.classSet
+React = require 'react'
+classnames = require 'classnames'
 _ = require 'underscore'
 ImmutableOptimizations = require('react-cursor').ImmutableOptimizations
 
@@ -162,7 +162,7 @@ Step = React.createClass
     console?.log 'classification send'
 
   render: ->
-    cancelClasses = cx
+    cancelClasses = classnames
       'cancel': true
       'hide': @props.step.value <= 1 or @props.step.value is steps.length - 1
 
@@ -175,7 +175,7 @@ Step = React.createClass
       when @props.step.value is 3 and window.innerWidth > 400 and window.innerWidth <= 450 then "top": "-115px"
       when @props.subStep.value is 3 and window.innerWidth > 450 then "marginTop": "52.5px"
 
-    addClasses = cx
+    addClasses = classnames
       'disabled': addDisabled
       'done': true
       'hidden': @props.step.value is 2 or @props.subStep.value < 2
@@ -183,7 +183,7 @@ Step = React.createClass
 
     stepButtons =
       if @props.step.value > 2 and @props.step.value isnt steps.length - 1
-        firstStepClasses = cx
+        firstStepClasses = classnames
           'step-button': true
           'step-active': @props.step.value is 2
           'step-complete': @props.step.value > 2
@@ -191,7 +191,7 @@ Step = React.createClass
         if @props.currentAnswers.animal is chimp
           subSteps = steps[3].map (step, i) =>
             stepBtnDisabled = _.values(@props.currentAnswers).length < i + 2
-            stepBtnClasses = cx
+            stepBtnClasses = classnames
               'step-button': true
               'step-active': @props.subStep.value is i
               'step-complete': i - 1 < @props.subStep.value - 1
@@ -203,7 +203,7 @@ Step = React.createClass
                 <img src="./assets/small-dot.svg" alt="" />
               </span>
         else
-          stepBtnClasses = cx
+          stepBtnClasses = classnames
             'step-button': true
             'step-active': @props.subStep.value is 3
 
@@ -231,7 +231,7 @@ Step = React.createClass
             when @props.notes.value.length is 0 and option is steps[1][0].annotation.options[2] then true
             when @props.notes.value.length > 0 and option is steps[1][0].annotation.options[0] then true
 
-        classes = cx
+        classes = classnames
           'btn-active': option in currentAnswersValues
           'disabled finish-disabled': @props.notes.value.length is 0 and option is steps[1][0].annotation.options[2]
           'disabled nothing-disabled': @props.notes.value.length > 0 and option is steps[1][0].annotation.options[0]

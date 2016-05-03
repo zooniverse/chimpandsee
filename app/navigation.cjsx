@@ -1,5 +1,5 @@
-React = require 'react/addons'
-cx = React.addons.classSet
+React = require 'react'
+classnames = require 'classnames'
 
 {Link} = require 'react-router'
 
@@ -27,11 +27,11 @@ module?.exports = React.createClass
   render: ->
     links = @links.map(@link)
 
-    navClasses = cx
+    navClasses = classnames
       'site-navigation': true
       'color-background': @state.showMobileMenu is true
 
-    menuClasses = cx
+    menuClasses = classnames
       'menu-list': true
       'show-menu green-background': @state.showMobileMenu is true
 

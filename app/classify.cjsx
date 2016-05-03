@@ -1,5 +1,5 @@
-React = require 'react/addons'
-cx = React.addons.classSet
+React = require 'react'
+classnames = require 'classnames'
 
 Annotation = require './annotation/annotation'
 SlideTutorial = require './slideTutorial'
@@ -130,7 +130,7 @@ module?.exports = React.createClass
     image = new Image()
     image.src = @state.previews[0]
     image.onload = =>
-      @setState srcWidth: image.naturalWidth
+      @setState srcWidth: image.naturalWidth, srcHeight: image.naturalHeight
 
   toggleGuide: (e) ->
     if @state.guideIsOpen is false
@@ -193,12 +193,12 @@ module?.exports = React.createClass
     User.current?.setPreference 'skip_first_step', preference, @setState skipImages: preference
 
   render: ->
-    classifyClasses = cx
+    classifyClasses = classnames
       'classify': true
       'content': true
       'open-guide': @state.guideIsOpen is true
 
-    hiddenChimpClasses = cx
+    hiddenChimpClasses = classnames
       'hide': @state.previews is null
       'hidden-chimp-container': true
 
@@ -242,6 +242,7 @@ module?.exports = React.createClass
           location={@state.location}
           skipImages={@state.skipImages}
           srcWidth={@state.srcWidth}
+          srcHeight={@state.srcHeight}
           enableSkip={@enableSkip}
           disableSkip={@disableSkip}
         />

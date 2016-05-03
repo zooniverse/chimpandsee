@@ -1,5 +1,5 @@
-React = require 'react/addons'
-cx = React.addons.classSet
+React = require 'react'
+classnames = require 'classnames'
 
 ProfileItems = require './profileItems'
 
@@ -61,10 +61,10 @@ Profile = React.createClass
     errorMessage.getDOMNode().innerHTML = message
 
   render: ->
-    recentClasses = cx
+    recentClasses = classnames
       'active': @state.collection is 'Recent'
 
-    favoriteClasses = cx
+    favoriteClasses = classnames
       'active': @state.collection is 'Favorite'
 
     userDetails = if @props.user?

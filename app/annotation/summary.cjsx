@@ -1,5 +1,5 @@
-React = require 'react/addons'
-cx = React.addons.classSet
+React = require 'react'
+classnames = require 'classnames'
 
 Subject = require 'zooniverse/models/subject'
 ProjectGroup = require 'zooniverse/models/project-group'
@@ -68,7 +68,7 @@ Summary = React.createClass
 
       <li key={i}>{if note.animal is "human" then "N/A" else note.number} {note.animal}{plural if note.number > 1 or note.number is "5+"}</li>
 
-    generalClasses = cx
+    generalClasses = classnames
       'general-summary': true
       'no-chimp': @state.chimpsSeen is false
 

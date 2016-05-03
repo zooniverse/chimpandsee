@@ -1,11 +1,11 @@
-React = require 'react/addons'
-cx = React.addons.classSet
+React = require 'react'
+classnames = require 'classnames'
 
 AboutPage = React.createClass
   displayName: 'AboutPage'
 
   render: ->
-    pageClasses = cx
+    pageClasses = classnames
       'page-one': @props.activeContent is 0
       'page-two': @props.activeContent is 1
       'page-three': @props.activeContent is 2

@@ -1,5 +1,4 @@
-React = require 'react/addons'
-cx = React.addons.classSet
+React = require 'react'
 
 Share = React.createClass
   displayName: 'Share'

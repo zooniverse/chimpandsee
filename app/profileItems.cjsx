@@ -1,5 +1,4 @@
-React = require 'react/addons'
-cx = React.addons.classSet
+React = require 'react'
 
 Favorite = require 'zooniverse/models/favorite'
 Recent = require 'zooniverse/models/recent'

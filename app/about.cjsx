@@ -1,5 +1,5 @@
-React = require 'react/addons'
-cx = React.addons.classSet
+React = require 'react'
+classnames = require 'classnames'
 
 {Link} = require 'react-router'
 
@@ -31,7 +31,7 @@ module?.exports = React.createClass
     @setState activeContent: i
 
   render: ->
-    navLinkClasses = cx
+    navLinkClasses = classnames
       'about-link': window.location.hash isnt '#/about'
 
     links = @state.links.map (link, i) =>

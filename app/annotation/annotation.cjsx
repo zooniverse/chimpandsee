@@ -1,5 +1,5 @@
-React = require 'react/addons'
-cx = React.addons.classSet
+React = require 'react'
+classnames = require 'classnames'
 _ = require 'underscore'
 Cursor = require('react-cursor').Cursor
 SkyLight = require 'react-skylight'
@@ -33,19 +33,21 @@ Annotation = React.createClass
     zoomImageSrc: null
     favorited: false
     user: false
+    loaderStyle: {}
 
   componentWillMount: ->
     if @props.user?
       @setState user: true
 
   componentDidMount: ->
-    @loader = @refs.loader.getDOMNode()
-    @overlay = @refs.imageZoom?.getDOMNode().childNodes[0] #skylight-dialog__overlay
-    @dialog = @refs.imageZoom?.getDOMNode().childNodes[1] #skylight-dialog
+    @loader = React.findDOMNode @refs.loader
+    @overlay = React.findDOMNode(@refs.imageZoom).childNodes[0] #skylight-dialog__overlay
     @isFirefox = typeof InstallTrigger isnt 'undefined'
 
-    if @props.skipImages is true
+    if @props.skipImages
       @setState currentStep: 1
+    else
+      @setLoaderStyle()
 
     window.addEventListener 'keydown', @onPressSpaceBar
 
@@ -58,7 +60,10 @@ Annotation = React.createClass
 
     if nextProps.previews isnt @props.previews
       @loadCount = 0
-      @refs.previewImgs?.getDOMNode().classList.remove 'full-opacity'
+
+      unless @props.skipImages
+        @setLoaderStyle()
+        React.findDOMNode(@refs.previewImgs).classList.remove 'full-opacity'
 
     if nextProps.skipImages is true and nextProps.skipImages isnt @props.skipImages
       @setState currentStep: 1
@@ -66,6 +71,13 @@ Annotation = React.createClass
   componentWillUnmount: ->
     window.removeEventListener 'keydown', @onPressSpaceBar
 
+  setLoaderStyle: =>
+    console.log('calling setLoaderStyle')
+    if @props.srcWidth is 720
+      @setState loaderStyle: lineHeight: (@props.srcHeight / 4) * 3 + 20 + "px", height: (@props.srcHeight / 4) * 3 + 20 + "px"
+    else if @props.srcWidth is 640
+      @setState loaderStyle: lineHeight: (@props.srcHeight / 2) * 3 + 10 + "px", height: (@props.srcHeight / 2) * 3 + 10 + "px"
+  
   zoomImage: (i, preview) ->
     @setState({zoomImageCurrent: i, zoomImageSrc: preview})
     @refs.imageZoom.show() if window.innerWidth > 600
@@ -101,12 +113,13 @@ Annotation = React.createClass
     window.addEventListener 'keydown', @onPressKeyInZoom
 
   closeZoom: ->
-    @dialog.classList.add 'fade-out'
+    dialog = React.findDOMNode(@refs.imageZoom).childNodes[1] #skylight-dialog
+    dialog.classList.add 'fade-out'
     @overlay.classList.add 'fade-out'
 
     #Wait for fade out animation
     setTimeout ( =>
-      @dialog.classList.remove 'fade-out'
+      dialog.classList.remove 'fade-out'
       @overlay.classList.remove 'fade-out'
 
       @refs.imageZoom.hide()
@@ -135,7 +148,9 @@ Annotation = React.createClass
 
     if @loadCount is 9
       @hideLoader()
-      @refs.previewImgs?.getDOMNode().classList.add 'full-opacity'
+
+      unless @props.skipImages
+        React.findDOMNode(@refs.previewImgs).classList.add 'full-opacity'
 
   onVideoLoad: ->
     @loadCount = 1
@@ -153,15 +168,16 @@ Annotation = React.createClass
   onPressSpaceBar: (e) ->
     if e.keyCode is 32
       e.preventDefault()
-
-      if @refs.video.getDOMNode().paused
-        @refs.video.getDOMNode().play()
+      video = React.findDOMNode @refs.video
+      if video.paused
+        video.play()
       else
-        @refs.video.getDOMNode().pause()
+        video.pause()
 
   resetVideo: ->
-    @refs.video.getDOMNode().pause()
-    @refs.video.getDOMNode().currentTime = 0
+    video = React.findDOMNode @refs.video
+    video.pause()
+    video.currentTime = 0
 
   setCurrentAnswers: (currentAnswers) ->
     @setState currentAnswers: currentAnswers
@@ -183,23 +199,44 @@ Annotation = React.createClass
   render: ->
     cursor = Cursor.build(@)
 
-    favoriteClasses = cx
+    overlayStyles =
+      position: 'fixed'
+      top: 0
+      left: 0
+      width: '100%'
+      height: '100%'
+      zIndex: 99
+      backgroundColor: 'rgba(0,0,0,0.7)'
+      animation: 'fadeIn .25s forwards'
+
+    skylightDialogStyles =
+      animation: 'fadeIn .25s forwards'
+      backgroundColor: '#111111'
+      boxSizing: 'border-box'
+      borderRadius: '8px'
+      boxShadow: 'none'
+      height: 'inherit'
+      left: '20%'
+      margin: '0 -25% 0 0'
+      padding: '10px'
+      position: 'fixed'
+      top: '40px'
+      width: '60%'
+      zIndex: 100
+
+    favoriteClasses = classnames
       'favorite-btn': true
       'disabled': @state.user is false
       'favorited': @state.favorited is true
       'hide': true if window.innerWidth < 401 and cursor.refine('currentStep').value is steps.length - 1
 
-    guideClasses = cx
+    guideClasses = classnames
       'guide-btn': true
       'guide-open': @props.guideIsOpen is true
       'hide': true if window.innerWidth < 401 and cursor.refine('currentStep').value is steps.length - 1
 
     favoriteToolTip = if @state.user is false
       "Sign up or log in to favorite"
-
-    loaderStyle =
-      height: @refs.previewImgs?.getDOMNode().clientHeight
-      lineHeight: @refs.previewImgs?.getDOMNode().clientHeight + "px"
 
     previewImages = @createPreviewImages()
 
@@ -216,14 +253,20 @@ Annotation = React.createClass
     <div className="annotation">
       <div className="subject">
         <button className={guideClasses} onClick={@onClickGuide}>Field Guide</button>
-        <div ref="loader" className="loading-spinner" style={loaderStyle}><i className="fa fa-spinner fa-spin fa-4x"></i></div>
+        <div ref="loader" className="loading-spinner" style={@state.loaderStyle}><i className="fa fa-spinner fa-spin fa-4x"></i></div>
         {if cursor.refine('currentStep').value is 0
           <div ref="previewImgs" className='preview-imgs'>
             {previews}
           </div>
         }
         {if window.innerWidth > 600
-          <SkyLight ref="imageZoom" showOverlay={true} afterOpen={@modifyOverlay}>
+          <SkyLight ref="imageZoom" 
+          showOverlay={true} 
+          overlayStyles={overlayStyles}
+          dialogStyles={skylightDialogStyles}
+          closeButtonStyle={display: 'none'} 
+          afterOpen={@modifyOverlay}
+          >
             <img onClick={@closeZoom} src={@state.zoomImageSrc} alt="preview image" />
             <button className="close-zoom-btn" onClick={@closeZoom}><img src="./assets/cancel-icon.svg" alt="cancel icon" /></button>
           </SkyLight>

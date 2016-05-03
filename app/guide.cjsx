@@ -1,5 +1,5 @@
-React = require 'react/addons'
-cx = React.addons.classSet
+React = require 'react'
+classnames = require 'classnames'
 
 AnimateMixin = require "react-animate"
 
@@ -70,15 +70,15 @@ Guide = React.createClass
         <span className="animal-name">{animal}</span>
       </li>
 
-    behaviorDetailsClasses = cx
+    behaviorDetailsClasses = classnames
       'details': true
       'hide': @state.showBehaviorList is false
 
-    detailsClasses = cx
+    detailsClasses = classnames
       'details': true
       'hide': @state.guideDetailsIndex is null
 
-    headerClasses = cx
+    headerClasses = classnames
       'guide-header': true
       'open-guide': @state.guideDetailsIndex isnt null or @state.showBehaviorList is true
 

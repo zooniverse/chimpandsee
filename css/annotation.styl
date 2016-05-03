@@ -152,18 +152,7 @@
         @media screen and (max-width: 640px)
           width: 100%
 
-  .skylight-dialog
-    position: fixed
-    top: 40px
-    width: 60%
-    left: 20%
-    background-color: $blackish
-    border-radius: 8px
-    z-index: 100
-    padding: 10px
-    box-sizing: border-box
-    animation: fadeIn .25s forwards
-
+  .skylight-wrapper
     h2
       display: none
 
@@ -171,25 +160,12 @@
       width: 100%
       border-radius: 8px
 
-    .skylight-dialog--close
-      display: none
-
     .close-zoom-btn
       cursor: pointer
       position: absolute
       top: 5px
       right: -35px
       font-size: 16px
-
-  .skylight-dialog__overlay
-    position: absolute
-    top: 0
-    left: 0
-    width: 100%
-    height: 100%
-    z-index: 99
-    background-color: rgba(0,0,0,0.7)
-    animation: fadeIn .25s forwards
 
   .fade-out
     animation: fadeOut .25s forwards

@@ -13,9 +13,10 @@ User = require 'zooniverse/models/user'
 steps = require './lib/steps'
 
 outOfSubjectsMessage = '''
-  <h3>We're out of data!<h3>
+  <h3>We seem to be out of data!<h3>
 
-  <p>Unfortunately, we don't have any more videos to show you right now!
+  <p>Please try refreshing the page. If you get this message again,
+  we unfortunately don't have any more videos to show you right now!
   Either all current videos have been explored, or you personally
   may have explored every available video. We should have more
   data for you fairly soon, so don't forget about us!</p>

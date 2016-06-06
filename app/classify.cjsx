@@ -93,7 +93,7 @@ module?.exports = React.createClass
     previews = subject.location.previews
     randomInt = if subject.location.previews.length is 2 then Math.round(Math.random()) else Math.round(Math.random() * (2 - 0)) + 0
     @setState({
-      video: subject.location.standard
+      video: subject.location.standard.replace('http://www.chimpandsee.org/', 'https://www.chimpandsee.org/')
       previews: previews[randomInt]
       location: subject.group.name
       classification: new Classification {subject}

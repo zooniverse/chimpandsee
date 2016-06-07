@@ -210,6 +210,7 @@ Annotation = React.createClass
         </figure>
 
     source = if @isFirefox then @props.video.webm else @props.video.mp4
+    source = source.replace('http://www.chimpandsee.org/', 'https://www.chimpandsee.org/')  #MS Edge compatibility
     type = if @isFirefox then "video/webm" else "video/mp4"
 
     <div className="annotation">

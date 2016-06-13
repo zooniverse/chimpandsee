@@ -71,8 +71,7 @@ Annotation = React.createClass
   componentWillUnmount: ->
     window.removeEventListener 'keydown', @onPressSpaceBar
 
-  setLoaderStyle: =>
-    console.log('calling setLoaderStyle')
+  setLoaderStyle: ->
     if @props.srcWidth is 720
       @setState loaderStyle: lineHeight: (@props.srcHeight / 4) * 3 + 20 + "px", height: (@props.srcHeight / 4) * 3 + 20 + "px"
     else if @props.srcWidth is 640

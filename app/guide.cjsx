@@ -35,14 +35,14 @@ Guide = React.createClass
     @animate "close-details", {transitionProperty: 'opacity, left', transitionDuration: '.15s, 0s', transitionDelay: '0s, 0s', opacity: '0', left: '-400px'}, {opacity: '1', left: '0'}, 'in-out', 500
 
   onSelectGuideAnimal: (i) ->
+    console.log('calling onSelectGuideAnimal')
     @openAnimation()
-    @setState guideDetailsIndex: i
+    @setState guideDetailsIndex: i, -> console.log(@state)
     @goToTop()
 
   onClickBehaviorList: ->
     @openAnimation()
-    @setState showBehaviorList: true
-    @goToTop()
+    @setState showBehaviorList: true, -> @goToTop()
 
   goToTop: ->
     @guideContainer.scrollTop = 0
@@ -62,6 +62,12 @@ Guide = React.createClass
       guideDetailsIndex: null
       showBehaviorList: false
     @props.onClickClose()
+
+  getGuideSubheader: ->
+    { __html: guideDetails.animals[@state.guideDetailsIndex].subHeader }
+
+  getGuideDescription: ->
+   { __html: guideDetails.animals[@state.guideDetailsIndex].description }
 
   render: ->
     animals = steps[2][0].animal.options.map (animal, i) =>
@@ -90,8 +96,8 @@ Guide = React.createClass
         <section className={detailsClasses}>
           <button className="back-guide-btn" onClick={@onClickBack}><img className="back-icon" src="./assets/back-icon.svg" alt="back icon" /> Back</button>
           <h2 className="animal-name">{guideDetails.animals[@state.guideDetailsIndex].header}</h2>
-          <h3 className="animal-taxonomy" dangerouslySetInnerHTML={{__html: guideDetails.animals[@state.guideDetailsIndex].subHeader}}></h3>
-          <div className="animal-description" dangerouslySetInnerHTML={{__html: guideDetails.animals[@state.guideDetailsIndex].description}}></div>
+          <h3 className="animal-taxonomy" dangerouslySetInnerHTML={@getGuideSubheader()}></h3>
+          <div className="animal-description" dangerouslySetInnerHTML={@getGuideDescription()}></div>
           {if guideDetails.animals[@state.guideDetailsIndex].confusions
             <div className="animal-confusions">
               <p>Sometimes confused with:</p>
@@ -101,6 +107,7 @@ Guide = React.createClass
                   confusedAnimalDetails = ''
                   steps[2][0].animal.options.map (animal, j) =>
                     index = j if animal is confusion
+                    console.log('index', index)
                   if guideDetails.animals[@state.guideDetailsIndex].confusionsDetail 
                     confusedAnimalDetails = guideDetails.animals[@state.guideDetailsIndex].confusionsDetail[i]  
                   <li className="animal-confusion-list-item" key={i} onClick={@onSelectGuideAnimal.bind(null, index)}>{confusion}{confusedAnimalDetails if confusedAnimalDetails}</li>}

@@ -3,6 +3,7 @@ cx = React.addons.classSet
 
 Subject = require 'zooniverse/models/subject'
 ProjectGroup = require 'zooniverse/models/project-group'
+Api = require 'zooniverse/lib/api'
 Share = require '../share'
 steps = require '../lib/steps'
 
@@ -37,11 +38,12 @@ Summary = React.createClass
 
   onProjectGroupFetch: ->
     groupId = Subject.current?.group_id
-    group = ProjectGroup.find groupId
-    @setState({
-      group: group
-      newChimpsLink: group.metadata.new_chimps_link
-    }, => @getSiteLocation())
+    Api.current.get("/projects/#{Api.current.project}/groups/#{groupId}")
+      .then (subjectGroup) =>
+        @setState({
+          group: subjectGroup
+          newChimpsLink: subjectGroup.metadata.new_chimps_link
+        }, => @getSiteLocation())
 
   onProjectGroupFail: ->
     console.error 'Project Group fetch failed'

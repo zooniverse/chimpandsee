@@ -35,9 +35,8 @@ Guide = React.createClass
     @animate "close-details", {transitionProperty: 'opacity, left', transitionDuration: '.15s, 0s', transitionDelay: '0s, 0s', opacity: '0', left: '-400px'}, {opacity: '1', left: '0'}, 'in-out', 500
 
   onSelectGuideAnimal: (i) ->
-    console.log('calling onSelectGuideAnimal')
     @openAnimation()
-    @setState guideDetailsIndex: i, -> console.log(@state)
+    @setState guideDetailsIndex: i
     @goToTop()
 
   onClickBehaviorList: ->
@@ -107,7 +106,6 @@ Guide = React.createClass
                   confusedAnimalDetails = ''
                   steps[2][0].animal.options.map (animal, j) =>
                     index = j if animal is confusion
-                    console.log('index', index)
                   if guideDetails.animals[@state.guideDetailsIndex].confusionsDetail 
                     confusedAnimalDetails = guideDetails.animals[@state.guideDetailsIndex].confusionsDetail[i]  
                   <li className="animal-confusion-list-item" key={i} onClick={@onSelectGuideAnimal.bind(null, index)}>{confusion}{confusedAnimalDetails if confusedAnimalDetails}</li>}

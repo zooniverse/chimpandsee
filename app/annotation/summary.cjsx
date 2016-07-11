@@ -8,10 +8,10 @@ Share = require '../share'
 steps = require '../lib/steps'
 
 sites =
-  siteA: ["guinea_foutahdjalon", "guinea_sangaredi", "guineabissau_boe_part1", "guineabissau_boe_part2", "ivorycoast_azagny", "ivorycoast_djouroutou", "ivorycoast_taie", "ivorycoast_tair", "liberia_eastnimba", "liberia_grebo_sala_part1", "liberia_grebo_sala_part2", "liberia_grebo_tasla", "liberia_sapo", "senegal_kayan", "liberia_grebo_part1", "taieast_marielyne"]
-  siteB: ["nigeria_gashaka"]
-  siteC: ["equatorialguinea_nationwide"]
-  siteD: ["drc_biliuere", "uganda_budongo", "uganda_bwindi", "uganda_ngogo", "tanzania_ugalla"]
+  siteA: ["dry-lake", "aged-violet", "cold-snowflake", "cool-silence", "red-water", "crimson-dew", "lingering-shape", "frosty-sky", "muddy-frost", "lingering-shape", "dark-field", "dawn-bird"]
+  siteB: ["wandering-sun"]
+  siteC: ["shy-waterfall"]
+  siteD: ["green-snowflake", "quiet-wood", "delicate-river", "cold-fire", "restless-star"]
 
 # Note: group metadata does not exist in dev db, so buttons and location image will not work locally or on staging
 Summary = React.createClass
@@ -49,7 +49,7 @@ Summary = React.createClass
     console.error 'Project Group fetch failed'
 
   getSiteLocation: ->
-    locationName = @state.group.metadata.site
+    locationName = @state.group.metadata.fake_name
 
     siteLocation = switch
       when sites.siteA.indexOf(locationName.toLowerCase()) > -1 then "site-a"

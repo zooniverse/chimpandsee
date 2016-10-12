@@ -90,11 +90,16 @@ module?.exports = React.createClass
     @removeClassesForGuide()
 
   onSubjectSelect: (e, subject) ->
-    previews = subject.location.previews
     randomInt = if subject.location.previews.length is 2 then Math.round(Math.random()) else Math.round(Math.random() * (2 - 0)) + 0
+    previews = subject.location.previews[randomInt]
+
+    if window.location.hostname is "www.chimpandsee.org"
+      previews = previews.map (preview, i) ->
+        preview = preview.replace("http", "https")
+
     @setState({
       video: subject.location.standard
-      previews: previews[randomInt]
+      previews: previews
       location: subject.group.name
       classification: new Classification {subject}
     }, => @onSubjectUpdate(randomInt))

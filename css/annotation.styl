@@ -148,6 +148,15 @@
         border-radius: 8px
         vertical-align: top
         max-width: 930px
+        
+        &::-internal-media-controls-download-button 
+          display: none
+
+        &::-webkit-media-controls-enclosure 
+          overflow: hidden
+
+        &::-webkit-media-controls-panel 
+          width: calc(100% + 30px); /* Adjust as needed */
 
         @media screen and (max-width: 640px)
           width: 100%

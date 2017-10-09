@@ -43,5 +43,5 @@
     "underscore": "1.7.0",
     "zooniverse": "0.7.1"
   },
-  "engine": "node 0.10.x"
+  "engine": "node 4.0.x"
 }

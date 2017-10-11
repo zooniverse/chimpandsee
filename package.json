@@ -5,7 +5,7 @@
   "main": "webpack.config.js",
   "scripts": {
     "start": "gulp",
-    "deploy-to-staging": "gulp clean && gulp build && publisssh ./public/build demo.zooniverse.org/chimps-staging && gulp clean",
+    "deploy-to-staging": "gulp clean && gulp build && publisssh ./public/build zooniverse-static/preview.zooniverse.org/chimps-staging && gulp clean",
     "deploy-to-beta": "gulp clean && gulp build && publisssh ./public/build zooniverse-static/www.chimpandsee.org/beta && gulp clean",
     "deploy-to-production": "gulp clean && gulp build && publisssh ./public/build zooniverse-static/www.chimpandsee.org --force && gulp clean",
     "deploy": "npm run deploy-to-staging && npm run deploy-to-production"

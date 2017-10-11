@@ -203,6 +203,12 @@ aboutContent = [
         {title: "Max Planck Society Innovation Fund", link: null}
       ]
     }
+  ],
+  [
+    {
+      header: "Authors",
+      content: "Thank you to the following volunteers for their contributions:"
+    }
   ]
 ]
 

@@ -1,8 +1,8 @@
 React = require 'react/addons'
 cx = React.addons.classSet
 
-AboutPage = React.createClass
-  displayName: 'AboutPage'
+GenericAboutPage = React.createClass
+  displayName: 'GenericAboutPage'
 
   render: ->
     pageClasses = cx
@@ -50,4 +50,4 @@ AboutPage = React.createClass
 
     <div className={pageClasses}>{pageContent}</div>
 
-module.exports = AboutPage
+module.exports = GenericAboutPage

@@ -3,8 +3,9 @@ cx = React.addons.classSet
 
 {Link} = require 'react-router'
 
-AboutPage = require './aboutPage'
-aboutContent = require './lib/aboutContent'
+GenericAboutPage = require './generic-about-page'
+Authors = require './authors'
+aboutContent = require '../lib/aboutContent'
 
 module?.exports = React.createClass
   displayName: 'About'
@@ -14,6 +15,7 @@ module?.exports = React.createClass
       { href: "about", name: "About" }
       { href: "team", name: "Team" }
       { href: "organizations", name: "Organizations" }
+      { href: "authors", name: "Authors" }
     ]
     pageContent: aboutContent
     activeContent: 0
@@ -23,6 +25,8 @@ module?.exports = React.createClass
       @setState activeContent: 1
     else if window.location.hash is '#/about/organizations'
       @setState activeContent: 2
+    else if window.location.hash is '#/about/authors'
+      @setState activeContent: 3
 
   componentWillReceiveProps: (nextProps) ->
     if nextProps.hash is '#/about' then @setState activeContent: 0
@@ -46,5 +50,8 @@ module?.exports = React.createClass
           {links}
         </div>
       </nav>
-      <AboutPage activeContent={@state.activeContent} pageContent={@state.pageContent[@state.activeContent]} />
+      {if @state.activeContent isnt 3
+        <GenericAboutPage activeContent={@state.activeContent} pageContent={@state.pageContent[@state.activeContent]} />}
+      {if @state.activeContent is 3
+        <Authors pageContent={@state.pageContent[@state.activeContent]} />}
     </div>

@@ -7,7 +7,9 @@ Navigation = require './navigation'
 Footer = require './footer'
 Home = require './home'
 Classify = require './classify'
-About = require './about'
+About = require './about/'
+GenericAboutPage = require './about/generic-about-page'
+Authors = require './about/authors'
 
 User = require 'zooniverse/models/user'
 Profile = require './profile'
@@ -42,6 +44,7 @@ routes =
     <Route name="about" path="about" handler={About} ignoreScrollBehavior>
       <Route name="team" path="team" handler={About} />
       <Route name="organizations" path="organizations" handler={About} />
+      <Route name="authors" path="authors" handler={About} />
     </Route>
     <Route name="profile" path="profile" handler={Profile} />
 
